@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +17,9 @@ use App\Http\Controllers\ProdutosController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('/Produtos/Novo',[ProdutosController::class,'Cadastrar']);
+Route::post('/Produtos/Salvar',[ProdutosController::class,'Salvar']);
+Route::get('/Cliente/Novo',[ClientesController::class,'Cadastrar']);
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
