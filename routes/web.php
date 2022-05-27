@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
-
+use App\Http\Controllers\ClientesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +16,7 @@ use App\Http\Controllers\ProdutosController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('Home');
 });
 Route::get('/Produtos/Novo',[ProdutosController::class,'Cadastrar']);
 Route::post('/Produtos/Salvar',[ProdutosController::class,'Salvar']);
