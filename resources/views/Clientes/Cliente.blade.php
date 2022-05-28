@@ -1,156 +1,93 @@
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<?php echo asset('css/app.css')?>" type="text/css">
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pedidos</title>
+
 </head>
+@include('Header')
+<br>
+<div class='.container-fluid ' id='c3'>
+<h5 Style='margin-left:1%;'class="text-left">Cadastro de clientes</h5>
 
 <body>
 
+    <form method="post" action="/Clientes/Salvar">
+        @csrf
 
-<div class="container" id="c2">
-    <h3 class="text-left">Cadastro de Produtos</h3>
-    
-  
- 
-<br>
-<button onclick="location.href = 'relatoriodeCliente';" id="myButton" class="btn btn-primary" >Pesquisar cliente</button>
-<br>
-<br>
-    <form method="post" action= "ClienteController">
-    
-    
-<div class="form-group">
-  <label for=""class="text-primary" >Nome do Cliente</label>
-  <input type="text" style="whidth:90%;font-color:blue;"name='nome' class="form-control" name="nome" id="dados" aria-describedby="helpId" placeholder=""required>
- 
+            <div class='form-row'>
+                <div Style='margin-left:1%;'class="form-group col-md-4 ">
+                    <label for="">Nome</label>
+                    <input type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="">CPF</label>
+                    <input type="text" class="form-control" name="CPF" id="" aria-describedby="helpId" placeholder="">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="">RG</label>
+                    <input type="text" class="form-control" name="RG" id="" aria-describedby="helpId" placeholder="">
+                </div>
 
-</div>
-<div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="">CNPJ</label>
+                    <input type="text" class="form-control" name="CNPJ" id="" aria-describedby="helpId" placeholder="">
+                </div>
+                <div Style='margin-left:1%;'class="form-group col-md-4">
+                    <label for="">Logadouro</label>
+                    <input type="text" class="form-control" name="Endereco" id="" aria-describedby="helpId"
+                        placeholder="">
+                </div>
+                <div Style='margin-left:1%;'class="form-group col-md-1">
+                    <label for="">Número</label>
+                    <input type="number" class="form-control" name="Numero" id="" aria-describedby="helpId"
+                        placeholder="">
+                </div>
+                <div Style='margin-left:1%;'class="form-group col-md-4">
+                    <label for="">Bairro</label>
+                    <input type="text" class="form-control" name="Bairro" id="" aria-describedby="helpId"
+                        placeholder="">
+                </div>
+                <div Style='margin-left:1%;'class="form-group col-md-4">
+                    <label for="">Cidade</label>
+                    <input type="text" class="form-control" name="Cidade" id="" aria-describedby="helpId"
+                        placeholder="">
+                </div>
+                <div Style='margin-left:1%;' class="form-group col-md-1">
+                    <label for="">UF</label>
+                    <input type="text" class="form-control" name="UF" id="" aria-describedby="helpId" placeholder="">
+                </div>
+                <div Style='margin-left:1%;' class="form-group col-md-1">
+                    <label for="">Email</label>
+                    <input type="text" class="form-control" name="Email" id="" aria-describedby="helpId"
+                        placeholder="">
+                </div>
 
-<div class="form-group">
-  <label for="Ins-estadual"class="text-primary">IE/RG</label>
-  <input type="text" class="form-control" name="ie" id="dados"  aria-describedby="helpId" placeholder=""require>
-
-</div>
-
-
-<div class="form-group">
-  <label for=""class="text-primary"class="text-primary">CPF/CNPJ</label>
-  <input type="text" class="form-control" name="cpf_cnpj" id="dados" aria-describedby="helpId" placeholder=""required>
-  
-</div>
-<div class="form-group">
-  <label for=""class="text-primary">Telefone</label>
-  <input type="text" class="form-control" name="telefone" id="dados" aria-describedby="helpId" placeholder=""required>
-  
-</div>
-
-<div class="form-group">
-  <label for="">Email</label>
-  <input type="text" class="form-control" name="email" id="dados" style="  width:80%; " aria-describedby="helpId" placeholder="">
-  
-</div>
-</div>
-
-<div class="form-group">
-  <label for=""class="text-primary">Endereço</label>
-  <input type="text" style="whidth:90%" class="form-control" name="endereco" id="dados" aria-describedby="helpId" placeholder=""require>
- 
-</div>
-
-<div class="form-row" >
-
-
-
-<div class="form-group">
-  <label for=""class="text-primary">Numero</label>
-  <input type="text" class="form-control" name="numero" id="dados" aria-describedby="helpId" placeholder=""require>
- 
-</div>
-
-<div class="form-group">
-  <label for="">Complemento</label>
-  <input type="text" class="form-control" name="complemento" id="dados" aria-describedby="helpId" placeholder="">
-
-</div>
-
-<div class="form-group">
-  <label for=""class="text-primary">Bairro</label>
-  <input type="text" class="form-control" name="bairro" id="dados" aria-describedby="helpId" placeholder=""require>
-
-</div>
-
-<div class="form-group">
-  <label for=""class="text-primary">Cidade</label>
-  <input type="text" class="form-control" name="cidade" id="dados" aria-describedby="helpId" placeholder=""require>
- 
-</div>
-
-<div class="form-group">
-  <label for=""class="text-primary">CEP</label>
-  <input type="text" class="form-control" name="cep" id="" aria-describedby="helpId" placeholder=""require>
- 
-</div>
-<div class="form-group">
-  <label for=""class="text-primary">UF</label>
-  <input type="text" class="form-control" name="uf" id="dados" aria-describedby="helpId" placeholder=""require>
-  
-</div>
-
-
-<div class="form-group">
-  <label for="">Codigo de cidade</label>
-  <input type="text" class="form-control" name="codcidade" id="dados" aria-describedby="helpId" placeholder="">
- 
-</div>
+            </div>
 
 
 
-<div class="form-group">
-  <label for="">Limite</label>
-  <input type="text" class="form-control" name="Limite" id="dados" aria-describedby="helpId" placeholder="">
-
-</div>
-
-
-
-<div class="form-group">
-  <label for="">Limite Atual</label>
-  <input type="text" class="form-control" name="limitiatual" id="dados" aria-describedby="helpId" placeholder="">
-
-</div>
+            <br>
+            <div class="form-group col-md-4">
+                <input name="Salvar" id="Salvar" class="btn btn-dark" type="submit" value="Salvar">
+            </div>
+        </div>
 
 
 
-<div class="form-group">
-  <label for="">Cartão</label>
-  <input type="text" class="form-control" name="cartao" id="" aria-describedby="helpId" placeholder="">
 
-</div>
-
-</div>
-
-<div class="form-group">
-<input name="Salvar" id="Editar" class="btn btn-success"type="submit" value="Salvar" >
-</div>
-
-</form>
+    </form>
 
 
 
 
 
-</div>
-</form>
+    </div>
+    </form>
 
-
+    </div>
 </body>
+
 </html>

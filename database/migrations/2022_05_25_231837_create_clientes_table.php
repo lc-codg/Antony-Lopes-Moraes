@@ -19,13 +19,12 @@ return new class extends Migration
             $table->string('CPF',11);
             $table->string('RG',9);
             $table->string('CNPJ',14);
-            $table->string('Email',10);
+            $table->string('Email',100);
             $table->string('Endereco',100);
             $table->string('Bairro',100);
             $table->integer('Numero');
-            $table->boolean('PessoaJuridica');
-
-
+            $table->string('Cidade',100);
+            $table->string('UF',4);
             $table->timestamps();
         });
     }

@@ -20,5 +20,15 @@ Route::get('/', function () {
 });
 Route::get('/Produtos/Novo',[ProdutosController::class,'Cadastrar']);
 Route::post('/Produtos/Salvar',[ProdutosController::class,'Salvar']);
-Route::get('/Cliente/Novo',[ClientesController::class,'Cadastrar']);
+Route::get('/Produtos/Editar/{Id}',[ProdutosController::class,'Editar']);
+Route::get('/Produtos/Delete/{Id}',[ProdutosController::class,'Delete']);
+Route::get('Produtos/Ver/{Id}',[ProdutosController::class,'ListarPorId']);
+Route::get('Produtos/Todos',[ProdutosController::class,'ListarTodos']);
+
+Route::get('/Clientes/Novo',[ClientesController::class,'Cadastrar']);
+Route::post('/Clientes/Salvar',[ClientesController::class,'Salvar']);
+Route::get('/Clientes/Editar/{Id}',[ClientesController::class,'Editar']);
+Route::get('/Clientes/Delete/{Id}',[ClientesController::class,'Delete']);
+Route::get('/Clientes/Ver/{Id}',[ClientesController::class,'ListarPorId']);
+Route::get('/Clientes/Todos',[ClientesController::class,'ListarTodos']);
 

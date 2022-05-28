@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Resources\views\Produtos\Produtos;
 use App\Models\Produto;
 
 class ProdutosController extends Controller
@@ -55,8 +54,10 @@ class ProdutosController extends Controller
             return "<script>alert('Salvo com sucesso!');location='/Produtos/Novo';</script>";
         }
     }
-    public function Editar(Request $request)
+    public function Editar(Request $request, $Id)
     {
+        $produto = Produto::findOrFail($Id);
+
         if (empty($request->Descricao)) {
             echo "<script>
           alert('Digite o nome do produto.');
@@ -87,15 +88,32 @@ class ProdutosController extends Controller
         } else {
 
 
-            Produto::update([
-                'id'=> $request->Id,
+            $produto->update([
+                'id' => $request->Id,
                 'Descricao' => $request->Descricao,
                 'Barras' => $request->Barras,
                 'ValorUnitario' => $request->ValorUnitario,
                 'Quantidade' => $request->Quantidade,
             ]);
 
-            return "<script>alert('Salvo com sucesso!');location='/Produtos/Novo';</script>";
+            return "<script>alert('Salvo com sucesso!');location='/Produtos/Todos';</script>";
         }
+    }
+    public function Delete($id)
+    {
+        $produto = Produto::findOrfail($id);
+        $produto->delete();
+        return "<script>alert('Deletado com sucesso!');location='/Produtos/Todos';</script>";
+    }
+
+    public function ListarPorId($id)
+    {
+        $produto = Produto::findOrfail($id);
+        return view('Produtos.Ver', ['produto' => $produto]);
+    }
+    public function ListarTodos()
+    {
+        $produto = Produto::All();
+        return view('Produtos.Todos', ['produto' => $produto]);
     }
 }
