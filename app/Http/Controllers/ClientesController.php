@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Clientes;
+use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
@@ -156,7 +157,13 @@ class ClientesController extends Controller
     }
     public function ListarTodos()
     {
-        $cliente = Clientes::All();
-        return view('Clientes.Todos', ['cliente' => $cliente]);
+        $clientes = DB::table('clientes')->paginate(20);
+        return view('Clientes.Todos', ['clientes' => $clientes]);
+    }
+    public function ListarPrimeiro()
+    {
+        $clientes = DB::table('clientes')->
+        select('id')->limit(1);
+        return view('Clientes.Todos', ['clientes' => $clientes]);
     }
 }

@@ -29,9 +29,9 @@
 
                 <th scope="col">Código</th>
                 <th scope="col">Barras</th>
-                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
                 <th scope="col">Valor</th>
-                <th scope="col">Estoque</th>
+                <th scope="col">Quantidade</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -41,7 +41,7 @@
 
 
 
-                <?php foreach($produtos as $row){
+                <?php foreach($itens as $row){
                 $val = $row->ValorUnitario;?>
 
                 <td>{{ $row->id }}</td>
@@ -55,17 +55,6 @@
 
 
 
-                <td>
-
-                    <form action="/Produtos/Ver/{{ $row->id }}" method="get">
-                        <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                    </form>
-                </td>
-                <td>
-                    <form action="/Produtos/Delete/{{ $row->id}}" method="get">
-                        <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
-                    </form>
-                </td>
 
 
 
@@ -77,7 +66,7 @@
 
 
 </body>
-{{$produtos->links()}}
-@include('footer')
 
+@include('footer')
+{{ $itens->links() }}
 </html>

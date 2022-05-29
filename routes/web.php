@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\ItensController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +33,13 @@ Route::get('/Clientes/Editar/{Id}',[ClientesController::class,'Editar']);
 Route::get('/Clientes/Delete/{Id}',[ClientesController::class,'Delete']);
 Route::get('/Clientes/Ver/{Id}',[ClientesController::class,'ListarPorId']);
 Route::get('/Clientes/Todos',[ClientesController::class,'ListarTodos']);
+
+
+Route::get('/Pedidos/Ver/{Id}',[PedidoController::class,'ListarPorId']);
+Route::get('/Pedidos/Todos',[PedidoController::class,'ListarTodos']);
+Route::get('/Pedidos/Delete/{id}',[PedidoController::class,'Delete']);
+
+Route::get('/Itens/Delete/{Id}',[ItensController::class,'Delete']);
+Route::get('/Itens/Ver/{id}',[ItensController::class,'ListarPorId']);
+Route::get('/Itens/Todos',[ItensController::class,'ListarTodos']);
 

@@ -20,18 +20,16 @@
 
 
     <style>
-
     </style>
 
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
-        <thead class="thead-DARK">
+        <thead class="thead-Dark">
             <tr>
 
                 <th scope="col">Código</th>
-                <th scope="col">Barras</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Estoque</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Total</th>
+                <th scope="col">Data</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -41,28 +39,28 @@
 
 
 
-                <?php foreach($produtos as $row){
-                $val = $row->ValorUnitario;?>
+                <?php foreach($Pedidos as $row){
+?>
 
                 <td>{{ $row->id }}</td>
 
-                <td>{{ $row->Barras }}</td>
-                <td>{{ $row->Descricao }}</td>
+                <td>{{ $row->Nome }}</td>
+                <td>R$ <span class="price">{{ number_format($row->Total, 2, '.', '') }}</span></td>
 
-                <td>R$ <span class="price">{{ number_format($val, 2, '.', '') }}</span></td>
-                <td>{{ $row->Quantidade }}</td>
+                <td>{{ $row->DtPedido }}</td>
 
 
 
 
                 <td>
 
-                    <form action="/Produtos/Ver/{{ $row->id }}" method="get">
-                        <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                    <form action="/Itens/Todos" method="get">
+                        <input class="btn btn-primary" name="" type="submit" Value='Itens'>
                     </form>
                 </td>
                 <td>
-                    <form action="/Produtos/Delete/{{ $row->id}}" method="get">
+                    <form action="/Pedidos/Delete/{{$row->id}}" method="get">
+
                         <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
                     </form>
                 </td>
@@ -71,13 +69,15 @@
 
 
             </tr>
-            <?php } ?>
-            <script></script>
+            <?php }
+            ?>
+            {{$Pedidos->links()}}
+
 
 
 
 </body>
-{{$produtos->links()}}
+
 @include('footer')
 
 </html>

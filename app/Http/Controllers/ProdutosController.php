@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use Illuminate\Support\Facades\DB;
 
 class ProdutosController extends Controller
 {
@@ -113,7 +114,7 @@ class ProdutosController extends Controller
     }
     public function ListarTodos()
     {
-        $produto = Produto::All();
-        return view('Produtos.Todos', ['produto' => $produto]);
+        $produtos = DB::table('produtos')->paginate(20);
+        return view('Produtos.Todos', ['produtos' => $produtos]);
     }
 }

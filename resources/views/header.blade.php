@@ -36,8 +36,8 @@
                   <li class="nav-item dropdown">
                     <a style='color:white;'class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pedidos</a>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="/Produtos/Novo">Cadastrar Pedido</a>
-                      <a class="dropdown-item" href="/Produtos/Todos">Listar Pedidos</a>
+                      <a class="dropdown-item" href="/Pedidos/Novo">Cadastrar Pedido</a>
+                      <a class="dropdown-item" href="/Pedidos/Todos">Listar Pedidos</a>
 
                     </div>
                   </li>

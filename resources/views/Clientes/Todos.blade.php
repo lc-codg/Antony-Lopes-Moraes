@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('Header')
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +45,7 @@
 
 
 
-                <?php foreach($cliente as $row){
+                <?php foreach($clientes as $row){
             ?>
 
                 <td>{{ $row->id }}</td>
@@ -83,6 +84,7 @@
 
 
 </body>
+{{ $clientes->links() }}
 
 @include('footer')
 
