@@ -34,6 +34,7 @@
                 <th scope="col">Estoque</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -41,8 +42,8 @@
 
 
 
-                <?php foreach($produtos as $row){
-                $val = $row->ValorUnitario;?>
+                @foreach($produtos as $row)
+                @php $val = $row->ValorUnitario @endphp
 
                 <td>{{ $row->id }}</td>
 
@@ -66,12 +67,21 @@
                         <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
                     </form>
                 </td>
+                <td>
+                    <form action="/Produtos/Inserir" method="post">
+                    @csrf
+                    <input class="btn btn-primary" name="" type="submit" Value='Inserir'>
+                    <input value='{{$row->Descricao}}'name='Descricao' hidden></input>
+                    <input value='{{$row->Barras}}'name='Barras' hidden></input>
+                    <input value='{{$row->ValorUnitario}}'name='ValorUnitario' hidden></input>
+                    </form>
+                </td>
 
 
 
 
             </tr>
-            <?php } ?>
+           @endforeach
             <script></script>
 
 

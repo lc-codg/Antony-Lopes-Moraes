@@ -16,12 +16,6 @@
 
 <body>
 
-
-
-
-    <style>
-    </style>
-
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
         <thead class="thead-Dark">
             <tr>
@@ -39,39 +33,37 @@
 
 
 
-                <?php foreach($Pedidos as $row){
-?>
+                @foreach ($Pedidos as $row) 
+                
+                    <td>{{ $row->id }}</td>
 
-                <td>{{ $row->id }}</td>
+                    <td>{{ $row->Nome }}</td>
+                    <td>R$ <span class="price">{{ number_format($row->Total, 2, '.', '') }}</span></td>
 
-                <td>{{ $row->Nome }}</td>
-                <td>R$ <span class="price">{{ number_format($row->Total, 2, '.', '') }}</span></td>
-
-                <td>{{ $row->DtPedido }}</td>
-
+                    <td>{{ $row->DtPedido }}</td>
 
 
 
-                <td>
 
-                    <form action="/Itens/Todos" method="get">
-                        <input class="btn btn-primary" name="" type="submit" Value='Itens'>
-                    </form>
-                </td>
-                <td>
-                    <form action="/Pedidos/Delete/{{$row->id}}" method="get">
+                    <td>
 
-                        <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
-                    </form>
-                </td>
+                        <form action="/Itens/Todos" method="get">
+                            <input class="btn btn-primary" name="" type="submit" Value='Itens'>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/Pedidos/Delete/{{$row->id}}" method="get">
+
+                            <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
+                        </form>
+                    </td>
 
 
 
 
             </tr>
-            <?php }
-            ?>
-            {{$Pedidos->links()}}
+       @endforeach
+        {{$Pedidos->links()}}
 
 
 

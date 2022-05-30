@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Arr;
+
+
+
 
 class ProdutosController extends Controller
 {
@@ -116,5 +121,16 @@ class ProdutosController extends Controller
     {
         $produtos = DB::table('produtos')->paginate(20);
         return view('Produtos.Todos', ['produtos' => $produtos]);
+    }
+    public function Inserir(Request $Request)
+    {
+        $Carrinho = collect([
+            'Barras' => $Request->Barras,
+            'Descricao' => $Request->Descricao,
+            'ValorUnitario' => $Request->ValorUnitario,
+            'Quantidade' => $Request->Quantidade
+        ]);
+        Session::push('Carrinho', $Carrinho);
+        return "<script>location='/Pedidos/Carrinho';</script>";
     }
 }

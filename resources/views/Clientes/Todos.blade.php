@@ -38,6 +38,7 @@
                 <th scope="col">UF</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -45,41 +46,45 @@
 
 
 
-                <?php foreach($clientes as $row){
-            ?>
+                @foreach ($clientes as $row) 
 
-                <td>{{ $row->id }}</td>
+                    <td>{{ $row->id }}</td>
 
-                <td>{{ $row->Nome }}</td>
-                <td>{{ $row->CPF }}</td>
+                    <td>{{ $row->Nome }}</td>
+                    <td>{{ $row->CPF }}</td>
 
 
-                <td>{{ $row->RG }}</td>
-                <td>{{ $row->CNPJ }}</td>
-                <td>{{ $row->Endereco }}</td>
-                <td>{{ $row->Numero }}</td>
-                <td>{{ $row->Bairro }}</td>
-                <td>{{ $row->Cidade }}</td>
-                <td>{{ $row->UF }}</td>
-                <td>
+                    <td>{{ $row->RG }}</td>
+                    <td>{{ $row->CNPJ }}</td>
+                    <td>{{ $row->Endereco }}</td>
+                    <td>{{ $row->Numero }}</td>
+                    <td>{{ $row->Bairro }}</td>
+                    <td>{{ $row->Cidade }}</td>
+                    <td>{{ $row->UF }}</td>
+                    <td>
 
-                    <form action="/Clientes/Ver/{{ $row->id }}" method="get">
-                        <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                    </form>
+                        <form action="/Clientes/Ver/{{ $row->id }}" method="get">
+                            <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                        </form>
 
-                </td>
-                <td>
-                    <form action="/Clientes/Delete/{{ $row->id }}" method="get">
-                        <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
-                    </form>
-                </td>
+                    </td>
+                    <td>
+                        <form action="/Clientes/Delete/{{ $row->id }}" method="get">
+                            <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/Clientes/Inserir" method="post">
+                            
+                        </form>
+                    </td>
 
 
 
 
             </tr>
-            <?php } ?>
-            <script></script>
+   @endforeach
+        <script></script>
 
 
 
