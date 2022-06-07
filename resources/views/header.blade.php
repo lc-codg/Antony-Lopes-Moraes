@@ -6,49 +6,163 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <title>sistema de Pedidos| Há mais de 10 anos no mercado | Emissor de Pedidos| Rio de Janeiro | Brasil</title>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a Style=" font-size: 30px;color:white;" class="navbar-brand" href="/">Sistema de Pedidos</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+  <meta charset="utf-8">
+  <title>Gadol Erp| Há mais de 10 anos no mercado | Emissor de Pedidos| Rio de Janeiro | Brasil</title>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a Style=" font-size: 30px;color:white;" class="navbar-brand" href="/">Gadol Erp</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
 
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-                <li class="nav-item dropdown">
-                    <a style='color:white;'class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Produtos</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="/Produtos/Novo">Cadastrar Produtos</a>
-                      <a class="dropdown-item" href="/Produtos/Todos">Listar Produtos</a>
+        <li class="nav-item dropdown">
+          <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cadastro</a>
+          <div class="dropdown-menu">
 
-                    </div>
-                  </li>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                Produtos
+              </a>
+              <a class="dropdown-item" href="/Produtos/Novo">Cadastrar Produtos</a>
+              <a class="dropdown-item" href="/Produtos/Todos">Listar Produtos</a>
+            </div>
+            <div class="list-group- Dark">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="True">
+                Clientes
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Clientes</a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Clientes</a>
+            </div>
 
-                  <li class="nav-item dropdown">
-                    <a style='color:white;'class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Clientes</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Clientes</a>
-                      <a class="dropdown-item" href="/Clientes/Todos">Listar Clientes</a>
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Fornecedores
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Fornecedores</a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Fornecedores</a>
+            </div>
 
-                    </div>
-                  </li>
+          </div>
+        </li>
 
-                  <li class="nav-item dropdown">
-                    <a style='color:white;'class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pedidos</a>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="/Pedidos/Carrinho">Cadastrar Pedido</a>
-                      <a class="dropdown-item" href="/Pedidos/Todos">Listar Pedidos</a>
+        <li class="nav-item dropdown">
+          <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Financeiro</a>
+          <div class="dropdown-menu">
 
-                    </div>
-                  </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="Front-end/Produto.html">Sair <span class="sr-only">(current)</span></a>
-                </li>
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Contas a Pagar
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Contas a Pagar</a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Contas a Pagar </a>
+            </div>
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Contas a Receber
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Contas a Receber </a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Contas a Receber </a>
+            </div>
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Conta Corrente
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Conta Corrente</a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Conta Corrente</a>
+            </div>
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Despesas
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar de Despesas </a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Despesas </a>
+            </div>
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Centro de Custos
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Centro de Custos </a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Centro de Custos </a>
+            </div>
 
-            </ul>
+          </div>
+        </li>
 
-        </div>
-    </nav>
+        <li class="nav-item dropdown">
+          <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notas</a>
+          <div class="dropdown-menu">
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Notas de Compra
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Notas de Compra </a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Notas de Compra </a>
+            </div>
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Notas de Venda
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Emitir Nota de Venda </a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Nota de Venda </a>
+            </div>
+
+
+          </div>
+        <li class="nav-item dropdown">
+          <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Fluxo</a>
+          <div class="dropdown-menu">
+
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                Fluxo de Caixa
+              </a>
+              <a class="dropdown-item" href="/Produtos/Novo">Movimento diário</a>
+              <a class="dropdown-item" href="/Produtos/Todos">Saldo Do Caixa</a>
+            </div>
+            <div class="list-group- Dark">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="True">
+                Balanço
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Lançar Balanço</a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Balanço</a>
+            </div>
+
+            <div class="list-group">
+              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+                Fechamento
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
+            </div>
+
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatório</a>
+          <div class="dropdown-menu">
+
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                Relatórios
+              </a>
+              <a class="dropdown-item" href="/Produtos/Novo">Entradas</a>
+              <a class="dropdown-item" href="/Produtos/Todos">Saídas</a>
+              <a class="dropdown-item" href="/Produtos/Todos">Despesas</a>
+              <a class="dropdown-item" href="/Produtos/Todos">Consolidado</a>
+            </div>
+           
+
+          </div>
+        </li>
+
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="Front-end/Produto.html">Sair <span class="sr-only">(current)</span></a>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
 </head>
 
 <body>

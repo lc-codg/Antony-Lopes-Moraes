@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pedidos', function (Blueprint $table) {
+        Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->integer('CodigoDoCliente');
             $table->decimal('Total',19,2);
@@ -52,6 +52,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidos');
+        Schema::dropIfExists('compras');
     }
 };

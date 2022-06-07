@@ -119,7 +119,7 @@ class ProdutosController extends Controller
     }
     public function ListarTodos()
     {
-        $produtos = DB::table('produtos')->paginate(20);
+        $produtos = DB::table('produtos')->paginate(10);
         return view('Produtos.Todos', ['produtos' => $produtos]);
     }
     public function Inserir(Request $Request)
