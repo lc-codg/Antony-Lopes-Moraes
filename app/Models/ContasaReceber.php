@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ContasaReceber extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = ['id', 'Barras', 'Descricao', 'CodCliente', 
+    'Total', 'TotalDesconto', 'TotalAcréscimo', 'TotaldosProdutos', 'Vencimento',
+     'CodGrupo', 'CodSubGrupo', 'Parcelas', 'Dataemissao', 'DataVencimento',
+     'Boleta', 'NotaFiscal', 'Serie', 'CodEmpresa', 'created_at', 'updated_at'];
 }

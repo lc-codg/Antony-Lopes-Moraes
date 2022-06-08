@@ -43,6 +43,7 @@ return new class extends Migration
             $table->decimal('AlPis',19,2);
             $table->decimal('AlCofins',19,2);
             $table->decimal('AlIpi',19,2);
+            $table->timestamps();
         });
     }
 

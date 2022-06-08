@@ -50,6 +50,21 @@ class ClientesController extends Controller
             </script>";
             exit;
         }
+        if (empty($request->cep)) {
+            echo "<script>
+            alert('Digite ao Bairro.');
+            javascript:history.back();
+            </script>";
+            exit;
+        }
+        if (empty($request->UF)) {
+            echo "<script>
+            alert('Digite a UF.');
+            javascript:history.back();
+            </script>";
+            exit;
+        }
+      
         if (empty($request->Numero)) {
             echo "<script>
             alert('Digite o Número.');
@@ -61,16 +76,32 @@ class ClientesController extends Controller
 
             Clientes::create([
                 'Nome' => $request->Nome,
-                'CPF' => $request->CPF,
-                'RG' => $request->RG,
-                'CNPJ' => $request->CNPJ,
+                'Cpf' => $request->CPF,
+                'Rg' => $request->rg,
+                'Cnpj' => $request->cnpj,
+                'Ie' =>$request->ie,
+                'Razao'=>$request->razao,
+                'Fantasia'=>$request->fantasia,
                 'Email' => $request->Email,
                 'Endereco' => $request->Endereco,
                 'Bairro' => $request->Bairro,
                 'Numero' => $request->Numero,
                 'PessoaJuridica' => $request->PessoaJuridica,
                 'Cidade' => $request->Cidade,
-                'UF' => $request->UF,
+                'UF'  => $request->UF,
+                'Cep' =>$request->cep,
+                'Telefone' =>$request->telefone,
+                'Contato' =>$request->contato,
+                'Prazo' =>$request->prazo,
+                'Observacao' =>$request->observacao,
+                'Conta' =>$request->conta,
+                'Agencia'=>$request->agencia,
+                'Tipo'=>$request->tipo,
+                'CodigoVendedor'=>$request->codvendedor,
+                'Limite'=>$request->limite,
+                'Bloqueio'=>$request->bloqueio,
+                'Exterior'=>$request->exterior,
+                'Juridico'=>$request->juridico,
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Clientes/Novo';</script>";
@@ -130,13 +161,29 @@ class ClientesController extends Controller
                 'CPF' => $request->CPF,
                 'RG' => $request->RG,
                 'CNPJ' => $request->CNPJ,
+                'ie' =>$request->Ie,
+                'Razao'=>$request->razao,
+                'Fantasia'=>$request->fantasia,
                 'Email' => $request->Email,
                 'Endereco' => $request->Endereco,
                 'Bairro' => $request->Bairro,
                 'Numero' => $request->Numero,
                 'PessoaJuridica' => $request->PessoaJuridica,
                 'Cidade' => $request->Cidade,
-                'UF' => $request->UF,
+                'UF'  => $request->UF,
+                'Cep' =>$request->cep,
+                'Telefone' =>$request->telefone,
+                'Contato' =>$request->contato,
+                'Prazo' =>$request->prazo,
+                'Observacao' =>$request->observacao,
+                'Conta' =>$request->conta,
+                'Agencia'=>$request->agencia,
+                'Tipo'=>$request->tipo,
+                'CodigoVendedor'=>$request->codigovendedor,
+                'Limite'=>$request->limite,
+                'Bloqueio'=>$request->bloqueio,
+                'Exterior'=>$request->exterior,
+                'Juridico'=>$request->juridico
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Clientes/Todos';</script>";

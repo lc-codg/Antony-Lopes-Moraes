@@ -39,9 +39,10 @@ return new class extends Migration
             $table->Date('DataSaida');
             $table->string('Finalidade',100);
             $table->string('Natureza',100);
-            $table->Boolean('Devolucao');
-            $table->boolean('Complementar');
+            $table->string('Devolucao');
+            $table->string('Complementar');
             $table->integer('CodEmpresa');
+            $table->timestamps();
         });
     }
 

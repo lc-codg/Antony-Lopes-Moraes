@@ -38,8 +38,8 @@
               <a href="" class="list-group-item list-group-item-action active" aria-current="False">
                 Fornecedores
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Fornecedores</a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Fornecedores</a>
+              <a class="dropdown-item" href="/Fornecedor/Novo">Cadastrar Fornecedores</a>
+              <a class="dropdown-item" href="/Fornecedor/Todos">Listar Fornecedores</a>
             </div>
 
           </div>

@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('Conta',20);
             $table->string('Agencia',20);
             $table->string('Tipo',50);
+            $table->integer('Numero');
+            $table->string('UF',5);
             $table->timestamps();
         });
     }

@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Clientes extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-    protected $fillable = [ 'id', 'Nome', 'CPF', 'RG', 'CNPJ', 'Email', 'Endereco', 'Bairro', 'Numero','Cidade','UF'];
+   
+   public $timestamps = false;
+    protected $fillable = [ 'id', 'Nome', 'Cnpj', 'Cpf','Rg',
+     'Ie', 'Razao', 'Fantasia', 'Endereco', 'Bairro','Numero', 'Cidade', 'Cep',
+      'Telefone', 'Email', 'Contato', 'Prazo', 'Observacao', 'Conta',
+       'Agencia', 'Tipo', 'CodigoVendedor', 'Limite',
+        'Bloqueio','UF', 'Exterior', 'Juridico'];
 
 }

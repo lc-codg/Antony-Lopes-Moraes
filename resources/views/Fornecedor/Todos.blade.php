@@ -46,7 +46,7 @@
 
 
 
-                @foreach ($clientes as $row) 
+                @foreach ($Fornecedors as $row) 
 
                     <td>{{ $row->id }}</td>
 
@@ -63,18 +63,18 @@
                     <td>{{ $row->UF }}</td>
                     <td>
 
-                        <form action="/Clientes/Ver/{{ $row->id }}" method="get">
+                        <form action="/Fornecedores/Ver/{{ $row->id }}" method="get">
                             <input class="btn btn-dark" name="" type="submit" Value='Editar'>
                         </form>
 
                     </td>
                     <td>
-                        <form action="/Clientes/Delete/{{ $row->id }}" method="get">
+                        <form action="/Fornecedores/Delete/{{ $row->id }}" method="get">
                             <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
                         </form>
                     </td>
                     <td>
-                        <form action="/Clientes/Inserir" method="post">
+                        <form action="/Fornecedores/Inserir" method="post">
                             
                         </form>
                     </td>
@@ -89,7 +89,7 @@
 
 
 </body>
-{{ $clientes->links() }}
+{{ $Fornecedors->links() }}
 
 @include('footer')
 

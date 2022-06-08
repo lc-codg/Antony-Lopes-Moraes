@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('Nome',200);
             $table->string('Cnpj',15);
             $table->string('Ie',100);
+            $table->string('Rg',20);
+            $table->string('Cpf',20);
             $table->string('Razao',200);
             $table->string('Fantasia',200);
             $table->string('Endereco',200);
@@ -33,9 +35,11 @@ return new class extends Migration
             $table->string('Agencia',20);
             $table->string('Tipo',50);
             $table->decimal('Limite',19,2);
-            $table->boolean('Bloqueio');
-            $table->boolean('Exterior');
-            $table->Boolean('Juridico');
+            $table->string('Bloqueio');
+            $table->string('Exterior');
+            $table->string('Juridico');
+            $table->integer('Numero');
+            $table->string('UF',5);
             $table->timestamps();
         });
     }

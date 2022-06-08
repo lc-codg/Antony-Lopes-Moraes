@@ -10,7 +10,7 @@
 @include('Header')
 <br>
 
-<h5 Style='margin-left:1%;' class="text-left">Cadastro de clientes</h5>
+<h5 Style='margin-left:1%;' class="text-left">Cadastro de Fornecedores</h5>
 
 <body>
 
@@ -28,7 +28,7 @@
             <a href="#Dados Financeiros" data-toggle="tab" class="nav-link">Dados Financeiros</a>
         </li>
     </ul>
-    <form method="post" action="/Clientes/Salvar">
+    <form method="post" action="/Fornecedor/Salvar">
         @csrf
         <div class="tab-content">
 

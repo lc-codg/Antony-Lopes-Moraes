@@ -9,5 +9,10 @@ class Pedidos extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['id', 'CodigoDoCliente', 'Total', 'TotalDesconto', 'TotalAcréscimo', 'DtPedido'];
+    protected $fillable = ['id', 'CodigoDoCliente', 'Total', 'TotalDesconto', 
+    'TotalAcréscimo', 'TotaldosProdutos', 'Modelo', 'Nota', 'Serie', 'TotalTributos',
+     'TotalIpi', 'TotalPis', 'TotalCofins', 'TotalIcms', 'TotalBase', 
+     'TotalBaseImcs', 'TotalBaseSt', 'TotalFrete', 'TotalOutros', 'DtPedido', 
+     'TotalSt', 'Dataemissao',
+     'DataSaida', 'Finalidade', 'Natureza', 'Devolucao', 'Complementar', 'CodEmpresa'];
 }

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('Operacao',20);
             $table->string('Descricao',200);
             $table->integer('CodEmpresa');
+           
 
         });
     }

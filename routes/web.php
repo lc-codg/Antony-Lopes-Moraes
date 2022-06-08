@@ -5,6 +5,7 @@ use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ItensController;
+use App\Http\Controllers\FornecedorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +47,13 @@ Route::get('/Pedidos/LimparCarrinho',[PedidoController::class,'LimparCarrinho'])
 Route::get('/Itens/Delete/{Id}',[ItensController::class,'Delete']);
 Route::get('/Itens/Ver/{id}',[ItensController::class,'ListarPorId']);
 Route::get('/Itens/Todos',[ItensController::class,'ListarTodos']);
+
+Route::get('/Fornecedor/Novo',[FornecedorController::class,'Cadastrar']);
+Route::post('/Fornecedor/Salvar',[FornecedorController::class,'Salvar']);
+Route::get('/Fornecedor/Editar/{Id}',[FornecedorController::class,'Editar']);
+Route::get('/Fornecedor/Delete/{Id}',[FornecedorController::class,'Delete']);
+Route::get('/Fornecedor/Ver/{Id}',[FornecedorController::class,'ListarPorId']);
+Route::get('/Fornecedor/Todos',[FornecedorController::class,'ListarTodos']);
+Route::post('/Fornecedor/Inserir',[FornecedorController::class,'Inserir']);
 
 
