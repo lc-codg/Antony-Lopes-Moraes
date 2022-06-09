@@ -63,18 +63,18 @@
                     <td>{{ $row->UF }}</td>
                     <td>
 
-                        <form action="/Fornecedores/Ver/{{ $row->id }}" method="get">
+                        <form action="/Fornecedor/Ver/{{ $row->id }}" method="get">
                             <input class="btn btn-dark" name="" type="submit" Value='Editar'>
                         </form>
 
                     </td>
                     <td>
-                        <form action="/Fornecedores/Delete/{{ $row->id }}" method="get">
+                        <form action="/Fornecedor/Delete/{{ $row->id }}" method="get">
                             <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
                         </form>
                     </td>
                     <td>
-                        <form action="/Fornecedores/Inserir" method="post">
+                        <form action="/Fornecedor/Inserir" method="post">
                             
                         </form>
                     </td>

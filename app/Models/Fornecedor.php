@@ -10,9 +10,9 @@ class Fornecedor extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['id', 'Nome', 'Cnpj', 'Ie', 'Razao', 'Fantasia', 
+    protected $fillable = ['id', 'Nome', 'Cnpj','Cpf', 'Ie','Rg', 'Razao', 'Fantasia', 
     'Endereco', 'Bairro', 'Cidade', 'Cep', 'Telefone', 'Email', 'Contato', 'Prazo',
-     'Observacao', 'UF','Conta', 'Agencia','Numero', 'Tipo', 'Limite', 'Bloqueio', 'Exterior', 
+     'Observacao', 'UF','Conta', 'Agencia','Numero', 'Tipo', 'Limite', 'Exterior', 
      'Juridico'];
 
 

@@ -63,15 +63,7 @@ class FornecedorController extends Controller
             </script>";
             exit;
         }
-        if ($request->Juridico){
-        if (empty($request->cnpj)) {
-            echo "<script>
-            alert('Digite ao Bairro.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
-    }
+       
         if (empty($request->Numero)) {
             echo "<script>
             alert('Digite o Número.');
@@ -85,8 +77,8 @@ class FornecedorController extends Controller
                 'Nome' => $request->Nome,
                 'Cpf' => $request->CPF,
                 'Cnpj' => $request->cnpj,
-                'Ie' =>$request->Ie,
-                'Rg' =>$request->RG,
+                'Ie' =>$request->ie,
+                'Rg' =>$request->ie,
                 'Razao'=>$request->razao,
                 'Fantasia'=>$request->fantasia,
                 'Email' => $request->Email,
@@ -106,12 +98,11 @@ class FornecedorController extends Controller
                 'Tipo'=>$request->tipo,
                 'CodigoVendedor'=>$request->codigovendedor,
                 'Limite'=>$request->limite,
-                'Bloqueio'=>$request->bloqueio,
                 'Exterior'=>$request->exterior,
                 'Juridico'=>$request->juridico
             ]);
 
-            return "<script>alert('Salvo com sucesso!');location='/Fornecedors/Novo';</script>";
+            return "<script>alert('Salvo com sucesso!');location='/Fornecedor/Novo';</script>";
         }
     }
     public function Editar(Request $request, $Id)
@@ -163,12 +154,11 @@ class FornecedorController extends Controller
 
 
             $cliente->update([
-                'id' => $request->id,
                 'Nome' => $request->Nome,
-                'CPF' => $request->CPF,
-                'RG' => $request->RG,
-                'CNPJ' => $request->CNPJ,
-                'ie' =>$request->Ie,
+                'Cpf' => $request->CPF,
+                'Rg' => $request->RG,
+                'Cnpj' => $request->CNPJ,
+                'Ie' =>$request->Ie,
                 'Razao'=>$request->razao,
                 'Fantasia'=>$request->fantasia,
                 'Email' => $request->Email,
@@ -188,7 +178,6 @@ class FornecedorController extends Controller
                 'Tipo'=>$request->tipo,
                 'CodigoVendedor'=>$request->codigovendedor,
                 'Limite'=>$request->limite,
-                'Bloqueio'=>$request->bloqueio,
                 'Exterior'=>$request->exterior,
                 'Juridico'=>$request->juridico
             ]);
@@ -207,7 +196,7 @@ class FornecedorController extends Controller
     public function ListarPorId($id)
     {
         $cliente = Fornecedor::findOrfail($id);
-        return view('Fornecedor.Ver', ['cliente' => $cliente]);
+        return view('Fornecedor.Ver', ['Fornecedors' => $cliente]);
     }
     public function ListarTodos()
     {

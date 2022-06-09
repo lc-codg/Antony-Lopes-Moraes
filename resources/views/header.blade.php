@@ -20,14 +20,14 @@
           <div class="dropdown-menu">
 
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+              <a href="#" class="list-group-item-dark  list-group-item-action active" aria-current="true">
                 Produtos
               </a>
               <a class="dropdown-item" href="/Produtos/Novo">Cadastrar Produtos</a>
               <a class="dropdown-item" href="/Produtos/Todos">Listar Produtos</a>
             </div>
-            <div class="list-group- Dark">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="True">
+            <div class="list-group">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="True">
                 Clientes
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Clientes</a>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Fornecedores
               </a>
               <a class="dropdown-item" href="/Fornecedor/Novo">Cadastrar Fornecedores</a>
@@ -50,39 +50,46 @@
           <div class="dropdown-menu">
 
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Contas a Pagar
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Contas a Pagar</a>
               <a class="dropdown-item" href="/Clientes/Todos">Listar Contas a Pagar </a>
             </div>
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Contas a Receber
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Contas a Receber </a>
               <a class="dropdown-item" href="/Clientes/Todos">Listar Contas a Receber </a>
             </div>
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Conta Corrente
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Conta Corrente</a>
               <a class="dropdown-item" href="/Clientes/Todos">Listar Conta Corrente</a>
             </div>
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Despesas
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Cadastrar de Despesas </a>
               <a class="dropdown-item" href="/Clientes/Todos">Listar Despesas </a>
             </div>
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Centro de Custos
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Centro de Custos </a>
               <a class="dropdown-item" href="/Clientes/Todos">Listar Centro de Custos </a>
+            </div>
+            <div class="list-group">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
+                Balanço
+              </a>
+              <a class="dropdown-item" href="/Clientes/Novo">Lançar Balanço</a>
+              <a class="dropdown-item" href="/Clientes/Todos">Listar Balanço</a>
             </div>
 
           </div>
@@ -92,14 +99,14 @@
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notas</a>
           <div class="dropdown-menu">
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Notas de Compra
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Notas de Compra </a>
               <a class="dropdown-item" href="/Clientes/Todos">Listar Notas de Compra </a>
             </div>
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Notas de Venda
               </a>
               <a class="dropdown-item" href="/Clientes/Novo">Emitir Nota de Venda </a>
@@ -113,24 +120,14 @@
           <div class="dropdown-menu">
 
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                Fluxo de Caixa
-              </a>
+
               <a class="dropdown-item" href="/Produtos/Novo">Movimento diário</a>
               <a class="dropdown-item" href="/Produtos/Todos">Saldo Do Caixa</a>
             </div>
-            <div class="list-group- Dark">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="True">
-                Balanço
-              </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Lançar Balanço</a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Balanço</a>
-            </div>
+
 
             <div class="list-group">
-              <a href="" class="list-group-item list-group-item-action active" aria-current="False">
-                Fechamento
-              </a>
+
               <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
             </div>
 
@@ -141,15 +138,13 @@
           <div class="dropdown-menu">
 
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                Relatórios
-              </a>
+
               <a class="dropdown-item" href="/Produtos/Novo">Entradas</a>
               <a class="dropdown-item" href="/Produtos/Todos">Saídas</a>
               <a class="dropdown-item" href="/Produtos/Todos">Despesas</a>
               <a class="dropdown-item" href="/Produtos/Todos">Consolidado</a>
             </div>
-           
+
 
           </div>
         </li>

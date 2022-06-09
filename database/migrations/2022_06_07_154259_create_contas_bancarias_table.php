@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('Banco',100);
             $table->decimal('Saldo',19,2);
             $table->string('Agencia',20);
-            $table->string('Tipo',20);
+            $table->string('Tipo',20)->nullable()->default(NULL);;
             $table->string('Conta',100);
-            $table->string('Operacao',20);
-            $table->string('Descricao',200);
+            $table->string('Operacao',20)->nullable()->default(NULL);;
+            $table->string('Descricao',200)->nullable()->default(NULL);;
             $table->integer('CodEmpresa');
            
 

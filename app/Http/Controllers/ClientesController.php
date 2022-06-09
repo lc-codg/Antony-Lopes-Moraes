@@ -156,12 +156,11 @@ class ClientesController extends Controller
 
 
             $cliente->update([
-                'id' => $request->id,
                 'Nome' => $request->Nome,
-                'CPF' => $request->CPF,
-                'RG' => $request->RG,
-                'CNPJ' => $request->CNPJ,
-                'ie' =>$request->Ie,
+                'Cpf' => $request->CPF,
+                'Cnpj' => $request->cnpj,
+                'Ie' =>$request->ie,
+                'Rg' =>$request->RG,
                 'Razao'=>$request->razao,
                 'Fantasia'=>$request->fantasia,
                 'Email' => $request->Email,
