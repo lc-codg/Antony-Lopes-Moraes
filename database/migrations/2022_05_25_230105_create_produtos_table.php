@@ -42,7 +42,19 @@ return new class extends Migration
             $table->decimal('St',19,2)->nullable()->default(NULL);
             $table->decimal('AlPis',19,2)->nullable()->default(NULL);
             $table->decimal('AlCofins',19,2)->nullable()->default(NULL);
-            $table->decimal('AlIpi',19,2)->nullable()->default(NULL);
+            $table->string('Secao',100)->nullable()->default(NULL);
+            $table->string('Tamanho',50)->nullable()->default(NULL);
+            $table->string('Cor',100)->nullable()->default(NULL);
+            $table->string('Referencia',100)->nullable()->default(NULL);
+            $table->decimal('Fator',19,2)->nullable()->default(NULL);
+            $table->string('Modelo',100)->nullable()->default(NULL);
+            $table->string('Serie',100)->nullable()->default(NULL);
+            $table->string('Suframa',100)->nullable()->default(NULL);
+            $table->decimal('Validade',19,2)->nullable()->default(NULL);
+            $table->string('Lote',100)->nullable()->default(NULL);
+            $table->string('SubSecao',100)->nullable()->default(NULL);
+            $table->string('Beneficio',100)->nullable()->default(NULL);
+
             $table->timestamps();
         });
     }
