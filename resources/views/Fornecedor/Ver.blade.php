@@ -10,7 +10,7 @@
 @include('Header')
 <br>
 
-<h5 class="text-left">Editar de Fornecedor</h5>
+<h5 Style='margin-left:1%;margin-right:1%;'class="text-left">Editar de Fornecedor</h5>
 
 <body>
 

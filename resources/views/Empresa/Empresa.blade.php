@@ -10,7 +10,7 @@
 @include('Header')
 <br>
 
-<h5 class="text-left">Cadastro de Empresa</h5>
+<h5 Style='margin-left:1%;margin-right:1%;'class="text-left">Cadastro de Empresa</h5>
 
 <body>
 

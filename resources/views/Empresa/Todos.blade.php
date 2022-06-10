@@ -26,10 +26,10 @@
         <thead class="thead-DARK">
             <tr>
 
-                <th scope="col">Código</th>
-                <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
-                <th scope="col">RG</th>
+                <th scope="col">Cod.Empresa</th>
+                <th scope="col">Razão</th>
+                <th scope="col">Fantasia</th>
+                <th scope="col">IE</th>
                 <th scope="col">CNPJ</th>
                 <th scope="col">Endereço</th>
                 <th scope="col">Número</th>

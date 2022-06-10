@@ -26,7 +26,7 @@
         <thead class="thead-DARK">
             <tr>
 
-                <th scope="col">Código</th>
+                <th scope="col">Cod.Fornecedor</th>
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
                 <th scope="col">RG</th>
