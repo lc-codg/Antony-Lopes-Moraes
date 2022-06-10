@@ -164,7 +164,7 @@
 
                 <div  class="form-group col-md-4">
                         <label for="">Banco</label>
-                        <input type="number" class="form-control" name="tipo" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" class="form-control" name="tipo" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div  class="form-group col-md-3">

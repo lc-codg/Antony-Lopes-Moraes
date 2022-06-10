@@ -42,6 +42,14 @@
               <a class="dropdown-item" href="/Fornecedor/Todos">Listar Fornecedores</a>
             </div>
 
+            <div class="list-group">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
+                Empresas
+              </a>
+              <a class="dropdown-item" href="/Empresa/Novo">Cadastrar Empresas</a>
+              <a class="dropdown-item" href="/Empresa/Todos">Listar Empresas</a>
+            </div>
+
           </div>
         </li>
 

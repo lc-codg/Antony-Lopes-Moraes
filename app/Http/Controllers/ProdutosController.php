@@ -55,6 +55,42 @@ class ProdutosController extends Controller
                 'Barras' => $request->Barras,
                 'ValorUnitario' => $request->ValorUnitario,
                 'Quantidade' => $request->Quantidade,
+                'ValorPrazo' => $request->prazo ,
+                'ValorPromocao' => $request->promocao ,
+                'Custo' => $request-> custo,
+                'Icms' => $request-> icms,
+                'Origem' => $request->origem ,
+                'Cst' => $request->cst ,
+                'Ncm' => $request->ncm ,
+                'Cest' => $request->cest ,
+                'Cfop' => $request->cfop ,
+                'CodPis' => $request->codpis ,
+                'CodCofins' => $request-> codcofins,
+                'CodIpi' => $request-> codipi,
+                'BasePis' => $request->basepis ,
+                'Basecofins' => $request->basecofins ,
+                'BaseIpi' => $request->baseipi ,
+                'Peso' => $request-> peso,
+                'Reducao' => $request-> reducao,
+                'Mva' => $request->mva ,
+                'BaseIcms' => $request->base ,
+                'BaseSt' => $request->basest ,
+                'St' => $request->st ,
+                'AlPis' => $request->alpis ,
+                'AlCofins' => $request->alcofins ,
+                'Secao' => $request->secao ,
+                'Tamanho' => $request->tamanho ,
+                'Cor' => $request->cor ,
+                'Referencia' => $request->referencia ,
+                'Fator' => $request->fator ,
+                'Modelo' => $request->modelo ,
+                'Serie' => $request->serie ,
+                'Suframa' => $request->suframa ,
+                'Validade' => $request->validade ,
+                'Lote' => $request->lote ,
+                'SubSecao' => $request->subsecao ,
+                'Beneficio'=> $request->beneficio,
+                'Alipi'=> $request->alipi
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Produtos/Novo';</script>";
@@ -95,11 +131,46 @@ class ProdutosController extends Controller
 
 
             $produto->update([
-                'id' => $request->Id,
                 'Descricao' => $request->Descricao,
                 'Barras' => $request->Barras,
                 'ValorUnitario' => $request->ValorUnitario,
                 'Quantidade' => $request->Quantidade,
+                'ValorPrazo' => $request->prazo ,
+                'ValorPromocao' => $request->promocao ,
+                'Custo' => $request-> custo,
+                'Icms' => $request-> icms,
+                'Origem' => $request->origem ,
+                'Cst' => $request->cst ,
+                'Ncm' => $request->ncm ,
+                'Cest' => $request->cest ,
+                'Cfop' => $request->cfop ,
+                'CodPis' => $request->codpis ,
+                'CodCofins' => $request-> codcofins,
+                'CodIpi' => $request-> codipi,
+                'BasePis' => $request->basepis ,
+                'Basecofins' => $request->basecofins ,
+                'BaseIpi' => $request->baseipi ,
+                'Peso' => $request-> peso,
+                'Reducao' => $request-> reducao,
+                'Mva' => $request->mva ,
+                'BaseIcms' => $request->base ,
+                'BaseSt' => $request->basest ,
+                'St' => $request->st ,
+                'AlPis' => $request->alpis ,
+                'AlCofins' => $request->alcofins ,
+                'Secao' => $request->secao ,
+                'Tamanho' => $request->tamanho ,
+                'Cor' => $request->cor ,
+                'Referencia' => $request->referencia ,
+                'Fator' => $request->fator ,
+                'Modelo' => $request->modelo ,
+                'Serie' => $request->serie ,
+                'Suframa' => $request->suframa ,
+                'Validade' => $request->validade ,
+                'Lote' => $request->lote ,
+                'SubSecao' => $request->subsecao ,
+                'Beneficio'=> $request->beneficio,
+                'Alipi'=> $request->alipi
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Produtos/Todos';</script>";
@@ -115,12 +186,12 @@ class ProdutosController extends Controller
     public function ListarPorId($id)
     {
         $produto = Produto::findOrfail($id);
-        return view('Produtos.Ver', ['produto' => $produto]);
+        return view('Produtos.Ver',['produto' => $produto]);
     }
     public function ListarTodos()
     {
         $produtos = DB::table('produtos')->paginate(10);
-        return view('Produtos.Todos', ['produtos' => $produtos]);
+        return view('Produtos.Todos' , ['produtos' => $produtos]);
     }
     public function Inserir(Request $Request)
     {
@@ -130,7 +201,7 @@ class ProdutosController extends Controller
             'ValorUnitario' => $Request->ValorUnitario,
             'Quantidade' => $Request->Quantidade
         ]);
-        Session::push('Carrinho', $Carrinho);
+        Session::push('Carrinho' , $Carrinho);
         return "<script>location='/Pedidos/Carrinho';</script>";
     }
 }

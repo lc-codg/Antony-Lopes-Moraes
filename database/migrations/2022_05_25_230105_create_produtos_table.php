@@ -54,6 +54,7 @@ return new class extends Migration
             $table->string('Lote',100)->nullable()->default(NULL);
             $table->string('SubSecao',100)->nullable()->default(NULL);
             $table->string('Beneficio',100)->nullable()->default(NULL);
+            $table->decimal('Alipi',19,2)->nullable()->default(NULL);
 
             $table->timestamps();
         });

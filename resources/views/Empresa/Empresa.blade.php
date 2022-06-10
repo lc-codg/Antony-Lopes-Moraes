@@ -10,7 +10,7 @@
 @include('Header')
 <br>
 
-<h5 class="text-left">Cadastro de Fornecedores</h5>
+<h5 class="text-left">Cadastro de Empresa</h5>
 
 <body>
 
@@ -20,15 +20,13 @@
         <li class="nav-item">
             <a href="#Dados Pessoais" data-toggle="tab" class="active nav-link">Dados Pessoais</a>
         </li>
-        <li class="nav-item">
-            <a href="#Dados Empresarias" data-toggle="tab" class="nav-link">Dados Empresariais</a>
-        </li>
 
         <li class="nav-item">
             <a href="#Dados Financeiros" data-toggle="tab" class="nav-link">Dados Financeiros</a>
         </li>
     </ul>
-    <form method="post" action="/Fornecedor/Salvar">
+
+    <form method="post" action="/Empresa/Salvar">
         @csrf
         <div class="tab-content">
 
@@ -37,19 +35,25 @@
                 <div Style='margin-left:1%;margin-right:1%;' class='form-row'>
 
                     <div class="form-group col-md-4 ">
-                        <label for="">Nome</label>
-                        <input required type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+                        <label for="">Razão</label>
+                        <input type="text" class="form-control" name="razao" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
-                        <label for="">CPF</label>
-                        <input required type="number" class="form-control" name="CPF" id="" aria-describedby="helpId" placeholder="">
+                        <label for="">Fantasia</label>
+                        <input type="text" class="form-control" name="fantasia" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
-                        <label for="">RG</label>
-                        <input required type="number" class="form-control" name="RG" id="" aria-describedby="helpId" placeholder="">
+                        <label for="">CNPJ</label>
+                        <input type="number" class="form-control" name="cnpj" id="" aria-describedby="helpId" placeholder="">
                     </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="">Inscrição Estadual</label>
+                        <input type="number" class="form-control" name="ie" id="" aria-describedby="helpId" placeholder="">
+                    </div>
+
 
                     <div class="form-group col-md-4">
                         <label for="">Logadouro</label>
@@ -104,41 +108,6 @@
 
             </div>
 
-            <div id="Dados Empresarias" class="tab-pane .container-fluid">
-
-                <div Style='margin-left:1%;margin-right:1%;' class='form-row'>
-
-                    <div class="form-group col-md-4 ">
-                        <label for="">Razão</label>
-                        <input type="text" class="form-control" name="razao" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                        <label for="">Fantasia</label>
-                        <input type="text" class="form-control" name="fantasia" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                        <label for="">CNPJ</label>
-                        <input type="number" class="form-control" name="cnpj" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                        <label for="">Inscrição Estadual</label>
-                        <input type="number" class="form-control" name="ie" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-
-
-
-                </div>
-                <div Style='margin-left:1%;margin-right:1%;' class="form-check col-md-1">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="juridico" id="" value="t" unchecked>
-                        P.Júrídica
-                    </label>
-                </div>
-
-            </div>
 
             <div id="Dados Financeiros" class="tab-pane .container-fluid">
 
@@ -148,18 +117,6 @@
                         <label for="">Prazo</label>
                         <input type="number" class="form-control" name="prazo" id="" aria-describedby="helpId" placeholder="">
                     </div>
-
-                    <div class="form-group col-md-2">
-                        <label for="">Vendedor</label>
-                        <input type="number" class="form-control" name="codvendedor" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                        <label for="">Limite</label>
-                        <input type="number" class="form-control" name="limite" id="" aria-describedby="helpId" placeholder="">
-                    </div>
-                </div>
-                <div Style='margin-left:1%;margin-right:1%;' class='form-row'>
 
                     <div class="form-group col-md-4">
                         <label for="">Banco</label>
@@ -177,14 +134,6 @@
                     </div>
 
                 </div>
-
-                <div Style='margin-left:1%;margin-right:1%;' class="form-check col-md-1">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="exterior" id="" value="t" unchecked>
-                        Exterior
-                    </label>
-                </div>
-
             </div>
 
 

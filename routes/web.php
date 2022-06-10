@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ItensController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\EmpresaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,5 +56,13 @@ Route::get('/Fornecedor/Delete/{Id}',[FornecedorController::class,'Delete']);
 Route::get('/Fornecedor/Ver/{Id}',[FornecedorController::class,'ListarPorId']);
 Route::get('/Fornecedor/Todos',[FornecedorController::class,'ListarTodos']);
 Route::post('/Fornecedor/Inserir',[FornecedorController::class,'Inserir']);
+
+Route::get('/Empresa/Novo',[EmpresaController::class,'Cadastrar']);
+Route::post('/Empresa/Salvar',[EmpresaController::class,'Salvar']);
+Route::get('/Empresa/Editar/{Id}',[EmpresaController::class,'Editar']);
+Route::get('/Empresa/Delete/{Id}',[EmpresaController::class,'Delete']);
+Route::get('/Empresa/Ver/{Id}',[EmpresaController::class,'ListarPorId']);
+Route::get('/Empresa/Todos',[EmpresaController::class,'ListarTodos']);
+Route::post('/Empresa/Inserir',[EmpresaController::class,'Inserir']);
 
 

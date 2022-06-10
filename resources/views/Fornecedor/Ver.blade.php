@@ -163,7 +163,7 @@
 
                     <div class="form-group col-md-4">
                         <label for="">Banco</label>
-                        <input type="text" value="{{$Fornecedors->Banco}}" class="form-control" name="tipo" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" value="{{$Fornecedors->Tipo}}" class="form-control" name="tipo" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-3">
