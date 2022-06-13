@@ -73,10 +73,10 @@
             </div>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
-                Conta Corrente
+                Contaas Bancárias
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Conta Corrente</a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Conta Corrente</a>
+              <a class="dropdown-item" href="/ContasBancarias/Novo">Cadastrar Conta Bancárias</a>
+              <a class="dropdown-item" href="/ContasBancarias/Todos">Listar Conta Bancárias</a>
             </div>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">

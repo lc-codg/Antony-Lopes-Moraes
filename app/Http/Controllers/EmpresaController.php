@@ -180,6 +180,12 @@ class EmpresaController extends Controller
         $Empresa = DB::table('Empresas')->paginate(20);
         return view('Empresa.Todos', ['Empresas' => $Empresa]);
     }
+    public function Listar(){
+       
+            $Empresa = DB::table('Empresas')->get();
+            return $Empresa;
+        
+    }
     public function ListarPrimeiro()
     {
         $Empresa = DB::table('Empresas')->select('id')->limit(1);

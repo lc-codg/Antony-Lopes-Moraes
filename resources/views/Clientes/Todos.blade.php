@@ -15,15 +15,8 @@
 
 <body>
 
-
-
-
-    <style>
-
-    </style>
-
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
-        <thead class="thead-DARK">
+        <thead class="thead-dARK">
             <tr>
 
                 <th scope="col">Cod.Cliente</th>

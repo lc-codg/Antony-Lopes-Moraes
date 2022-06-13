@@ -7,6 +7,8 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ItensController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\ContasBancariasController;
+use App\Models\ContasBancarias;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,4 +67,10 @@ Route::get('/Empresa/Ver/{Id}',[EmpresaController::class,'ListarPorId']);
 Route::get('/Empresa/Todos',[EmpresaController::class,'ListarTodos']);
 Route::post('/Empresa/Inserir',[EmpresaController::class,'Inserir']);
 
+Route::get('/ContasBancarias/Novo',[ContasBancariasController::class,'index']);
+Route::post('/ContasBancarias/Salvar',[ContasBancariasController::class,'Salvar']);
+Route::get('/ContasBancarias/Todos',[ContasBancariasController::class,'ListarTodos']);
+Route::get('/ContasBancarias/Ver/{id}',[ContasBancariasController::class,'show']);
+Route::get('/ContasBancarias/Editar/{id}',[ContasBancariasController::class,'Update']);
+Route::get('/ContasBancarias/Delete/{id}',[ContasBancariasController::class,'Delete']);
 
