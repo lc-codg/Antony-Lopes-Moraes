@@ -77,7 +77,7 @@
                         <select selected class="form-control" name="CodEmpresa" id="">
                         <option selected>{{$ContasBancarias->CodEmpresa}}</option>
                             @foreach ($Empresas as $row)
-                            <option>{{$row->id}}</option>
+                            <option>{{$row->id}}- {{$row->Razao}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -93,5 +93,5 @@
     </div>
     </div>
 </body>
-
+@include('footer')
 </html>

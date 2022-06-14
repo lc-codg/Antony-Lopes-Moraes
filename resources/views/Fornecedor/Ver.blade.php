@@ -206,5 +206,5 @@
 
 
 </body>
-
+@include('footer')
 </html>

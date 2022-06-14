@@ -8,7 +8,7 @@ use App\Http\Controllers\ItensController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ContasBancariasController;
-use App\Models\ContasBancarias;
+use App\Http\Controllers\ContasaPagarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,4 +73,11 @@ Route::get('/ContasBancarias/Todos',[ContasBancariasController::class,'ListarTod
 Route::get('/ContasBancarias/Ver/{id}',[ContasBancariasController::class,'show']);
 Route::get('/ContasBancarias/Editar/{id}',[ContasBancariasController::class,'Update']);
 Route::get('/ContasBancarias/Delete/{id}',[ContasBancariasController::class,'Delete']);
+
+Route::get('/ContasaPagar/Novo',[ContasaPagarController::class,'index']);
+Route::post('/ContasaPagar/Salvar',[Contasapagarcontroller::class,'create']);
+Route::get('/ContasaPagar/Todos',[ContasaPagarController::class,'ListarTodos']);
+Route::get('/ContasaPagar/Ver/{id}',[ContasaPagarController::class,'show']);
+Route::get('/ContasaPagar/Editar/{id}',[ContasaPagarController::class,'update']);
+Route::get('ContasaPagar/Delete/{id}',[Contasapagarcontroller::class,'destroy']);
 

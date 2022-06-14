@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ContasBancarias;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\EmpresaController;
+use Illuminate\Support\Str;
 
 class ContasBancariasController extends Controller
 {
@@ -62,7 +63,7 @@ class ContasBancariasController extends Controller
             </script>";
             exit;
         } else {
-
+            
             ContasBancarias::create(
                 [
                     'Banco' => $request->Banco,
@@ -72,7 +73,7 @@ class ContasBancariasController extends Controller
                     'Conta' => $request->Conta,
                     'Operacao' => $request->Operacao,
                     'Descricao' => $request->Descricao,
-                    'CodEmpresa' => $request->CodEmpresa
+                    'CodEmpresa' => Str::substr($request->CodEmpresa,0,1)
                 ]
             );
             return
@@ -167,7 +168,7 @@ class ContasBancariasController extends Controller
                 'Conta' => $request->Conta,
                 'Operacao' => $request->Operacao,
                 'Descricao' => $request->Descricao,
-                'CodEmpresa' => $request->CodEmpresa
+                'CodEmpresa' => Str::substr($request->CodEmpresa,0,1)
             ]
         );
         return 

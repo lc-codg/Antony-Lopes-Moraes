@@ -61,8 +61,8 @@
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Contas a Pagar
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Contas a Pagar</a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Contas a Pagar </a>
+              <a class="dropdown-item" href="/ContasaPagar/Novo">Cadastrar Contas a Pagar</a>
+              <a class="dropdown-item" href="/ContasaPagar/Todos">Listar Contas a Pagar </a>
             </div>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">

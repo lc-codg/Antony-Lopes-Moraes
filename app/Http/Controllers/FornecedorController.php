@@ -203,6 +203,11 @@ class FornecedorController extends Controller
         $Fornecedor = DB::table('Fornecedors')->paginate(20);
         return view('Fornecedor.Todos', ['Fornecedors' => $Fornecedor]);
     }
+    public function Listar()
+    {
+        $Fornecedor = DB::table('Fornecedors')->get();
+        return $Fornecedor;
+    }
     public function ListarPrimeiro()
     {
         $Fornecedor = DB::table('Fornecedors')->

@@ -75,14 +75,14 @@
                         <label for="">Codigo Empresa</label>
                         <select selected class="form-control" name="CodEmpresa" id="">
                             @foreach ($Empresas as $row)
-                            <option>{{$row->id}}</option>
+                            <option>{{$row->id}}- {{$row->Razao}}</option>
                             @endforeach
                         </select>
                     </div>
 
                     </div>
 
-                    <input name="Salvar" id="" class="btn btn-primary" type="submit" value="Salvar">
+                    <input name="Salvar" id="" class="btn btn-dark" type="submit" value="Salvar">
             </form>
 
 
@@ -91,5 +91,5 @@
     </div>
     </div>
 </body>
-
+@include('footer')
 </html>
