@@ -206,6 +206,11 @@ class ClientesController extends Controller
         $clientes = DB::table('clientes')->paginate(20);
         return view('Clientes.Todos', ['clientes' => $clientes]);
     }
+    public function Listar()
+    {
+        $cliente = DB::table('clientes')->get();
+        return $cliente;
+    }
     public function ListarPrimeiro()
     {
         $clientes = DB::table('clientes')->

@@ -9,6 +9,7 @@ use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ContasBancariasController;
 use App\Http\Controllers\ContasaPagarController;
+use App\Http\Controllers\ContasaReceberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,4 +81,11 @@ Route::get('/ContasaPagar/Todos',[ContasaPagarController::class,'ListarTodos']);
 Route::get('/ContasaPagar/Ver/{id}',[ContasaPagarController::class,'show']);
 Route::get('/ContasaPagar/Editar/{id}',[ContasaPagarController::class,'update']);
 Route::get('ContasaPagar/Delete/{id}',[Contasapagarcontroller::class,'destroy']);
+
+Route::get('/ContasaReceber/Novo',[ContasaReceberController::class,'index']);
+Route::post('/ContasaReceber/Salvar',[ContasaRecebercontroller::class,'create']);
+Route::get('/ContasaReceber/Todos',[ContasaReceberController::class,'ListarTodos']);
+Route::get('/ContasaReceber/Ver/{id}',[ContasaReceberController::class,'show']);
+Route::get('/ContasaReceber/Editar/{id}',[ContasaReceberController::class,'update']);
+Route::get('ContasaReceber/Delete/{id}',[ContasaRecebercontroller::class,'destroy']);
 

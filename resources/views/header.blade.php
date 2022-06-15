@@ -68,8 +68,8 @@
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Contas a Receber
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Contas a Receber </a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Contas a Receber </a>
+              <a class="dropdown-item" href="/ContasaReceber/Novo">Cadastrar Contas a Receber </a>
+              <a class="dropdown-item" href="/ContasaReceber/Todos">Listar Contas a Receber </a>
             </div>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
