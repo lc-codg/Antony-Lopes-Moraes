@@ -10,6 +10,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ContasBancariasController;
 use App\Http\Controllers\ContasaPagarController;
 use App\Http\Controllers\ContasaReceberController;
+use App\Http\Controllers\DespesasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,4 +89,11 @@ Route::get('/ContasaReceber/Todos',[ContasaReceberController::class,'ListarTodos
 Route::get('/ContasaReceber/Ver/{id}',[ContasaReceberController::class,'show']);
 Route::get('/ContasaReceber/Editar/{id}',[ContasaReceberController::class,'update']);
 Route::get('ContasaReceber/Delete/{id}',[ContasaRecebercontroller::class,'destroy']);
+
+Route::get('/Despesas/Novo',[DespesasController::class,'index']);
+Route::post('/Despesas/Salvar',[Despesascontroller::class,'create']);
+Route::get('/Despesas/Todos',[DespesasController::class,'ListarTodos']);
+Route::get('/Despesas/Ver/{id}',[DespesasController::class,'show']);
+Route::get('/Despesas/Editar/{id}',[DespesasController::class,'update']);
+Route::get('Despesas/Delete/{id}',[Despesascontroller::class,'destroy']);
 

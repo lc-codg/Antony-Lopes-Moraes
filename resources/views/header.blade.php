@@ -82,16 +82,10 @@
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Despesas
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar de Despesas </a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Despesas </a>
+              <a class="dropdown-item" href="/Despesas/Novo">Cadastrar de Despesas </a>
+              <a class="dropdown-item" href="/Despesas/Todos">Listar Despesas </a>
             </div>
-            <div class="list-group">
-              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
-                Centro de Custos
-              </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Centro de Custos </a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Centro de Custos </a>
-            </div>
+           
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Balanço
