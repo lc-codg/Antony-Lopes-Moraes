@@ -11,6 +11,7 @@ use App\Http\Controllers\ContasBancariasController;
 use App\Http\Controllers\ContasaPagarController;
 use App\Http\Controllers\ContasaReceberController;
 use App\Http\Controllers\DespesasController;
+use App\Models\ContasaReceber;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +31,9 @@ Route::get('/Produtos/Novo',[ProdutosController::class,'Cadastrar']);
 Route::post('/Produtos/Salvar',[ProdutosController::class,'Salvar']);
 Route::get('/Produtos/Editar/{Id}',[ProdutosController::class,'Editar']);
 Route::get('/Produtos/Delete/{Id}',[ProdutosController::class,'Delete']);
-Route::get('Produtos/Ver/{Id}',[ProdutosController::class,'ListarPorId']);
-Route::get('Produtos/Todos',[ProdutosController::class,'ListarTodos']);
-Route::post('Produtos/Inserir',[ProdutosController::class,'Inserir']);
+Route::get('/Produtos/Ver/{Id}',[ProdutosController::class,'ListarPorId']);
+Route::get('/Produtos/Todos',[ProdutosController::class,'ListarTodos']);
+Route::post('/Produtos/Inserir',[ProdutosController::class,'Inserir']);
 
 Route::get('/Clientes/Novo',[ClientesController::class,'Cadastrar']);
 Route::post('/Clientes/Salvar',[ClientesController::class,'Salvar']);
@@ -81,7 +82,9 @@ Route::post('/ContasaPagar/Salvar',[Contasapagarcontroller::class,'create']);
 Route::get('/ContasaPagar/Todos',[ContasaPagarController::class,'ListarTodos']);
 Route::get('/ContasaPagar/Ver/{id}',[ContasaPagarController::class,'show']);
 Route::get('/ContasaPagar/Editar/{id}',[ContasaPagarController::class,'update']);
-Route::get('ContasaPagar/Delete/{id}',[Contasapagarcontroller::class,'destroy']);
+Route::get('/ContasaPagar/Delete/{id}',[Contasapagarcontroller::class,'destroy']);
+Route::get('/ContasaPagar/Quitar/{id},{tipo}',[ContasaPagarController::class,'Quitar']);
+Route::get('/ContasaPagar/Estornar/{id},{tipo}',[ContasaPagarController::class,'Estornar']);
 
 Route::get('/ContasaReceber/Novo',[ContasaReceberController::class,'index']);
 Route::post('/ContasaReceber/Salvar',[ContasaRecebercontroller::class,'create']);
@@ -89,6 +92,8 @@ Route::get('/ContasaReceber/Todos',[ContasaReceberController::class,'ListarTodos
 Route::get('/ContasaReceber/Ver/{id}',[ContasaReceberController::class,'show']);
 Route::get('/ContasaReceber/Editar/{id}',[ContasaReceberController::class,'update']);
 Route::get('ContasaReceber/Delete/{id}',[ContasaRecebercontroller::class,'destroy']);
+Route::get('/ContasaReceber/Quitar/{id},{tipo}',[ContasaReceberController::class,'Quitar']);
+Route::get('/ContasaReceber/Estornar/{id},{tipo}',[ContasaReceberController::class,'Estornar']);
 
 Route::get('/Despesas/Novo',[DespesasController::class,'index']);
 Route::post('/Despesas/Salvar',[Despesascontroller::class,'create']);
@@ -96,4 +101,5 @@ Route::get('/Despesas/Todos',[DespesasController::class,'ListarTodos']);
 Route::get('/Despesas/Ver/{id}',[DespesasController::class,'show']);
 Route::get('/Despesas/Editar/{id}',[DespesasController::class,'update']);
 Route::get('Despesas/Delete/{id}',[Despesascontroller::class,'destroy']);
+
 

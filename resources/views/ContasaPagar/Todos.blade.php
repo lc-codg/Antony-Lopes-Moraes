@@ -26,6 +26,8 @@
                     <th scope='col'>N° Boleta</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -59,6 +61,19 @@
                             <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
                         </form>
                     </td>
+
+                    <td>
+                        <form action="/ContasaPagar/Quitar/{{$row->id}},Pagar" method="get">
+                            <input class="btn btn-primary" name="" type="submit" Value='Quitar'>
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="/ContasaPagar/Estornar/{{ $row->id }},Pagar" method="get">
+                            <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
+                        </form>
+                    </td>
+
 
 
 

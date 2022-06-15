@@ -111,8 +111,8 @@
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Notas de Venda
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Emitir Nota de Venda </a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Nota de Venda </a>
+              <a class="dropdown-item" href="/Pedidos/Carrinho">Emitir Nota de Venda </a>
+              <a class="dropdown-item" href="/Pedidos/Todos">Listar Nota de Venda </a>
             </div>
 
 

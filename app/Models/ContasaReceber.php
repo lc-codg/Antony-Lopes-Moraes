@@ -12,5 +12,5 @@ class ContasaReceber extends Model
     protected $fillable = ['id', 'Barras', 'Descricao', 'CodCliente', 
     'Total', 'TotalDesconto', 'TotalAcréscimo', 'TotaldosProdutos', 'Vencimento',
      'CodGrupo', 'CodSubGrupo', 'Parcelas', 'Dataemissao', 'Vencimento','Datarecebimento',
-     'Boleta', 'NotaFiscal', 'Serie', 'CodEmpresa', 'created_at', 'updated_at'];
+     'Boleta', 'NotaFiscal', 'Serie', 'CodEmpresa', 'created_at', 'updated_at','status'];
 }

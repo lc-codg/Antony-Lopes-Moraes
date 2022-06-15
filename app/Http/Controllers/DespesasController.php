@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\FornecedorController;
 use Illuminate\Support\Str;
 use App\Models\Despesas;
+use App\Classes\ObterDados;
 
 class DespesasController extends Controller
 {
-    public function index()
+  public function index()
   {
-    $Empresa = new EmpresaController();
-    $Fornecedor = new FornecedorController();
+    $ObterDados = new ObterDados();
 
-    $DadosFornecedor = $Fornecedor->Listar();
-    $Dados = $Empresa->Listar();
-
-    return view('Despesas.Despesas', ['Empresas' => $Dados, 'Fornecedor' => $DadosFornecedor]);
+    return view('Despesas.Despesas', [
+      'Empresas'
+      =>  $ObterDados->ListaDeEmpresas(),
+      'Fornecedor' =>  $ObterDados->ListaDeFornecedores()
+    ]);
   }
 
   public function create(Request $request)
@@ -95,23 +94,27 @@ class DespesasController extends Controller
 
   public function show($id)
   {
-    $Empresa = new EmpresaController();
-    $Fornecedor = new FornecedorController();
-
-    $DadosFornecedor = $Fornecedor->Listar();
-    $Dados = $Empresa->Listar();
+    $ObterDados = new ObterDados();
 
     $Despesas = Despesas::findOrFail($id);
-    return view('/Despesas.Ver', ['Despesas' => $Despesas, 'Empresas'
-    => $Dados, 'Fornecedor' => $DadosFornecedor]);
+
+    return view('/Despesas.Ver', [
+      'Despesas' => $Despesas,
+      'Empresas'
+      =>  $ObterDados->ListaDeEmpresas(),
+      'Fornecedor' =>  $ObterDados->ListaDeFornecedores()
+    ]);
   }
 
   public function Listartodos()
   {
 
-    $Despesas = DB::table('despesas')->join('empresas','despesas.CodEmpresa',
-     '=','empresas.id')->join('fornecedors','despesas.CodFornecedor','=','fornecedors.id')->
-      select('despesas.*','empresas.Razao as Razaoe','fornecedors.Razao as Razaof')
+    $Despesas = DB::table('despesas')->join(
+      'empresas',
+      'despesas.CodEmpresa',
+      '=',
+      'empresas.id'
+    )->join('fornecedors', 'despesas.CodFornecedor', '=', 'fornecedors.id')->select('despesas.*', 'empresas.Razao as Razaoe', 'fornecedors.Razao as Razaof')
       ->paginate(20);
 
     return view('/Despesas.Todos', ['Despesas' => $Despesas]);

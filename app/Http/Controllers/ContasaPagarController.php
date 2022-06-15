@@ -4,22 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ContasaPagar;
-use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\FornecedorController;
 use Illuminate\Support\Str;
+use App\Classes\ObterDados;
+use App\Classes\Operacoes;
+
+
 
 class ContasaPagarController extends Controller
 {
+
+  public function Quitar($id,$tipo){
+    $Operacões = new Operacoes();
+    $Operacões->Quitar($id,$tipo);
+  }
+
+  public function Estornar($id,$tipo){
+    $Operacões = new Operacoes();
+    $Operacões->Estornar($id,$tipo);
+  }
+
   public function index()
   {
-    $Empresa = new EmpresaController();
-    $Fornecedor = new FornecedorController();
+    $ObterDados = new ObterDados();
 
-    $DadosFornecedor = $Fornecedor->Listar();
-    $Dados = $Empresa->Listar();
-
-    return view('ContasaPagar.ContasaPagar', ['Empresas' => $Dados, 'Fornecedor' => $DadosFornecedor]);
+    return view('ContasaPagar.ContasaPagar', [
+      'Empresas' => $ObterDados->ListaDeEmpresas(),
+      'Fornecedor' => $ObterDados->ListaDeFornecedores()
+    ]);
   }
 
   public function create(Request $request)
@@ -95,23 +107,22 @@ class ContasaPagarController extends Controller
 
   public function show($id)
   {
-    $Empresa = new EmpresaController();
-    $Fornecedor = new FornecedorController();
-
-    $DadosFornecedor = $Fornecedor->Listar();
-    $Dados = $Empresa->Listar();
+     $ObterDados = new ObterDados();
 
     $ContasaPagar = ContasaPagar::findOrFail($id);
     return view('/ContasaPagar.Ver', ['ContasaPagar' => $ContasaPagar, 'Empresas'
-    => $Dados, 'Fornecedor' => $DadosFornecedor]);
+    =>  $ObterDados->ListaDeEmpresas(), 'Fornecedor' =>  $ObterDados->ListaDeFornecedores()]);
   }
 
   public function Listartodos()
   {
 
-    $ContasaPagar = DB::table('contasa_pagars')->join('empresas','contasa_pagars.CodEmpresa',
-     '=','empresas.id')->join('fornecedors','contasa_pagars.CodFornecedor','=','fornecedors.id')->
-      select('contasa_pagars.*','empresas.Razao as Razaoe','fornecedors.Razao as Razaof')
+    $ContasaPagar = DB::table('contasa_pagars')->join(
+      'empresas',
+      'contasa_pagars.CodEmpresa',
+      '=',
+      'empresas.id'
+    )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Razao as Razaof')
       ->paginate(20);
 
     return view('/ContasaPagar.Todos', ['ContasaPagar' => $ContasaPagar]);

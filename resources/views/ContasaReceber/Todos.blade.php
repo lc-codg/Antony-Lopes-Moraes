@@ -26,6 +26,8 @@
                     <th scope='col'>N° Boleta</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -57,6 +59,18 @@
                     <td>
                         <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
                             <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="/ContasaReceber/Quitar/{{$row->id}},Receber" method="get">
+                            <input class="btn btn-primary" name="" type="submit" Value='Quitar'>
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="/ContasaReceber/Estornar/{{ $row->id }},Receber" method="get">
+                            <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
                         </form>
                     </td>
 

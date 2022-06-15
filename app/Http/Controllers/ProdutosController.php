@@ -13,6 +13,11 @@ use Illuminate\Support\Arr;
 
 class ProdutosController extends Controller
 {
+    public function Busca($barras)
+    {
+      $Produtos = DB::table('produtos')->get()->Limit(25);
+      return response()->json($Produtos);
+    }
     public function Cadastrar()
     {
         return view('Produtos.produto');
