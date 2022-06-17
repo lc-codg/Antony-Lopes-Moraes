@@ -83,8 +83,8 @@ class ContasaPagarController extends Controller
         'Descricao' => $request->Descricao,
         'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
         'Total' => Str_replace(",", ".", $request->Total),
-        'TotalDesconto' => Str_replace(",", ".", $request->TotalDesconto),
-        'TotalAcréscimo' => Str_replace(",", ".", $request->TotalAcrescimo),
+        'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
+        'TotalAcréscimo' => isset($request->TotalAcréscimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
         'Vencimento' => $request->Vencimento,
         'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
         'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
@@ -94,7 +94,8 @@ class ContasaPagarController extends Controller
         'Boleta' => $request->boleta,
         'NotaFiscal' => $request->NotaFiscal,
         'Serie' => $request->Serie,
-        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1)
+        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
+        'status' => isset($request->status) ? false : false,
       ]);
 
       return
@@ -122,7 +123,7 @@ class ContasaPagarController extends Controller
       'contasa_pagars.CodEmpresa',
       '=',
       'empresas.id'
-    )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Razao as Razaof')
+    )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')
       ->paginate(20);
 
     return view('/ContasaPagar.Todos', ['ContasaPagar' => $ContasaPagar]);
@@ -179,8 +180,8 @@ class ContasaPagarController extends Controller
         'Descricao' => $request->Descricao,
         'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
         'Total' => Str_replace(",", ".", $request->Total),
-        'TotalDesconto' => Str_replace(",", ".", $request->TotalDesconto),
-        'TotalAcréscimo' => Str_replace(",", ".", $request->TotalAcrescimo),
+        'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
+        'TotalAcréscimo' => isset($request->TotalAcréscimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
         'Vencimento' => $request->Vencimento,
         'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
         'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
@@ -190,7 +191,8 @@ class ContasaPagarController extends Controller
         'Boleta' => $request->boleta,
         'NotaFiscal' => $request->NotaFiscal,
         'Serie' => $request->Serie,
-        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1)
+        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
+        'status' => isset($request->status) ? false : false,
       ]);
 
       return

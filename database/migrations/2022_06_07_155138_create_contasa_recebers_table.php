@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('NotaFiscal',100)->nullable()->default(NULL);;
             $table->string('Serie',100)->nullable()->default(NULL);;
             $table->integer('CodEmpresa');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

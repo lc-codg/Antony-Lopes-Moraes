@@ -10,7 +10,7 @@
 @include('Header')
 <br>
 
-<h5 Style='margin-left:1%;margin-right:1%;'class="text-left">Cadastro de Empresa</h5>
+<h5 Style='margin-left:1%;margin-right:1%;' class="text-left">Cadastro de Empresa</h5>
 
 <body>
 
@@ -36,67 +36,80 @@
 
                     <div class="form-group col-md-4 ">
                         <label for="">Razão</label>
-                        <input type="text" class="form-control" name="razao" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" class="form-control" name="razao" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Fantasia</label>
-                        <input type="text" class="form-control" name="fantasia" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" class="form-control" name="fantasia" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">CNPJ</label>
-                        <input type="number" class="form-control" name="cnpj" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" class="form-control" name="cnpj" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Inscrição Estadual</label>
-                        <input type="number" class="form-control" name="ie" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" class="form-control" name="ie" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
 
                     <div class="form-group col-md-4">
                         <label for="">Logadouro</label>
-                        <input required type="text" class="form-control" name="Endereco" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="text" class="form-control" name="Endereco" id=""
+                            aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">Número</label>
-                        <input required type="number" class="form-control" name="Numero" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="number" class="form-control" name="Numero" id=""
+                            aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Bairro</label>
-                        <input required type="text" class="form-control" name="Bairro" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="text" class="form-control" name="Bairro" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Cidade</label>
-                        <input required type="text" class="form-control" name="Cidade" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="text" class="form-control" name="Cidade" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">UF</label>
-                        <input required type="text" class="form-control" name="UF" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="text" class="form-control" name="UF" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">Cep</label>
-                        <input required type="number" class="form-control" name="cep" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="number" class="form-control" name="cep" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Email</label>
-                        <input type="text" class="form-control" name="Email" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" class="form-control" name="Email" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label foFornecedorr="">Telefone</label>
-                        <input type="text" class="form-control" name="telefone" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" class="form-control" name="telefone" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Contato</label>
-                        <input type="text" class="form-control" name="contato" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" class="form-control" name="contato" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-10">
@@ -115,37 +128,41 @@
 
                     <div class="form-group col-md-4">
                         <label for="">Prazo</label>
-                        <input type="number" class="form-control" name="prazo" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" class="form-control" name="prazo" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Banco</label>
-                        <input type="text" class="form-control" name="tipo" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text" class="form-control" name="tipo" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="">Agência</label>
-                        <input type="number" class="form-control" name="agencia" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" class="form-control" name="agencia" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="">Conta</label>
-                        <input type="number" class="form-control" name="conta" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" class="form-control" name="conta" id="" aria-describedby="helpId"
+                            placeholder="">
                     </div>
 
                 </div>
+
+
+
+
+
             </div>
 
-
-
-
+            <br>
+            <div class="form-group col-md-4">
+                <input name="Salvar" id="Salvar" class="btn btn-dark" type="submit" value="Salvar">
+            </div>
         </div>
-
-        <br>
-        <div class="form-group col-md-4">
-            <input name="Salvar" id="Salvar" class="btn btn-dark" type="submit" value="Salvar">
-        </div>
-
 
 
 
@@ -156,4 +173,5 @@
 
 </body>
 @include('footer')
+
 </html>

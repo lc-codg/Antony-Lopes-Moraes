@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 
 
@@ -15,8 +15,8 @@ class ProdutosController extends Controller
 {
     public function Busca($barras)
     {
-      $Produtos = DB::table('produtos')->get()->Limit(25);
-      return response()->json($Produtos);
+        $Produtos = DB::table('produtos')->get()->Limit(25);
+        return response()->json($Produtos);
     }
     public function Cadastrar()
     {
@@ -58,44 +58,44 @@ class ProdutosController extends Controller
             Produto::create([
                 'Descricao' => $request->Descricao,
                 'Barras' => $request->Barras,
-                'ValorUnitario' =>str_replace(",",".", $request-> ValorUnitario),
-                'Quantidade' =>  str_replace(",",".", $request-> quantidade),
-                'ValorPrazo' => str_replace(",",".", $request-> cprazo),
-                'ValorPromocao' => $request->promocao ,
-                'Custo' => str_replace(",",".", $request-> custo),
-                'Icms' => $request-> str_replace(",",".", $request-> icms),
-                'Origem' => $request->origem ,
-                'Cst' => $request->cst ,
-                'Ncm' => $request->ncm ,
-                'Cest' => $request->cest ,
-                'Cfop' => $request->cfop ,
-                'CodPis' => $request->codpis ,
-                'CodCofins' => $request-> codcofins,
-                'CodIpi' => $request-> codipi,
-                'BasePis' => $request->str_replace(",",".", $request-> basepis),
-                'Basecofins' =>str_replace(",",".", $request-> basecofins),
-                'BaseIpi' => str_replace(",",".", $request-> baseipi),
-                'Peso' =>  str_replace(",",".", $request-> peso),
-                'Reducao' => str_replace(",",".", $request-> reducao),
-                'Mva' =>str_replace(",",".", $request-> mva),
-                'BaseIcms' => str_replace(",",".", $request-> base),
-                'BaseSt' =>str_replace(",",".", $request-> basest),
-                'St' => str_replace(",",".", $request-> st),
-                'AlPis' => str_replace(",",".", $request-> alpis),
-                'AlCofins' => str_replace(",",".", $request-> alcofins),
-                'Secao' => $request->secao ,
-                'Tamanho' => $request->tamanho ,
-                'Cor' => $request->cor ,
-                'Referencia' => $request->referencia ,
-                'Fator' => $request->fator ,
-                'Modelo' => $request->modelo ,
-                'Serie' => $request->serie ,
-                'Suframa' => $request->suframa ,
-                'Validade' => $request->validade ,
-                'Lote' => $request->lote ,
-                'SubSecao' => $request->subsecao ,
-                'Beneficio'=> $request->beneficio,
-                'Alipi'=> str_replace(",",".", $request-> alipi),
+                'ValorUnitario' => Str::replace(",", ".", $request->ValorUnitario),
+                'Quantidade' =>  Str::replace(",", ".", $request->Quantidade),
+                'ValorPrazo' => Str::replace(",", ".", $request->prazo),
+                'ValorPromocao' => $request->promocao,
+                'Custo' => Str::replace(",", ".", $request->custo),
+                'Icms' => isset($request->icms) ? Str::replace(",", ".", $request->icms) : 0,
+                'Origem' => $request->origem,
+                'Cst' => $request->cst,
+                'Ncm' => $request->ncm,
+                'Cest' => $request->cest,
+                'Cfop' => $request->cfop,
+                'CodPis' => $request->codpis,
+                'CodCofins' => $request->codcofins,
+                'CodIpi' => $request->codipi,
+                'BasePis' => isset($request->basepis) ? Str::replace(",", ".", $request->basepis) : 0,
+                'Basecofins' => isset($request->basecofins) ? Str::replace(",", ".", $request->basecofins) : 0,
+                'BaseIpi' => isset($request->baseipi) ? Str::replace(",", ".", $request->baseipi) : 0,
+                'Peso' =>  Str::replace(",", ".", $request->peso),
+                'Reducao' => isset($request->reducao) ? Str::replace(",", ".", $request->reducao) : 0,
+                'Mva' => isset($request->mva) ? Str::replace(",", ".", $request->mva) : 0,
+                'BaseIcms' => isset($request->baseicms) ? Str::replace(",", ".", $request->base) : 0,
+                'BaseSt' => isset($request->basest) ? Str::replace(",", ".", $request->basest) : 0,
+                'St' => isset($request->st) ? Str::replace(",", ".", $request->st) : 0,
+                'AlPis' => isset($request->alpis) ? Str::replace(",", ".", $request->alpis) : 0,
+                'AlCofins' => isset($request->alcofins) ? Str::replace(",", ".", $request->alcofins) : 0,
+                'Secao' => $request->secao,
+                'Tamanho' => $request->tamanho,
+                'Cor' => $request->cor,
+                'Referencia' => $request->referencia,
+                'Fator' => $request->fator,
+                'Modelo' => $request->modelo,
+                'Serie' => $request->serie,
+                'Suframa' => $request->suframa,
+                'Validade' => $request->validade,
+                'Lote' => $request->lote,
+                'SubSecao' => $request->subsecao,
+                'Beneficio' => $request->beneficio,
+                'Alipi' => isset($request->alipi) ? Str::replace(",", ".", $request->alipi) : 0,
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Produtos/Novo';</script>";
@@ -138,44 +138,44 @@ class ProdutosController extends Controller
             $produto->update([
                 'Descricao' => $request->Descricao,
                 'Barras' => $request->Barras,
-                'ValorUnitario' =>str_replace(",",".", $request-> ValorUnitario),
-                'Quantidade' =>  str_replace(",",".", $request-> quantidade),
-                'ValorPrazo' => str_replace(",",".", $request-> cprazo),
-                'ValorPromocao' => $request->promocao ,
-                'Custo' => str_replace(",",".", $request-> custo),
-                'Icms' => $request-> str_replace(",",".", $request-> icms),
-                'Origem' => $request->origem ,
-                'Cst' => $request->cst ,
-                'Ncm' => $request->ncm ,
-                'Cest' => $request->cest ,
-                'Cfop' => $request->cfop ,
-                'CodPis' => $request->codpis ,
-                'CodCofins' => $request-> codcofins,
-                'CodIpi' => $request-> codipi,
-                'BasePis' => $request->str_replace(",",".", $request-> basepis),
-                'Basecofins' =>str_replace(",",".", $request-> basecofins),
-                'BaseIpi' => str_replace(",",".", $request-> baseipi),
-                'Peso' =>  str_replace(",",".", $request-> peso),
-                'Reducao' => str_replace(",",".", $request-> reducao),
-                'Mva' =>str_replace(",",".", $request-> mva),
-                'BaseIcms' => str_replace(",",".", $request-> base),
-                'BaseSt' =>str_replace(",",".", $request-> basest),
-                'St' => str_replace(",",".", $request-> st),
-                'AlPis' => str_replace(",",".", $request-> alpis),
-                'AlCofins' => str_replace(",",".", $request-> alcofins),
-                'Secao' => $request->secao ,
-                'Tamanho' => $request->tamanho ,
-                'Cor' => $request->cor ,
-                'Referencia' => $request->referencia ,
-                'Fator' => $request->fator ,
-                'Modelo' => $request->modelo ,
-                'Serie' => $request->serie ,
-                'Suframa' => $request->suframa ,
-                'Validade' => $request->validade ,
-                'Lote' => $request->lote ,
-                'SubSecao' => $request->subsecao ,
-                'Beneficio'=> $request->beneficio,
-                'Alipi'=> str_replace(",",".", $request-> alipi),
+                'ValorUnitario' => Str::replace(",", ".", $request->ValorUnitario),
+                'Quantidade' =>  Str::replace(",", ".", $request->Quantidade),
+                'ValorPrazo' => Str::replace(",", ".", $request->prazo),
+                'ValorPromocao' => $request->promocao,
+                'Custo' => Str::replace(",", ".", $request->custo),
+                'Icms' => isset($request->icms) ? Str::replace(",", ".", $request->icms) : 0,
+                'Origem' => $request->origem,
+                'Cst' => $request->cst,
+                'Ncm' => $request->ncm,
+                'Cest' => $request->cest,
+                'Cfop' => $request->cfop,
+                'CodPis' => $request->codpis,
+                'CodCofins' => $request->codcofins,
+                'CodIpi' => $request->codipi,
+                'BasePis' => isset($request->basepis) ? Str::replace(",", ".", $request->basepis) : 0,
+                'Basecofins' => isset($request->basecofins) ? Str::replace(",", ".", $request->basecofins) : 0,
+                'BaseIpi' => isset($request->baseipi) ? Str::replace(",", ".", $request->baseipi) : 0,
+                'Peso' =>  Str::replace(",", ".", $request->peso),
+                'Reducao' => isset($request->reducao) ? Str::replace(",", ".", $request->reducao) : 0,
+                'Mva' => isset($request->mva) ? Str::replace(",", ".", $request->mva) : 0,
+                'BaseIcms' => isset($request->baseicms) ? Str::replace(",", ".", $request->base) : 0,
+                'BaseSt' => isset($request->basest) ? Str::replace(",", ".", $request->basest) : 0,
+                'St' => isset($request->st) ? Str::replace(",", ".", $request->st) : 0,
+                'AlPis' => isset($request->alpis) ? Str::replace(",", ".", $request->alpis) : 0,
+                'AlCofins' => isset($request->alcofins) ? Str::replace(",", ".", $request->alcofins) : 0,
+                'Secao' => $request->secao,
+                'Tamanho' => $request->tamanho,
+                'Cor' => $request->cor,
+                'Referencia' => $request->referencia,
+                'Fator' => $request->fator,
+                'Modelo' => $request->modelo,
+                'Serie' => $request->serie,
+                'Suframa' => $request->suframa,
+                'Validade' => $request->validade,
+                'Lote' => $request->lote,
+                'SubSecao' => $request->subsecao,
+                'Beneficio' => $request->beneficio,
+                'Alipi' => isset($request->alipi) ? Str::replace(",", ".", $request->alipi) : 0,
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Produtos/Todos';</script>";
@@ -191,12 +191,12 @@ class ProdutosController extends Controller
     public function ListarPorId($id)
     {
         $produto = Produto::findOrfail($id);
-        return view('Produtos.Ver',['produto' => $produto]);
+        return view('Produtos.Ver', ['produto' => $produto]);
     }
     public function ListarTodos()
     {
         $produtos = DB::table('produtos')->paginate(10);
-        return view('Produtos.Todos' , ['produtos' => $produtos]);
+        return view('Produtos.Todos', ['produtos' => $produtos]);
     }
     public function Inserir(Request $Request)
     {
@@ -206,7 +206,7 @@ class ProdutosController extends Controller
             'ValorUnitario' => $Request->ValorUnitario,
             'Quantidade' => $Request->Quantidade
         ]);
-        Session::push('Carrinho' , $Carrinho);
+        Session::push('Carrinho', $Carrinho);
         return "<script>location='/Pedidos/Carrinho';</script>";
     }
 }

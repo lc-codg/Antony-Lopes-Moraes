@@ -80,7 +80,8 @@ class ContasaReceberController extends Controller
         'Boleta' => $request->boleta,
         'NotaFiscal' => $request->NotaFiscal,
         'Serie' => $request->Serie,
-        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1)
+        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
+        'status' => isset($request->status) ? false : false,
       ]);
 
       return
@@ -191,7 +192,8 @@ class ContasaReceberController extends Controller
         'Boleta' => $request->boleta,
         'NotaFiscal' => $request->NotaFiscal,
         'Serie' => $request->Serie,
-        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1)
+        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
+        'status' => isset($request->status) ? false : false,
       ]);
 
       return

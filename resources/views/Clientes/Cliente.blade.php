@@ -23,12 +23,12 @@
         <li class="nav-item">
             <a href="#Dados Empresarias" data-toggle="tab" class="nav-link">Dados Empresariais</a>
         </li>
- 
+
         <li class="nav-item">
             <a href="#Dados Financeiros" data-toggle="tab" class="nav-link">Dados Financeiros</a>
         </li>
     </ul>
-    
+
     <form method="post" action="/Clientes/Salvar">
         @csrf
         <div class="tab-content">
@@ -197,7 +197,7 @@
 
 
 
-        </div>
+
 
         <br>
         <div class="form-group col-md-4">
@@ -206,7 +206,7 @@
 
 
 
-
+    </div>
 
 
     </form>

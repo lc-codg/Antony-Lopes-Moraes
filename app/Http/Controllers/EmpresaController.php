@@ -79,9 +79,9 @@ class EmpresaController extends Controller
                 'Telefone' => $request->telefone,
                 'Contato' => $request->contato,
                 'Prazo' => $request->prazo,
-                'Observacao' => $request->observacao,
-                'Conta' => $request->conta,
-                'Agencia' => $request->agencia,
+                'Observacao' => isset($request->observacao) ? $request->observacao : '',
+                'Conta' => isset($request->observacao) ? $request->conta : '',
+                'Agencia' => isset($request->agencia) ? $request->agencia : '',
                 'Tipo' => $request->tipo,
 
             ]);
@@ -152,9 +152,9 @@ class EmpresaController extends Controller
                 'Telefone' => $request->telefone,
                 'Contato' => $request->contato,
                 'Prazo' => $request->prazo,
-                'Observacao' => $request->observacao,
-                'Conta' => $request->conta,
-                'Agencia' => $request->agencia,
+                'Observacao' => isset($request->observacao) ? $request->observacao : '',
+                'Conta' => isset($request->observacao) ? $request->conta : '',
+                'Agencia' => isset($request->agencia) ? $request->agencia : '',
                 'Tipo' => $request->tipo,
 
             ]);
@@ -181,10 +181,10 @@ class EmpresaController extends Controller
         return view('Empresa.Todos', ['Empresas' => $Empresa]);
     }
     public function Listar(){
-       
+
             $Empresa = DB::table('Empresas')->get();
             return $Empresa;
-        
+
     }
     public function ListarPrimeiro()
     {

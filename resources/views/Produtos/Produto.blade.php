@@ -48,34 +48,34 @@
 
                     <div class="form-group col-md-2">
                         <label for="">Quantidade</label>
-                        <input type="number" class="form-control" name="Quantidade" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="Quantidade" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Peso</label>
-                        <input type="number" class="form-control" name="peso" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="peso" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Preço de Venda</label>
-                        <input required type="number" class="form-control" name="ValorUnitario" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="ValorUnitario" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Preço Promoção</label>
-                        <input type="number" class="form-control" name="promocao" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="promocao" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Preço a Prazo</label>
-                        <input type="number" class="form-control" name="prazo" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="prazo" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Preço de Custo</label>
-                        <input type="number" class="form-control" name="custo" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="custo" id="" aria-describedby="helpId" placeholder="">
                     </div>
-                    
+
                     <div class="form-group col-md-4">
                       <label for="">Seção</label>
                       <select class="form-control" name="secao" id="">
@@ -115,7 +115,7 @@
 
                     <div class="form-group col-md-2">
                         <label for="">Origem</label>
-                        <input type="number" class="form-control" name="origem" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="origem" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
@@ -125,42 +125,42 @@
 
                     <div class="form-group col-md-2">
                         <label for="">Cfop</label>
-                        <input type="number" class="form-control" name="cfop" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="cfop" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Aliquota Icms</label>
-                        <input type="number" class="form-control" name="icms" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="icms" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Base Icms</label>
-                        <input type="number" class="form-control" name="base" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="base" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Redução</label>
-                        <input type="number" class="form-control" name="reducao" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="reducao" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Beneficio</label>
-                        <input type="number" class="form-control" name="beneficio" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="beneficio" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Aliquota St</label>
-                        <input type="number" class="form-control" name="st" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="st" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Base St</label>
-                        <input type="number" class="form-control" name="basest" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="basest" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Mva</label>
-                        <input type="number" class="form-control" name="mva" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="mva" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                 </div>
@@ -169,47 +169,47 @@
 
                     <div class="form-group col-md-2">
                         <label for="">Codigo Pis</label>
-                        <input type="number" class="form-control" name="codpis" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="codpis" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Aliquota Pis</label>
-                        <input type="number" class="form-control" name="alpis" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="alpis" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Base Pis</label>
-                        <input type="number" class="form-control" name="basepis" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="basepis" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Codigo Cofins</label>
-                        <input type="number" class="form-control" name="codcofins" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="codcofins" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Aliquota Cofins</label>
-                        <input type="number" class="form-control" name="alcofins" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="alcofins" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Base Cofins</label>
-                        <input type="number" class="form-control" name="basecofins" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="basecofins" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Codigo Ipi</label>
-                        <input type="number" class="form-control" name="codipi" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="codipi" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Aliquota Ipi</label>
-                        <input type="number" class="form-control" name="alipi" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="alipi" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Base Ipi</label>
-                        <input type="number" class="form-control" name="baseipi" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="baseipi" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
 
@@ -239,7 +239,7 @@
 
                     <div class="form-group col-md-2">
                         <label for="">Fator</label>
-                        <input type="number" class="form-control" name="fator" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="fator" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
@@ -259,7 +259,7 @@
 
                     <div class="form-group col-md-2">
                         <label for="">Validade</label>
-                        <input type="number" class="form-control" name="validade" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  class="form-control" name="validade" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">

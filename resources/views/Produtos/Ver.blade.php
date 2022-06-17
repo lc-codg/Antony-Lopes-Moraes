@@ -75,7 +75,7 @@
                         <label for="">Preço de Custo</label>
                         <input  type="text" value="{{$produto->Custo}}"class="form-control" name="custo" id="" aria-describedby="helpId" placeholder="">
                     </div>
-                    
+
                     <div class="form-group col-md-4">
                       <label for="">Seção</label>
                       <select class="form-control" name="secao" id="">
@@ -120,12 +120,12 @@
 
                     <div class="form-group col-md-2">
                         <label for="">Csosn/Cst</label>
-                        <input type="number" value="{{$produto->Cst}}"class="form-control" name="cst" id="" aria-describedby="helpId" placeholder="">
+                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  value="{{$produto->Cst}}"class="form-control" name="cst" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Cfop</label>
-                        <input  type="Number" value="{{$produto->Cfop}}"class="form-control" name="cfop" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"  value="{{$produto->Cfop}}"class="form-control" name="cfop" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
