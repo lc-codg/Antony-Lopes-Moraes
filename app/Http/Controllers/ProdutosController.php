@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-
-
-
 class ProdutosController extends Controller
 {
     public function Busca($barras)
@@ -18,6 +15,13 @@ class ProdutosController extends Controller
         $Produtos = DB::table('produtos')->get()->Limit(25);
         return response()->json($Produtos);
     }
+    public function LocalizarPorDescricao(Request $request)
+    {
+        $Produtos = DB::table('produtos')->select('Id','Descricao','Barras','ValorUnitario')->where('Descricao', 'LIKE', '%' . $request->Descricao . '%')->get();
+        return response()->json(array('Produtos'=>$Produtos));
+    
+    }
+
     public function Cadastrar()
     {
         return view('Produtos.produto');

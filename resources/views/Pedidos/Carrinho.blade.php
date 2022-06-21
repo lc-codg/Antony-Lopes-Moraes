@@ -41,20 +41,19 @@
 
     </div>
 
-    <form action='' method='post' enctype="multipart/form-data" id='form_busca'>
-
+ 
         <div class="form-group col-md-6">
             <label>
                 <span>Buscar Produtos</span>
             </label>
-            <input type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
+            <input autocomplete="off" type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
         </div>
 
-    </form>
+  
 
     <div class="form-group col-md-6" id='resultado_busca'>
 
-        <a href='#' id='1:34:42'></a>
+
 
     </div>
 
