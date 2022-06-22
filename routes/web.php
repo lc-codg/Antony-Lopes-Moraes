@@ -34,7 +34,7 @@ Route::get('/Produtos/Editar/{Id}', [ProdutosController::class, 'Editar']);
 Route::get('/Produtos/Delete/{Id}', [ProdutosController::class, 'Delete']);
 Route::get('/Produtos/Ver/{Id}', [ProdutosController::class, 'ListarPorId']);
 Route::get('/Produtos/Todos', [ProdutosController::class, 'ListarTodos']);
-Route::post('/Produtos/Inserir', [ProdutosController::class, 'Inserir']);
+Route::get('/Produtos/Inserir', [ProdutosController::class, 'Inserir']);
 Route::get('/Produtos/LocDesc', [ProdutosController::class, 'LocalizarPorDescricao'])->name('Produtos.LocDesc');
 
 Route::get('/Clientes/Novo', [ClientesController::class, 'Cadastrar']);

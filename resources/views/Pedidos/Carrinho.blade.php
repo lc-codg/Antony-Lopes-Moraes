@@ -7,7 +7,7 @@
 } ?>
 
 <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet" type="text/css">
-<script src="{{ asset('js/app.js') }}" ></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,15 +41,15 @@
 
     </div>
 
- 
-        <div class="form-group col-md-6">
-            <label>
-                <span>Buscar Produtos</span>
-            </label>
-            <input autocomplete="off" type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
-        </div>
 
-  
+    <div class="form-group col-md-6">
+        <label>
+            <span>Buscar Produtos</span>
+        </label>
+        <input autofocus id='Limpar'autocomplete="off" type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
+    </div>
+
+
 
     <div class="form-group col-md-6" id='resultado_busca'>
 
@@ -59,13 +59,14 @@
 
 
     <div id='container' class='.container-fluid'>
+
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Código</th>
                     <th scope="col">Produto</th>
-                    <th scope="col">Quantidade</th>
                     <th scope="col">Valor Unitário</th>
+                    <th scope="col">Quantidade</th>
                     <th scope="col">Subtotal</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -73,26 +74,39 @@
             </thead>
             <tbody>
                 <div id='content_retorno'>
-                    <tr>
 
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>R$ <span class="price"></span></td>
-                        <td>
-                            <button onclick="location.href = '/Produtos/Todos';" id="" class="btn btn-primary">Inserir</button>
-                        </td>
+                    @foreach ($Cart as $row)
+                    <tr>
+                        <td>{{ $row['Barras']}}</td>
+                        <td>{{ $row['Descricao'] }}</td>
+                        <td>{{$row['Valor']}}</td>
+                        <td>{{$row['Quantidade']}}</td>
+                        <td>{{$row['Quantidade'] * $row['Valor']}}</td>
+
+
+
                         <td>
                             <form action="/Pedidos/Excluir/{id}" method="get">
                                 <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
                             </form>
                         </td>
                     </tr>
-                </div>
+                    @endforeach
+        </table>
+        <div>
+    <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="" class="btn btn-warning">Limpar Carrinho</button>
+    </div>
+    </div>
 
-                <php } ?></php>
+
+
+
 
     </div>
+    <div>
+
+    </div>
+
 </body>
 
 </html>

@@ -6,10 +6,25 @@ use Illuminate\Http\Request;
 use App\models\Pedidos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Arr;
+
 
 class PedidoController extends Controller
 {
+    public function Show()
+    {
+        if (session()->has('Cart')){
+        $Carrinho = (Session::get('Cart'));
+            return view('Pedidos.Carrinho', ['Cart' => ($Carrinho)]);
+        }else{
+        $Carrinho = session('cart', []);
+            return view('Pedidos.Carrinho', ['Cart' => $Carrinho]);
+    }
+}
+    public function LimparCarrinho()
+    {
+        Session::flush('Cart');
+        return "<script>location='/Pedidos/Carrinho';</script>";
+    }
     public function Delete($id)
     {
         $Pedidos = Pedidos::findOrfail($id);
@@ -36,15 +51,5 @@ class PedidoController extends Controller
             ->paginate(20);
 
         return view('Pedidos.Todos', ['Pedidos' => $Pedidos]);
-    }
-    public function Show()
-    {
-      
-            return view('Pedidos.Carrinho');
- 
-}
-    public function LimparCarrinho()
-    {
-        Session::flush();
     }
 }

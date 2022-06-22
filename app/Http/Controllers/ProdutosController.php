@@ -17,9 +17,39 @@ class ProdutosController extends Controller
     }
     public function LocalizarPorDescricao(Request $request)
     {
-        $Produtos = DB::table('produtos')->select('Id','Descricao','Barras','ValorUnitario')->where('Descricao', 'LIKE', '%' . $request->Descricao . '%')->get();
-        return response()->json(array('Produtos'=>$Produtos));
-    
+        $Produtos = DB::table('produtos')->select('Id', 'Descricao', 'Barras', 'ValorUnitario')->where('Descricao', 'LIKE', '%' . $request->Descricao . '%')->get();
+        return response()->json(array('Produtos' => $Produtos));
+    }
+    public function Delete($id)
+    {
+        $produto = Produto::findOrfail($id);
+        $produto->delete();
+        return "<script>alert('Deletado com sucesso!');location='/Produtos/Todos';</script>";
+    }
+
+    public function ListarPorId($id)
+    {
+        $produto = Produto::findOrfail($id);
+        return view('Produtos.Ver', ['produto' => $produto]);
+    }
+    public function ListarTodos()
+    {
+        $produtos = DB::table('produtos')->paginate(10);
+        return view('Produtos.Todos', ['produtos' => $produtos]);
+    }
+    public function Inserir(Request $request)
+    {
+        $Produtos = Produto::findOrfail($request->id);
+
+        Session::push('Cart', [
+            'Barras' => $Produtos->Barras,
+            'Descricao' => $Produtos->Descricao,
+            'Valor' => $Produtos->ValorUnitario,
+            'Quantidade' =>$request->Quantidade,
+        ]);
+        $Carrinho = (Session::get('Cart'));
+        return ($Carrinho);
+   
     }
 
     public function Cadastrar()
@@ -184,33 +214,5 @@ class ProdutosController extends Controller
 
             return "<script>alert('Salvo com sucesso!');location='/Produtos/Todos';</script>";
         }
-    }
-    public function Delete($id)
-    {
-        $produto = Produto::findOrfail($id);
-        $produto->delete();
-        return "<script>alert('Deletado com sucesso!');location='/Produtos/Todos';</script>";
-    }
-
-    public function ListarPorId($id)
-    {
-        $produto = Produto::findOrfail($id);
-        return view('Produtos.Ver', ['produto' => $produto]);
-    }
-    public function ListarTodos()
-    {
-        $produtos = DB::table('produtos')->paginate(10);
-        return view('Produtos.Todos', ['produtos' => $produtos]);
-    }
-    public function Inserir(Request $Request)
-    {
-        $Carrinho = collect([
-            'Barras' => $Request->Barras,
-            'Descricao' => $Request->Descricao,
-            'ValorUnitario' => $Request->ValorUnitario,
-            'Quantidade' => $Request->Quantidade
-        ]);
-        Session::push('Carrinho', $Carrinho);
-        return "<script>location='/Pedidos/Carrinho';</script>";
     }
 }
