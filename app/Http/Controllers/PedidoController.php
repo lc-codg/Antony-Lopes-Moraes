@@ -12,17 +12,25 @@ class PedidoController extends Controller
 {
     public function Show()
     {
-        if (session()->has('Cart')){
+        if (session()->has('Cart'))
         $Carrinho = (Session::get('Cart'));
-            return view('Pedidos.Carrinho', ['Cart' => ($Carrinho)]);
+        else
+        $Carrinho = session('Cart', []);
+
+        if (session()->has('Cliente')){
+        $Cliente = Session::get('Cliente');
         }else{
-        $Carrinho = session('cart', []);
-            return view('Pedidos.Carrinho', ['Cart' => $Carrinho]);
-    }
+            $Cliente = session('Cliente',['Razao'=>'','Cnpj'=>'','Id'=>'']);
+        }
+        
+
+    return view('Pedidos.Carrinho', ['Cart' => $Carrinho,'Cliente'=>$Cliente]);
+
 }
     public function LimparCarrinho()
     {
         Session::flush('Cart');
+        Session::flush('Cliente');
         return "<script>location='/Pedidos/Carrinho';</script>";
     }
     public function Delete($id)

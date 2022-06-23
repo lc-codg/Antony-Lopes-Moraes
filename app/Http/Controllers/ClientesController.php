@@ -5,12 +5,62 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Clientes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ClientesController extends Controller
 {
     public function Cadastrar()
     {
         return view('Clientes.Cliente');
+    }
+    public function Inserir(Request $request)
+    {
+        $cliente = Clientes::findorFail($request->id);
+        
+        Session::put('Cliente',[
+            'Razao' => ($cliente->Nome =='')?$cliente->Razao:$cliente->Nome,
+            'Cnpj'=>($cliente->Cpf =='')?$cliente->Cnpj:$cliente->Cpf,
+            'Id'=>$cliente->id,
+        ]);
+        return Session::get('Cliente');
+    }
+    public function Delete($id)
+    {
+        $cliente = Clientes::findOrfail($id);
+        $cliente->delete();
+        return "<script>alert('Deletado com sucesso!');location='/Clientes/Todos';</script>";
+    }
+
+    public function ListarPorId($id)
+    {
+        $cliente = Clientes::findOrfail($id);
+        return view('Clientes.Ver', ['cliente' => $cliente]);
+    }
+
+    public function ListarPorNome(Request $request)
+    {
+        $Cliente = DB::table('clientes')->select('Nome', 'Id', 'Cnpj', 'Cpf', 'Razao')->where('Nome', 'LIKE', '%' . $request->Nome . '%', 'OR', 'Razao', 'LIKE', '%' . $request->Nome . '%')->get();
+        return response()->json(array('Clientes' => $Cliente));
+    }
+    public function ListarPorCnpj(Request $request)
+    {
+        $Cliente = DB::table('clientes')->select('Nome', 'Id')->where('Cnpj', 'LIKE', '%' . $request->Cnpj . '%')->get();
+        return response()->json(array('Clientes' => $Cliente));
+    }
+    public function ListarTodos()
+    {
+        $clientes = DB::table('clientes')->paginate(20);
+        return view('Clientes.Todos', ['clientes' => $clientes]);
+    }
+    public function Listar()
+    {
+        $cliente = DB::table('clientes')->get();
+        return $cliente;
+    }
+    public function ListarPrimeiro()
+    {
+        $clientes = DB::table('clientes')->select('id')->limit(1);
+        return view('Clientes.Todos', ['clientes' => $clientes]);
     }
 
     public function Salvar(Request $request)
@@ -64,7 +114,7 @@ class ClientesController extends Controller
             </script>";
             exit;
         }
-      
+
         if (empty($request->Numero)) {
             echo "<script>
             alert('Digite o Número.');
@@ -79,9 +129,9 @@ class ClientesController extends Controller
                 'Cpf' => $request->CPF,
                 'Rg' => $request->rg,
                 'Cnpj' => $request->cnpj,
-                'Ie' =>$request->ie,
-                'Razao'=>$request->razao,
-                'Fantasia'=>$request->fantasia,
+                'Ie' => $request->ie,
+                'Razao' => $request->razao,
+                'Fantasia' => $request->fantasia,
                 'Email' => $request->Email,
                 'Endereco' => $request->Endereco,
                 'Bairro' => $request->Bairro,
@@ -89,19 +139,19 @@ class ClientesController extends Controller
                 'PessoaJuridica' => $request->PessoaJuridica,
                 'Cidade' => $request->Cidade,
                 'UF'  => $request->UF,
-                'Cep' =>$request->cep,
-                'Telefone' =>$request->telefone,
-                'Contato' =>$request->contato,
-                'Prazo' =>$request->prazo,
-                'Observacao' =>$request->observacao,
-                'Conta' =>$request->conta,
-                'Agencia'=>$request->agencia,
-                'Tipo'=>$request->tipo,
-                'CodigoVendedor'=>$request->codvendedor,
-                'Limite'=>$request->limite,
-                'Bloqueio'=>$request->bloqueio,
-                'Exterior'=>$request->exterior,
-                'Juridico'=>$request->juridico,
+                'Cep' => $request->cep,
+                'Telefone' => $request->telefone,
+                'Contato' => $request->contato,
+                'Prazo' => $request->prazo,
+                'Observacao' => $request->observacao,
+                'Conta' => $request->conta,
+                'Agencia' => $request->agencia,
+                'Tipo' => $request->tipo,
+                'CodigoVendedor' => $request->codvendedor,
+                'Limite' => $request->limite,
+                'Bloqueio' => $request->bloqueio,
+                'Exterior' => $request->exterior,
+                'Juridico' => $request->juridico,
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Clientes/Novo';</script>";
@@ -159,10 +209,10 @@ class ClientesController extends Controller
                 'Nome' => $request->Nome,
                 'Cpf' => $request->CPF,
                 'Cnpj' => $request->cnpj,
-                'Ie' =>$request->ie,
-                'Rg' =>$request->RG,
-                'Razao'=>$request->razao,
-                'Fantasia'=>$request->fantasia,
+                'Ie' => $request->ie,
+                'Rg' => $request->RG,
+                'Razao' => $request->razao,
+                'Fantasia' => $request->fantasia,
                 'Email' => $request->Email,
                 'Endereco' => $request->Endereco,
                 'Bairro' => $request->Bairro,
@@ -170,51 +220,22 @@ class ClientesController extends Controller
                 'PessoaJuridica' => $request->PessoaJuridica,
                 'Cidade' => $request->Cidade,
                 'UF'  => $request->UF,
-                'Cep' =>$request->cep,
-                'Telefone' =>$request->telefone,
-                'Contato' =>$request->contato,
-                'Prazo' =>$request->prazo,
-                'Observacao' =>$request->observacao,
-                'Conta' =>$request->conta,
-                'Agencia'=>$request->agencia,
-                'Tipo'=>$request->tipo,
-                'CodigoVendedor'=>$request->codigovendedor,
-                'Limite'=>$request->limite,
-                'Bloqueio'=>$request->bloqueio,
-                'Exterior'=>$request->exterior,
-                'Juridico'=>$request->juridico
+                'Cep' => $request->cep,
+                'Telefone' => $request->telefone,
+                'Contato' => $request->contato,
+                'Prazo' => $request->prazo,
+                'Observacao' => $request->observacao,
+                'Conta' => $request->conta,
+                'Agencia' => $request->agencia,
+                'Tipo' => $request->tipo,
+                'CodigoVendedor' => $request->codigovendedor,
+                'Limite' => $request->limite,
+                'Bloqueio' => $request->bloqueio,
+                'Exterior' => $request->exterior,
+                'Juridico' => $request->juridico
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Clientes/Todos';</script>";
         }
-    }
-
-    public function Delete($id)
-    {
-        $cliente = Clientes::findOrfail($id);
-        $cliente->delete();
-        return "<script>alert('Deletado com sucesso!');location='/Clientes/Todos';</script>";
-    }
-
-    public function ListarPorId($id)
-    {
-        $cliente = Clientes::findOrfail($id);
-        return view('Clientes.Ver', ['cliente' => $cliente]);
-    }
-    public function ListarTodos()
-    {
-        $clientes = DB::table('clientes')->paginate(20);
-        return view('Clientes.Todos', ['clientes' => $clientes]);
-    }
-    public function Listar()
-    {
-        $cliente = DB::table('clientes')->get();
-        return $cliente;
-    }
-    public function ListarPrimeiro()
-    {
-        $clientes = DB::table('clientes')->
-        select('id')->limit(1);
-        return view('Clientes.Todos', ['clientes' => $clientes]);
     }
 }

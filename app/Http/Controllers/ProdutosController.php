@@ -17,9 +17,12 @@ class ProdutosController extends Controller
     }
     public function LocalizarPorDescricao(Request $request)
     {
-        $Produtos = DB::table('produtos')->select('Id', 'Descricao', 'Barras', 'ValorUnitario')->where('Descricao', 'LIKE', '%' . $request->Descricao . '%')->get();
+        $Produtos = DB::table('produtos')->select('Id','Descricao', 'Barras', 'ValorUnitario')->
+        where('Descricao', 'LIKE', '%' . $request->Descricao . '%')->
+        get();
         return response()->json(array('Produtos' => $Produtos));
     }
+    
     public function Delete($id)
     {
         $produto = Produto::findOrfail($id);
@@ -49,7 +52,6 @@ class ProdutosController extends Controller
         ]);
         $Carrinho = (Session::get('Cart'));
         return ($Carrinho);
-   
     }
 
     public function Cadastrar()

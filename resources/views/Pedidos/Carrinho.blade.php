@@ -1,10 +1,5 @@
 @include('Header')
-<?php if (session_status() !== PHP_SESSION_ACTIVE) {
 
-    session_start();
-    $cache_limiter = session_cache_limiter();
-    $cache_expire = session_cache_expire();
-} ?>
 
 <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet" type="text/css">
 <script src="{{ asset('js/app.js') }}"></script>
@@ -25,19 +20,24 @@
 
             <div class="form-group col-md-6">
                 <label for="">Nome Cliente</label>
-                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                <input type="text" class="form-control" name="PesquisaNome" id="PesquisaNome" aria-describedby="helpId" placeholder="">
             </div>
 
             <div class="form-group col-md-2">
                 <label for="">CNPJ</label>
-                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                <input type="text" class="form-control" name="PesquisaCnpj" id="PesquisaCnpj" aria-describedby="helpId" placeholder="">
             </div>
 
-            <div style='margin-top:2.5%;' class="form-group col-md-2">
-                <button onclick="location.href = '/Clientes/Todos';" id="" class="btn btn-primary">Pesquisar</button>
-            </div>
+
 
         </div>
+        <div class="form-group col-md-6" id='resultado_cliente'>
+
+
+
+        </div>
+   
+
 
     </div>
 
@@ -46,7 +46,7 @@
         <label>
             <span>Buscar Produtos</span>
         </label>
-        <input autofocus id='Limpar'autocomplete="off" type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
+        <input autofocus autocomplete="off" type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
     </div>
 
 
@@ -69,21 +69,22 @@
                     <th scope="col">Quantidade</th>
                     <th scope="col">Subtotal</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
+
                 </tr>
             </thead>
             <tbody>
                 <div id='content_retorno'>
-
+                    @php $Total =0; @endphp
                     @foreach ($Cart as $row)
                     <tr>
                         <td>{{ $row['Barras']}}</td>
                         <td>{{ $row['Descricao'] }}</td>
-                        <td>{{$row['Valor']}}</td>
+                        <td>{{'R$'.number_format($row['Valor'],2,',','.')}}</td>
                         <td>{{$row['Quantidade']}}</td>
-                        <td>{{$row['Quantidade'] * $row['Valor']}}</td>
-
-
+                        <td class='SubTotal'>{{'R$'.number_format($row['Quantidade'] * $row['Valor'],2,',','.')}}</td>
+                        @php
+                        $Total += ($row['Quantidade'] * $row['Valor']);
+                        @endphp
 
                         <td>
                             <form action="/Pedidos/Excluir/{id}" method="get">
@@ -91,11 +92,28 @@
                             </form>
                         </td>
                     </tr>
+
                     @endforeach
+
+                    <th class='Total' scope="col">Total</th>
+                    <td id='Total'>{{'R$'.number_format($Total,2,',','.')}}</td>
+                    <th class='Cliente' scope="col">Cliente</th>
+                    <td >{{$Cliente['Razao']}}  </td>
+
         </table>
-        <div>
-    <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="" class="btn btn-warning">Limpar Carrinho</button>
-    </div>
+        <div class='form-row'>
+
+
+            <div class="form-group col-md-01">
+                <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Limpar" class="btn btn-danger">Cancelar</button>
+            </div>
+
+            <div class='form-group col-md-01'>
+                <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Finalizar" class="btn btn-primary">Finalizar- F2</button>
+            </div>
+
+        </div>
+
     </div>
 
 

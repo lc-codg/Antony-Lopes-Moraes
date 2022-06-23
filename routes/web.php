@@ -43,7 +43,8 @@ Route::get('/Clientes/Editar/{Id}', [ClientesController::class, 'Editar']);
 Route::get('/Clientes/Delete/{Id}', [ClientesController::class, 'Delete']);
 Route::get('/Clientes/Ver/{Id}', [ClientesController::class, 'ListarPorId']);
 Route::get('/Clientes/Todos', [ClientesController::class, 'ListarTodos']);
-Route::post('/Clientes/Inserir', [ClientesController::class, 'Inserir']);
+Route::get('/Clientes/Inserir', [ClientesController::class, 'Inserir']);
+Route::get('/Clientes/PesquisaNome',[ClientesController::class,'ListarPorNome']);
 
 
 Route::get('/Pedidos/Ver/{Id}', [PedidoController::class, 'ListarPorId']);
