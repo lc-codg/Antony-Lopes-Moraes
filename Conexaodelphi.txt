@@ -1,0 +1,42 @@
+var
+ arqini : tInifile;
+ aux:string;
+begin
+aux:=extractfilepath(application.ExeName) +'config.ini';
+arqini:=tinifile.create(aux);
+
+
+      remoto:= TUniConnection.Create(Nil);
+     remoto.ProviderName:=arqini.readString('remoto', 'provedor', '');
+      remoto.Port:= StrToInt(arqini.readString('remoto', 'porta', ''));
+      remoto.Server:= arqini.readString('remoto', 'server', '');
+      remoto.Database:=arqini.readString('remoto', 'database', '');
+     remoto.Username:= arqini.readString('remoto', 'usuario', '');
+      remoto.Password:=arqini.readString('remoto', 'senha', '');
+     remoto.AutoCommit:= True;
+     remoto.Connected:= True;
+
+      server:= TUniConnection.Create(Nil);
+      server.ProviderName:=arqini.readString('server', 'provedor', '');
+      server.Port:= StrToInt(arqini.readString('server', 'porta', ''));
+     server.Server:= arqini.readString('server', 'server', '');
+     server.Database:=arqini.readString('server', 'database', '');
+      server.Username:= arqini.readString('server', 'usuario', '');
+     server.Password:=arqini.readString('server', 'senha', '');
+     server.AutoCommit:= True;
+     server.Connected:= True;
+
+      produto:= TUniConnection.Create(Nil);
+     produto.ProviderName:=arqini.readString('produto', 'provedor', '');
+      produto.Port:= StrToInt(arqini.readString('produto', 'porta', ''));
+      produto.Server:= arqini.readString('produto', 'server', '');
+      produto.Database:=arqini.readString('produto', 'database', '');
+      produto.Username:= arqini.readString('produto', 'usuario', '');
+      produto.Password:=arqini.readString('produto', 'senha', '');
+      produto.AutoCommit:= True;
+     produto.Connected:= True;
+
+
+    arqini.Free;
+
+
