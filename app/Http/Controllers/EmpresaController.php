@@ -175,9 +175,9 @@ class EmpresaController extends Controller
         $empresa = Empresa::findOrfail($id);
         return view('Empresa.Ver', ['Empresas' => $empresa]);
     }
-    public function ListarTodos()
+    public function ListarTodos(Request $request)
     {
-        $Empresa = DB::table('Empresas')->paginate(20);
+        $Empresa = DB::table('Empresas')->where('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
         return view('Empresa.Todos', ['Empresas' => $Empresa]);
     }
     public function Listar(){

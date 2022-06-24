@@ -18,6 +18,34 @@ class FornecedorController extends Controller
         return view('Fornecedor.Fornecedor');
     }
 
+    public function Delete($id)
+    {
+        $cliente = Fornecedor::findOrfail($id);
+        $cliente->delete();
+        return "<script>alert('Deletado com sucesso!');location='/Fornecedor/Todos';</script>";
+    }
+
+    public function ListarPorId($id)
+    {
+        $cliente = Fornecedor::findOrfail($id);
+        return view('Fornecedor.Ver', ['Fornecedors' => $cliente]);
+    }
+    public function ListarTodos(Request $request)
+    {
+        $Fornecedor = DB::table('Fornecedors')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
+        return view('Fornecedor.Todos', ['Fornecedors' => $Fornecedor]);
+    }
+    public function Listar()
+    {
+        $Fornecedor = DB::table('Fornecedors')->get();
+        return $Fornecedor;
+    }
+    public function ListarPrimeiro()
+    {
+        $Fornecedor = DB::table('Fornecedors')->select('id')->limit(1);
+        return view('Fornecedor.Todos', ['Fornecedors' => $Fornecedor]);
+    }
+
     public function Salvar(Request $request)
     {
         if (empty($request->Nome)) {
@@ -34,7 +62,7 @@ class FornecedorController extends Controller
             </script>";
             exit;
         }
-      
+
         if (empty($request->Endereco)) {
             echo "<script>
             alert('Digite o Endereço.');
@@ -63,7 +91,7 @@ class FornecedorController extends Controller
             </script>";
             exit;
         }
-       
+
         if (empty($request->Numero)) {
             echo "<script>
             alert('Digite o Número.');
@@ -77,10 +105,10 @@ class FornecedorController extends Controller
                 'Nome' => $request->Nome,
                 'Cpf' => $request->CPF,
                 'Cnpj' => $request->cnpj,
-                'Ie' =>$request->ie,
-                'Rg' =>$request->ie,
-                'Razao'=>$request->razao,
-                'Fantasia'=>$request->fantasia,
+                'Ie' => $request->ie,
+                'Rg' => $request->ie,
+                'Razao' => $request->razao,
+                'Fantasia' => $request->fantasia,
                 'Email' => $request->Email,
                 'Endereco' => $request->Endereco,
                 'Bairro' => $request->Bairro,
@@ -88,18 +116,18 @@ class FornecedorController extends Controller
                 'PessoaJuridica' => $request->PessoaJuridica,
                 'Cidade' => $request->Cidade,
                 'UF'  => $request->UF,
-                'Cep' =>$request->cep,
-                'Telefone' =>$request->telefone,
-                'Contato' =>$request->contato,
-                'Prazo' =>$request->prazo,
-                'Observacao' =>$request->observacao,
-                'Conta' =>$request->conta,
-                'Agencia'=>$request->agencia,
-                'Tipo'=>$request->tipo,
-                'CodigoVendedor'=>$request->codigovendedor,
-                'Limite'=>$request->limite,
-                'Exterior'=>$request->exterior,
-                'Juridico'=>$request->juridico
+                'Cep' => $request->cep,
+                'Telefone' => $request->telefone,
+                'Contato' => $request->contato,
+                'Prazo' => $request->prazo,
+                'Observacao' => $request->observacao,
+                'Conta' => $request->conta,
+                'Agencia' => $request->agencia,
+                'Tipo' => $request->tipo,
+                'CodigoVendedor' => $request->codigovendedor,
+                'Limite' => $request->limite,
+                'Exterior' => $request->exterior,
+                'Juridico' => $request->juridico
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Fornecedor/Novo';</script>";
@@ -156,11 +184,11 @@ class FornecedorController extends Controller
             $cliente->update([
                 'Nome' => $request->Nome,
                 'Cpf' => $request->CPF,
-                'Rg' => $request->RG,
-                'Cnpj' => $request->CNPJ,
-                'Ie' =>$request->Ie,
-                'Razao'=>$request->razao,
-                'Fantasia'=>$request->fantasia,
+                'Cnpj' => $request->cnpj,
+                'Ie' => $request->ie,
+                'Rg' => $request->ie,
+                'Razao' => $request->razao,
+                'Fantasia' => $request->fantasia,
                 'Email' => $request->Email,
                 'Endereco' => $request->Endereco,
                 'Bairro' => $request->Bairro,
@@ -168,50 +196,21 @@ class FornecedorController extends Controller
                 'PessoaJuridica' => $request->PessoaJuridica,
                 'Cidade' => $request->Cidade,
                 'UF'  => $request->UF,
-                'Cep' =>$request->cep,
-                'Telefone' =>$request->telefone,
-                'Contato' =>$request->contato,
-                'Prazo' =>$request->prazo,
-                'Observacao' =>$request->observacao,
-                'Conta' =>$request->conta,
-                'Agencia'=>$request->agencia,
-                'Tipo'=>$request->tipo,
-                'CodigoVendedor'=>$request->codigovendedor,
-                'Limite'=>$request->limite,
-                'Exterior'=>$request->exterior,
-                'Juridico'=>$request->juridico
+                'Cep' => $request->cep,
+                'Telefone' => $request->telefone,
+                'Contato' => $request->contato,
+                'Prazo' => $request->prazo,
+                'Observacao' => $request->observacao,
+                'Conta' => $request->conta,
+                'Agencia' => $request->agencia,
+                'Tipo' => $request->tipo,
+                'CodigoVendedor' => $request->codigovendedor,
+                'Limite' => $request->limite,
+                'Exterior' => $request->exterior,
+                'Juridico' => $request->juridico
             ]);
 
             return "<script>alert('Salvo com sucesso!');location='/Fornecedor/Todos';</script>";
         }
-    }
-
-    public function Delete($id)
-    {
-        $cliente = Fornecedor::findOrfail($id);
-        $cliente->delete();
-        return "<script>alert('Deletado com sucesso!');location='/Fornecedor/Todos';</script>";
-    }
-
-    public function ListarPorId($id)
-    {
-        $cliente = Fornecedor::findOrfail($id);
-        return view('Fornecedor.Ver', ['Fornecedors' => $cliente]);
-    }
-    public function ListarTodos()
-    {
-        $Fornecedor = DB::table('Fornecedors')->paginate(20);
-        return view('Fornecedor.Todos', ['Fornecedors' => $Fornecedor]);
-    }
-    public function Listar()
-    {
-        $Fornecedor = DB::table('Fornecedors')->get();
-        return $Fornecedor;
-    }
-    public function ListarPrimeiro()
-    {
-        $Fornecedor = DB::table('Fornecedors')->
-        select('id')->limit(1);
-        return view('Fornecedor.Todos', ['Fornecedors' => $Fornecedor]);
     }
 }

@@ -15,12 +15,15 @@
 
 <body>
 
+    <form method='get' action='/Fornecedor/Todos'>
 
+        <div class="form-group">
+            <label for="">Pesquisa Fornecedor</label>
+            <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+            <small id="helpId" class="form-text text-muted">Aperte a tecla ENTER para realizar a pesquisa por Cnpj,Cpf,Nome ou Razão Social</small>
+        </div>
 
-
-    <style>
-
-    </style>
+    </form>
 
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
         <thead class="thead-DARK">
@@ -46,45 +49,45 @@
 
 
 
-                @foreach ($Fornecedors as $row) 
+                @foreach ($Fornecedors as $row)
 
-                    <td>{{ $row->id }}</td>
+                <td>{{ $row->id }}</td>
 
-                    <td>{{ $row->Nome }}</td>
-                    <td>{{ $row->Cpf }}</td>
+                <td>{{ $row->Nome }}</td>
+                <td>{{ $row->Cpf }}</td>
 
 
-                    <td>{{ $row->Rg}}</td>
-                    <td>{{ $row->Cnpj }}</td>
-                    <td>{{ $row->Endereco }}</td>
-                    <td>{{ $row->Numero }}</td>
-                    <td>{{ $row->Bairro }}</td>
-                    <td>{{ $row->Cidade }}</td>
-                    <td>{{ $row->UF }}</td>
-                    <td>
+                <td>{{ $row->Rg}}</td>
+                <td>{{ $row->Cnpj }}</td>
+                <td>{{ $row->Endereco }}</td>
+                <td>{{ $row->Numero }}</td>
+                <td>{{ $row->Bairro }}</td>
+                <td>{{ $row->Cidade }}</td>
+                <td>{{ $row->UF }}</td>
+                <td>
 
-                        <form action="/Fornecedor/Ver/{{ $row->id }}" method="get">
-                            <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                        </form>
+                    <form action="/Fornecedor/Ver/{{ $row->id }}" method="get">
+                        <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                    </form>
 
-                    </td>
-                    <td>
-                        <form action="/Fornecedor/Delete/{{ $row->id }}" method="get">
-                            <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/Fornecedor/Inserir" method="post">
-                            
-                        </form>
-                    </td>
+                </td>
+                <td>
+                    <form action="/Fornecedor/Delete/{{ $row->id }}" method="get">
+                        <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
+                    </form>
+                </td>
+                <td>
+                    <form action="/Fornecedor/Inserir" method="post">
+
+                    </form>
+                </td>
 
 
 
 
             </tr>
-   @endforeach
-        <script></script>
+            @endforeach
+            <script></script>
 
 
 

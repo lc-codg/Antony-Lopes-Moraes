@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\models\Pedidos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Classes\ObterDados;
 
 
 class PedidoController extends Controller
@@ -22,9 +23,10 @@ class PedidoController extends Controller
         }else{
             $Cliente = session('Cliente',['Razao'=>'','Cnpj'=>'','Id'=>'']);
         }
-        
+       $ObterDados = new ObterDados();
+       $Empresa = $ObterDados->ListaDeEmpresas(); 
 
-    return view('Pedidos.Carrinho', ['Cart' => $Carrinho,'Cliente'=>$Cliente]);
+    return view('Pedidos.Carrinho', ['Cart' => $Carrinho,'Cliente'=>$Cliente, 'Empresa' =>$Empresa]);
 
 }
     public function LimparCarrinho()

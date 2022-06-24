@@ -16,19 +16,23 @@
     <br>
     <div id='container' class='.container-fluid'>
 
+
         <div class='form-row '>
 
+            <div class="form-group col-md-4">
+
+                <label for="">Emitente</label>
+                <select class="form-control " name="" id="">
+                    @foreach($Empresa as $RowEmpresa)
+                    <option selected>{{$RowEmpresa->id}} - {{$RowEmpresa->Razao}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="form-group col-md-6">
-                <label for="">Nome Cliente</label>
-                <input type="text" class="form-control" name="PesquisaNome" id="PesquisaNome" aria-describedby="helpId" placeholder="">
+                <label for="">Pesquisa Destinatário</label>
+                <input autocomplete="off" type="text" class="form-control" name="PesquisaNome" id="PesquisaNome" aria-describedby="helpId" placeholder="">
+                <smal id="helpId" class="form-text text-muted">Aperte a tecla ENTER para pesquisar por Cnpj,Nome,Razao ou Cpf</smal>
             </div>
-
-            <div class="form-group col-md-2">
-                <label for="">CNPJ</label>
-                <input type="text" class="form-control" name="PesquisaCnpj" id="PesquisaCnpj" aria-describedby="helpId" placeholder="">
-            </div>
-
-
 
         </div>
         <div class="form-group col-md-6" id='resultado_cliente'>
@@ -36,7 +40,7 @@
 
 
         </div>
-   
+
 
 
     </div>
@@ -47,6 +51,7 @@
             <span>Buscar Produtos</span>
         </label>
         <input autofocus autocomplete="off" type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
+        <smal id="helpId" class="form-text text-muted">Aperte a tecla ENTER para pesquisar por Descrição ou código de Barras.</smal>
     </div>
 
 
@@ -59,7 +64,11 @@
 
 
     <div id='container' class='.container-fluid'>
-
+        @php if(($Cliente['Razao'] <>'')){ @endphp 
+        <td><button type="button" id="Cliente" class="btn btn-dark btn-xs">Cliente: {{$Cliente['Razao']}}</button></td>
+        @php
+        }
+        @endphp
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
                 <tr>
@@ -94,25 +103,18 @@
                     </tr>
 
                     @endforeach
+                    <td> <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Limpar" class="btn btn-danger">Cancelar</button></td>
+                    <td> <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Finalizar" class="btn btn-primary">Finalizar- F2</button></td>
+                    <td></td>
 
                     <th class='Total' scope="col">Total</th>
                     <td id='Total'>{{'R$'.number_format($Total,2,',','.')}}</td>
-                    <th class='Cliente' scope="col">Cliente</th>
-                    <td >{{$Cliente['Razao']}}  </td>
+                    <td></td>
+
+
 
         </table>
-        <div class='form-row'>
 
-
-            <div class="form-group col-md-01">
-                <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Limpar" class="btn btn-danger">Cancelar</button>
-            </div>
-
-            <div class='form-group col-md-01'>
-                <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Finalizar" class="btn btn-primary">Finalizar- F2</button>
-            </div>
-
-        </div>
 
     </div>
 

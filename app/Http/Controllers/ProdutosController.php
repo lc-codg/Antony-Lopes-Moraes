@@ -17,12 +17,10 @@ class ProdutosController extends Controller
     }
     public function LocalizarPorDescricao(Request $request)
     {
-        $Produtos = DB::table('produtos')->select('Id','Descricao', 'Barras', 'ValorUnitario')->
-        where('Descricao', 'LIKE', '%' . $request->Descricao . '%')->
-        get();
+        $Produtos = DB::table('produtos')->select('Id', 'Descricao', 'Barras', 'ValorUnitario')->where('Descricao', 'LIKE', '%' . $request->Descricao . '%')->orwhere('Barras', 'LIKE', '%' . $request->Descricao . '%')->get();
         return response()->json(array('Produtos' => $Produtos));
     }
-    
+
     public function Delete($id)
     {
         $produto = Produto::findOrfail($id);
@@ -35,9 +33,9 @@ class ProdutosController extends Controller
         $produto = Produto::findOrfail($id);
         return view('Produtos.Ver', ['produto' => $produto]);
     }
-    public function ListarTodos()
+    public function ListarTodos(Request $request)
     {
-        $produtos = DB::table('produtos')->paginate(10);
+        $produtos = DB::table('produtos')->where('Barras', 'LIKE', '%' . $request->Nome . '%')->orwhere('Descricao', 'LIKE', '%' . $request->Nome . '%')->paginate(10);
         return view('Produtos.Todos', ['produtos' => $produtos]);
     }
     public function Inserir(Request $request)
@@ -48,7 +46,7 @@ class ProdutosController extends Controller
             'Barras' => $Produtos->Barras,
             'Descricao' => $Produtos->Descricao,
             'Valor' => $Produtos->ValorUnitario,
-            'Quantidade' =>$request->Quantidade,
+            'Quantidade' => $request->Quantidade,
         ]);
         $Carrinho = (Session::get('Cart'));
         return ($Carrinho);

@@ -15,12 +15,15 @@
 
 <body>
 
+    <form method='get' action='/Empresa/Todos'>
 
+        <div class="form-group">
+            <label for="">Pesquisa Empresa</label>
+            <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+            <small id="helpId" class="form-text text-muted">Aperte a tecla  ENTER para realizar a pesquisa por Cnpj ou Razão Social</small>
+        </div>
 
-
-    <style>
-
-    </style>
+    </form>
 
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
         <thead class="thead-DARK">
@@ -46,45 +49,45 @@
 
 
 
-                @foreach ($Empresas as $row) 
+                @foreach ($Empresas as $row)
 
-                    <td>{{ $row->id }}</td>
+                <td>{{ $row->id }}</td>
 
-                    <td>{{ $row->Razao }}</td>
-                    <td>{{ $row->Fantasia }}</td>
+                <td>{{ $row->Razao }}</td>
+                <td>{{ $row->Fantasia }}</td>
 
 
-                    <td>{{ $row->Ie}}</td>
-                    <td>{{ $row->Cnpj }}</td>
-                    <td>{{ $row->Endereco }}</td>
-                    <td>{{ $row->Numero }}</td>
-                    <td>{{ $row->Bairro }}</td>
-                    <td>{{ $row->Cidade }}</td>
-                    <td>{{ $row->UF }}</td>
-                    <td>
+                <td>{{ $row->Ie}}</td>
+                <td>{{ $row->Cnpj }}</td>
+                <td>{{ $row->Endereco }}</td>
+                <td>{{ $row->Numero }}</td>
+                <td>{{ $row->Bairro }}</td>
+                <td>{{ $row->Cidade }}</td>
+                <td>{{ $row->UF }}</td>
+                <td>
 
-                        <form action="/Empresa/Ver/{{ $row->id }}" method="get">
-                            <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                        </form>
+                    <form action="/Empresa/Ver/{{ $row->id }}" method="get">
+                        <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                    </form>
 
-                    </td>
-                    <td>
-                        <form action="/Empresa/Delete/{{ $row->id }}" method="get">
-                            <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/Empresa/Inserir" method="post">
-                            
-                        </form>
-                    </td>
+                </td>
+                <td>
+                    <form action="/Empresa/Delete/{{ $row->id }}" method="get">
+                        <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
+                    </form>
+                </td>
+                <td>
+                    <form action="/Empresa/Inserir" method="post">
+
+                    </form>
+                </td>
 
 
 
 
             </tr>
-   @endforeach
-        <script></script>
+            @endforeach
+            <script></script>
 
 
 

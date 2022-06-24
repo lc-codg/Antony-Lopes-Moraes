@@ -16,11 +16,11 @@ class ClientesController extends Controller
     public function Inserir(Request $request)
     {
         $cliente = Clientes::findorFail($request->id);
-        
-        Session::put('Cliente',[
-            'Razao' => ($cliente->Nome =='')?$cliente->Razao:$cliente->Nome,
-            'Cnpj'=>($cliente->Cpf =='')?$cliente->Cnpj:$cliente->Cpf,
-            'Id'=>$cliente->id,
+
+        Session::put('Cliente', [
+            'Razao' => ($cliente->Nome == '') ? $cliente->Razao : $cliente->Nome,
+            'Cnpj' => ($cliente->Cpf == '') ? $cliente->Cnpj : $cliente->Cpf,
+            'Id' => $cliente->id,
         ]);
         return Session::get('Cliente');
     }
@@ -39,17 +39,12 @@ class ClientesController extends Controller
 
     public function ListarPorNome(Request $request)
     {
-        $Cliente = DB::table('clientes')->select('Nome', 'Id', 'Cnpj', 'Cpf', 'Razao')->where('Nome', 'LIKE', '%' . $request->Nome . '%', 'OR', 'Razao', 'LIKE', '%' . $request->Nome . '%')->get();
+        $Cliente = DB::table('clientes')->select('Nome', 'Id', 'Cnpj', 'Cpf', 'Razao')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->get();
         return response()->json(array('Clientes' => $Cliente));
     }
-    public function ListarPorCnpj(Request $request)
+    public function ListarTodos(Request $request)
     {
-        $Cliente = DB::table('clientes')->select('Nome', 'Id')->where('Cnpj', 'LIKE', '%' . $request->Cnpj . '%')->get();
-        return response()->json(array('Clientes' => $Cliente));
-    }
-    public function ListarTodos()
-    {
-        $clientes = DB::table('clientes')->paginate(20);
+        $clientes = DB::table('clientes')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
         return view('Clientes.Todos', ['clientes' => $clientes]);
     }
     public function Listar()

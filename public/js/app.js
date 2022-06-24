@@ -1,7 +1,6 @@
 
 
 $(function () {
-
     $('#PesquisaNome').keydown(function (e) {
 
         var buscacliente = $(this).val();
