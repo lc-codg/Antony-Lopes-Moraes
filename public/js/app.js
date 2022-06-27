@@ -1,7 +1,26 @@
+$(function() {
 
 
-$(function () {
-    $('#PesquisaNome').keydown(function (e) {
+    $('#Empresa').change(function(event) {
+        var empresa = event.currentTarget.value;
+        Codempresa = empresa.substr(0, 1);
+
+        $.ajax({
+            typ: 'get',
+            url: '/Empresa/Seleciona/',
+            data: { Codempresa: Codempresa },
+            datatype: 'json',
+            success: function(retorno) {
+
+                $.each(retorno, function(Id, val) {
+                    console.log(val);
+                });
+
+            }
+        });
+    });
+
+    $('#PesquisaNome').keydown(function(e) {
 
         var buscacliente = $(this).val();
 
@@ -21,11 +40,11 @@ $(function () {
                             data: { 'Nome': buscacliente },
                             datetype: 'json',
 
-                            success: function (retorno) {
+                            success: function(retorno) {
 
                                 if (retorno.Clientes.length > 0) {
 
-                                    $.each(retorno.Clientes, function (Id, val) {
+                                    $.each(retorno.Clientes, function(Id, val) {
                                         if (val.Nome === '') {
                                             Nome = val.Razao;
                                         } else {
@@ -51,7 +70,7 @@ $(function () {
 
 
 
-    $('#buscar').keydown(function (e) {
+    $('#buscar').keydown(function(e) {
 
         var buscatexto = $(this).val();
 
@@ -71,11 +90,11 @@ $(function () {
                             data: { 'Descricao': buscatexto },
                             datetype: 'json',
 
-                            success: function (retorno) {
+                            success: function(retorno) {
 
                                 if (retorno.Produtos.length > 0) {
 
-                                    $.each(retorno.Produtos, function (Id, val) {
+                                    $.each(retorno.Produtos, function(Id, val) {
 
                                         $('#resultado_busca').append(' <a href="#"" id=' + val.Id + '>' + val.Descricao + ' | R$' + val.ValorUnitario + '</a><p></p>');
 
@@ -91,7 +110,7 @@ $(function () {
     });
 
 
-    $('body').on('click', '#resultado_busca a', function () {
+    $('body').on('click', '#resultado_busca a', function() {
 
         var dadosProduto = $(this).attr('id');
         var splitdados = dadosProduto.split(':');
@@ -104,7 +123,7 @@ $(function () {
                 url: '/Produtos/Inserir',
                 data: { id: splitdados[0], 'Quantidade': quantidade },
                 datetype: 'json',
-                success: function (retorno) {
+                success: function(retorno) {
                     window.location.href = '/Pedidos/Carrinho';
 
                 }
@@ -116,21 +135,22 @@ $(function () {
     });
 });
 
-$('body').on('click', '#resultado_cliente a', function () {
+
+$('body').on('click', '#resultado_cliente a', function() {
 
     var dadosCliente = $(this).attr('id');
     var splitdados = dadosCliente.split(':');
 
-        $.ajax({
-            method: 'get',
-            url: '/Clientes/Inserir',
-            data: { id: splitdados[0]},
-            datetype: 'json',
-            success: function (retorno) {
-                window.location.href = '/Pedidos/Carrinho';
-            }
-        });
-    
+    $.ajax({
+        method: 'get',
+        url: '/Clientes/Inserir',
+        data: { id: splitdados[0] },
+        datetype: 'json',
+        success: function(retorno) {
+            window.location.href = '/Pedidos/Carrinho';
+        }
+    });
+
 
 
 });

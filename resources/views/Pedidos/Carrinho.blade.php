@@ -19,52 +19,51 @@
 
         <div class='form-row '>
 
-            <div class="form-group col-md-4">
-
+            <div class="form-group col-md-2">
                 <label for="">Emitente</label>
-                <select class="form-control " name="" id="">
+                <select class="form-control " name="" id='Empresa'>
                     @foreach($Empresa as $RowEmpresa)
                     <option selected>{{$RowEmpresa->id}} - {{$RowEmpresa->Razao}}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-6">
+
+            <div class="form-group col-md-4">
                 <label for="">Pesquisa Destinatário</label>
                 <input autocomplete="off" type="text" class="form-control" name="PesquisaNome" id="PesquisaNome" aria-describedby="helpId" placeholder="">
-                <smal id="helpId" class="form-text text-muted">Aperte a tecla ENTER para pesquisar por Cnpj,Nome,Razao ou Cpf</smal>
+
             </div>
+
+            <div class="form-group col-md-4">
+                <label for="">Pesquisa Produto</label>
+                <input autofocus autocomplete="off" type="text" class="form-control" name="PesquisaNome" id="buscar" aria-describedby="helpId" placeholder="">
+
+            </div>
+
 
         </div>
         <div class="form-group col-md-6" id='resultado_cliente'>
 
+        </div>
+
+        <div class="form-group col-md-6" id='resultado_busca'>
+
 
 
         </div>
 
-
-
-    </div>
-
-
-    <div class="form-group col-md-6">
-        <label>
-            <span>Buscar Produtos</span>
-        </label>
-        <input autofocus autocomplete="off" type="text" class="form-control col-md-10" name="buscar" id="buscar" aria-describedby="helpId" placeholder="">
-        <smal id="helpId" class="form-text text-muted">Aperte a tecla ENTER para pesquisar por Descrição ou código de Barras.</smal>
     </div>
 
 
 
-    <div class="form-group col-md-6" id='resultado_busca'>
 
 
 
-    </div>
+
 
 
     <div id='container' class='.container-fluid'>
-        @php if(($Cliente['Razao'] <>'')){ @endphp 
+        @php if(($Cliente['Razao'] <>'')){ @endphp
         <td><button type="button" id="Cliente" class="btn btn-dark btn-xs">Cliente: {{$Cliente['Razao']}}</button></td>
         @php
         }
@@ -104,7 +103,7 @@
 
                     @endforeach
                     <td> <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Limpar" class="btn btn-danger">Cancelar</button></td>
-                    <td> <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Finalizar" class="btn btn-primary">Finalizar- F2</button></td>
+                    <td> <button onclick="location.href = '/Pedidos/Salvar';" id="Finalizar" class="btn btn-primary">Finalizar- F2</button></td>
                     <td></td>
 
                     <th class='Total' scope="col">Total</th>
