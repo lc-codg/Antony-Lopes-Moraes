@@ -52,6 +52,7 @@ Route::get('/Pedidos/Todos', [PedidoController::class, 'ListarTodos']);
 Route::get('/Pedidos/Delete/{id}', [PedidoController::class, 'Delete']);
 Route::get('/Pedidos/Carrinho', [PedidoController::class, 'Show']);
 Route::get('/Pedidos/LimparCarrinho', [PedidoController::class, 'LimparCarrinho']);
+Route::get('/Pedidos/Salvar',[PedidoController::class,'create']);
 
 Route::get('/Itens/Delete/{Id}', [ItensController::class, 'Delete']);
 Route::get('/Itens/Ver/{id}', [ItensController::class, 'ListarPorId']);
@@ -72,6 +73,7 @@ Route::get('/Empresa/Delete/{Id}', [EmpresaController::class, 'Delete']);
 Route::get('/Empresa/Ver/{Id}', [EmpresaController::class, 'ListarPorId']);
 Route::get('/Empresa/Todos', [EmpresaController::class, 'ListarTodos']);
 Route::post('/Empresa/Inserir', [EmpresaController::class, 'Inserir']);
+Route::get('/Empresa/Seleciona',[EmpresaController::class, 'Seleciona']);
 
 Route::get('/ContasBancarias/Novo', [ContasBancariasController::class, 'index']);
 Route::post('/ContasBancarias/Salvar', [ContasBancariasController::class, 'Salvar']);

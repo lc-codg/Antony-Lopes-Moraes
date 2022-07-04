@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Empresa;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class EmpresaController extends Controller
 {
@@ -17,7 +18,42 @@ class EmpresaController extends Controller
     {
         return view('Empresa.Empresa');
     }
+    public function Delete($id)
+    {
+        $empresa = Empresa::findOrfail($id);
+        $empresa->delete();
+        return "<script>alert('Deletado com sucesso!');location='/Empresa/Todos';</script>";
+    }
+    public function Seleciona(Request $request)
+    {
+        $Empresa = Empresa::findorFail($request->Codempresa);
+        session::put('Empresa',[
+          'Id'=>$Empresa->id,
+        ]);
+        $IdEmpresa = session::get('Empresa');
+       return $IdEmpresa;
+    }
+    public function ListarPorId($id)
+    {
+        $empresa = Empresa::findOrfail($id);
+        return view('Empresa.Ver', ['Empresas' => $empresa]);
+    }
+    public function ListarTodos(Request $request)
+    {
+        $Empresa = DB::table('Empresas')->where('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
+        return view('Empresa.Todos', ['Empresas' => $Empresa]);
+    }
+    public function Listar()
+    {
 
+        $Empresa = DB::table('Empresas')->get();
+        return $Empresa;
+    }
+    public function ListarPrimeiro()
+    {
+        $Empresa = DB::table('Empresas')->select('id')->limit(1);
+        return view('Empresa.Todos', ['Empresas' => $Empresa]);
+    }
     public function Salvar(Request $request)
     {
         if (empty($request->razao)) {
@@ -161,34 +197,5 @@ class EmpresaController extends Controller
 
             return "<script>alert('Salvo com sucesso!');location='/Empresa/Todos';</script>";
         }
-    }
-
-    public function Delete($id)
-    {
-        $empresa = Empresa::findOrfail($id);
-        $empresa->delete();
-        return "<script>alert('Deletado com sucesso!');location='/Empresa/Todos';</script>";
-    }
-
-    public function ListarPorId($id)
-    {
-        $empresa = Empresa::findOrfail($id);
-        return view('Empresa.Ver', ['Empresas' => $empresa]);
-    }
-    public function ListarTodos(Request $request)
-    {
-        $Empresa = DB::table('Empresas')->where('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
-        return view('Empresa.Todos', ['Empresas' => $Empresa]);
-    }
-    public function Listar(){
-
-            $Empresa = DB::table('Empresas')->get();
-            return $Empresa;
-
-    }
-    public function ListarPrimeiro()
-    {
-        $Empresa = DB::table('Empresas')->select('id')->limit(1);
-        return view('Empresa.Todos', ['Empresas' => $Empresa]);
     }
 }
