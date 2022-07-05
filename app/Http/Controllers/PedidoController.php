@@ -7,7 +7,8 @@ use App\models\Pedidos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Classes\ObterDados;
-
+use App\Http\Controllers\ItensController;
+use Exception;
 
 class PedidoController extends Controller
 {
@@ -46,8 +47,12 @@ class PedidoController extends Controller
         $Pedido = Pedidos::findOrfail($Id);
         return view('Pedidos.Ver', ['Pedidos' => $Pedido]);
     }
-    public function ListarTodos()
+    public function ListarTodos(Request $request)
     {
+        $Dados = new ObterDados;
+        $Empresa = $Dados->ListaDeEmpresas();
+        $Cliente = $Dados->ListaDeClientes();
+
         $Pedidos = DB::table('pedidos')->select(
             'pedidos.id',
             'pedidos.CodigoDoCliente',
@@ -55,43 +60,76 @@ class PedidoController extends Controller
             'pedidos.TotalDesconto',
             'pedidos.TotalAcréscimo',
             'pedidos.DtPedido',
-            'clientes.Nome'
-        )->join('clientes', 'pedidos.CodigoDoCliente', '=', 'clientes.id')
-            ->paginate(20);
+            'pedidos.CodEmpresa',
+            'clientes.Nome',
+            'empresas.Razao',
 
-        return view('Pedidos.Todos', ['Pedidos' => $Pedidos]);
+        )->
+        join('clientes', 'pedidos.CodigoDoCliente', '=', 'clientes.id')->
+        join('empresas', 'pedidos.CodEmpresa','=','empresas.id')->
+        where('empresas.Razao', 'LIKE', '%'.$request->Nome.'%')->
+        orwhere('clientes.Nome','LIKE','%'.$request->Nome.'%')->
+        orwhere('Clientes.Razao','LIKE','%'.$request->Nome.'%')->
+        whereBetween('DtPedido',array($request->Dataini,$request->Datafim))->
+        paginate(20);
+
+        return view('Pedidos.Todos', ['Pedidos' => $Pedidos,'Empresa'=>$Empresa,'Cliente'=>$Cliente]);
     }
-    public function VerificaDados(Request $request)
+    public function VerificaDados($Cliente, $Empresa, $Produtos)
     {
-        empty(!$request->CodigoCliente)? exit:"<scrip>Selecione o Cliente</scrip>";
-        empty(!$request->Total)?exit : "<scrip>Insira os produtos.</scrip>";
-        empty(!$request->CodEmpresa)?exit:"<scrip>Selecione a Empresa emitente.</scrip>";
-        return True;
+        if (empty($Cliente['Id'])) {
+            echo "<script>alert('Preencha o Cliente.'),history.back()</script>";
+            exit;
+        }
+        if (empty($Empresa['Id'])) {
+
+            echo "<script>alert('Preencha o emitente.'),history.back()</script>";
+            exit;
+        }
+        if ($Produtos == 0) {
+            echo "<script>alert('Insira produtos ao pedido.'),history.back()</script>";
+            exit;
+        } else {
+
+            return true;
+        }
     }
     public function create(Request $request)
     {
         $Cliente = session::get('Cliente');
         $Empresa = session::get('Empresa');
-        $Produtos = session::get('Cart');
+        $Itens = new ItensController;
         $Total = 0;
 
+        if ($request->session()->has('Cart')) {
 
-
-        foreach ($Produtos as $row){
-            $Total += ($row['Valor'] *  $row['Quantidade']);
+            $Produtos = session::get('Cart');
+            foreach ($Produtos as $row) {
+                $Total += ($row['Valor'] *  $row['Quantidade']);
+            }
+        } else {
+            $Produtos = 0;
         }
 
-        Pedidos::create([
-            'CodigoDoCliente'=>$Cliente['Id'],
-            'Total'=>$Total,
-            'TotaldosProdutos'=>$Total,
-            'DtPedido' => date('Y-m-d'),
-            'Dataemissao'=>date('Y-m-d'),
-            'DataSaida'=>date('Y-m-d'),
-            'Finalidade'=>'Venda',
-            'CodEmpresa'=>$Empresa['Id']
-        ]);
-        return "<script>alert('Pedido Salvo com sucesso.'),location='LimparCarrinho'</script>";
+        if ($this->VerificaDados($Cliente, $Empresa, $Produtos)) {
+            $Pedidos = Pedidos::create([
+                'CodigoDoCliente' => $Cliente['Id'],
+                'Total' => $Total,
+                'TotaldosProdutos' => $Total,
+                'DtPedido' => date('Y-m-d'),
+                'Dataemissao' => date('Y-m-d'),
+                'DataSaida' => date('Y-m-d'),
+                'Finalidade' => 'Venda',
+                'CodEmpresa' => $Empresa['Id']
+            ]);
 
+            $Id = $Pedidos->id;
+
+            if ($Itens->Salvar($Produtos, $Id)) {
+                return "<script>alert('Pedido Salvo com sucesso.'),location='LimparCarrinho'</script>";
+            } else {
+                return "<script>alert(Erro ao Gravar.)</script>";
+            }
+        }
     }
 }

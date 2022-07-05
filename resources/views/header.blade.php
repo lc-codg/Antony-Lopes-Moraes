@@ -113,7 +113,7 @@
                 Notas de Venda
               </a>
               <a class="dropdown-item" href="/Pedidos/Carrinho">Emitir Nota de Venda </a>
-              <a class="dropdown-item" href="/Pedidos/Todos">Listar Nota de Venda </a>
+              <a class="dropdown-item" href="/Pedidos/Todos/">Listar Nota de Venda </a>
             </div>
 
 
@@ -163,10 +163,6 @@
   </nav>
 </head>
 
-<body>
-
-
-
-</body>
+<br>
 
 </html>

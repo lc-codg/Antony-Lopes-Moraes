@@ -9,19 +9,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <div class='.container-fluid ' id='c2'>
 
 </head>
 
 <body>
-
-
-
-
-    <style>
-
-    </style>
+    <br>
 
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
         <thead class="thead-DARK">
@@ -32,8 +25,9 @@
                 <th scope="col">Descrição</th>
                 <th scope="col">Valor</th>
                 <th scope="col">Quantidade</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope='col'>Subtotal</th>
+              
+               
             </tr>
         </thead>
         <tbody>
@@ -41,32 +35,30 @@
 
 
 
-                <?php foreach($itens as $row){
-                $val = $row->ValorUnitario;?>
-
+                @foreach($itens as $row)
+                 
+         
                 <td>{{ $row->id }}</td>
 
                 <td>{{ $row->Barras }}</td>
                 <td>{{ $row->Descricao }}</td>
 
-                <td>R$ <span class="price">{{ number_format($val, 2, '.', '') }}</span></td>
+                <td>R$ <span class="price">{{ number_format($row->ValorUnitario, 2, '.', '') }}</span></td>
                 <td>{{ $row->Quantidade }}</td>
-
-
-
-
-
-
-
+                <td>R$ <span class="price">{{ number_format(($row->ValorUnitario * $row->Quantidade), 2, '.', '') }}</span></td>
 
             </tr>
-            <?php } ?>
-            <script></script>
+            @endforeach
+    </table>
+    <form action="/Pedidos/Todos" method="get">
 
+        <input class="btn btn-dark" name="" type="submit" Value='Voltar'>
+    </form>
 
 
 </body>
 
 @include('footer')
 {{ $itens->links() }}
+
 </html>

@@ -46,7 +46,6 @@ Route::get('/Clientes/Todos', [ClientesController::class, 'ListarTodos']);
 Route::get('/Clientes/Inserir', [ClientesController::class, 'Inserir']);
 Route::get('/Clientes/PesquisaNome',[ClientesController::class,'ListarPorNome']);
 
-
 Route::get('/Pedidos/Ver/{Id}', [PedidoController::class, 'ListarPorId']);
 Route::get('/Pedidos/Todos', [PedidoController::class, 'ListarTodos']);
 Route::get('/Pedidos/Delete/{id}', [PedidoController::class, 'Delete']);
@@ -56,7 +55,7 @@ Route::get('/Pedidos/Salvar',[PedidoController::class,'create']);
 
 Route::get('/Itens/Delete/{Id}', [ItensController::class, 'Delete']);
 Route::get('/Itens/Ver/{id}', [ItensController::class, 'ListarPorId']);
-Route::get('/Itens/Todos', [ItensController::class, 'ListarTodos']);
+Route::get('/Itens/Todos/{id}', [ItensController::class, 'ListarTodos']);
 
 Route::get('/Fornecedor/Novo', [FornecedorController::class, 'Cadastrar']);
 Route::post('/Fornecedor/Salvar', [FornecedorController::class, 'Salvar']);
