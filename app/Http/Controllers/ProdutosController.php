@@ -51,6 +51,19 @@ class ProdutosController extends Controller
         $Carrinho = (Session::get('Cart'));
         return ($Carrinho);
     }
+    public function InserirCompras(Request $request)
+    {
+        $Produtos = Produto::findOrfail($request->id);
+
+        Session::push('CartCompras', [
+            'Barras' => $Produtos->Barras,
+            'Descricao' => $Produtos->Descricao,
+            'Valor' => $Produtos->ValorUnitario,
+            'Quantidade' => $request->Quantidade,
+        ]);
+        $Carrinho = (Session::get('CartCompras'));
+        return ($Carrinho);
+    }
 
     public function Cadastrar()
     {

@@ -35,6 +35,7 @@ Route::get('/Produtos/Delete/{Id}', [ProdutosController::class, 'Delete']);
 Route::get('/Produtos/Ver/{Id}', [ProdutosController::class, 'ListarPorId']);
 Route::get('/Produtos/Todos', [ProdutosController::class, 'ListarTodos']);
 Route::get('/Produtos/Inserir', [ProdutosController::class, 'Inserir']);
+Route::get('/Produtos/InserirCompras', [ProdutosController::class, 'InserirCompras']);
 Route::get('/Produtos/LocDesc', [ProdutosController::class, 'LocalizarPorDescricao'])->name('Produtos.LocDesc');
 
 Route::get('/Clientes/Novo', [ClientesController::class, 'Cadastrar']);
@@ -64,6 +65,7 @@ Route::get('/Fornecedor/Delete/{Id}', [FornecedorController::class, 'Delete']);
 Route::get('/Fornecedor/Ver/{Id}', [FornecedorController::class, 'ListarPorId']);
 Route::get('/Fornecedor/Todos', [FornecedorController::class, 'ListarTodos']);
 Route::post('/Fornecedor/Inserir', [FornecedorController::class, 'Inserir']);
+Route::get('/Fornecedor/PesquisaNome',[FornecedorController::class,'ListarPorNome']);
 
 Route::get('/Empresa/Novo', [EmpresaController::class, 'Cadastrar']);
 Route::post('/Empresa/Salvar', [EmpresaController::class, 'Salvar']);
@@ -105,3 +107,10 @@ Route::get('/Despesas/Todos', [DespesasController::class, 'ListarTodos']);
 Route::get('/Despesas/Ver/{id}', [DespesasController::class, 'show']);
 Route::get('/Despesas/Editar/{id}', [DespesasController::class, 'update']);
 Route::get('Despesas/Delete/{id}', [Despesascontroller::class, 'destroy']);
+
+Route::get('/Compras/Ver/{Id}', [ComprasController::class, 'ListarPorId']);
+Route::get('/Compras/Todos', [ComprasController::class, 'ListarTodos']);
+Route::get('/Compras/Delete/{id}', [ComprasController::class, 'Delete']);
+Route::get('/Compras/Carrinho', [ComprasController::class, 'Show']);
+Route::get('/Compras/LimparCarrinho', [ComprasController::class, 'LimparCarrinho']);
+Route::get('/Compras/Salvar',[ComprasController::class,'create']);

@@ -17,7 +17,11 @@ class FornecedorController extends Controller
     {
         return view('Fornecedor.Fornecedor');
     }
-
+    public function ListarPorNome(Request $request)
+    {
+        $Cliente = DB::table('fornecedor')->select('Nome', 'Id', 'Cnpj', 'Cpf', 'Razao')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->get();
+        return response()->json(array('Fornecedor' => $Cliente));
+    }
     public function Delete($id)
     {
         $cliente = Fornecedor::findOrfail($id);
