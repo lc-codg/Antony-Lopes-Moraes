@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\ContasaReceber;
 use App\Classes\ObterDados;
-use App\Classes\Operacoes;
+
 
 class ContasaReceberController extends Controller
 {
@@ -92,16 +92,30 @@ class ContasaReceberController extends Controller
     }
   }
 
-  public function Quitar($id, $tipo)
+  public function Quitar(Request $request)
   {
-    $Operacões = new Operacoes();
-    $Operacões->Quitar($id, $tipo);
+    $ContasaReceber = ContasaReceber::findOrFail($request->id);
+            $ContasaReceber->update([
+                'status' => 1,
+            ]);
+
+    return   "<script>
+    alert('Quitado com sucesso!');
+    location = '/ContasaReceber/Todos';
+  </script>";
   }
 
-  public function Estornar($id, $tipo)
+  public function Estornar(Request $request)
   {
-    $Operacões = new Operacoes();
-    $Operacões->Estornar($id, $tipo);
+    $ContasaReceber = ContasaReceber::findOrFail($request->id);
+            $ContasaReceber->update([
+                'status' => 0,
+            ]);
+
+   return "<script>
+    alert('Estornado com sucesso!');
+    location = '/ContasaReceber/Todos';
+  </script>";
   }
 
   public function show($id)
@@ -112,11 +126,11 @@ class ContasaReceberController extends Controller
     return view('/ContasaReceber.Ver', [
       'ContasaReceber' => $ContasaReceber, 'Empresas'
       => $ObterDados->ListaDeEmpresas(),
-      'Cliente' => $ObterDados->ListaDeClientes
+      'Cliente' => $ObterDados->ListaDeClientes(),
     ]);
   }
 
-  public function Listartodos()
+  public function Listartodos(Request $request)
   {
 
     $ContasaReceber = DB::table('contasa_recebers')->join(
@@ -124,8 +138,10 @@ class ContasaReceberController extends Controller
       'contasa_recebers.CodEmpresa',
       '=',
       'empresas.id'
-    )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')
-      ->paginate(20);
+    )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->
+    select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
+    whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->
+    where('status','=',0)->paginate(20);
 
     return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber]);
   }

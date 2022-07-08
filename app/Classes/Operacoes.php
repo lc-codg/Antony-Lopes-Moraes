@@ -9,15 +9,15 @@ class Operacoes
 {
     public function Quitar($id, $tipo)
     {
-        if ($tipo == 'Pagar') {
+        if ($tipo === 'Pagar') {
             $ContasaPagar = ContasaPagar::findOrFail($id);
             $ContasaPagar->update([
-                'status' => True
+                'status' => 1,
             ]);
-        } elseif ($tipo == 'Receber') {
+        } elseif ($tipo === 'Receber') {
             $ContasaReceber = ContasaReceber::findOrFail($id);
             $ContasaReceber->update([
-                'status' => True,
+                'status' => 1,
             ]);
 
             
@@ -25,15 +25,15 @@ class Operacoes
     }
     public function Estornar($id, $tipo)
     {
-        if ($tipo == 'Pagar') {
+        if ($tipo ==='Pagar') {
             $ContasaPagar = ContasaPagar::findOrFail($id);
             $ContasaPagar->update([
-                'status' => False
+                'status' => 0,
             ]);
-        } elseif ($tipo == 'Receber') {
+        } elseif ($tipo === 'Receber') {
             $ContasaReceber = ContasaReceber::findOrFail($id);
             $ContasaReceber->update([
-                'status' => False,
+                'status' => 0,
             ]);
         }
     }

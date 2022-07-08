@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link href="/css/app.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,27 @@
 </head>
 
 <body>
-    <div id='container' class='.container-fluid'>
+    <div id='container' class='.container-fluid' id='c2'>
+
+        <form method='get' action='/ContasBancarias/Todos/'>
+
+            <div class='form-row'>
+
+                <div class="form-group col-md-4">
+                    <label for="">Pesquisar Por Empresa</label>
+                    <input autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+                    <small id="helpId" class="form-text text-muted">Código, Nome ou Cnpj</small>
+                </div>
+                <div class="form-group col-md-4">
+                    <input name="Localizar" id="Bot" class="btn btn-dark" type="submit" value="Pesquisar">
+                </div>
+
+
+            </div>
+
+
+        </form>
+
 
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
@@ -22,6 +43,7 @@
                     <th scope="col">Operação</th>
                     <th scope="col">Tipo</th>
                     <th scope='col'>Empresa</th>
+                    <th scope='col'>Saldo</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
@@ -40,7 +62,8 @@
                     <td>{{ $row->Agencia}}</td>
                     <td>{{ $row->Operacao}}</td>
                     <td>{{ $row->Tipo}}</td>
-                    <td>{{ $row->CodEmpresa}}</td>
+                    <td>{{ $row->Razao}}</td>
+                    <td>{{ $row->Saldo}}</td>
 
                     <td>
 

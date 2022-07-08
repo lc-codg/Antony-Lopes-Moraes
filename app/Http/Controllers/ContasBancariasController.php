@@ -7,9 +7,26 @@ use App\Models\ContasBancarias;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Str;
+use App\Classes\ObterDados;
 
 class ContasBancariasController extends Controller
 {
+    public function money(Request $request)
+    {
+      $ContasBancarias = ContasBancarias::findOrFail($request->id);
+      $ContasBancarias->update([
+      'Saldo'=> ($ContasBancarias->Saldo) + ($request->Money), 
+      ]);
+
+      return true;
+    }
+    public function Retirada(Request $request)
+    {
+        $ContasBancarias = ContasBancarias::fincdOrFail($request->id);
+        $ContasBancarias->update([
+        'Saldo' => ($ContasBancarias->Saldo) - ($request->money),
+        ]);
+    }
 
     public function index()
     {
@@ -18,6 +35,26 @@ class ContasBancariasController extends Controller
 
         return view('ContasBancarias.ContasBancarias', ['Empresas' => $Dados]);
     }
+    public function show($id)
+    {
+        $Empresa = new EmpresaController;
+        $Dados = $Empresa->Listar();
+
+        $ContasBancarias = ContasBancarias::FindOrFail($id);
+        return View('ContasBancarias.Ver', ['ContasBancarias' => $ContasBancarias,'Empresas'=>$Dados]);
+    }
+
+    public function ListarTodos(Request $request)
+    {
+        $ContasBancarias = DB::table('contas_bancarias')->
+        join('empresas','empresas.id','=','contas_bancarias.CodEmpresa')->
+        select('contas_bancarias.id','contas_bancarias.Descricao','contas_bancarias.Banco','contas_bancarias.Agencia',
+        'contas_bancarias.Operacao','contas_bancarias.Tipo','empresas.Razao',
+        'contas_bancarias.Saldo')->where('empresas.Razao','LIKE','%'.$request->Nome.'%')->
+        orwhere('empresas.Cnpj','=',$request->Nome)->orwhere('empresas.id','=',$request->Nome)->paginate(20);
+        return View('ContasBancarias.Todos', ['ContasBancarias' => $ContasBancarias]);
+    }
+
 
     public function Salvar(Request $request)
     {
@@ -97,21 +134,7 @@ class ContasBancariasController extends Controller
         </script>";
 
     }
-    public function show($id)
-    {
-        $Empresa = new EmpresaController;
-        $Dados = $Empresa->Listar();
-
-        $ContasBancarias = ContasBancarias::FindOrFail($id);
-        return View('ContasBancarias.Ver', ['ContasBancarias' => $ContasBancarias,'Empresas'=>$Dados]);
-    }
-
-    public function ListarTodos()
-    {
-        $ContasBancarias = DB::table('contas_bancarias')->paginate(20);
-        return View('ContasBancarias.Todos', ['ContasBancarias' => $ContasBancarias]);
-    }
-
+   
     public function update(Request $request, $id)
     {
         $ContasBancarias = ContasBancarias::findOrFail($id);
@@ -162,7 +185,7 @@ class ContasBancariasController extends Controller
         $ContasBancarias->update(
             [
                 'Banco' => $request->Banco,
-                'Saldo' => str_replace(",",".",$request->Saldo),
+                'Saldo' => $request->Saldo,
                 'Agencia' => $request->Agencia,
                 'Tipo' => $request->Tipo,
                 'Conta' => $request->Conta,

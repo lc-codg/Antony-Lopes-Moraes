@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="/css/app.css" rel="stylesheet">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +10,28 @@
 </head>
 
 <body>
-    <div id='container' class='.container-fluid'>
+    <div class='.container-fluid ' id='c2'>
+
+        <form method='get' action='/ContasaPagar/Todos'>
+
+            <div class='form-row'>
+
+                <div class="form-group col-md-2">
+                    <label for="">Data Inicial</label>
+                    <input type="date" class="form-control" name="DataIni" id="" value="{{Date('Y-m-d')}}" aria-describedby="helpId" placeholder="">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="">Data Final</label>
+                    <input type="date" class="form-control" name="DataFim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                </div>
+
+            </div>
+        </form>
 
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
@@ -39,7 +61,12 @@
 
                     <td>{{ $row->id }}</td>
 
-                    <td>{{ $row->Descricao }}</td>
+                     @if ($row->status === 0)
+                    <td style='color:red;'>{{ $row->Descricao }}</td>
+                     @else
+                    <td style='color:blue;'>{{ $row->Descricao }}</td>
+                     @endif
+
                     <td>{{ $row->Barras }}</td>
                     <td>{{ $row->Razaoe}}</td>
                     <td>{{ $row->Razaof}}</td>
@@ -47,7 +74,7 @@
                     <td>{{ $row->Vencimento}}</td>
                     <td>{{ $row->Parcelas}}</td>
                     <td>{{ $row->Boleta}}</td>
-                    
+
 
                     <td>
 
@@ -63,24 +90,29 @@
                     </td>
 
                     <td>
-                        <form action="/ContasaPagar/Quitar/{{$row->id}},Pagar" method="get">
+                        <form action="/ContasaPagar/Quitar/" method="get">
+                            <input name='id' hidden value='{{$row->id}}'>
+                            <input namer='tipo' hidden value='Pagar'>
                             <input class="btn btn-primary" name="" type="submit" Value='Quitar'>
                         </form>
                     </td>
 
-                    <td>
-                        <form action="/ContasaPagar/Estornar/{{ $row->id }},Pagar" method="get">
-                            <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
-                        </form>
-                    </td>
+               
+
 
 
 
 
 
                 </tr>
+
                 @endforeach
-                <script></script>
+        </table>
+        </tbody>
+
+
+
+    </div>
 
 
 

@@ -74,7 +74,7 @@
             </div>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
-                Contaas Bancárias
+                Contas Bancárias
               </a>
               <a class="dropdown-item" href="/ContasBancarias/Novo">Cadastrar Conta Bancárias</a>
               <a class="dropdown-item" href="/ContasBancarias/Todos">Listar Conta Bancárias</a>
@@ -89,10 +89,10 @@
 
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
-                Balanço
+                Receitas
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Lançar Balanço</a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Balanço</a>
+              <a class="dropdown-item" href="/Receitas/Novo">Lançar Receitas</a>
+              <a class="dropdown-item" href="/Receitas/Todos">Listar Receitas</a>
             </div>
 
           </div>

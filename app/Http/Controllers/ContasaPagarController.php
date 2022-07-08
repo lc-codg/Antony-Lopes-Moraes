@@ -7,22 +7,39 @@ use App\Models\ContasaPagar;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Classes\ObterDados;
-use App\Classes\Operacoes;
+
 
 
 
 class ContasaPagarController extends Controller
 {
 
-  public function Quitar($id,$tipo){
-    $Operacões = new Operacoes();
-    $Operacões->Quitar($id,$tipo);
+  public function Quitar(Request $request)
+  {
+    $ContasaPagar = ContasaPagar::findOrFail($request->id);
+    $ContasaPagar->update([
+      'status' => 1,
+    ]);
+
+    return   "<script>
+    alert('Quitado com sucesso!');
+    location = '/ContasaPagar/Todos';
+  </script>";
   }
 
-  public function Estornar($id,$tipo){
-    $Operacões = new Operacoes();
-    $Operacões->Estornar($id,$tipo);
+  public function Estornar(Request $request)
+  {
+    $ContasaPagar = ContasaPagar::findOrFail($request->id);
+    $ContasaPagar->update([
+      'status' => 0,
+    ]);
+
+    return "<script>
+    alert('Estornado com sucesso!');
+    location = '/ContasaPagar/Todos';
+  </script>";
   }
+
 
   public function index()
   {
@@ -108,14 +125,14 @@ class ContasaPagarController extends Controller
 
   public function show($id)
   {
-     $ObterDados = new ObterDados();
+    $ObterDados = new ObterDados();
 
     $ContasaPagar = ContasaPagar::findOrFail($id);
     return view('/ContasaPagar.Ver', ['ContasaPagar' => $ContasaPagar, 'Empresas'
     =>  $ObterDados->ListaDeEmpresas(), 'Fornecedor' =>  $ObterDados->ListaDeFornecedores()]);
   }
 
-  public function Listartodos()
+  public function Listartodos(Request $request)
   {
 
     $ContasaPagar = DB::table('contasa_pagars')->join(
@@ -123,10 +140,9 @@ class ContasaPagarController extends Controller
       'contasa_pagars.CodEmpresa',
       '=',
       'empresas.id'
-    )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')
-      ->paginate(20);
+    )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->orwhere('status', '=', '0')->paginate(20);
 
-    return view('/ContasaPagar.Todos', ['ContasaPagar' => $ContasaPagar]);
+    return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar]);
   }
 
   public function update(Request $request, $id)

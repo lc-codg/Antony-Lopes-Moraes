@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="/css/app.css" rel="stylesheet">
 
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,26 @@
 
 <body>
     <div id='container' class='.container-fluid'>
+        <form method='get' action='/ContasaReceber/Todos'>
 
+            <div class='form-row'>
+
+                <div class="form-group col-md-2">
+                    <label for="">Data Inicial</label>
+                    <input type="date" class="form-control" name="DataIni" id="" value="{{Date('Y-m-d')}}" aria-describedby="helpId" placeholder="">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="">Data Final</label>
+                    <input type="date" class="form-control" name="DataFim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                </div>
+
+            </div>
+        </form>
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
                 <tr>
@@ -47,7 +67,7 @@
                     <td>{{ $row->Vencimento}}</td>
                     <td>{{ $row->Parcelas}}</td>
                     <td>{{ $row->Boleta}}</td>
-                    
+
 
                     <td>
 
@@ -63,16 +83,16 @@
                     </td>
 
                     <td>
-                        <form action="/ContasaReceber/Quitar/{{$row->id}},Receber" method="get">
+                        <form action="/ContasaReceber/Quitar/" method="get">
+                            <input name='id' hidden value='{{$row->id}}'>
+                            <input namer='tipo' hidden value='Receber'>
                             <input class="btn btn-primary" name="" type="submit" Value='Quitar'>
                         </form>
                     </td>
 
-                    <td>
-                        <form action="/ContasaReceber/Estornar/{{ $row->id }},Receber" method="get">
-                            <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
-                        </form>
-                    </td>
+                 
+
+
 
 
 

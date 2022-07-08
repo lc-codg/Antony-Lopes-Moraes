@@ -15,7 +15,7 @@
 
 <body>
 
-    <form method='get' action='/compras/Todos'>
+    <form method='get' action='/Compras/Todos'>
 
         <div class='form-row'>
 

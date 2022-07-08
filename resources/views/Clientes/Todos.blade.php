@@ -16,10 +16,17 @@
 <body>
     <form method='get' action='/Clientes/Todos'>
 
-        <div class="form-group">
-            <label for="">Pesquisa Cliente</label>
-            <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
-            <small id="helpId" class="form-text text-muted">Aperte a tecla ENTER para realizar a pesquisa por Cnpj,Cpf,Nome ou Razão Social</small>
+        <div class='form-row'>
+
+            <div class="form-group col-md-8">
+                <label for="">Pesquisa Cliente</label>
+                <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+                <small id="helpId" class="form-text text-muted">Aperte a tecla ENTER para realizar a pesquisa por Cnpj,Cpf,Nome ou Razão Social</small>
+            </div>
+
+            <div class="form-group col-md-4">
+                <input name="Localizar" id="Bot" class="btn btn-dark" type="submit" value="Pesquisar">
+            </div>
         </div>
 
     </form>

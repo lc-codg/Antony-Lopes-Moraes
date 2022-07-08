@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="{{ URL::asset('css/app.css') }}" rel="stylesheet" type="text/css">
+<link href="/css/app.css" rel="stylesheet">
 
 <head>
     <meta charset="UTF-8">
@@ -58,10 +58,7 @@
                         <input type="number" class="form-control" name="Tipo" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
-                    <div class="form-group col md-4">
-                        <label for="">Saldo</label>
-                        <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="Saldo" id="valor" aria-describedby="helpId" placeholder="">
-                    </div>
+                    
                 </div>
 
                 <div class='form-row'>
