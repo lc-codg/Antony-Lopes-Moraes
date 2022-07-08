@@ -13,9 +13,11 @@
 </head>
 
 <body>
-    <br>
-    <div id='container' class='.container-fluid'>
 
+
+    <div id='container' class='.container-fluid'>
+        <h5>Entrada de Notas</h5>
+        <br>
 
         <div class='form-row '>
 
@@ -42,7 +44,7 @@
 
 
         </div>
-        <div class="form-group col-md-6" id='resultado_cliente'>
+        <div class="form-group col-md-6" id='resultado_Fornecedor'>
 
         </div>
 
@@ -63,8 +65,8 @@
 
 
     <div id='container' class='.container-fluid'>
-        @php if(($Cliente['Razao'] <>'')){ @endphp
-        <td><button type="button" id="Cliente" class="btn btn-dark btn-xs">Cliente: {{$Cliente['Razao']}}</button></td>
+        @php if(($Fornecedor['Razao'] <>'')){ @endphp
+        <td> <button type="button" id="Fornecedor" class="btn btn-dark btn-xs">Fornecedor: {{$Fornecedor['Razao']}}</button></td>
         @php
         }
         @endphp
@@ -83,7 +85,7 @@
             <tbody>
                 <div id='content_retorno'>
                     @php $Total =0; @endphp
-                    @foreach ($Cart as $row)
+                    @foreach ($CartCompras as $row)
                     <tr>
                         <td>{{ $row['Barras']}}</td>
                         <td>{{ $row['Descricao'] }}</td>
@@ -102,8 +104,8 @@
                     </tr>
 
                     @endforeach
-                    <td> <button onclick="location.href = '/Pedidos/LimparCarrinho';" id="Limpar" class="btn btn-danger">Cancelar</button></td>
-                    <td> <button onclick="location.href = '/Pedidos/Salvar';" id="Finalizar" class="btn btn-primary">Finalizar- F2</button></td>
+                    <td> <button onclick="location.href = '/Compras/LimparCarrinho';" id="Limpar" class="btn btn-danger">Cancelar</button></td>
+                    <td> <button onclick="location.href = '/Compras/Salvar';" id="Finalizar" class="btn btn-primary">Finalizar- F2</button></td>
                     <td></td>
 
                     <th class='Total' scope="col">Total</th>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Fornecedor;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class FornecedorController extends Controller
 {
@@ -17,10 +18,21 @@ class FornecedorController extends Controller
     {
         return view('Fornecedor.Fornecedor');
     }
+    public function Inserir(Request $request)
+    {
+        $cliente = Fornecedor::findorFail($request->id);
+
+        Session::put('Fornecedor', [
+            'Razao' => ($cliente->Nome == '') ? $cliente->Razao : $cliente->Nome,
+            'Cnpj' => ($cliente->Cpf == '') ? $cliente->Cnpj : $cliente->Cpf,
+            'Id' => $cliente->id,
+        ]);
+        return Session::get('Fornecedor');
+    }
     public function ListarPorNome(Request $request)
     {
-        $Cliente = DB::table('fornecedor')->select('Nome', 'Id', 'Cnpj', 'Cpf', 'Razao')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->get();
-        return response()->json(array('Fornecedor' => $Cliente));
+        $Fornecedor = DB::table('fornecedors')->select('Nome', 'Id', 'Cnpj', 'Cpf', 'Razao')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->get();
+        return response()->json(array('Fornecedor' => $Fornecedor));
     }
     public function Delete($id)
     {

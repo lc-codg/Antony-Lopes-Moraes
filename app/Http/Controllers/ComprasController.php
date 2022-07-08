@@ -7,7 +7,7 @@ use App\models\Compras;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Classes\ObterDados;
-use App\Http\Controllers\ItensController;
+use App\Http\Controllers\ItensCompraController;
 use Exception;
 
 class ComprasController extends Controller
@@ -55,7 +55,7 @@ class ComprasController extends Controller
 
         $Compras = DB::table('Compras')->select(
             'Compras.id',
-            'Compras.CodigoDoFornecedor',
+            'Compras.CodigoDocliente',
             'Compras.Total',
             'Compras.TotalDesconto',
             'Compras.TotalAcréscimo',
@@ -65,7 +65,7 @@ class ComprasController extends Controller
             'empresas.Razao',
 
         )->
-        join('Fornecedors', 'Compras.CodigoDoFornecedor', '=', 'Fornecedors.id')->
+        join('Fornecedors', 'Compras.CodigoDoCliente', '=', 'Fornecedors.id')->
         join('empresas', 'Compras.CodEmpresa','=','empresas.id')->
         where('empresas.Razao', 'LIKE', '%'.$request->Nome.'%')->
         orwhere('Fornecedors.Nome','LIKE','%'.$request->Nome.'%')->
@@ -98,7 +98,7 @@ class ComprasController extends Controller
     {
         $Fornecedor = session::get('Fornecedor');
         $Empresa = session::get('Empresa');
-        $Itens = new ItensController;
+        $Itens = new ItensCompraController;
         $Total = 0;
 
         if ($request->session()->has('CartCompras')) {
@@ -113,7 +113,7 @@ class ComprasController extends Controller
 
         if ($this->VerificaDados($Fornecedor, $Empresa, $Produtos)) {
             $Compras = Compras::create([
-                'CodigoDoFornecedor' => $Fornecedor['Id'],
+                'CodigoDoCliente' => $Fornecedor['Id'],
                 'Total' => $Total,
                 'TotaldosProdutos' => $Total,
                 'DtPedido' => date('Y-m-d'),

@@ -86,7 +86,7 @@
               <a class="dropdown-item" href="/Despesas/Novo">Cadastrar de Despesas </a>
               <a class="dropdown-item" href="/Despesas/Todos">Listar Despesas </a>
             </div>
-           
+
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Balanço
@@ -105,8 +105,8 @@
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Notas de Compra
               </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Notas de Compra </a>
-              <a class="dropdown-item" href="/Clientes/Todos">Listar Notas de Compra </a>
+              <a class="dropdown-item" href="/Compras/Carrinho">Cadastrar Notas de Compra </a>
+              <a class="dropdown-item" href="/Compras/Todos">Listar Notas de Compra </a>
             </div>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">

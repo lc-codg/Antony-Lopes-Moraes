@@ -32,7 +32,7 @@ $(function() {
                 $('#Finalizar').focus();
             case 13:
                 {
-                    $('#resultado_cliente').html("");
+                    $('#resultado_Fornecedor').html("");
                     if (buscacliente.length > 0)
                         $.ajax({
                             type: 'get',
@@ -42,9 +42,9 @@ $(function() {
 
                             success: function(retorno) {
 
-                                if (retorno.Clientes.length > 0) {
+                                if (retorno.Fornecedor.length > 0) {
 
-                                    $.each(retorno.Clientes, function(Id, val) {
+                                    $.each(retorno.Fornecedor, function(Id, val) {
                                         if (val.Nome === '') {
                                             Nome = val.Razao;
                                         } else {
@@ -55,12 +55,13 @@ $(function() {
                                         } else {
                                             Cpf = val.Cnpj;
                                         }
-                                        $('#resultado_cliente').append(' <a style ="color:red;" href="#"" id=' + val.Id + '>' + Nome + ' | CNPJ: ' + Cpf + '</a><p></p>');
+
+                                        $('#resultado_Fornecedor').append(' <a style ="color:red;" href="#"" id=' + val.Id + '>' + Nome + ' | CNPJ: ' + Cpf + '</a><p></p>');
 
                                     });
 
                                 } else {
-                                    $('#resultado_cliente').html("<p>Não há Dados para esta consulta.</p>");
+                                    $('#resultado_Fornecedor').html("<p>Não há Dados para esta consulta.</p>");
                                 }
                             }
                         });
@@ -136,14 +137,14 @@ $(function() {
 });
 
 
-$('body').on('click', '#resultado_cliente a', function() {
+$('body').on('click', '#resultado_Fornecedor a', function() {
 
     var dadosCliente = $(this).attr('id');
     var splitdados = dadosCliente.split(':');
 
     $.ajax({
         method: 'get',
-        url: '/Clientes/Inserir',
+        url: '/Fornecedor/Inserir',
         data: { id: splitdados[0] },
         datetype: 'json',
         success: function(retorno) {

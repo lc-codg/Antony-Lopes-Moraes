@@ -11,6 +11,8 @@ use App\Http\Controllers\ContasBancariasController;
 use App\Http\Controllers\ContasaPagarController;
 use App\Http\Controllers\ContasaReceberController;
 use App\Http\Controllers\DespesasController;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\ItensCompraController;
 use App\Models\ContasaReceber;
 
 /*
@@ -58,13 +60,17 @@ Route::get('/Itens/Delete/{Id}', [ItensController::class, 'Delete']);
 Route::get('/Itens/Ver/{id}', [ItensController::class, 'ListarPorId']);
 Route::get('/Itens/Todos/{id}', [ItensController::class, 'ListarTodos']);
 
+Route::get('/ItensCompra/Delete/{Id}', [ItensCompraController::class, 'Delete']);
+Route::get('/ItensCompra/Ver/{id}', [ItensCompraController::class, 'ListarPorId']);
+Route::get('/ItensCompra/Todos/{id}', [ItensCompraController::class, 'ListarTodos']);
+
 Route::get('/Fornecedor/Novo', [FornecedorController::class, 'Cadastrar']);
 Route::post('/Fornecedor/Salvar', [FornecedorController::class, 'Salvar']);
 Route::get('/Fornecedor/Editar/{Id}', [FornecedorController::class, 'Editar']);
 Route::get('/Fornecedor/Delete/{Id}', [FornecedorController::class, 'Delete']);
 Route::get('/Fornecedor/Ver/{Id}', [FornecedorController::class, 'ListarPorId']);
 Route::get('/Fornecedor/Todos', [FornecedorController::class, 'ListarTodos']);
-Route::post('/Fornecedor/Inserir', [FornecedorController::class, 'Inserir']);
+Route::get('/Fornecedor/Inserir', [FornecedorController::class, 'Inserir']);
 Route::get('/Fornecedor/PesquisaNome',[FornecedorController::class,'ListarPorNome']);
 
 Route::get('/Empresa/Novo', [EmpresaController::class, 'Cadastrar']);

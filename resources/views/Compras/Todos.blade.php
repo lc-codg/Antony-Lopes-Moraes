@@ -15,7 +15,7 @@
 
 <body>
 
-    <form method='get' action='/Pedidos/Todos'>
+    <form method='get' action='/compras/Todos'>
 
         <div class='form-row'>
 
@@ -60,7 +60,7 @@
 
 
 
-                @foreach ($Pedidos as $row)
+                @foreach ($Compras as $row)
 
                 <td>{{ $row->id }}</td>
                 <td>{{ $row->Razao }}</td>
@@ -74,12 +74,12 @@
 
                 <td>
 
-                    <form action="/Itens/Todos/{{ $row->id }}" method="get">
+                    <form action="/ItensCompra/Todos/{{ $row->id }}" method="get">
                         <input class="btn btn-primary" name="" type="submit" Value='Itens'>
                     </form>
                 </td>
                 <td>
-                    <form action="/Pedidos/Delete/{{$row->id}}" method="get">
+                    <form action="/Compras/Delete/{{$row->id}}" method="get">
 
                         <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
                     </form>
@@ -90,7 +90,7 @@
 
             </tr>
             @endforeach
-            {{$Pedidos->links()}}
+            {{$Compras->links()}}
 
 
 

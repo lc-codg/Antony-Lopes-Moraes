@@ -26,8 +26,8 @@ class ItensCompraController extends Controller
     }
     public function ListarTodos($id)
     {
-        $itens = DB::table('itens_compras')->where('NumeroDoPedido', '=', $id)->paginate(20);
-        return view('ItensCompras.Todos', ['itens' => $itens]);
+        $itensCompra = DB::table('itens_compras')->where('NumeroDoPedido', '=', $id)->paginate(20);
+        return view('ItensCompra.Todos', ['itensCompra' => $itensCompra]);
     }
     public function Salvar($Produtos, $Id)
     {
