@@ -141,7 +141,7 @@ class ContasaReceberController extends Controller
     )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->
     select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
     whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->
-    where('status','=',0)->paginate(20);
+    paginate(20);
 
     return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber]);
   }

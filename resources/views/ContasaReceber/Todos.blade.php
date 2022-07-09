@@ -47,7 +47,7 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +59,11 @@
 
                     <td>{{ $row->id }}</td>
 
-                    <td>{{ $row->Descricao }}</td>
+                    @if ($row->status === 0)
+                    <td style='color:red;'>{{ $row->Descricao }}</td>
+                     @else
+                    <td style='color:blue;'>{{ $row->Descricao }}</td>
+                     @endif
                     <td>{{ $row->Barras }}</td>
                     <td>{{ $row->Razaoe}}</td>
                     <td>{{ $row->Razaof}}</td>
@@ -90,7 +94,7 @@
                         </form>
                     </td>
 
-                 
+
 
 
 

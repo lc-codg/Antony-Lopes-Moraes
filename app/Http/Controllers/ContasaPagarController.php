@@ -140,7 +140,7 @@ class ContasaPagarController extends Controller
       'contasa_pagars.CodEmpresa',
       '=',
       'empresas.id'
-    )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->orwhere('status', '=', '0')->paginate(20);
+    )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
     return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar]);
   }

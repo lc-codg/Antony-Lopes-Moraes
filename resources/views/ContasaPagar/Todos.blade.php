@@ -49,7 +49,7 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -97,7 +97,7 @@
                         </form>
                     </td>
 
-               
+
 
 
 
