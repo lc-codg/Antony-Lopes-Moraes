@@ -18,7 +18,7 @@
             <div class='form-row'>
 
                 @csrf
-                <div class="form-group md col-6">
+                <div class="form-group md col-4">
                     <label for="">Empresa</label>
                     <select class="form-control " name="CodEmpresa" id="">
                         @foreach ($Empresas as $row)
@@ -27,11 +27,19 @@
                     </select>
                 </div>
 
-                <div class="form-group md col-6">
+                <div class="form-group md col-4">
                     <label for="">Fornecedor</label>
                     <select class="form-control" name="CodFornecedor" id="">
                         @foreach ($Fornecedor as $RowF)
                         <option selected>{{$RowF->id}}- {{$RowF->Nome}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group md col-4">
+                    <label for="">Conta Bancária</label>
+                    <select class="form-control" name="Conta" id="">
+                        @foreach ($Contas as $C)
+                        <option selected>{{$C->id}}- {{$C->Descricao}}</option>
                         @endforeach
                     </select>
                 </div>

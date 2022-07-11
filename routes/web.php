@@ -97,7 +97,7 @@ Route::get('/ContasaPagar/Ver/{id}', [ContasaPagarController::class, 'show']);
 Route::get('/ContasaPagar/Editar/{id}', [ContasaPagarController::class, 'update']);
 Route::get('/ContasaPagar/Delete/{id}', [Contasapagarcontroller::class, 'destroy']);
 Route::get('/ContasaPagar/Quitar/', [ContasaPagarController::class, 'Quitar']);
-Route::get('/ContasaPagar/Estornar/', [ContasaPagarController::class, 'Estornar']);
+Route::get('/ContasaPagar/Estornar', [ContasaPagarController::class, 'Estornar']);
 
 Route::get('/ContasaReceber/Novo', [ContasaReceberController::class, 'index']);
 Route::post('/ContasaReceber/Salvar', [ContasaRecebercontroller::class, 'create']);

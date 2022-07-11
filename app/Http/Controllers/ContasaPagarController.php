@@ -7,6 +7,7 @@ use App\Models\ContasaPagar;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Classes\ObterDados;
+use App\Http\Controllers\ContasBancariasController;
 
 
 
@@ -15,11 +16,15 @@ class ContasaPagarController extends Controller
 {
 
   public function Quitar(Request $request)
-  {
+  { 
     $ContasaPagar = ContasaPagar::findOrFail($request->id);
+    $Banco = new ContasBancariasController();
+
+    if($Banco->Saque(Str::substr($request->conta,0,1),$request->Valor))
     $ContasaPagar->update([
       'status' => 1,
     ]);
+    
 
     return   "<script>
     alert('Quitado com sucesso!');
@@ -29,10 +34,13 @@ class ContasaPagarController extends Controller
 
   public function Estornar(Request $request)
   {
+    $Banco = new ContasBancariasController();
+    if( $Banco->Deposito(Str::substr($request->conta,0,1),$request->Valor))
     $ContasaPagar = ContasaPagar::findOrFail($request->id);
     $ContasaPagar->update([
       'status' => 0,
     ]);
+   
 
     return "<script>
     alert('Estornado com sucesso!');
@@ -134,6 +142,8 @@ class ContasaPagarController extends Controller
 
   public function Listartodos(Request $request)
   {
+    $Obter = new ObterDados();
+    $ContasBancarias = $Obter->ListarContasBancarias();
 
     $ContasaPagar = DB::table('contasa_pagars')->join(
       'empresas',
@@ -142,7 +152,7 @@ class ContasaPagarController extends Controller
       'empresas.id'
     )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
-    return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar]);
+    return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar, 'Contas' => $ContasBancarias]);
   }
 
   public function update(Request $request, $id)

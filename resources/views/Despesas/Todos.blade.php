@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="/css/app.css" rel="stylesheet">
+    
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +11,8 @@
 </head>
 
 <body>
-    <div id='container' class='.container-fluid'>
-
+    <div id='c2' class='.container-fluid'>
+<h5>Despesas</h5>
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
                 <tr>
@@ -70,6 +72,7 @@
 
 
 </body>
+
 {{ $Despesas->links() }}
 
 @include('footer')

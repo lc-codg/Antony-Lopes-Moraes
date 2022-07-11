@@ -5,6 +5,7 @@ namespace App\Classes;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ContasBancariasController;
 
 class ObterDados
 {
@@ -22,5 +23,9 @@ class ObterDados
     {
         $clientes = new ClientesController();
         return $clientes->Listar();
+    }
+    public function ListarContasBancarias(){
+        $Contas = new ContasBancariasController();
+        return $Contas->Listar();
     }
 }

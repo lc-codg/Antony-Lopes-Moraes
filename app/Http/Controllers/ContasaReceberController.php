@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\ContasaReceber;
 use App\Classes\ObterDados;
+use App\Http\Controllers\ContasBancariasController;
 
 
 class ContasaReceberController extends Controller
@@ -94,10 +95,12 @@ class ContasaReceberController extends Controller
 
   public function Quitar(Request $request)
   {
-    $ContasaReceber = ContasaReceber::findOrFail($request->id);
-            $ContasaReceber->update([
-                'status' => 1,
-            ]);
+    $Banco = new ContasBancariasController();
+    if ($Banco->Deposito($request->conta, $request->Valor))
+      $ContasaReceber = ContasaReceber::findOrFail($request->id);
+    $ContasaReceber->update([
+      'status' => 1,
+    ]);
 
     return   "<script>
     alert('Quitado com sucesso!');
@@ -107,12 +110,14 @@ class ContasaReceberController extends Controller
 
   public function Estornar(Request $request)
   {
-    $ContasaReceber = ContasaReceber::findOrFail($request->id);
-            $ContasaReceber->update([
-                'status' => 0,
-            ]);
+    $Banco = new ContasBancariasController();
+    if ($Banco->Saque($request->conta, $request->Valor))
+      $ContasaReceber = ContasaReceber::findOrFail($request->id);
+    $ContasaReceber->update([
+      'status' => 0,
+    ]);
 
-   return "<script>
+    return "<script>
     alert('Estornado com sucesso!');
     location = '/ContasaReceber/Todos';
   </script>";
@@ -132,18 +137,16 @@ class ContasaReceberController extends Controller
 
   public function Listartodos(Request $request)
   {
-
+    $Contas = new ContasBancariasController();
+    $Banco = $Contas->Listar(); 
     $ContasaReceber = DB::table('contasa_recebers')->join(
       'empresas',
       'contasa_recebers.CodEmpresa',
       '=',
       'empresas.id'
-    )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->
-    select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
-    whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->
-    paginate(20);
+    )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
-    return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber]);
+    return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber,'Contas'=>$Banco]);
   }
 
   public function update(Request $request, $id)

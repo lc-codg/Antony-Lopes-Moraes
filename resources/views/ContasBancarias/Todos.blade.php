@@ -11,7 +11,7 @@
 
 <body>
     <div id='container' class='.container-fluid' id='c2'>
-
+<h5>Contas Bancárias</h5>
         <form method='get' action='/ContasBancarias/Todos/'>
 
             <div class='form-row'>
@@ -63,7 +63,7 @@
                     <td>{{ $row->Operacao}}</td>
                     <td>{{ $row->Tipo}}</td>
                     <td>{{ $row->Razao}}</td>
-                    <td>{{ $row->Saldo}}</td>
+                    <td class='price'>R${{ $row->Saldo}}</td>
 
                     <td>
 

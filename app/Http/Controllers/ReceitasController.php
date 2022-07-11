@@ -7,22 +7,24 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Receitas;
 use App\Classes\ObterDados;
-
+use App\Http\Controllers\ContasBancariasController;
 
 class ReceitasController extends Controller
 {public function index()
     {
         $ObterDados = new ObterDados();
-
         return view('Receitas.Receitas', [
             'Empresas'
             =>  $ObterDados->ListaDeEmpresas(),
-            'Cliente' =>  $ObterDados->ListaDeClientes()
+            'Cliente' =>  $ObterDados->ListaDeClientes(),
+            'Contas'=>$ObterDados->ListarContasBancarias(),
         ]);
     }
 
     public function create(Request $request)
     {
+        $Contas = new ContasBancariasController();
+        
         if (empty($request->Descricao)) {
             echo "<script>
               alert('Preencha a Descrição');
@@ -73,6 +75,7 @@ class ReceitasController extends Controller
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
             ]);
+            $Contas->Deposito(Str::substr($request->Conta,0,1),$request->Total);
 
             return
                 "<script>
@@ -85,6 +88,7 @@ class ReceitasController extends Controller
     public function show($id)
     {
         $ObterDados = new ObterDados();
+        $Conta = new ContasBancariasController();
 
         $Receitas = Receitas::findOrFail($id);
 
@@ -94,18 +98,19 @@ class ReceitasController extends Controller
             =>  $ObterDados->ListaDeEmpresas(),
             'Cliente' =>  $ObterDados->ListaDeClientes()
         ]);
+
+        
     }
 
-    public function Listartodos()
+    public function Listartodos(Request $request)
     {
-
         $Receitas = DB::table('Receitas')->join(
             'empresas',
             'Receitas.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('clientes', 'Receitas.CodCliente', '=', 'clientes.id')->select('Receitas.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')
-            ->paginate(20);
+        )->join('clientes', 'Receitas.CodCliente', '=', 'clientes.id')->select('Receitas.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
+          wherebetween('DataDaEntrada',[$request->DataIni,$request->DataFim]) ->paginate(20);
 
         return view('/Receitas.Todos', ['Receitas' => $Receitas]);
     }
@@ -175,6 +180,7 @@ class ReceitasController extends Controller
 
     public function destroy($id)
     {
+        
         $Receitas = Receitas::findOrFail($id);
         $Receitas->delete();
 

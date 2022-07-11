@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Despesas;
 use App\Classes\ObterDados;
+use App\Http\Controllers\ContasBancariasController;
 
 class DespesasController extends Controller
 {
@@ -17,12 +18,14 @@ class DespesasController extends Controller
         return view('Despesas.Despesas', [
             'Empresas'
             =>  $ObterDados->ListaDeEmpresas(),
-            'Fornecedor' =>  $ObterDados->ListaDeFornecedores()
+            'Fornecedor' =>  $ObterDados->ListaDeFornecedores(),
+            'Contas' => $ObterDados->ListarContasBancarias(),
         ]);
     }
 
     public function create(Request $request)
     {
+        $Contas = new ContasBancariasController();
         if (empty($request->Descricao)) {
             echo "<script>
               alert('Preencha a Descrição');
@@ -83,7 +86,7 @@ class DespesasController extends Controller
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1)
             ]);
-
+            $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
             return
                 "<script>
                 alert('Salvo com sucesso!');

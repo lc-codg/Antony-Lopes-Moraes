@@ -11,8 +11,9 @@
 
 <body>
     <div id='c2' class='.container-fluid'>
+        <h5>Receitas</h5>
 
-        <form method='get' action='/ContasaReceber/Todos'>
+        <form method='get' action='/Receitas/Todos'>
 
             <div class='form-row'>
 
@@ -37,7 +38,7 @@
             <thead class="thead-dark">
                 <tr>
 
-                    <th scope="col">Cod.Despesa</th>
+                    <th scope="col">Cod.Receita</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Fornecedor</th>
