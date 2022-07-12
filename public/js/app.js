@@ -116,12 +116,17 @@ $(function() {
         var splitdados = dadosProduto.split(':');
 
         quantidade = prompt('Digite a quantidade: ');
+        peso = prompt('Digite o Peso: ');
+        preco = prompt('Digite o Preço: ');
 
         if ((!isNaN(quantidade)) && (quantidade > 0)) {
+            if ((!isNaN(peso)) && (peso > 0)) 
+            if ((!isNaN(preco)) && (preco > 0)) 
+
             $.ajax({
                 method: 'get',
                 url: '/Produtos/Inserir',
-                data: { id: splitdados[0], 'Quantidade': quantidade },
+                data: { id: splitdados[0], 'Quantidade': quantidade,'Preco':Preco,'Peso':Peso },
                 datetype: 'json',
                 success: function(retorno) {
                     window.location.href = '/Pedidos/Carrinho';

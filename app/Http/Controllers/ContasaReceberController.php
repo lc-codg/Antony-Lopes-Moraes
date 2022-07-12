@@ -12,6 +12,7 @@ use App\Http\Controllers\ContasBancariasController;
 
 class ContasaReceberController extends Controller
 {
+
   public function index()
   {
     $ObterDados = new ObterDados;
@@ -20,78 +21,126 @@ class ContasaReceberController extends Controller
       'Empresas' => $ObterDados->ListaDeEmpresas(), 'Cliente' => $ObterDados->ListaDeClientes()
     ]);
   }
-
-  public function create(Request $request)
+  public function Verificar($Descricao, $Vencimento, $Dataemissao, $Total, $Datarecebimento, $CodEmpresa)
   {
-    if (empty($request->Descricao)) {
+    if (empty($Descricao)) {
       echo "<script>
                 alert('Preencha a Descrição');
                 javascript:history.back();
               </script>";
       exit;
     }
-    if (empty($request->Vencimento)) {
+    if (empty($Vencimento)) {
       echo "<script>
                 alert('Preencha o vencimento');
                 javascript:history.back();
               </script>";
       exit;
     }
-    if (empty($request->Dataemissao)) {
+    if (empty($Dataemissao)) {
       echo "<script>
                 alert('Preencha a Data da emissão');
                 javascript:history.back();
               </script>";
       exit;
     }
-    if (empty($request->Total)) {
+    if (empty($Total)) {
       echo "<script>
-                alert('Preencha a Total');
+                alert('Preencha o Total');
                 javascript:history.back();
               </script>";
       exit;
     }
-    if (empty($request->Datarecebimento)) {
+    if (empty($Datarecebimento)) {
       echo "<script>
                 alert('Preencha a Data do recebimento');
                 javascript:history.back();
               </script>";
       exit;
     }
-    if (empty($request->CodEmpresa)) {
+    if (empty($CodEmpresa)) {
       echo "<script>
                 alert('Preencha a Descrição');
                 javascript:history.back();
               </script>";
       exit;
     } else {
-      ContasaReceber::create([
-        'Barras' => $request->Barras,
-        'Descricao' => $request->Descricao,
-        'CodCliente' => Str::substr($request->CodCliente, 0, 1),
-        'Total' => Str_replace(",", ".", $request->Total),
-        'TotalDesconto' => Str_replace(",", ".", $request->TotalDesconto),
-        'TotalAcréscimo' => Str_replace(",", ".", $request->TotalAcrescimo),
-        'Vencimento' => $request->Vencimento,
-        'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
-        'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
-        'Parcelas' => $request->Parcelas,
-        'Dataemissao' => $request->Dataemissao,
-        'Datarecebimento' => $request->Datarecebimento,
-        'Boleta' => $request->boleta,
-        'NotaFiscal' => $request->NotaFiscal,
-        'Serie' => $request->Serie,
-        'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-        'status' => isset($request->status) ? false : false,
-      ]);
-
-      return
-        "<script>
-                  alert('Salvo com sucesso!');
-                  location = '/ContasaReceber/Todos';
-                </script>";
+      return true;
     }
   }
+
+  public function Salvar(
+    $Barras,
+    $Descricao,
+    $CodCliente,
+    $Total,
+    $TotalDesconto,
+    $TotalAcrescimo,
+    $Vencimento,
+    $CodGrupo,
+    $SubGrupo,
+    $Parcelas,
+    $Dataemissao,
+    $Datarecebimento,
+    $boleta,
+    $NotaFiscal,
+    $Serie,
+    $CodEmpresa,
+    $status,
+  ) {
+    ContasaReceber::create([
+      'Barras' => $Barras,
+      'Descricao' => $Descricao,
+      'CodCliente' => $CodCliente,
+      'Total' => $Total,
+      'TotalDesconto' =>$TotalDesconto,
+      'TotalAcréscimo' => $TotalAcrescimo,
+      'Vencimento' => $Vencimento,
+      'CodGrupo' => $CodGrupo,
+      'CodSubGrupo' => $SubGrupo,
+      'Parcelas' => $Parcelas,
+      'Dataemissao' => $Dataemissao,
+      'Datarecebimento' => $Datarecebimento,
+      'Boleta' => $boleta,
+      'NotaFiscal' => $NotaFiscal,
+      'Serie' => $Serie,
+      'CodEmpresa' => $CodEmpresa,
+      'status' => $status,
+    ]);
+  }
+  public function create(Request $request)
+  {
+
+    if ($this->Verificar($request->Descricao, $request->Vencimento, $request->Dataemissao, $request->Total, $request->Datarecebimento, $request->CodEmpresa))
+
+      $this->Salvar(
+        $request->Barras,
+        $request->Descricao,
+        Str::substr($request->CodCliente, 0, 1),
+        Str_replace(",", ".", $request->Total),
+        Str_replace(",", ".", $request->TotalDesconto),
+        Str_replace(",", ".", $request->TotalAcrescimo),
+        $request->Vencimento,
+        Str::substr($request->CodGrupo, 0, 1),
+        Str::substr($request->SubGrupo, 0, 1),
+        $request->Parcelas,
+        $request->Dataemissao,
+        $request->Datarecebimento,
+        $request->boleta,
+        $request->NotaFiscal,
+        $request->Serie,
+        Str::substr($request->CodEmpresa, 0, 1),
+        isset($request->status) ? false : false,
+      );
+
+    return
+      "<script>
+                  alert('Salvo com sucesso!');
+                  location = '/ContasaReceber/Novo';
+                </script>";
+  }
+
+
 
   public function Quitar(Request $request)
   {
@@ -138,7 +187,7 @@ class ContasaReceberController extends Controller
   public function Listartodos(Request $request)
   {
     $Contas = new ContasBancariasController();
-    $Banco = $Contas->Listar(); 
+    $Banco = $Contas->Listar();
     $ContasaReceber = DB::table('contasa_recebers')->join(
       'empresas',
       'contasa_recebers.CodEmpresa',
@@ -146,55 +195,15 @@ class ContasaReceberController extends Controller
       'empresas.id'
     )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
-    return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber,'Contas'=>$Banco]);
+    return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber, 'Contas' => $Banco]);
   }
 
   public function update(Request $request, $id)
   {
     $ContasaReceber = ContasaReceber::findOrFail($id);
 
-    if (empty($request->Descricao)) {
-      echo "<script>
-                alert('Preencha a Descrição');
-                javascript:history.back();
-              </script>";
-      exit;
-    }
-    if (empty($request->Vencimento)) {
-      echo "<script>
-                alert('Preencha o vencimento');
-                javascript:history.back();
-              </script>";
-      exit;
-    }
-    if (empty($request->Dataemissao)) {
-      echo "<script>
-                alert('Preencha a Data da emissão');
-                javascript:history.back();
-              </script>";
-      exit;
-    }
-    if (empty($request->Total)) {
-      echo "<script>
-                alert('Preencha a Total');
-                javascript:history.back();
-              </script>";
-      exit;
-    }
-    if (empty($request->Datarecebimento)) {
-      echo "<script>
-                alert('Preencha a Data do recebimento');
-                javascript:history.back();
-              </script>";
-      exit;
-    }
-    if (empty($request->CodEmpresa)) {
-      echo "<script>
-                alert('Preencha a Descrição');
-                javascript:history.back();
-              </script>";
-      exit;
-    } else {
+    if ($this->Verificar($request->Descricao, $request->Vencimento, $request->Dataemissao, $request->Total, $request->Datarecebimento, $request->CodEmpresa))
+
       $ContasaReceber->Update([
         'Barras' => $request->Barras,
         'Descricao' => $request->Descricao,
@@ -215,13 +224,13 @@ class ContasaReceberController extends Controller
         'status' => isset($request->status) ? false : false,
       ]);
 
-      return
-        "<script>
+    return
+      "<script>
             alert('Salvo com Sucesso!');
             location = '/ContasaReceber/Todos';
         </script>";
-    }
   }
+
 
   public function destroy($id)
   {

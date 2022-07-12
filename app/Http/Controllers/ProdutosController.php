@@ -47,6 +47,8 @@ class ProdutosController extends Controller
             'Descricao' => $Produtos->Descricao,
             'Valor' => $Produtos->ValorUnitario,
             'Quantidade' => $request->Quantidade,
+            'Peso'=>$request->Peso,
+            
         ]);
         $Carrinho = (Session::get('Cart'));
         return ($Carrinho);

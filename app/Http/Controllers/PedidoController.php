@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ItensController;
+use App\Http\Controllers\ContasaReceberController;
 use Exception;
 
 class PedidoController extends Controller
@@ -35,6 +36,7 @@ class PedidoController extends Controller
         Session::flush('Cliente');
         return "<script>location='/Pedidos/Carrinho';</script>";
     }
+
     public function Delete($id)
     {
         $Pedidos = Pedidos::findOrfail($id);
@@ -122,8 +124,27 @@ class PedidoController extends Controller
                 'Finalidade' => 'Venda',
                 'CodEmpresa' => $Empresa['Id']
             ]);
+          
 
             $Id = $Pedidos->id;
+            $ContasAReceber = new ContasaReceberController();
+            $ContasAReceber->Salvar('0',
+            'Emissão de nota',
+            $Cliente['Id'],
+            $Total,
+            0,
+            0,
+            date('Y-m-d'),
+            '0',
+            '0',
+            1,
+            date('Y-m-d'),
+            date('Y-m-d'),
+            0,
+            $Id,
+            0,
+            $Empresa['Id'],
+            0);
 
             if ($Itens->Salvar($Produtos, $Id)) {
                 return "<script>alert('Pedido Salvo com sucesso.'),location='LimparCarrinho'</script>";
