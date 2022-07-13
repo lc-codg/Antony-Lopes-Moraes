@@ -117,12 +117,14 @@ $(function() {
         var splitdados = dadosProduto.split(':');
 
         quantidade = prompt('Digite a quantidade: ');
+        Peso = prompt('Digite o Peso: ');
+        Preco = prompt('Digite o Preço: ');
 
         if ((!isNaN(quantidade)) && (quantidade > 0)) {
             $.ajax({
                 method: 'get',
                 url: '/Produtos/InserirCompras',
-                data: { id: splitdados[0], 'Quantidade': quantidade },
+                data: { id: splitdados[0], 'Quantidade': quantidade, 'Preco': Preco, 'Peso': Peso },
                 datetype: 'json',
                 success: function(retorno) {
                     window.location.href = '/Compras/Carrinho';

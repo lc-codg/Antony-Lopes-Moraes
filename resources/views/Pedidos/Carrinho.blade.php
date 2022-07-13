@@ -75,6 +75,7 @@
                     <th scope="col">Produto</th>
                     <th scope="col">Valor Unitário</th>
                     <th scope="col">Quantidade</th>
+                    <th scope=''>Peso</th>
                     <th scope="col">Subtotal</th>
                     <th scope="col"></th>
 
@@ -89,9 +90,10 @@
                         <td>{{ $row['Descricao'] }}</td>
                         <td>{{'R$'.number_format($row['Valor'],2,',','.')}}</td>
                         <td>{{$row['Quantidade']}}</td>
-                        <td class='SubTotal'>{{'R$'.number_format($row['Quantidade'] * $row['Valor'],2,',','.')}}</td>
+                        <td>{{$row['Peso'] }}</td>
+                        <td class='SubTotal'>{{'R$'.number_format($row['Peso'] * $row['Valor'],2,',','.')}}</td>
                         @php
-                        $Total += ($row['Quantidade'] * $row['Valor']);
+                        $Total += ($row['Peso'] * $row['Valor']);
                         @endphp
 
                         <td>

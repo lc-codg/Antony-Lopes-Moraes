@@ -42,13 +42,15 @@ class ProdutosController extends Controller
     {
         $Produtos = Produto::findOrfail($request->id);
 
+        $Valor = $request->Preco <> 0 ? $request->Preco  : $Produtos->ValorUnitario;
+
         Session::push('Cart', [
             'Barras' => $Produtos->Barras,
             'Descricao' => $Produtos->Descricao,
-            'Valor' => $Produtos->ValorUnitario,
+            'Valor' => $Valor,
             'Quantidade' => $request->Quantidade,
-            'Peso'=>$request->Peso,
-            
+            'Peso' =>$request->Peso,
+
         ]);
         $Carrinho = (Session::get('Cart'));
         return ($Carrinho);
@@ -57,11 +59,15 @@ class ProdutosController extends Controller
     {
         $Produtos = Produto::findOrfail($request->id);
 
+        $Valor = $request->Preco <> 0 ? $request->Preco  : $Produtos->ValorUnitario;
+
         Session::push('CartCompras', [
             'Barras' => $Produtos->Barras,
             'Descricao' => $Produtos->Descricao,
-            'Valor' => $Produtos->ValorUnitario,
+            'Valor' => $Valor,
             'Quantidade' => $request->Quantidade,
+            'Peso' =>$request->Peso,
+
         ]);
         $Carrinho = (Session::get('CartCompras'));
         return ($Carrinho);

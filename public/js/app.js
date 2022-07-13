@@ -116,23 +116,23 @@ $(function() {
         var splitdados = dadosProduto.split(':');
 
         quantidade = prompt('Digite a quantidade: ');
-        peso = prompt('Digite o Peso: ');
-        preco = prompt('Digite o Preço: ');
+        Peso = prompt('Digite o Peso: ');
+        Preco = prompt('Digite o Preço: ');
 
         if ((!isNaN(quantidade)) && (quantidade > 0)) {
-            if ((!isNaN(peso)) && (peso > 0)) 
-            if ((!isNaN(preco)) && (preco > 0)) 
+            if ((!isNaN(Peso)) && (Peso > 0))
+                if ((!isNaN(Preco)) && (Preco > 0))
 
-            $.ajax({
-                method: 'get',
-                url: '/Produtos/Inserir',
-                data: { id: splitdados[0], 'Quantidade': quantidade,'Preco':Preco,'Peso':Peso },
-                datetype: 'json',
-                success: function(retorno) {
-                    window.location.href = '/Pedidos/Carrinho';
+                    $.ajax({
+                    method: 'get',
+                    url: '/Produtos/Inserir',
+                    data: { id: splitdados[0], 'Quantidade': quantidade, 'Preco': Preco, 'Peso': Peso },
+                    datetype: 'json',
+                    success: function(retorno) {
+                        window.location.href = '/Pedidos/Carrinho';
 
-                }
-            });
+                    }
+                });
         } else
             alert('Digite um número válido.');
 

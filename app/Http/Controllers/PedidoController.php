@@ -124,7 +124,7 @@ class PedidoController extends Controller
                 'Finalidade' => 'Venda',
                 'CodEmpresa' => $Empresa['Id']
             ]);
-          
+
 
             $Id = $Pedidos->id;
             $ContasAReceber = new ContasaReceberController();
@@ -147,7 +147,9 @@ class PedidoController extends Controller
             0);
 
             if ($Itens->Salvar($Produtos, $Id)) {
-                return "<script>alert('Pedido Salvo com sucesso.'),location='LimparCarrinho'</script>";
+                return "<script>
+                alert('Pedido Salvo com sucesso.'),
+                location='LimparCarrinho'</script>";
             } else {
                 return "<script>alert(Erro ao Gravar.)</script>";
             }
