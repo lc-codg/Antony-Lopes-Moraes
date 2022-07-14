@@ -56,6 +56,7 @@ Route::get('/Pedidos/Delete/{id}', [PedidoController::class, 'Delete']);
 Route::get('/Pedidos/Carrinho', [PedidoController::class, 'Show']);
 Route::get('/Pedidos/LimparCarrinho', [PedidoController::class, 'LimparCarrinho']);
 Route::get('/Pedidos/Salvar',[PedidoController::class,'create']);
+Route::get('/Pedidos/ImprimirA4/{id}/{tipo}',[PedidoController::class,'Imprimir']);
 
 Route::get('/Itens/Delete/{Id}', [ItensController::class, 'Delete']);
 Route::get('/Itens/Ver/{id}', [ItensController::class, 'ListarPorId']);

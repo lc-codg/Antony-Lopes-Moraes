@@ -13,6 +13,26 @@ use Exception;
 
 class PedidoController extends Controller
 {
+    public function Imprimir($id,$tipo)
+    {
+      $pedidos = DB::table('pedidos')->select('pedidos.Id',
+      'clientes.Nome as Nomecliente',
+      'clientes.Razao as RazaoCliente' ,
+      'empresas.RAZAO as RazaoEmpresa' ,
+      'pedidos.Total',
+      'pedidos.dTpEDIDO',
+      'clientes.endereco','clientes.bairro',
+      'clientes.cnpj','clientes.cep','clientes.telefone',
+      'clientes.ie','clientes.numero')->
+      join('clientes' ,'pedidos.CodigoDocliente', '=','clientes.id')-> 
+      join('empresas', 'pedidos.CodEmpresa', '=', 'empresas.Id')->
+      where('pedidos.id', '=', $id)->get();
+      
+      $itens = new ItensController();
+      $Produtos = $itens->LocalizaItens($id);
+
+      return view('Pedidos.ImpressaoA4',['Itens'=>$Produtos, 'Venda'=>$pedidos,'Tipo'=>$tipo]);
+    }
     public function Show()
     {
         if (session()->has('Cart'))
@@ -147,9 +167,12 @@ class PedidoController extends Controller
             0);
 
             if ($Itens->Salvar($Produtos, $Id)) {
-                return "<script>
+                $Tipo = 'Novo';
+                echo "<script>
                 alert('Pedido Salvo com sucesso.'),
-                location='LimparCarrinho'</script>";
+               </script>";
+               $this->LimparCarrinho();
+               return $this->Imprimir($Id,$Tipo);
             } else {
                 return "<script>alert(Erro ao Gravar.)</script>";
             }

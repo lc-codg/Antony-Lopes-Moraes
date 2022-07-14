@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <div class='.container-fluid ' id='c2'>
-<h5>Vendas</h5>
+        <h5>Vendas</h5>
 </head>
 
 <body>
@@ -53,6 +53,7 @@
                 <th scope="col">Data</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -82,6 +83,13 @@
                     <form action="/Pedidos/Delete/{{$row->id}}" method="get">
 
                         <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
+                    </form>
+                </td>
+
+                <td>
+                    <form target="_blank"action="/Pedidos/ImprimirA4/{{$row->id}}/{{'Limpo'}}" method="get">
+
+                        <input class="btn btn-success" name="" type="submit" Value='Imprimir'>
                     </form>
                 </td>
 

@@ -24,14 +24,20 @@ class ItensController extends Controller
         $Iten = Itens::findOrfail($id);
         return view('Itens.Todos', ['Itens' => $Iten]);
     }
-    public function ListarTodos($id)
+    public function LocalizaItens($id)
     {
         $itens = DB::table('itens')->where('NumeroDoPedido', '=', $id)->paginate(20);
+        return $itens;  
+    }
+    public function ListarTodos($id)
+    {
+        $itens = $this->LocalizaItens($id);
         return view('Itens.Todos', ['itens' => $itens]);
     }
     public function Salvar($Produtos, $Id)
     {
         foreach ($Produtos as $row) {
+            
             Itens::Create(
                 [
                     'Descricao' => $row['Descricao'],
@@ -44,6 +50,7 @@ class ItensController extends Controller
                 ]
             );
         }
+
         try {
             return true;
         } catch (Exception $e) {
