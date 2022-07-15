@@ -18,7 +18,11 @@ class ItensCompraController extends Controller
         $Iten->delete();
         return "<script>alert('Deletado com sucesso!');location='/ItensCompras/Todos';</script>";
     }
-
+    public function LocalizaItens($id)
+    {
+        $itens = DB::table('itens_compras')->where('NumeroDoPedido', '=', $id)->paginate(20);
+        return $itens;
+    }
     public function ListarPorId($id)
     {
         $Iten = ItensCompras::findOrfail($id);
@@ -26,12 +30,13 @@ class ItensCompraController extends Controller
     }
     public function ListarTodos($id)
     {
-        $itensCompra = DB::table('itens_compras')->where('NumeroDoPedido', '=', $id)->paginate(20);
+        $itensCompra = $this->LocalizaItens($id);
         return view('ItensCompra.Todos', ['itensCompra' => $itensCompra]);
     }
     public function Salvar($Produtos, $Id)
     {
         foreach ($Produtos as $row) {
+            
             ItensCompras::Create(
                 [
                     'Descricao' => $row['Descricao'],

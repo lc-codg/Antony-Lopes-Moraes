@@ -20,7 +20,7 @@ class PedidoController extends Controller
       'clientes.Razao as RazaoCliente' ,
       'empresas.RAZAO as RazaoEmpresa' ,
       'pedidos.Total',
-      'pedidos.dTpEDIDO',
+      'pedidos.DtPedido',
       'clientes.endereco','clientes.bairro',
       'clientes.cnpj','clientes.cep','clientes.telefone',
       'clientes.ie','clientes.numero')->
@@ -31,7 +31,7 @@ class PedidoController extends Controller
       $itens = new ItensController();
       $Produtos = $itens->LocalizaItens($id);
 
-      return view('Pedidos.ImpressaoA4',['Itens'=>$Produtos, 'Venda'=>$pedidos,'Tipo'=>$tipo]);
+      return view('Pedidos.ImpressaoA4',['Itens'=>$Produtos, 'Venda'=>$pedidos,'Tipo'=>$tipo, 'Estado'=>'C']);
     }
     public function Show()
     {

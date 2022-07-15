@@ -21,7 +21,12 @@
     <br>
 
     <div class='card'>
+        @if ($Estado == 'C')
         <h4>Cópia de Nota Fiscal</h4>
+        @else
+        <h4>Espelho de Compra</h4>
+        @endif
+
     </div>
 
     <body>
@@ -29,22 +34,36 @@
         @foreach($Venda as $row)
 
         <div class='card'>
+            @if ($Estado == 'C')
             <H6>Dados Do Emitente</H6>
+            @else
+            <H6>Dados Do Comprador</H6>
+            @endif
         </div>
 
         <div class='card'>
             <h6>N° da Nota: {{$row->Id}}</h6>
+            @if ($Estado == 'C')
             <h6>Emitente: {{$row->RazaoEmpresa}}</h6>
+            @else
+            <h6>Comprador: {{$row->RazaoEmpresa}}</h6>
+            @endif
+            <h6>Data: {{$row->DtPedido}}</h6>
+
         </div>
 
         <div class='card'>
+            @if ($Estado == 'C')
             <H6>Dados Do Destinatário</H6>
+            @else
+            <H6>Dados Do Fornecedor</H6>
+            @endif
         </div>
 
         <div class='card'>
 
             <div class='form-row'>
-                <h6 class='form-group col-md-3'>Cliente: {{$row->Nomecliente}}</h6>
+                <h6 class='form-group col-md-3'>Nome: {{$row->Nomecliente}}</h6>
                 <h6 class='form-group col-md-3'>Endereço: {{$row->endereco}}</h6>
                 <h6 class='form-group col-md-1'>N°: {{$row->numero}}</h6>
                 <h6 class='form-group col-md-2'>Bairro: {{$row->bairro}}</h6>
@@ -111,15 +130,26 @@
         <br>
 
         <a name="" onClick="window.print()" id="" class="btn btn-primary" href="#" role="button">Imprimir</a>
-       
-        @if ($Tipo == 'Limpo')
-         <a name="" onClick="window.close();" id="" class="btn btn-danger" href="" role="button">Fechar</a>
-        @else
-         <a name="" id="" class="btn btn-danger" href="/Pedidos/Carrinho" role="button">Fechar</a>
 
-         @endif
-      
-        </div>
+        @if($Estado == 'C')
+
+          @if ($Tipo == 'Limpo')
+             <a name="" onClick="window.close();" id="" class="btn btn-danger" href="" role="button">Fechar</a>
+          @else
+             <a name="" id="" class="btn btn-danger" href="/Pedidos/Carrinho" role="button">Fechar</a>
+           @endif
+
+        @else
+
+          @if ($Tipo == 'Limpo')
+              <a name="" onClick="window.close();" id="" class="btn btn-danger" href="" role="button">Fechar</a>
+           @else
+             <a name="" id="" class="btn btn-danger" href="/Compras/Carrinho" role="button">Fechar</a>
+            @endif
+
+            @endif
+
+</div>
 
 
 

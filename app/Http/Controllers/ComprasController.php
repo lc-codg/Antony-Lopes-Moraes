@@ -12,6 +12,29 @@ use Exception;
 
 class ComprasController extends Controller
 {
+    public function Imprimir($id,$tipo)
+    {
+        $comprass = DB::table('compras')->select(
+            'compras.Id',
+            'fornecedors.Nome as Nomecliente',
+            'fornecedors.Razao as RazaoCliente',
+            'empresas.RAZAO as RazaoEmpresa',
+            'compras.Total',
+            'compras.DtPedido',
+            'fornecedors.endereco',
+            'fornecedors.bairro',
+            'fornecedors.cnpj',
+            'fornecedors.cep',
+            'fornecedors.telefone',
+            'fornecedors.ie',
+            'fornecedors.numero'
+        )->join('fornecedors', 'compras.CodigoDocliente', '=', 'fornecedors.id')->join('empresas', 'compras.CodEmpresa', '=', 'empresas.Id')->where('compras.id', '=', $id)->get();
+
+        $itens = new ItensCompraController();
+        $Produtos = $itens->LocalizaItens($id);
+
+        return view('Pedidos.ImpressaoA4', ['Itens' => $Produtos, 'Venda' => $comprass, 'Tipo' => $tipo, 'Estado'=>'F']);
+    }
     public function Show()
     {
         if (session()->has('CartCompras'))
@@ -53,27 +76,20 @@ class ComprasController extends Controller
         $Empresa = $Dados->ListaDeEmpresas();
         $Fornecedor = $Dados->ListaDeFornecedores();
 
-        $Compras = DB::table('Compras')->select(
-            'Compras.id',
-            'Compras.CodigoDocliente',
-            'Compras.Total',
-            'Compras.TotalDesconto',
-            'Compras.TotalAcréscimo',
-            'Compras.DtPedido',
-            'Compras.CodEmpresa',
+        $Compras = DB::table('compras')->select(
+            'compras.id',
+            'compras.CodigoDocliente',
+            'compras.Total',
+            'compras.TotalDesconto',
+            'compras.TotalAcréscimo',
+            'compras.DtPedido',
+            'compras.CodEmpresa',
             'Fornecedors.Nome',
             'empresas.Razao',
 
-        )->
-        join('Fornecedors', 'Compras.CodigoDoCliente', '=', 'Fornecedors.id')->
-        join('empresas', 'Compras.CodEmpresa','=','empresas.id')->
-        where('empresas.Razao', 'LIKE', '%'.$request->Nome.'%')->
-        orwhere('Fornecedors.Nome','LIKE','%'.$request->Nome.'%')->
-        orwhere('Fornecedors.Razao','LIKE','%'.$request->Nome.'%')->
-        whereBetween('DtPedido',array($request->Dataini,$request->Datafim))->
-        paginate(20);
+        )->join('Fornecedors', 'compras.CodigoDoCliente', '=', 'Fornecedors.id')->join('empresas', 'compras.CodEmpresa', '=', 'empresas.id')->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Fornecedors.Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Fornecedors.Razao', 'LIKE', '%' . $request->Nome . '%')->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->paginate(20);
 
-        return view('Compras.Todos', ['Compras' => $Compras,'Empresa'=>$Empresa,'Fornecedor'=>$Fornecedor]);
+        return view('Compras.Todos', ['Compras' => $Compras, 'Empresa' => $Empresa, 'Fornecedor' => $Fornecedor]);
     }
     public function VerificaDados($Fornecedor, $Empresa, $Produtos)
     {
@@ -126,7 +142,13 @@ class ComprasController extends Controller
             $Id = $Compras->id;
 
             if ($Itens->Salvar($Produtos, $Id)) {
-                return "<script>alert('Pedido Salvo com sucesso.'),location='LimparCarrinho'</script>";
+                $Tipo = 'Novo';
+                echo "<script>
+                alert('Nota Salva com sucesso.'),
+               </script>";
+               $this->LimparCarrinho();
+               return $this->Imprimir($Id,$Tipo);
+
             } else {
                 return "<script>alert(Erro ao Gravar.)</script>";
             }

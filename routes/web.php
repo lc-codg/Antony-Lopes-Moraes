@@ -122,6 +122,7 @@ Route::get('/Compras/Delete/{id}', [ComprasController::class, 'Delete']);
 Route::get('/Compras/Carrinho', [ComprasController::class, 'Show']);
 Route::get('/Compras/LimparCarrinho', [ComprasController::class, 'LimparCarrinho']);
 Route::get('/Compras/Salvar',[ComprasController::class,'create']);
+Route::get('/Compras/ImprimirA4/{id}/{tipo}',[ComprasController::class,'Imprimir']);
 
 Route::get('/Receitas/Novo',[ReceitasController::class,'index']);
 Route::get('/Receitas/Todos',[ReceitasController::class,'ListarTodos']);
