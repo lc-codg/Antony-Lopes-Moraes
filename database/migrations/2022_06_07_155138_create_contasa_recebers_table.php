@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('contasa_recebers', function (Blueprint $table) {
             $table->id();
-            $table->string('Barras',60);
+            $table->string('Barras',60)->nullable()->default(NULL);
             $table->string('Descricao',100);
             $table->integer('CodCliente');
             $table->decimal('Total',19,2);

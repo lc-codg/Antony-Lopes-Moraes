@@ -96,6 +96,13 @@
               <a class="dropdown-item" href="/Receitas/Todos">Listar Receitas</a>
             </div>
 
+            <div class="list-group">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
+                Outros Lançamentos
+              </a>
+              <a class="dropdown-item" href="/Outros/Novo">Lançar Outros</a>
+            </div>
+
           </div>
         </li>
 

@@ -14,21 +14,23 @@ return new class extends Migration
     public function up()
     {
         Schema::create('receitas', function (Blueprint $table) {
+
             $table->id();
-            $table->string('Descricao',100);
+            $table->string('Descricao',100)->nullable()->default(NULL);
             $table->integer('CodCliente')->nullable()->default(NULL);
             $table->decimal('Total',19,2);
-            $table->decimal('TotalDesconto',19,2)->nullable()->default(NULL);;
-            $table->decimal('TotalAcréscimo',19,2)->nullable()->default(NULL);;;
-            $table->decimal('TotaldosProdutos',19,2)->nullable()->default(NULL);;;
-            $table->Date('Vencimento');
-            $table->integer('Parcelas')->nullable()->default(NULL);;;;
+            $table->decimal('TotalDesconto',19,2)->nullable()->default(NULL);
+            $table->decimal('TotalAcréscimo',19,2)->nullable()->default(NULL);
+            $table->decimal('TotaldosProdutos',19,2)->nullable()->default(NULL);
+            $table->Date('Vencimento')->nullable()->default(NULL);
+            $table->integer('Parcelas')->nullable()->default(NULL);
             $table->Date('DataDaEntrada');
             $table->string('Boleta',100)->nullable()->default(NULL);
             $table->string('NotaFiscal',100)->nullable()->default(NULL);
             $table->string('Serie',100)->nullable()->default(NULL);
             $table->integer('CodEmpresa');
             $table->timestamps();
+            
         });
     }
 

@@ -10,80 +10,76 @@ use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
 
 class ReceitasController extends Controller
-{public function index()
+{
+    public function index()
     {
         $ObterDados = new ObterDados();
         return view('Receitas.Receitas', [
             'Empresas'
             =>  $ObterDados->ListaDeEmpresas(),
             'Cliente' =>  $ObterDados->ListaDeClientes(),
-            'Contas'=>$ObterDados->ListarContasBancarias(),
+            'Contas' => $ObterDados->ListarContasBancarias(),
         ]);
     }
-
-    public function create(Request $request)
+    public function Verificar($dados)
     {
-        $Contas = new ContasBancariasController();
-        
-        if (empty($request->Descricao)) {
-            echo "<script>
-              alert('Preencha a Descrição');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Vencimento)) {
-            echo "<script>
-              alert('Preencha o vencimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-       
-        if (empty($request->Total)) {
+        if (empty($dados->Total)) {
             echo "<script>
               alert('Preencha a Total');
               javascript:history.back();
             </script>";
             exit;
         }
-        if (empty($request->Recebimento)) {
+        if (empty($dados->Datarecebimento)) {
             echo "<script>
               alert('Preencha a Data do recebimento');
               javascript:history.back();
             </script>";
             exit;
         }
-        if (empty($request->CodEmpresa)) {
+        if (empty($dados->CodEmpresa)) {
             echo "<script>
               alert('Preencha a Descrição');
               javascript:history.back();
             </script>";
             exit;
         } else {
+
+            return true;
+        }
+    }
+
+
+    public function create(Request $request)
+    {
+        $Contas = new ContasBancariasController();
+
+        if ($this->Verificar($request)) {
+
             Receitas::create([
                 'Descricao' => $request->Descricao,
-                'CodCliente' => Str::substr($request->CodCliente, 0, 1),
+                'CodCliente' => Isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) :0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
                 'Vencimento' => $request->Vencimento,
                 'Parcelas' => $request->Parcelas,
-                'DataDaEntrada' => $request->Recebimento,
+                'DataDaEntrada' => $request->Datarecebimento,
                 'Boleta' => $request->boleta,
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
             ]);
-            $Contas->Deposito(Str::substr($request->Conta,0,1),$request->Total);
+            $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
 
             return
                 "<script>
-                alert('Salvo com sucesso!');
-                location = '/Receitas/Todos';
+                alert('Receita Salva com sucesso!');
+                location = '/Receitas/Novo';
               </script>";
         }
     }
+
 
     public function show($id)
     {
@@ -98,8 +94,6 @@ class ReceitasController extends Controller
             =>  $ObterDados->ListaDeEmpresas(),
             'Cliente' =>  $ObterDados->ListaDeClientes()
         ]);
-
-        
     }
 
     public function Listartodos(Request $request)
@@ -109,8 +103,7 @@ class ReceitasController extends Controller
             'Receitas.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('clientes', 'Receitas.CodCliente', '=', 'clientes.id')->select('Receitas.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
-          wherebetween('DataDaEntrada',[$request->DataIni,$request->DataFim]) ->paginate(20);
+        )->select('Receitas.*', 'empresas.Razao as Razaoe', 'Receitas.CodCliente as Razaof')->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(20);
 
         return view('/Receitas.Todos', ['Receitas' => $Receitas]);
     }
@@ -119,51 +112,16 @@ class ReceitasController extends Controller
     {
         $Receitas = Receitas::findOrFail($id);
 
-        if (empty($request->Descricao)) {
-            echo "<script>
-              alert('Preencha a Descrição');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Vencimento)) {
-            echo "<script>
-              alert('Preencha o vencimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Recebimento)) {
-            echo "<script>
-              alert('Preencha a Data do recebimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Total)) {
-            echo "<script>
-              alert('Preencha a Total');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-      
-        if (empty($request->CodEmpresa)) {
-            echo "<script>
-              alert('Preencha a Descrição');
-              javascript:history.back();
-            </script>";
-            exit;
-        } else {
+        if ($this->Verificar($request)) {
             $Receitas->Update([
                 'Descricao' => $request->Descricao,
-                'CodCliente' => Str::substr($request->CodCliente, 0, 1),
+                'CodCliente' => Isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) :0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
                 'Vencimento' => $request->Vencimento,
                 'Parcelas' => $request->Parcelas,
-                'DataDaEntrada' => $request->Recebimento,
+                'DataDaEntrada' => $request->Datarecebimento,
                 'Boleta' => $request->boleta,
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
@@ -178,9 +136,10 @@ class ReceitasController extends Controller
         }
     }
 
+
     public function destroy($id)
     {
-        
+
         $Receitas = Receitas::findOrFail($id);
         $Receitas->delete();
 

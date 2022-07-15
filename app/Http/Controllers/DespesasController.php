@@ -11,6 +11,33 @@ use App\Http\Controllers\ContasBancariasController;
 
 class DespesasController extends Controller
 {
+    public function Verificar($Dados)
+    {
+
+        if (empty($Dados->Total)) {
+            echo "<script>
+              alert('Preencha a Total');
+              javascript:history.back();
+            </script>";
+            exit;
+        }
+        if (empty($Dados->Datarecebimento)) {
+            echo "<script>
+              alert('Preencha a Data do recebimento');
+              javascript:history.back();
+            </script>";
+            exit;
+        }
+        if (empty($Dados->CodEmpresa)) {
+            echo "<script>
+              alert('Preencha a Descrição');
+              javascript:history.back();
+            </script>";
+            exit;
+        } else {
+            return true;
+        }
+    }
     public function index()
     {
         $ObterDados = new ObterDados();
@@ -26,58 +53,19 @@ class DespesasController extends Controller
     public function create(Request $request)
     {
         $Contas = new ContasBancariasController();
-        if (empty($request->Descricao)) {
-            echo "<script>
-              alert('Preencha a Descrição');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Vencimento)) {
-            echo "<script>
-              alert('Preencha o vencimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Dataemissao)) {
-            echo "<script>
-              alert('Preencha a Data da emissão');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Total)) {
-            echo "<script>
-              alert('Preencha a Total');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Datarecebimento)) {
-            echo "<script>
-              alert('Preencha a Data do recebimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->CodEmpresa)) {
-            echo "<script>
-              alert('Preencha a Descrição');
-              javascript:history.back();
-            </script>";
-            exit;
-        } else {
+
+        if ($this->Verificar($request)) {
+
             Despesas::create([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
+                'CodFornecedor' => Isset($request->CodFornecedor) ?Str::substr($request->CodFornecedor, 0, 1):0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
                 'Vencimento' => $request->Vencimento,
-                'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
-                'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
+                'CodGrupo' => Isset($request->CodGrupo) ? Str::substr($request->CodGrupo, 0, 1) : 0,
+                'CodSubGrupo' =>  Isset($request->CodGrupo) ? Str::substr($request->SubGrupo, 0, 1) : 0,
                 'Parcelas' => $request->Parcelas,
                 'Dataemissao' => $request->Dataemissao,
                 'Datarecebimento' => $request->Datarecebimento,
@@ -89,8 +77,8 @@ class DespesasController extends Controller
             $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
             return
                 "<script>
-                alert('Salvo com sucesso!');
-                location = '/Despesas/Todos';
+                alert('Despesa Salva com sucesso!');
+                location = '/Despesas/Novo;
               </script>";
         }
     }
@@ -109,7 +97,7 @@ class DespesasController extends Controller
         ]);
     }
 
-    public function Listartodos()
+    public function Listartodos(Request $request)
     {
 
         $Despesas = DB::table('despesas')->join(
@@ -117,8 +105,7 @@ class DespesasController extends Controller
             'despesas.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'despesas.CodFornecedor', '=', 'fornecedors.id')->select('despesas.*', 'empresas.Razao as Razaoe', 'fornecedors.Razao as Razaof')
-            ->paginate(20);
+        )->select('despesas.*', 'empresas.Razao as Razaoe', 'despesas.CodFornecedor as Razaof')->wherebetween('Datarecebimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
         return view('/Despesas.Todos', ['Despesas' => $Despesas]);
     }
@@ -127,52 +114,11 @@ class DespesasController extends Controller
     {
         $Despesas = Despesas::findOrFail($id);
 
-        if (empty($request->Descricao)) {
-            echo "<script>
-              alert('Preencha a Descrição');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Vencimento)) {
-            echo "<script>
-              alert('Preencha o vencimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Dataemissao)) {
-            echo "<script>
-              alert('Preencha a Data da emissão');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Total)) {
-            echo "<script>
-              alert('Preencha a Total');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Datarecebimento)) {
-            echo "<script>
-              alert('Preencha a Data do recebimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->CodEmpresa)) {
-            echo "<script>
-              alert('Preencha a Descrição');
-              javascript:history.back();
-            </script>";
-            exit;
-        } else {
+        if ($this->Verificar($request)) {
             $Despesas->Update([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
+                'CodFornecedor' => Isset($request->CodFornecedor) ?Str::substr($request->CodFornecedor, 0, 1):0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,

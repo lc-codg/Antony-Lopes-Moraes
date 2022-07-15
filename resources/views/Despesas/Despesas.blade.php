@@ -49,11 +49,6 @@
                     <input type="text" class="form-control" name="Descricao" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-12">
-                    <label for="">Código da Boleta</label>
-                    <input type="number" class="form-control" name="Barras" id="" aria-describedby="helpId" placeholder="">
-                </div>
-
             </div>
 
             <div class='form-row'>
@@ -63,15 +58,6 @@
                     <input type="number" class="form-control" name="NotaFiscal" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-4">
-                    <label for="">Série</label>
-                    <input type="number" class="form-control" name="Serie" id="" aria-describedby="helpId" placeholder="">
-                </div>
-
-                <div class="form-group md col-2">
-                    <label for="">Vencimento</label>
-                    <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Vencimento" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
                 <div class="form-group md col-2">
                     <label for="">Data Recebimento</label>
@@ -109,15 +95,6 @@
                     <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalFinal" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Parcelas</label>
-                    <input type="number" class="form-control" name="Parcelas" id="" aria-describedby="helpId" placeholder="">
-                </div>
-
-                <div class="form-group md col-2">
-                    <label for="">Quantidade de boletas</label>
-                    <input type="number" class="form-control" name="boleta" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
             </div>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <link href="/css/app.css" rel="stylesheet">
-    
+
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,29 @@
 
 <body>
     <div id='c2' class='.container-fluid'>
-<h5>Despesas</h5>
+
+        <h5>Despesas</h5>
+
+        <form method='get' action='/Despesas/Todos'>
+
+            <div class='form-row'>
+
+                <div class="form-group col-md-2">
+                    <label for="">Data Inicial</label>
+                    <input type="date" class="form-control" name="DataIni" id="" value="{{Date('Y-m-d')}}" aria-describedby="helpId" placeholder="">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="">Data Final</label>
+                    <input type="date" class="form-control" name="DataFim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                </div>
+
+            </div>
+        </form>
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
                 <tr>
@@ -25,7 +47,7 @@
                     <th scope="col">Total</th>
                     <th scope='col'>Vencimento</th>
                     <th scope='col'>N° Parcela</th>
-                    <th scope='col'>N° Boleta</th>
+                    <th scope='col'>Identificação</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
@@ -47,7 +69,7 @@
                     <td>{{ $row->Vencimento}}</td>
                     <td>{{ $row->Parcelas}}</td>
                     <td>{{ $row->Boleta}}</td>
-                    
+
 
                     <td>
 

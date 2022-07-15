@@ -14,6 +14,7 @@ use App\Http\Controllers\DespesasController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\ItensCompraController;
 use App\Http\Controllers\ReceitasController;
+use App\Http\Controllers\ControllerOutrosLancamentos;
 use App\Models\ContasaReceber;
 
 /*
@@ -130,4 +131,7 @@ Route::post('/Receitas/Salvar', [Receitascontroller::class, 'create']);
 Route::get('/Receitas/Ver/{id}', [ReceitasController::class, 'show']);
 Route::get('/Receitas/Editar/{id}', [ReceitasController::class, 'update']);
 Route::get('Receitas/Delete/{id}', [ReceitasController::class, 'destroy']);
+
+Route::get('/Outros/Novo',[ControllerOutrosLancamentos::class,'Novo']);
+Route::post('/Outros/Salvar',[ControllerOutrosLancamentos::class,'Salvar']);
 

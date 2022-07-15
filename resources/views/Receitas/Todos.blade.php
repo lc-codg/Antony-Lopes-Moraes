@@ -45,7 +45,7 @@
                     <th scope="col">Total</th>
                     <th scope='col'>Vencimento</th>
                     <th scope='col'>N° Parcela</th>
-                    <th scope='col'>N° Boleta</th>
+                    <th scope='col'>Identificação</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
