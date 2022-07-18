@@ -20,6 +20,7 @@ class ControllerOutrosLancamentos extends Controller
         $Receitas = new ReceitasController();
 
       ($request->Tipo == 'Crédito') ? $Receitas->create($request) : $Despesas->create($request); 
+      echo "<script>alert('Salvo com sucesso!');</script>";
       return $this->Novo();
         
     }

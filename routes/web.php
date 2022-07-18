@@ -16,6 +16,7 @@ use App\Http\Controllers\ItensCompraController;
 use App\Http\Controllers\ReceitasController;
 use App\Http\Controllers\ControllerOutrosLancamentos;
 use App\Models\ContasaReceber;
+use App\Http\Controllers\ArrecadacaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,4 +135,6 @@ Route::get('Receitas/Delete/{id}', [ReceitasController::class, 'destroy']);
 
 Route::get('/Outros/Novo',[ControllerOutrosLancamentos::class,'Novo']);
 Route::post('/Outros/Salvar',[ControllerOutrosLancamentos::class,'Salvar']);
+
+route::get('/Arrecadacao/Novo',[ArrecadacaoController::class,'index']);
 

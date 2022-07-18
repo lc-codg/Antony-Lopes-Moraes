@@ -103,6 +103,12 @@
               <a class="dropdown-item" href="/Outros/Novo">Lançar Outros</a>
             </div>
 
+            <div class="list-group">
+              <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
+                Arrecadação
+              </a>
+              <a class="dropdown-item" href="/Arrecadacao/Novo">Areecadação</a>
+            </div>
           </div>
         </li>
 
