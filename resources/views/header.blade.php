@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <title>Frigo Erp| Há mais de 10 anos no mercado | Emissor de Pedidos| Rio de Janeiro | Brasil</title>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a Style=" font-size: 30px;color:white;" class="navbar-brand" href="/">LopesNuvem Erp</a>
+    <a Style=" font-size: 30px;color:white;" class="navbar-brand" href="/">FrigoErp</a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
 
     <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -107,7 +107,7 @@
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Arrecadação
               </a>
-              <a class="dropdown-item" href="/Arrecadacao/Novo">Areecadação</a>
+              <a class="dropdown-item" href="/Arrecadacao/Novo">Arrecadação</a>
             </div>
           </div>
         </li>

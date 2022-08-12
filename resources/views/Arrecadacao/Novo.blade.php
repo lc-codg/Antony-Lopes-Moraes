@@ -17,14 +17,15 @@
         <h5>Informar arrecadação</h5>
 
         <form action='/Arrecadacao/Salvar' method='post'>
-        @csrf
+
             <div class='form-row'>
 
+            @csrf
                 <div class="form-group md col-2">
                     <label for="">Empresa</label>
-                    <select class="form-control" name="codempresa" id="">
-                        @foreach($Empresa as $rowE)
-                        <option>{{$rowE->id}}- {{$rowE->Razao}}</option>
+                    <select class="form-control " name="Codempresa" id="">
+                        @foreach ($Empresa as $row)
+                        <option selected>{{$row->id}}- {{$row->Razao}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -40,12 +41,12 @@
             <div class='form-row'>
                 <div class="form-group md col-2">
                     <label for="">Valor</label>
-                    <input type="text" class="form-control" name="Valor" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="Valor" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Data</label>
-                    <input type="date" class="form-control" name="Data" id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" value='{{date("Y-m-d")}}' name="Data" id="" aria-describedby="helpId" placeholder="">
                 </div>
                 <div class="form-group md col-8">
                     <label for="">Indenfificação</label>
