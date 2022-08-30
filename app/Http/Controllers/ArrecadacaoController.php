@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Classes\ObterDados;
 use App\Models\Arrecadacao;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class ArrecadacaoController extends Controller
 {
@@ -13,6 +14,23 @@ class ArrecadacaoController extends Controller
     {
         $Obterdados = new ObterDados();
         return view('Arrecadacao.Novo', ['Empresa' => $Obterdados->ListaDeEmpresas()]);
+    }
+    public function ListarTodos(Request $request)
+    {
+        $Arrecada = DB::table('arrecadacaos')->join(
+            'empresas',
+            'arrecadacaos.Codempresa',
+            '=',
+            'empresas.id'
+        )->select(
+            'arrecadacaos.*',
+            'empresas.Razao as Razaoe'
+        )->wherebetween(
+            'DataRecebimento',
+            [$request->DataIni, $request->DataFim]
+        )->paginate(20);
+
+        return view('/Arrecadacao.Todos',['Arrecada' => $Arrecada]);
     }
     private function Verificar($Dados)
     {

@@ -108,6 +108,7 @@
                 Arrecadação
               </a>
               <a class="dropdown-item" href="/Arrecadacao/Novo">Arrecadação</a>
+              <a class="dropdown-item" href="/Arrecadacao/Todos">Listar Arrecadação</a>
             </div>
           </div>
         </li>

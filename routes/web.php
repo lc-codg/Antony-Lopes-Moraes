@@ -136,6 +136,7 @@ Route::get('Receitas/Delete/{id}', [ReceitasController::class, 'destroy']);
 Route::get('/Outros/Novo',[ControllerOutrosLancamentos::class,'Novo']);
 Route::post('/Outros/Salvar',[ControllerOutrosLancamentos::class,'Salvar']);
 
+
 route::get('/Arrecadacao/Novo',[ArrecadacaoController::class,'index']);
 Route::post('/Arrecadacao/Salvar',[ArrecadacaoController::class,'Salvar']);
-
+Route::get('/Arrecadacao/Todos',[ArrecadacaoController::class,'Listartodos']);
