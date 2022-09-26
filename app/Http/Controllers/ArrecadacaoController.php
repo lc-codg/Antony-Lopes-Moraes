@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Classes\ObterDados;
 use App\Models\Arrecadacao;
+use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
@@ -30,7 +32,7 @@ class ArrecadacaoController extends Controller
             [$request->DataIni, $request->DataFim]
         )->paginate(20);
 
-        return view('/Arrecadacao.Todos',['Arrecada' => $Arrecada]);
+        return view('/Arrecadacao.Todos', ['Arrecada' => $Arrecada]);
     }
     private function Verificar($Dados)
     {
@@ -72,6 +74,43 @@ class ArrecadacaoController extends Controller
             return  "<script>
             alert('Arrecadação Salva com sucesso!');
             location = '/Arrecadacao/Novo';
+          </script>";
+        }
+    }
+
+    public function Excluir($id)
+    {
+        $Arreacadacao = Arrecadacao::findOrFail($id);
+        $Arreacadacao->delete();
+        try {
+            return "<script>alert('Registro deletado com sucesso!');
+          location = '/Arrecadacao/Todos';
+          </script>";
+        } catch (Exception $e) {
+            return "<script>alert('Erro ao deletar');</script>";
+        }
+    }
+    public function Editar($id)
+    {
+        $Empresa = new ObterDados();
+        $Arrecadacao = Arrecadacao::findOrFail($id);
+        return View('Arrecadacao.Ver', ['Arrecadacao' => $Arrecadacao], ['Empresa' => $Empresa->ListaDeEmpresas()]);
+    }
+    public function Atualizar(Request $request)
+    {
+
+        if ($this->Verificar($request)) {
+            $Arrecadacao = Arrecadacao::findOrFail($request->id);
+            $Arrecadacao->update([
+                'CodEmpresa' => Str::substr($request->Codempresa, 0, 1),
+                'Valor' => $request->Valor,
+                'Numero' => $request->Numero,
+                'DataRecebimento' => $request->Data,
+                'Descricao' => $request->Descricao
+            ]);
+            return  "<script>
+            alert('Ajustes Salva com sucesso!');
+            location = '/Arrecadacao/Todos';
           </script>";
         }
     }

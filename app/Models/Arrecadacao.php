@@ -9,5 +9,5 @@ class Arrecadacao extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable =['id','Descricao','Valor','DataRecebimento','CodEmpresa'];
+    protected $fillable =['id','Descricao','Valor','DataRecebimento','CodEmpresa','Numero'];
 }

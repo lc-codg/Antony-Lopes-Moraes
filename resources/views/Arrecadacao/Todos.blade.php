@@ -65,14 +65,14 @@
 
                     <td>
 
-                        <form action="/Arrecadacao/Ver/{{ $row->id }}" method="get">
+                        <form action="/Arrecadacao/Editar/{{ $row->id }}" method="get">
                             <input class="btn btn-dark" name="" type="submit" Value='Editar'>
                         </form>
 
                     </td>
 
                     <td>
-                        <form action="/Arrecadacao/Delete/{{ $row->id }}" method="get">
+                        <form action="/Arrecadacao/Deletar/{{ $row->id }}" method="get">
                             <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
                         </form>
                     </td>

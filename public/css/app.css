@@ -24,6 +24,10 @@
 #Bot {
     margin-top: 7%;
 }
+#btnVoltar{
+    margin-top: 7%;
+    margin-left: 12px;
+}
 .price{
     color:blue;
 }
