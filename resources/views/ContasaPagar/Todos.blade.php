@@ -10,28 +10,31 @@
 
     <link href="/css/app.css" rel="stylesheet">
 
-    <script src="{{ asset('js/Contas.js') }}"></script>
+
 </head>
 
 <body>
     <div class='.container-fluid ' id='c2'>
-<h5>Contas a Pagar</h5>
+        <h5>Contas a Pagar</h5>
         <form method='get' action='/ContasaPagar/Todos'>
 
             <div class='form-row'>
 
                 <div class="form-group col-md-2">
                     <label for="">Data Inicial</label>
-                    <input type="date" class="form-control" name="DataIni" id="" value="{{Date('Y-m-d')}}" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" name="DataIni" id="" value="{{ Date('Y-m-d') }}"
+                        aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="">Data Final</label>
-                    <input type="date" class="form-control" name="DataFim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" name="DataFim" value="{{ Date('Y-m-d') }}" id=""
+                        aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group col-md-4">
-                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar'
+                        aria-describedby="helpId" placeholder="">
                 </div>
 
             </div>
@@ -46,7 +49,7 @@
 
 
         </div>
-        <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
+        <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 12px; width:100%;">
             <thead class="thead-dark">
                 <tr>
 
@@ -59,6 +62,11 @@
                     <th scope='col'>Vencimento</th>
                     <th scope='col'>N° Parcela</th>
                     <th scope='col'>N° Boleta</th>
+
+                    <th scope='col'>Juros</th>
+                    <th scope='col'>Multas</th>
+                    <th scope='col'>Cheque</th>
+
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -72,91 +80,112 @@
 
 
                     @foreach ($ContasaPagar as $row)
+                        <td>{{ $row->id }}</td>
 
-                    <td>{{ $row->id }}</td>
+                        @if ($row->status === 0)
+                            <td data-estado="Pago" class='DescA'>{{ $row->Descricao }}</td>
+                        @else
+                            <td data-estado="Pagar" class='DescP'>{{ $row->Descricao }}</td>
+                        @endif
 
-                    @if ($row->status === 0)
-                    <td data-estado="Pago" class='DescA'>{{ $row->Descricao }}</td>
-                    @else
-                    <td data-estado="Pagar" class='DescP'>{{ $row->Descricao }}</td>
-                    @endif
+                        <td>{{ $row->Barras }}</td>
+                        <td>{{ $row->Razaoe }}</td>
+                        <td>{{ $row->Razaof }}</td>
 
-                    <td>{{ $row->Barras }}</td>
-                    <td>{{ $row->Razaoe}}</td>
-                    <td>{{ $row->Razaof}}</td>
+                        @if ($row->status === 0)
+                            <td class='price2'>R${{ $row->Total + $row->Juros + $row->Multa  }}</td>
+                        @else
+                            <td class='price'>R${{ $row->Total + $row->Juros + $row->Multa  }}</td>
+                        @endif
 
-                    @if ($row->status === 0)
-                    <td class='price2'>R${{ $row->Total}}</td>
-                    @else
-                    <td class='price'>R${{ $row->Total}}</td>
-                    @endif
-
-                    <td>{{ $row->Vencimento}}</td>
-                    <td>{{ $row->Parcelas}}</td>
-                    <td>{{ $row->Boleta}}</td>
-
+                        <td>{{ $row->Vencimento }}</td>
+                        <td>{{ $row->Parcelas }}</td>
+                        <td>{{ $row->Boleta }}</td>
 
 
-                    <td>
+                        <td>
+                            <input @if ($row->status === 1) readonly  value='{{$row->Juros }}' @endif
+                                style='font-size: 12px;width:70px;'type="number" pattern="[0-9]+([,\.][0-9]+)?"
+                                min="0" step="any" class="form-control" name="Juros" id="Juros"
+                                aria-describedby="helpId" placeholder="">
+                        </td>
+                        <td>
+                            <input @if ($row->status === 1) readonly
+                            value='{{$row->Multa }}'@endif style='font-size: 12px;width:70px;'
+                                type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
+                                class="form-control" name="Multa" id="Multa" aria-describedby="helpId"
+                                placeholder="">
+                        </td>
 
-                        <form action="/ContasaPagar/Ver/{{ $row->id }}" method="get">
-                            <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                        </form>
+                        <td>
+                            <input @if ($row->status === 1) readonly
+                            value=''@endif style='font-size: 12px;width:70px;'
+                                type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
+                                class="form-control" name="Cheque" id="Multa" aria-describedby="helpId"
+                                placeholder="">
+                        </td>
 
-                    </td>
-                    <td>
-                        <form action="/ContasaPagar/Delete/{{ $row->id }}" method="get">
-                            <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
-                        </form>
-                    </td>
-                    @if ($row->status === 0)
-                    <td>
-                        <form action="/ContasaPagar/Quitar" method="get">
-              
-                            <input name='id' hidden value='{{$row->id}}'>
-                            <input name='tipo' hidden value='Pagar'>
-                            <input name='Valor' hidden value='{{ $row->Total}}'>
-                            <input class="btn btn-primary" name="" type="submit" Value='Quitar'>
+                        <td>
 
-                    </td>
-                    <td>
+                            <form action="/ContasaPagar/Ver/{{ $row->id }}" method="get">
+                                <input style='width:65px;font-size: 12px;'class="btn btn-dark" name="" type="submit" Value='Editar'>
+                            </form>
 
+                        </td>
+                        <td>
+                            <form action="/ContasaPagar/Delete/{{ $row->id }}" method="get">
+                                <input style='width:65px;font-size: 12px;' class="btn btn-danger" name="" type="submit" Value='Excluir'>
+                            </form>
+                        </td>
+                        @if ($row->status === 0)
+                            <td>
+                                <form action="/ContasaPagar/Quitar" method="get">
 
-                        <select class="form-control" name="conta" id="">
-                            @foreach($Contas as $C)
-                            <option selected>{{$C->id}} - {{$C->Descricao}}</option>
-                            @endforeach
-                        </select>
+                                    <input name='id' hidden value='{{ $row->id }}'>
+                                    <input name='tipo' hidden value='Pagar'>
+                                    <input name='Valor' hidden value='{{ $row->Total }}'>
+                                    <input hidden name='Juros2'value='' id='Juros2'>
+                                    <input hidden name='Multa2' value='' id='Multa2'>
+                                    <input style='width:65px;font-size: 12px;' onclick='JurosEMulta();'class="btn btn-primary" name=""
+                                        type="submit" Value='Quitar'>
 
-                    </td>
-                    </form>
-                    @else
-
-                    <td>
-                        <form action="/ContasaPagar/Estornar" method="get">
-                   
-                            <input name='id' hidden value='{{$row->id}}'>
-                            <input name='tipo' hidden value='Pagar'>
-                            <input name='Valor' hidden value='{{ $row->Total}}'>
-                            <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
-
-                    </td>
-
-                    <td>
+                            </td>
+                            <td>
 
 
-                        <select class="form-control" name="conta" id="">
-                            @foreach($Contas as $C)
-                            <option selected>{{$C->id}} - {{$C->Descricao}}</option>
-                            @endforeach
-                        </select>
+                                <select style='font-size:15px' class="form-control" name="conta" id="">
+                                    @foreach ($Contas as $C)
+                                        <option selected>{{ $C->id }} - {{ $C->Descricao }}</option>
+                                    @endforeach
+                                </select>
 
-                    </td>
-                    </form>
-                    @endif
+                            </td>
+                            </form>
+                        @else
+                            <td>
+                                <form action="/ContasaPagar/Estornar" method="get">
+
+                                    <input name='id' hidden value='{{ $row->id }}'>
+                                    <input name='tipo' hidden value='Pagar'>
+                                    <input name='Valor' hidden value='{{ $row->Total }}'>
+                                    <input style='width:65px;font-size: 12px;' class="btn btn-warning" name="" type="submit" Value='Estornar'>
+
+                            </td>
+
+                            <td>
+
+
+                                <select class="form-control" name="conta" id="">
+                                    @foreach ($Contas as $C)
+                                        <option selected>{{ $C->id }} - {{ $C->Descricao }}</option>
+                                    @endforeach
+                                </select>
+
+                            </td>
+                            </form>
+                        @endif
 
                 </tr>
-
                 @endforeach
         </table>
         </tbody>
@@ -165,7 +194,7 @@
 
     </div>
 
-
+    <script src="{{ asset('js/Contas.js') }}"></script>
 
 </body>
 {{ $ContasaPagar->links() }}

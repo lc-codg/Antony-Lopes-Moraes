@@ -13,7 +13,7 @@
 
     <div id='container' class='.container-fluid'>
 
-        <h5>Cadastro de contas a Pagar</h5>
+        <h5>Cadastro de Contas a Pagar</h5>
         <form method='post' action='/ContasaPagar/Salvar'>
             <div class='form-row'>
 

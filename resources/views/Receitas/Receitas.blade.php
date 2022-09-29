@@ -76,7 +76,7 @@
 
                 <div class="form-group md col-2">
                     <label for="">Data da Entrada</label>
-                    <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Recebimento" id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
 

@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('Serie',100)->nullable()->default(NULL);;
             $table->integer('CodEmpresa');
             $table->boolean('status');
+            $table->decimal('Juros',19,2);
+            $table->decimal('Multa',19,2);
             $table->timestamps();
         });
     }
