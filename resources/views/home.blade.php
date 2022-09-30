@@ -8,12 +8,31 @@
 
 </head>
 @include('Header')
+
 <body>
-
-
-
-
+    @php
+        use App\Http\Controllers\ContasaPagarController;
+        $ContaAPagar = new ContasaPagarController();
+        $ContasVencidas = $ContaAPagar->ListarAtrasadas();
+    @endphp
+    @if (count($ContasVencidas) > 0)
+        <div class="card text-center">
+            <div class="card-header">
+                Atenção Estas Contas estão vencidas
+            </div>
+            <div class="card-body">
+                @foreach ($ContasVencidas as $row)
+                    <td>{{ $row->Vencimento }} - {{ $row->Razaof }} - R${{ $row->Total }}</td>
+                    <br>
+                @endforeach
+            </div>
+            <div class="card-header">
+                <br><a name="" id="" class="btn btn-danger" href="/ContasaPagar/Todos"
+                    role="button">Pagar</a>
+            </div>
+    @endif
 
 </body>
 @include('footer')
+
 </html>

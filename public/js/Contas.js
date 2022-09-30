@@ -1,10 +1,33 @@
+function SelecionaContaBancaria() {
+
+    var select = document.getElementById("ContaBancaria");
+    var Valor = select.options[select.selectedIndex].text;
+
+    document.getElementById("conta").value = Valor;
+
+}
+
+function ValidarForm() {
+    var select = document.getElementById("ContaBancaria");
+    var Valor = select.options[select.selectedIndex].text;
+    if (Valor == 'Selecione') {
+        alert('Atenção! É necessário Selecionar uma conta para pagamento.');
+    } else {
+        JurosEMulta();
+        document.getElementById("FrmQuitar").submit();
+    }
+
+}
+
 function JurosEMulta() {
 
     var Juros = document.getElementById("Juros").value;
     var Multa = document.getElementById("Multa").value;
+    var Cheque = document.getElementById("Cheque").value;
 
     document.getElementById("Juros2").value = Juros;
     document.getElementById("Multa2").value = Multa;
+    document.getElementById("Cheque2").value = Cheque;
 
 }
 

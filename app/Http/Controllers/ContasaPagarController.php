@@ -20,12 +20,15 @@ class ContasaPagarController extends Controller
 
         $Juros = empty($request->Juros2) ? 0 : $request->Juros2;
         $Multa = empty($request->Multa2) ? 0 : $request->Multa2;
+        $Cheque = empty($request->Cheque2) ? '' : $request->Cheque2;
 
-        if ($Banco->Saque(Str::substr($request->conta, 0, 1), $request->Valor))
+        if ($Banco->Saque(Str::substr($request->conta, 0, 1), $request->Valor + $Multa + $Juros))
             $ContasaPagar->update([
                 'status' => 1,
                 'Juros' => $Juros,
-                'Multa' => $Multa
+                'Multa' => $Multa,
+                'Cheque' => $Cheque,
+                'Conta' => $request->conta
             ]);
 
         return   "<script>
@@ -36,13 +39,18 @@ class ContasaPagarController extends Controller
 
     public function Estornar(Request $request)
     {
+        $Juros = empty($request->Juros2) ? 0 : $request->Juros2;
+        $Multa = empty($request->Multa2) ? 0 : $request->Multa2;
+
         $Banco = new ContasBancariasController();
-        if ($Banco->Deposito(Str::substr($request->conta, 0, 1), $request->Valor))
+        if ($Banco->Deposito(Str::substr($request->conta2, 0, 1), $request->Valor + $Multa + $Juros))
             $ContasaPagar = ContasaPagar::findOrFail($request->id);
         $ContasaPagar->update([
             'status' => 0,
             'Juros' => 0,
-            'Multa' => 0
+            'Multa' => 0,
+            'Cheque' => 0,
+            'Conta' => 0
         ]);
 
 
@@ -126,7 +134,8 @@ class ContasaPagarController extends Controller
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
                 'status' => isset($request->status) ? false : false,
                 'Juros' => 0,
-                'Multa' => 0
+                'Multa' => 0,
+                'Cheque' => 0
             ]);
 
             return
@@ -146,6 +155,7 @@ class ContasaPagarController extends Controller
         =>  $ObterDados->ListaDeEmpresas(), 'Fornecedor' =>  $ObterDados->ListaDeFornecedores()]);
     }
 
+
     public function Listartodos(Request $request)
     {
         $Obter = new ObterDados();
@@ -159,6 +169,18 @@ class ContasaPagarController extends Controller
         )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
         return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar, 'Contas' => $ContasBancarias]);
+    }
+
+    public function ListarAtrasadas()
+    {
+        $ContasaPagar = DB::table('contasa_pagars')->join(
+            'empresas',
+            'contasa_pagars.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->Where('contasa_pagars.vencimento', '>=', 'CURRENT_DATE()')->get();
+
+        return $ContasaPagar;
     }
 
     public function update(Request $request, $id)
@@ -226,7 +248,8 @@ class ContasaPagarController extends Controller
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
                 'status' => isset($request->status) ? false : false,
                 'Juros' => 0,
-                'Multa' => 0
+                'Multa' => 0,
+                'Cheque' => 0
             ]);
 
             return

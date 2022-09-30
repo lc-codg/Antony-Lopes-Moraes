@@ -34,6 +34,8 @@ return new class extends Migration
             $table->boolean('status');
             $table->decimal('Juros',19,2);
             $table->decimal('Multa',19,2);
+            $table->string('Cheque',100)->nullable()->default(NULL);
+            $table->string('Conta',100)->nullable()->default(NULL);
             $table->timestamps();
         });
     }

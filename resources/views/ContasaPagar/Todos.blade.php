@@ -48,7 +48,20 @@
             <button id='h7' type="button" class="btn btn-ligth btn-xs">
 
 
+
         </div>
+
+        <button id='h8' type="button" class='btn btn-dark btn-xs'>
+            <select id='ContaBancaria' onchange="SelecionaContaBancaria();" class="form-control" name="conta"
+                id="">
+                <option selected>Selecione</option>
+                @foreach ($Contas as $C)
+
+                    <option >{{ $C->id }} - {{ $C->Descricao }}</option>
+                @endforeach
+            </select>
+        </button>
+
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 12px; width:100%;">
             <thead class="thead-dark">
                 <tr>
@@ -70,7 +83,7 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope='col'>Conta Bancária</th>
+
 
                 </tr>
             </thead>
@@ -93,9 +106,9 @@
                         <td>{{ $row->Razaof }}</td>
 
                         @if ($row->status === 0)
-                            <td class='price2'>R${{ $row->Total + $row->Juros + $row->Multa  }}</td>
+                            <td class='price2'>R${{ $row->Total + $row->Juros + $row->Multa }}</td>
                         @else
-                            <td class='price'>R${{ $row->Total + $row->Juros + $row->Multa  }}</td>
+                            <td class='price'>R${{ $row->Total + $row->Juros + $row->Multa }}</td>
                         @endif
 
                         <td>{{ $row->Vencimento }}</td>
@@ -104,62 +117,60 @@
 
 
                         <td>
-                            <input @if ($row->status === 1) readonly  value='{{$row->Juros }}' @endif
+                            <input @if ($row->status === 1) readonly  value='{{ $row->Juros }}' @endif
                                 style='font-size: 12px;width:70px;'type="number" pattern="[0-9]+([,\.][0-9]+)?"
                                 min="0" step="any" class="form-control" name="Juros" id="Juros"
                                 aria-describedby="helpId" placeholder="">
                         </td>
                         <td>
-                            <input @if ($row->status === 1) readonly
-                            value='{{$row->Multa }}'@endif style='font-size: 12px;width:70px;'
-                                type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                                class="form-control" name="Multa" id="Multa" aria-describedby="helpId"
-                                placeholder="">
+                            <input
+                                @if ($row->status === 1) readonly
+                            value='{{ $row->Multa }}' @endif
+                                style='font-size: 12px;width:70px;' type="number" pattern="[0-9]+([,\.][0-9]+)?"
+                                min="0" step="any" class="form-control" name="Multa" id="Multa"
+                                aria-describedby="helpId" placeholder="">
                         </td>
 
                         <td>
-                            <input @if ($row->status === 1) readonly
-                            value=''@endif style='font-size: 12px;width:70px;'
-                                type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                                class="form-control" name="Cheque" id="Multa" aria-describedby="helpId"
+                            <input
+                                @if ($row->status === 1) readonly
+                            value='{{ $row->Cheque }}' @endif
+                                style='font-size: 12px;width:70px;' type="text" step="any"
+                                class="form-control" name="Cheque" id="Cheque" aria-describedby="helpId"
                                 placeholder="">
                         </td>
 
                         <td>
 
                             <form action="/ContasaPagar/Ver/{{ $row->id }}" method="get">
-                                <input style='width:65px;font-size: 12px;'class="btn btn-dark" name="" type="submit" Value='Editar'>
+                                <input style='width:65px;font-size: 12px;'class="btn btn-dark" name=""
+                                    type="submit" Value='Editar'>
                             </form>
 
                         </td>
                         <td>
                             <form action="/ContasaPagar/Delete/{{ $row->id }}" method="get">
-                                <input style='width:65px;font-size: 12px;' class="btn btn-danger" name="" type="submit" Value='Excluir'>
+                                <input style='width:65px;font-size: 12px;' class="btn btn-danger" name=""
+                                    type="submit" Value='Excluir'>
                             </form>
                         </td>
                         @if ($row->status === 0)
                             <td>
-                                <form action="/ContasaPagar/Quitar" method="get">
+                                <form id='FrmQuitar'action="/ContasaPagar/Quitar" method="get">
 
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Pagar'>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
                                     <input hidden name='Juros2'value='' id='Juros2'>
                                     <input hidden name='Multa2' value='' id='Multa2'>
-                                    <input style='width:65px;font-size: 12px;' onclick='JurosEMulta();'class="btn btn-primary" name=""
-                                        type="submit" Value='Quitar'>
+                                    <input hidden name='Cheque2' value='' id='Cheque2'>
+                                    <input hidden name='conta' value='' id='conta'>
+                                    <input style='width:65px;font-size: 12px;'
+                                        onclick='ValidarForm();'class="btn btn-primary" name=""
+                                        type="button" Value='Quitar'>
 
                             </td>
-                            <td>
 
-
-                                <select style='font-size:15px' class="form-control" name="conta" id="">
-                                    @foreach ($Contas as $C)
-                                        <option selected>{{ $C->id }} - {{ $C->Descricao }}</option>
-                                    @endforeach
-                                </select>
-
-                            </td>
                             </form>
                         @else
                             <td>
@@ -168,20 +179,15 @@
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Pagar'>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input style='width:65px;font-size: 12px;' class="btn btn-warning" name="" type="submit" Value='Estornar'>
+                                    <input hidden name='Juros2'value='{{ $row->Juros }}' id='Juros2'>
+                                    <input hidden name='Multa2' value='{{ $row->Multa }}' id='Multa2'>
+                                    <input hidden name='conta2' value='{{ $row->Conta }}' id='conta2'>
+                                    <input style='width:65px;font-size: 12px;' class="btn btn-warning" name=""
+                                        type="submit" Value='Estornar'>
 
                             </td>
 
-                            <td>
 
-
-                                <select class="form-control" name="conta" id="">
-                                    @foreach ($Contas as $C)
-                                        <option selected>{{ $C->id }} - {{ $C->Descricao }}</option>
-                                    @endforeach
-                                </select>
-
-                            </td>
                             </form>
                         @endif
 

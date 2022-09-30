@@ -13,5 +13,5 @@ class ContasaPagar extends Model
     'Total', 'TotalDesconto', 'TotalAcréscimo', 'Vencimento', 'CodGrupo',
      'CodSubGrupo', 'Parcelas', 'Dataemissao', 'Datarecebimento', 'Boleta',
       'NotaFiscal', 'Serie', 'CodEmpresa', 'created_at', 'updated_at','status',
-    'Juros','Multa'];
+    'Juros','Multa','Cheque','Conta'];
 }
