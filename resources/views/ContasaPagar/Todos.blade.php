@@ -9,7 +9,7 @@
     @include('Header')
 
     <link href="/css/app.css" rel="stylesheet">
-
+    @php        $ContaDados = count($ContasaPagar); @endphp
 
 </head>
 
@@ -52,12 +52,11 @@
         </div>
 
         <button id='h8' type="button" class='btn btn-dark btn-xs'>
-            <select id='ContaBancaria' onchange="SelecionaContaBancaria();" class="form-control" name="conta"
+            <select id='ContaBancaria' onchange="SelecionaContaBancaria({{ $ContaDados }});" class="form-control" name="conta"
                 id="">
                 <option selected>Selecione</option>
                 @foreach ($Contas as $C)
-
-                    <option >{{ $C->id }} - {{ $C->Descricao }}</option>
+                    <option>{{ $C->id }} - {{ $C->Descricao }}</option>
                 @endforeach
             </select>
         </button>
@@ -90,9 +89,15 @@
             <tbody>
                 <tr>
 
+                    @php
+                        $IdDados = 0;
 
+                    @endphp
 
                     @foreach ($ContasaPagar as $row)
+
+                        @php $IdDados++; @endphp
+
                         <td>{{ $row->id }}</td>
 
                         @if ($row->status === 0)
@@ -164,7 +169,7 @@
                                     <input hidden name='Juros2'value='' id='Juros2'>
                                     <input hidden name='Multa2' value='' id='Multa2'>
                                     <input hidden name='Cheque2' value='' id='Cheque2'>
-                                    <input hidden name='conta' value='' id='conta'>
+                                    <input name='conta' value='' id='{{ $IdDados }}'>
                                     <input style='width:65px;font-size: 12px;'
                                         onclick='ValidarForm();'class="btn btn-primary" name=""
                                         type="button" Value='Quitar'>

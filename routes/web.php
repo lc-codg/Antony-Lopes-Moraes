@@ -110,6 +110,7 @@ Route::get('/ContasaReceber/Editar/{id}', [ContasaReceberController::class, 'upd
 Route::get('ContasaReceber/Delete/{id}', [ContasaRecebercontroller::class, 'destroy']);
 Route::get('/ContasaReceber/Quitar/', [ContasaReceberController::class, 'Quitar']);
 Route::get('/ContasaReceber/Estornar/', [ContasaReceberController::class, 'Estornar']);
+Route::get('/ContasaReceber/Validar/', [ContasaReceberController::class, 'Validar']);
 
 Route::get('/Despesas/Novo', [DespesasController::class, 'index']);
 Route::post('/Despesas/Salvar', [Despesascontroller::class, 'create']);

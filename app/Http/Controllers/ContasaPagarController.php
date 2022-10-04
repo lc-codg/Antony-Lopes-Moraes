@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
-use PhpParser\Node\Expr\Empty_;
+use Carbon\Carbon;
 
 class ContasaPagarController extends Controller
 {
@@ -28,7 +28,7 @@ class ContasaPagarController extends Controller
                 'Juros' => $Juros,
                 'Multa' => $Multa,
                 'Cheque' => $Cheque,
-                'Conta' => $request->conta
+                'Conta' => Str::substr($request->conta, 0, 1)
             ]);
 
         return   "<script>
@@ -178,11 +178,21 @@ class ContasaPagarController extends Controller
             'contasa_pagars.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->Where('contasa_pagars.vencimento', '>=', 'CURRENT_DATE()')->get();
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->WhereDate('contasa_pagars.vencimento', '>', 'CURRENT_DATE()')->get();
 
         return $ContasaPagar;
     }
+    public function ListarAVencer()
+    {
+        $ContasaPagar = DB::table('contasa_pagars')->join(
+            'empresas',
+            'contasa_pagars.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->WhereDate('contasa_pagars.vencimento', '<=', 'CURRENT_DATE()')->get();
 
+        return $ContasaPagar;
+    }
     public function update(Request $request, $id)
     {
         $ContasaPagar = ContasaPagar::findOrFail($id);

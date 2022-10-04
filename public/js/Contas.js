@@ -1,10 +1,11 @@
-function SelecionaContaBancaria() {
+function SelecionaContaBancaria(TotalDados) {
 
     var select = document.getElementById("ContaBancaria");
     var Valor = select.options[select.selectedIndex].text;
 
-    document.getElementById("conta").value = Valor;
-
+    for (let i = 1; i <= TotalDados; i++) {
+        document.getElementById(i).value = Valor;
+    }
 }
 
 function ValidarForm() {
@@ -14,6 +15,25 @@ function ValidarForm() {
         alert('Atenção! É necessário Selecionar uma conta para pagamento.');
     } else {
         JurosEMulta();
+        document.getElementById("FrmQuitar").submit();
+    }
+
+}
+
+function Parcial() {
+
+    var Valor = document.getElementById("Parcial").value;
+
+    document.getElementById("ValorParcial").value = Valor;
+}
+
+function ValidarFormReceber() {
+    var select = document.getElementById("ContaBancaria");
+    var Valor = select.options[select.selectedIndex].text;
+    if (Valor == 'Selecione') {
+        alert('Atenção! É necessário Selecionar uma conta para pagamento.');
+    } else {
+        Parcial();
         document.getElementById("FrmQuitar").submit();
     }
 

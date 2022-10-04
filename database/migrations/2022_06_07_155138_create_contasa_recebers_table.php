@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('Serie',100)->nullable()->default(NULL);;
             $table->integer('CodEmpresa');
             $table->boolean('status');
+            $table->string('conta',200)->default(NULL);
             $table->timestamps();
         });
     }

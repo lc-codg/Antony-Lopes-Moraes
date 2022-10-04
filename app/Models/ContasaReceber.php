@@ -9,8 +9,8 @@ class ContasaReceber extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['id', 'Barras', 'Descricao', 'CodCliente', 
+    protected $fillable = ['id', 'Barras', 'Descricao', 'CodCliente',
     'Total', 'TotalDesconto', 'TotalAcréscimo', 'TotaldosProdutos', 'Vencimento',
      'CodGrupo', 'CodSubGrupo', 'Parcelas', 'Dataemissao', 'Vencimento','Datarecebimento',
-     'Boleta', 'NotaFiscal', 'Serie', 'CodEmpresa', 'created_at', 'updated_at','status'];
+     'Boleta', 'NotaFiscal', 'Serie', 'CodEmpresa', 'created_at', 'updated_at','status','conta'];
 }

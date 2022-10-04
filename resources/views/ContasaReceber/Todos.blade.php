@@ -10,7 +10,7 @@
 <link href="/css/app.css" rel="stylesheet">
 
 <script src="{{ asset('js/Contas.js') }}"></script>
-
+@php        $ContaDados = count($ContasaReceber); @endphp
 <body>
     <div id='container' class='.container-fluid'>
         <h5>Contas a Receber</h5>
@@ -20,16 +20,19 @@
 
                 <div class="form-group col-md-2">
                     <label for="">Data Inicial</label>
-                    <input type="date" class="form-control" name="DataIni" id="" value="{{Date('Y-m-d')}}" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" name="DataIni" id="" value="{{ Date('Y-m-d') }}"
+                        aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="">Data Final</label>
-                    <input type="date" class="form-control" name="DataFim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" name="DataFim" value="{{ Date('Y-m-d') }}" id=""
+                        aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group col-md-4">
-                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar'
+                        aria-describedby="helpId" placeholder="">
                 </div>
 
             </div>
@@ -42,102 +45,120 @@
             <button id='h6' type="button" class="btn btn-danger  btn-xs"></button>
             <button id='h7' type="button" class="btn btn-ligth btn-xs"></button>
         </div>
+        <button id='h8' type="button" class='btn btn-dark btn-xs'>
+            <select id='ContaBancaria' onchange="SelecionaContaBancaria({{ $ContaDados }});" class="form-control" name="contab"
+                id="">
+                <option selected>Selecione</option>
+                @foreach ($Contas as $C)
+
+                    <option >{{ $C->id }} - {{ $C->Descricao }}</option>
+                @endforeach
+            </select>
+        </button>
+
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
                 <tr>
 
-                    <th scope="col">Cod.Contas a Receber</th>
+                    <th scope="col">Código</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Barras</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Total</th>
                     <th scope='col'>Vencimento</th>
-                    <th scope='col'>N° Parcela</th>
-                    <th scope='col'>N° Boleta</th>
+                    <th scope='col'>Parcela</th>
+                    <th scope='col'>Boleta</th>
+                    <th scope='col'>Parcial</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col">Conta Bancária</th>
+                    <th scope="col"></th>
 
                 </tr>
             </thead>
             <tbody>
                 <tr>
 
+                    @php
+                     $IdDados = 0;
+
+                    @endphp
 
 
                     @foreach ($ContasaReceber as $row)
 
-                    <td>{{ $row->id }}</td>
+                        @php $IdDados++; @endphp
 
-                    @if ($row->status === 0)
-                    <td data-estado="Pago" class='DescA'>{{ $row->Descricao }}</td>
-                    @else
-                    <td data-estado="Pagar" class='DescP'>{{ $row->Descricao }}</td>
-                    @endif
+                        <td>{{ $row->id }}</td>
 
-                    <td>{{ $row->Barras }}</td>
-                    <td>{{ $row->Razaoe}}</td>
-                    <td>{{ $row->Razaof}}</td>
+                        @if ($row->status === 0)
+                            <td data-estado="Pago" class='DescA'>{{ $row->Descricao }}</td>
+                        @else
+                            <td data-estado="Pagar" class='DescP'>{{ $row->Descricao }}</td>
+                        @endif
 
-                    @if ($row->status === 0)
-                    <td class='price2'>R${{ $row->Total}}</td>
-                    @else
-                    <td class='price'>R${{ $row->Total}}</td>
-                    @endif
-                    <td>{{ $row->Vencimento}}</td>
-                    <td>{{ $row->Parcelas}}</td>
-                    <td>{{ $row->Boleta}}</td>
+                        <td>{{ $row->Barras }}</td>
+                        <td>{{ $row->Razaoe }}</td>
+                        <td>{{ $row->Razaof }}</td>
+
+                        @if ($row->status === 0)
+                            <td class='price2'>R${{ $row->Total }}</td>
+                        @else
+                            <td class='price'>R${{ $row->Total }}</td>
+                        @endif
+                        <td>{{ $row->Vencimento }}</td>
+                        <td>{{ $row->Parcelas }}</td>
+                        <td>{{ $row->Boleta }}</td>
 
 
-                    <td>
+                        <td>
+                            <input @if ($row->status === 1) readonly  value='' @endif
+                                style='font-size: 12px;width:70px;'type="number" pattern="[0-9]+([,\.][0-9]+)?"
+                                min="0" step="any" class="form-control" name="Parcial" id="Parcial"
+                                aria-describedby="helpId" placeholder="">
+                        </td>
+                        <td>
 
-                        <form action="/ContasaReceber/Ver/{{ $row->id }}" method="get">
-                            <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                        </form>
+                            <form action="/ContasaReceber/Ver/{{ $row->id }}" method="get">
+                                <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                            </form>
 
-                    </td>
-                    <td>
-                        <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
-                            <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
-                        </form>
-                    </td>
-                    @if ($row->status === 0)
-                    <td>
-                        <form action="/ContasaReceber/Quitar/" method="get">
-                            <input name='id' hidden value='{{$row->id}}'>
-                            <input name='tipo' hidden value='Receber'>
-                            <input name='Valor' hidden value='{{$row->Total}}'>
-                            <input class="btn btn-primary" name="" type="submit" Value='Receber'>
+                        </td>
+                        <td>
+                            <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
+                                <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
+                            </form>
+                        </td>
+                        @if ($row->status === 0)
+                            <td>
+                                <form id='FrmQuitar'action="/ContasaReceber/Validar/" method="get">
+                                    <input name='id' hidden value='{{ $row->id }}'>
+                                    <input name='tipo' hidden value='Receber'>
+                                    <input name='ValorParcial' id='ValorParcial' hidden value=''>
+                                    <input name='Valor' hidden value='{{ $row->Total }}'>
+                                    <input  hidden name='conta' value='' id='{{ $IdDados }}'>
+                                    <input onclick='ValidarFormReceber();'class="btn btn-primary" name="" type="button" Value='Receber'>
 
-                    </td>
-                    <td>
-                        <select class="form-control" name="conta" id="">
-                            @foreach($Contas as $C)
-                            <option selected>{{$C->id}} - {{$C->Descricao}}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    </form>
-                    @else
+                            </td>
 
-                    <td>
-                        <form action="/ContasaReceber/Estornar/" method="get">
-                            <input name='id' hidden value='{{$row->id}}'>
-                            <input name='tipo' hidden value='Receber'>
-                            <input name='Valor' hidden value='{{$row->Total}}'>
-                            <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
-                    </td>
-                    <td>
-                        <select class="form-control" name="conta" id="">
-                            @foreach($Contas as $C)
-                            <option selected>{{$C->id}} - {{$C->Descricao}}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    </form>
-                    @endif
+
+
+
+
+                            </form>
+                        @else
+                            <td>
+                                <form action="/ContasaReceber/Estornar/" method="get">
+                                    <input name='id' hidden value='{{ $row->id }}'>
+                                    <input name='tipo' hidden value='Receber'>
+                                    <input hidden name='conta2' value='{{ $row->conta }}' id='conta2'>
+                                    <input name='Valor' hidden value='{{ $row->Total }}'>
+                                    <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
+                            </td>
+
+                            </form>
+                        @endif
 
 
 
