@@ -115,7 +115,7 @@
                         <td>
                             <input @if ($row->status === 1) readonly  value='' @endif
                                 style='font-size: 12px;width:70px;'type="number" pattern="[0-9]+([,\.][0-9]+)?"
-                                min="0" step="any" class="form-control" name="Parcial" id="Parcial"
+                                min="0" step="any" class="form-control" onkeyup='Parcial({{$IdDados}});'name="Parcial" id="Parcial{{ $IdDados }}"
                                 aria-describedby="helpId" placeholder="">
                         </td>
                         <td>
@@ -135,10 +135,11 @@
                                 <form id='FrmQuitar'action="/ContasaReceber/Validar/" method="get">
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Receber'>
-                                    <input name='ValorParcial' id='ValorParcial' hidden value=''>
+                                    <input name='ValorParcial' id='ValorParcial{{ $IdDados }}' hidden value=''>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input  hidden name='conta' value='' id='{{ $IdDados }}'>
-                                    <input onclick='ValidarFormReceber();'class="btn btn-primary" name="" type="button" Value='Receber'>
+                                    <input  hidden name='conta' value='' id='{{$IdDados}}'>
+                                    <input onclick='QuitarContasAReceber({{ $row->id }},{{$IdDados}},
+                                    {{ $row->Total }});'class="btn btn-primary" name="" id='btn{{$IdDados}}' type="button" Value='Receber'>
 
                             </td>
 
@@ -152,7 +153,7 @@
                                 <form action="/ContasaReceber/Estornar/" method="get">
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Receber'>
-                                    <input hidden name='conta2' value='{{ $row->conta }}' id='conta2'>
+                                    <input hidden name='conta2' value='{{ $row->conta }}' id='{{$IdDados}}'>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
                                     <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
                             </td>

@@ -172,19 +172,14 @@ class ContasaReceberController extends Controller
     public function Validar(Request $request)
     {
         if (($request->ValorParcial >= $request->Valor) or (($request->ValorParcial == ''))) {
+
             $this->Quitar($request);
 
-            return   "<script>
-          alert('Quitado com sucesso!');
-          location = '/ContasaReceber/Todos';
-        </script>";
+            return 'Quitada com sucesso!' ;
         } else {
             $this->PagarParcial($request);
-
-            return   "<script>
-            alert('Laçamento Parcial com sucesso!');
-            location = '/ContasaReceber/Todos';
-          </script>";
+            $resto = 'Parcialmente Quitada, resta: '.($request->Valor - $request->ValorParcial);
+            return  $resto;
         }
     }
 

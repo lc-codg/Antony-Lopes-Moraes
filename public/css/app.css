@@ -3,6 +3,12 @@
     margin-right: 1%;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 #Total {
     color: blue;
     font-size: 25px;
@@ -24,19 +30,24 @@
 #Bot {
     margin-top: 7%;
 }
-#btnVoltar{
+
+#btnVoltar {
     margin-top: 7%;
     margin-left: 12px;
 }
-.price{
-    color:blue;
+
+.price {
+    color: blue;
 }
-.price2{
-    color:red;
+
+.price2 {
+    color: red;
 }
-.DescP{
-    color:blue;
+
+.DescP {
+    color: blue;
 }
-.DescA{
-    color:red;
+
+.DescA {
+    color: red;
 }

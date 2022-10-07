@@ -124,7 +124,7 @@
                         <td>
                             <input @if ($row->status === 1) readonly  value='{{ $row->Juros }}' @endif
                                 style='font-size: 12px;width:70px;'type="number" pattern="[0-9]+([,\.][0-9]+)?"
-                                min="0" step="any" class="form-control" name="Juros" id="Juros"
+                                min="0" step="any" class="form-control" onkeyup='Juros({{$IdDados}});' name="Juros" id="Juros{{$IdDados}}"
                                 aria-describedby="helpId" placeholder="">
                         </td>
                         <td>
@@ -132,7 +132,7 @@
                                 @if ($row->status === 1) readonly
                             value='{{ $row->Multa }}' @endif
                                 style='font-size: 12px;width:70px;' type="number" pattern="[0-9]+([,\.][0-9]+)?"
-                                min="0" step="any" class="form-control" name="Multa" id="Multa"
+                                min="0" step="any" class="form-control" onkeyup='Multa({{$IdDados}});'name="Multa" id="Multa{{$IdDados}}"
                                 aria-describedby="helpId" placeholder="">
                         </td>
 
@@ -141,7 +141,7 @@
                                 @if ($row->status === 1) readonly
                             value='{{ $row->Cheque }}' @endif
                                 style='font-size: 12px;width:70px;' type="text" step="any"
-                                class="form-control" name="Cheque" id="Cheque" aria-describedby="helpId"
+                                class="form-control" name="Cheque" onkeyup='Cheque({{$IdDados}});'id="Cheque{{$IdDados}}" aria-describedby="helpId"
                                 placeholder="">
                         </td>
 
@@ -163,13 +163,13 @@
                             <td>
                                 <form id='FrmQuitar'action="/ContasaPagar/Quitar" method="get">
 
-                                    <input name='id' hidden value='{{ $row->id }}'>
+                                    <input name='id' hidden value='{{$row->id}}'>
                                     <input name='tipo' hidden value='Pagar'>
-                                    <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input hidden name='Juros2'value='' id='Juros2'>
-                                    <input hidden name='Multa2' value='' id='Multa2'>
-                                    <input hidden name='Cheque2' value='' id='Cheque2'>
-                                    <input name='conta' value='' id='{{ $IdDados }}'>
+                                    <input hidden name='Valor' hidden value='{{$row->Total}}'>
+                                    <input  hidden name='Juros2'value='' id='Juros2{{$IdDados}}'>
+                                    <input  hidden name='Multa2' value='' id='Multa2{{$IdDados}}'>
+                                    <input  hidden name='Cheque2' value='' id='Cheque2{{$IdDados}}'>
+                                    <input hidden name='conta' hidden value='' id='{{$IdDados}}'>
                                     <input style='width:65px;font-size: 12px;'
                                         onclick='ValidarForm();'class="btn btn-primary" name=""
                                         type="button" Value='Quitar'>
@@ -186,7 +186,7 @@
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
                                     <input hidden name='Juros2'value='{{ $row->Juros }}' id='Juros2'>
                                     <input hidden name='Multa2' value='{{ $row->Multa }}' id='Multa2'>
-                                    <input hidden name='conta2' value='{{ $row->Conta }}' id='conta2'>
+                                    <input hidden name='conta2' value='{{ $row->Conta }}' id='{{$IdDados}}'>
                                     <input style='width:65px;font-size: 12px;' class="btn btn-warning" name=""
                                         type="submit" Value='Estornar'>
 

@@ -1,3 +1,26 @@
+function QuitarContasAReceber(id, idclass, total) {
+
+    if (ValidarFormReceber() == true) {
+
+        var Parcial = document.getElementById("ValorParcial" + idclass).value;
+        var Conta = document.getElementById(idclass).value;
+
+        $.ajax({
+
+            method: 'get',
+            url: '/ContasaReceber/Validar/',
+            data: { 'id': id, 'tipo': 'Receber', 'ValorParcial': Parcial, 'Valor': total, 'conta': Conta },
+            success: function(retorno) {
+
+                alert(retorno);
+                document.getElementById("btn" + idclass).style.visibility = 'hidden';
+            }
+        });
+    }
+
+}
+
+
 function SelecionaContaBancaria(TotalDados) {
 
     var select = document.getElementById("ContaBancaria");
@@ -14,17 +37,17 @@ function ValidarForm() {
     if (Valor == 'Selecione') {
         alert('Atenção! É necessário Selecionar uma conta para pagamento.');
     } else {
-        JurosEMulta();
-        document.getElementById("FrmQuitar").submit();
+
+        return true;
     }
 
 }
 
-function Parcial() {
+function Parcial(id) {
 
-    var Valor = document.getElementById("Parcial").value;
+    var Valor = document.getElementById("Parcial" + id).value;
 
-    document.getElementById("ValorParcial").value = Valor;
+    document.getElementById("ValorParcial" + id).value = Valor;
 }
 
 function ValidarFormReceber() {
@@ -33,23 +56,33 @@ function ValidarFormReceber() {
     if (Valor == 'Selecione') {
         alert('Atenção! É necessário Selecionar uma conta para pagamento.');
     } else {
-        Parcial();
-        document.getElementById("FrmQuitar").submit();
+
+        return true;
     }
 
 }
 
-function JurosEMulta() {
+function Juros(id) {
 
-    var Juros = document.getElementById("Juros").value;
-    var Multa = document.getElementById("Multa").value;
-    var Cheque = document.getElementById("Cheque").value;
-
-    document.getElementById("Juros2").value = Juros;
-    document.getElementById("Multa2").value = Multa;
-    document.getElementById("Cheque2").value = Cheque;
+    var Juros = document.getElementById("Juros" + id).value;
+    document.getElementById("Juros2" + id).value = Juros;
 
 }
+
+function Multa(id) {
+
+    var Multa = document.getElementById("Multa" + id).value;
+    document.getElementById("Multa2" + id).value = Multa;
+
+}
+
+function Cheque(id) {
+
+    var Cheque = document.getElementById("Cheque" + id).value;
+    document.getElementById("Cheque2" + id).value = Cheque;
+
+}
+
 
 $(function() {
 
