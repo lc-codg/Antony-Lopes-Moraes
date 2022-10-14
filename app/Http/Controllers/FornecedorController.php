@@ -22,7 +22,7 @@ class FornecedorController extends Controller
     {
         $cliente = Fornecedor::findorFail($request->id);
 
-        Session::put('Fornecedor', [
+        Session::put('fornecedor', [
             'Razao' => ($cliente->Nome == '') ? $cliente->Razao : $cliente->Nome,
             'Cnpj' => ($cliente->Cpf == '') ? $cliente->Cnpj : $cliente->Cpf,
             'Id' => $cliente->id,
@@ -48,17 +48,17 @@ class FornecedorController extends Controller
     }
     public function ListarTodos(Request $request)
     {
-        $Fornecedor = DB::table('Fornecedors')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
+        $Fornecedor = DB::table('fornecedors')->where('Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cpf', 'LIKE', '%' . $request->Nome . '%')->orwhere('Nome', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
         return view('Fornecedor.Todos', ['Fornecedors' => $Fornecedor]);
     }
     public function Listar()
     {
-        $Fornecedor = DB::table('Fornecedors')->get();
+        $Fornecedor = DB::table('fornecedors')->get();
         return $Fornecedor;
     }
     public function ListarPrimeiro()
     {
-        $Fornecedor = DB::table('Fornecedors')->select('id')->limit(1);
+        $Fornecedor = DB::table('fornecedors')->select('id')->limit(1);
         return view('Fornecedor.Todos', ['Fornecedors' => $Fornecedor]);
     }
 

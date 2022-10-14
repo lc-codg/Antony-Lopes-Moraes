@@ -30,7 +30,7 @@ use App\Http\Controllers\ArrecadacaoController;
 */
 
 Route::get('/', function () {
-    return view('Home');
+    return view('home');
 });
 
 Route::get('/Produtos/Novo', [ProdutosController::class, 'Cadastrar']);

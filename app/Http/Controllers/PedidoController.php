@@ -91,7 +91,7 @@ class PedidoController extends Controller
         join('empresas', 'pedidos.CodEmpresa','=','empresas.id')->
         where('empresas.Razao', 'LIKE', '%'.$request->Nome.'%')->
         orwhere('clientes.Nome','LIKE','%'.$request->Nome.'%')->
-        orwhere('Clientes.Razao','LIKE','%'.$request->Nome.'%')->
+        orwhere('clientes.Razao','LIKE','%'.$request->Nome.'%')->
         whereBetween('DtPedido',array($request->Dataini,$request->Datafim))->
         paginate(20);
 

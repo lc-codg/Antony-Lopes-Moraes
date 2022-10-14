@@ -75,7 +75,7 @@ class ProdutosController extends Controller
 
     public function Cadastrar()
     {
-        return view('Produtos.produto');
+        return view('Produtos.Produto');
     }
 
     public function Salvar(Request $request)

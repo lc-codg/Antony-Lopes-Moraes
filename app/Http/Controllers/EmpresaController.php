@@ -40,18 +40,18 @@ class EmpresaController extends Controller
     }
     public function ListarTodos(Request $request)
     {
-        $Empresa = DB::table('Empresas')->where('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
+        $Empresa = DB::table('empresas')->where('Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('Cnpj', 'LIKE', '%' . $request->Nome . '%')->paginate(20);
         return view('Empresa.Todos', ['Empresas' => $Empresa]);
     }
     public function Listar()
     {
 
-        $Empresa = DB::table('Empresas')->get();
+        $Empresa = DB::table('empresas')->get();
         return $Empresa;
     }
     public function ListarPrimeiro()
     {
-        $Empresa = DB::table('Empresas')->select('id')->limit(1);
+        $Empresa = DB::table('empresas')->select('id')->limit(1);
         return view('Empresa.Todos', ['Empresas' => $Empresa]);
     }
     public function Salvar(Request $request)

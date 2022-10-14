@@ -98,12 +98,12 @@ class ReceitasController extends Controller
 
     public function Listartodos(Request $request)
     {
-        $Receitas = DB::table('Receitas')->join(
+        $Receitas = DB::table('receitas')->join(
             'empresas',
-            'Receitas.CodEmpresa',
+            'receitas.CodEmpresa',
             '=',
             'empresas.id'
-        )->select('Receitas.*', 'empresas.Razao as Razaoe', 'Receitas.CodCliente as Razaof')->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->select('receitas.*', 'empresas.Razao as Razaoe', 'receitas.CodCliente as Razaof')->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(20);
 
         return view('/Receitas.Todos', ['Receitas' => $Receitas]);
     }
