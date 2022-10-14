@@ -31,10 +31,8 @@ class ContasaPagarController extends Controller
                 'Conta' => Str::substr($request->conta, 0, 1)
             ]);
 
-        return   "<script>
-    alert('Quitado com sucesso!');
-    location = '/ContasaPagar/Todos';
-  </script>";
+        return 'Quitado com sucesso!';
+
     }
 
     public function Estornar(Request $request)
@@ -54,11 +52,9 @@ class ContasaPagarController extends Controller
         ]);
 
 
-        return "<script>
-    alert('Estornado com sucesso!');
-    location = '/ContasaPagar/Todos';
-  </script>";
+        return 'Estornado com sucesso!';
     }
+
 
 
     public function index()

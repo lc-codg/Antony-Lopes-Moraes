@@ -204,10 +204,8 @@ class ContasaReceberController extends Controller
             'conta' => ''
         ]);
 
-        return "<script>
-    alert('Estornado com sucesso!');
-    location = '/ContasaReceber/Todos';
-  </script>";
+        return "Estornado com sucesso!";
+
     }
 
     public function show($id)

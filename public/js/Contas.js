@@ -1,9 +1,34 @@
+function QuitarContasAPagar(Valor, id, Generator) {
+    let Juros = document.getElementById('Juros2' + Generator).value;
+    let Multa = $('Multa2' + Generator).value;
+    let Cheque = $('#Cheque2' + Generator).value;
+    let Conta = $('#' + Generator).value;
+
+    $.ajax({
+
+        method: 'get',
+        url: '/ContasaPagar/Quitar/',
+        data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor },
+
+        success: function(retorno) {
+
+            alert(retorno);
+            document.getElementById("btn" + Generator).style.visibility = 'hidden';
+            document.getElementById("btn" + Generator).style.visibility = 'hidden';
+            document.getElementById("btn" + Generator).style.visibility = 'hidden';
+            document.getElementById("btn" + Generator).style.visibility = 'hidden';
+        }
+
+    });
+}
+
+
 function QuitarContasAReceber(id, idclass, total) {
 
     if (ValidarFormReceber() == true) {
 
         var Parcial = document.getElementById("ValorParcial" + idclass).value;
-        var Conta = document.getElementById(idclass).value;
+        var Conta = document.getElementById('conta' + idclass).value;
 
         $.ajax({
 
@@ -14,10 +39,30 @@ function QuitarContasAReceber(id, idclass, total) {
 
                 alert(retorno);
                 document.getElementById("btn" + idclass).style.visibility = 'hidden';
+                document.getElementById("btned" + idclass).style.visibility = 'hidden';
+                document.getElementById("btnd" + idclass).style.visibility = 'hidden';
             }
         });
     }
 
+}
+
+function EstornarContasAReceber(id, idclass, total) {
+
+    var Conta = document.getElementById('conta' + idclass).value;
+
+    $.ajax({
+        method: 'get',
+        url: '/ContasaReceber/Estornar/',
+        data: { 'id': id, 'tipo': 'Receber', 'Valor': total, 'conta2': Conta },
+        success: function(retorno) {
+
+            alert(retorno);
+            document.getElementById("btne" + idclass).style.visibility = 'hidden';
+            document.getElementById("btned" + idclass).style.visibility = 'hidden';
+            document.getElementById("btnd" + idclass).style.visibility = 'hidden';
+        }
+    });
 }
 
 
@@ -27,7 +72,7 @@ function SelecionaContaBancaria(TotalDados) {
     var Valor = select.options[select.selectedIndex].text;
 
     for (let i = 1; i <= TotalDados; i++) {
-        document.getElementById(i).value = Valor;
+        document.getElementById('conta' + i).value = Valor;
     }
 }
 
@@ -115,8 +160,7 @@ $(function() {
 
     }
 
-    console.log(sum);
-    console.log(sum2);
+
 
 
 

@@ -121,13 +121,13 @@
                         <td>
 
                             <form action="/ContasaReceber/Ver/{{ $row->id }}" method="get">
-                                <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                                <input class="btn btn-dark" id='btned{{$IdDados}}'name="" type="submit" Value='Editar'>
                             </form>
 
                         </td>
                         <td>
                             <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
-                                <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
+                                <input class="btn btn-danger" id='btnd{{$IdDados}}'name="" type="submit" Value='Cancelar'>
                             </form>
                         </td>
                         @if ($row->status === 0)
@@ -137,7 +137,7 @@
                                     <input name='tipo' hidden value='Receber'>
                                     <input name='ValorParcial' id='ValorParcial{{ $IdDados }}' hidden value=''>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input  hidden name='conta' value='' id='{{$IdDados}}'>
+                                    <input  hidden name='conta' value='' id="conta{{$IdDados}}">
                                     <input onclick='QuitarContasAReceber({{ $row->id }},{{$IdDados}},
                                     {{ $row->Total }});'class="btn btn-primary" name="" id='btn{{$IdDados}}' type="button" Value='Receber'>
 
@@ -153,9 +153,10 @@
                                 <form action="/ContasaReceber/Estornar/" method="get">
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Receber'>
-                                    <input hidden name='conta2' value='{{ $row->conta }}' id='{{$IdDados}}'>
+                                    <input hidden name='conta2' value='{{ $row->conta }}' id='conta{{$IdDados}}'>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
+                                    <input onclick='EstornarContasAReceber({{ $row->id }},{{$IdDados}},
+                                    {{ $row->Total }});'class="btn btn-warning" name="" id='btne{{$IdDados}}'class="btn btn-warning" name="" type="button" Value='Estornar'>
                             </td>
 
                             </form>
