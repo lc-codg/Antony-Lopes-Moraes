@@ -139,7 +139,7 @@
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
                                     <input  hidden name='conta' value='' id="conta{{$IdDados}}">
                                     <input onclick='QuitarContasAReceber({{ $row->id }},{{$IdDados}},
-                                    {{ $row->Total }});'class="btn btn-primary" name="" id='btn{{$IdDados}}' type="button" Value='Receber'>
+                                    {{ $row->Total }});'class="btn btn-primary" name="" id='btnq{{$IdDados}}' type="button" Value='Receber'>
 
                             </td>
 

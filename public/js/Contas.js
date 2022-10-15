@@ -1,26 +1,56 @@
 function QuitarContasAPagar(Valor, id, Generator) {
-    let Juros = document.getElementById('Juros2' + Generator).value;
-    let Multa = $('Multa2' + Generator).value;
-    let Cheque = $('#Cheque2' + Generator).value;
-    let Conta = $('#' + Generator).value;
+
+    if (ValidarFormReceber() == true) {
+
+        let Juros = document.getElementById("Juros2" + Generator).value;
+        let Multa = document.getElementById('Multa2' + Generator).value;
+        let Cheque = document.getElementById('Cheque2' + Generator).value;
+        let Conta = document.getElementById('conta' + Generator).value;
+
+        $.ajax({
+
+            method: 'get',
+            url: '/ContasaPagar/Quitar/',
+            data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor },
+
+            success: function(retorno) {
+
+                alert(retorno);
+                document.getElementById("btnec" + Generator).style.visibility = 'hidden';
+                document.getElementById("btned" + Generator).style.visibility = 'hidden';
+                document.getElementById("btnq" + Generator).style.visibility = 'hidden';
+
+
+            }
+
+        });
+    }
+}
+
+function EstornarContasAPagar(Valor, id, Generator) {
+
+    let Juros = document.getElementById("Juros2" + Generator).value;
+    let Multa = document.getElementById('Multa2' + Generator).value;
+    let Conta = document.getElementById('conta' + Generator).value;
 
     $.ajax({
 
         method: 'get',
-        url: '/ContasaPagar/Quitar/',
-        data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor },
+        url: '/ContasaPagar/Estornar/',
+        data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'conta2': Conta, 'Valor': Valor },
 
         success: function(retorno) {
 
             alert(retorno);
-            document.getElementById("btn" + Generator).style.visibility = 'hidden';
-            document.getElementById("btn" + Generator).style.visibility = 'hidden';
-            document.getElementById("btn" + Generator).style.visibility = 'hidden';
-            document.getElementById("btn" + Generator).style.visibility = 'hidden';
+            document.getElementById("btnec" + Generator).style.visibility = 'hidden';
+            document.getElementById("btned" + Generator).style.visibility = 'hidden';
+            document.getElementById("btne" + Generator).style.visibility = 'hidden';
+
         }
 
     });
 }
+
 
 
 function QuitarContasAReceber(id, idclass, total) {
@@ -76,17 +106,6 @@ function SelecionaContaBancaria(TotalDados) {
     }
 }
 
-function ValidarForm() {
-    var select = document.getElementById("ContaBancaria");
-    var Valor = select.options[select.selectedIndex].text;
-    if (Valor == 'Selecione') {
-        alert('Atenção! É necessário Selecionar uma conta para pagamento.');
-    } else {
-
-        return true;
-    }
-
-}
 
 function Parcial(id) {
 

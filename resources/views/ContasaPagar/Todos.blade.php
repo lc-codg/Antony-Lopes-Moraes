@@ -150,15 +150,15 @@
                         <td>
 
                             <form action="/ContasaPagar/Ver/{{ $row->id }}" method="get">
-                                <input style='width:65px;font-size: 12px;'class="btn btn-dark" name="btned{{ $IdDados }}"
-                                    type="submit" Value='Editar'>
+                                <input style='width:65px;font-size: 12px;'class="btn btn-dark"
+                                   id="btned{{ $IdDados }}" type="submit" Value='Editar'>
                             </form>
 
                         </td>
                         <td>
                             <form action="/ContasaPagar/Delete/{{ $row->id }}" method="get">
-                                <input style='width:65px;font-size: 12px;' class="btn btn-danger" name="btnec{{ $IdDados }}"
-                                    type="submit" Value='Excluir'>
+                                <input style='width:65px;font-size: 12px;' class="btn btn-danger"
+                                  id="btnec{{ $IdDados }}" type="submit" Value='Excluir'>
                             </form>
                         </td>
                         @if ($row->status === 0)
@@ -168,14 +168,15 @@
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Pagar'>
                                     <input hidden name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input hidden name='Juros2'value='' id='Juros2{{ $IdDados }}>
-                                    <input hidden name='Multa2' value='' id='Multa2{{ $IdDados }}>
-                                    <input hidden name='Cheque2' value='' id='Cheque2{{ $IdDados }}>
-                                    <input hidden name='conta' hidden value='' id='{{ $IdDados }}'>
+                                    <input hidden name='Juros2'value='' id='Juros2{{ $IdDados }}'>
+                                    <input hidden name='Multa2' value='' id='Multa2{{ $IdDados }}'>
+                                    <input hidden name='Cheque2' value='' id='Cheque2{{ $IdDados }}'>
+                                    <input hidden name='conta' hidden value=''
+                                        id='conta{{ $IdDados }}'>
                                     <input style='width:65px;font-size: 12px;'
                                         onclick='QuitarContasAPagar({{ $row->Total }},{{ $row->id }},{{ $IdDados }});
                                         'class="btn btn-primary"
-                                        name="btnq{{ $IdDados }}" type="button" Value='Quitar'>
+                                       id="btnq{{ $IdDados }}" type="button" Value='Quitar'>
 
                             </td>
 
@@ -187,12 +188,15 @@
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Pagar'>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input hidden name='Juros2'value='{{ $row->Juros }}' id='Juros2'>
-                                    <input hidden name='Multa2' value='{{ $row->Multa }}' id='Multa2'>
-                                    <input hidden name='conta2' value='{{ $row->Conta }}'
-                                        id='{{ $IdDados }}'>
-                                    <input style='width:65px;font-size: 12px;' class="btn btn-warning" name="btne{{ $IDDados }}"
-                                        type="button" Value='Estornar'>
+                                    <input hidden name='Juros2'value='{{ $row->Juros }}' id='Juros2{{ $IdDados }}'>
+                                    <input hidden name='Multa2' value='{{ $row->Multa }}' id='Multa2{{ $IdDados }}'>
+                                    <input hidden name='Cheque2' value='{{ $row->Cheque }}' id='Cheque2{{ $IdDados }}'>
+                                    <input  hidden name='conta' value='{{$row->Conta }}'
+                                    id='conta{{ $IdDados }}'>
+
+                                    <input style='width:65px;font-size: 12px;' class="btn btn-warning"
+                                        id="btne{{ $IdDados }}"
+                                        onclick='EstornarContasAPagar({{ $row->Total }},{{ $row->id }},{{ $IdDados }});'  type="button" Value='Estornar'>
 
                             </td>
 
