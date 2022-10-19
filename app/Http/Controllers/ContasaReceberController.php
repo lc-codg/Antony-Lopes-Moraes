@@ -8,11 +8,12 @@ use Illuminate\Support\Str;
 use App\Models\ContasaReceber;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
-use App\Models\parcial;
+use App\Http\Controllers\ExtratoController;
 
 
 class ContasaReceberController extends Controller
 {
+
 
     public function PagarParcial($Dados)
     {
@@ -20,24 +21,13 @@ class ContasaReceberController extends Controller
         if ($Banco->Deposito(Str::substr($Dados->conta, 0, 1),  $Dados->Valor))
             $ContasaReceber = ContasaReceber::findOrFail($Dados->id);
 
-            $ContasaReceber->update([
-                'status' => 0,
-                'Total' => (($Dados->Valor) - ($Dados->ValorParcial)),
-                'conta' => ''
-
-
-            ]);
-
-        parcial::create([
-            'data' => now(),
-            'valor' => $Dados->ValorParcial,
-            'usuario' => '',
-            'id_original' => $Dados->id,
-            'pessoa' => '',
-            'conta' => Str::substr($Dados->conta, 0, 1),
+        $ContasaReceber->update([
+            'status' => 0,
+            'Total' => (($Dados->Valor) - ($Dados->ValorParcial)),
+            'conta' => ''
         ]);
-
-
+        $Extrato = new ExtratoController();
+        $Extrato->Extrato($Dados,'Parcial');
     }
 
     public function index()
@@ -175,10 +165,10 @@ class ContasaReceberController extends Controller
 
             $this->Quitar($request);
 
-            return 'Quitada com sucesso!' ;
+            return 'Quitada com sucesso!';
         } else {
             $this->PagarParcial($request);
-            $resto = 'Parcialmente Quitada, resta: '.($request->Valor - $request->ValorParcial);
+            $resto = 'Parcialmente Quitada, resta: ' . ($request->Valor - $request->ValorParcial);
             return  $resto;
         }
     }
@@ -192,6 +182,9 @@ class ContasaReceberController extends Controller
             'status' => 1,
             'conta' => Str::substr($Dados->conta, 0, 1),
         ]);
+
+        $Extrato = new ExtratoController();
+        $Extrato->Extrato($Dados,'Parcial');
     }
 
     public function Estornar(Request $request)
@@ -205,7 +198,6 @@ class ContasaReceberController extends Controller
         ]);
 
         return "Estornado com sucesso!";
-
     }
 
     public function show($id)

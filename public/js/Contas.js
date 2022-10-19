@@ -68,7 +68,7 @@ function QuitarContasAReceber(id, idclass, total) {
             success: function(retorno) {
 
                 alert(retorno);
-                document.getElementById("btn" + idclass).style.visibility = 'hidden';
+                document.getElementById("btnq" + idclass).style.visibility = 'hidden';
                 document.getElementById("btned" + idclass).style.visibility = 'hidden';
                 document.getElementById("btnd" + idclass).style.visibility = 'hidden';
             }

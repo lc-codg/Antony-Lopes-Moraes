@@ -11,6 +11,7 @@
 
 <script src="{{ asset('js/Contas.js') }}"></script>
 @php        $ContaDados = count($ContasaReceber); @endphp
+
 <body>
     <div id='container' class='.container-fluid'>
         <h5>Contas a Receber</h5>
@@ -46,12 +47,11 @@
             <button id='h7' type="button" class="btn btn-ligth btn-xs"></button>
         </div>
         <button id='h8' type="button" class='btn btn-dark btn-xs'>
-            <select id='ContaBancaria' onchange="SelecionaContaBancaria({{ $ContaDados }});" class="form-control" name="contab"
-                id="">
+            <select id='ContaBancaria' onchange="SelecionaContaBancaria({{ $ContaDados }});" class="form-control"
+                name="contab" id="">
                 <option selected>Selecione</option>
                 @foreach ($Contas as $C)
-
-                    <option >{{ $C->id }} - {{ $C->Descricao }}</option>
+                    <option>{{ $C->id }} - {{ $C->Descricao }}</option>
                 @endforeach
             </select>
         </button>
@@ -81,13 +81,14 @@
                 <tr>
 
                     @php
-                     $IdDados = 0;
+                        $IdDados = 0;
+                        use App\Http\Controllers\ExtratoController;
+                        $VerificaExtrato = new ExtratoController();
 
                     @endphp
 
 
                     @foreach ($ContasaReceber as $row)
-
                         @php $IdDados++; @endphp
 
                         <td>{{ $row->id }}</td>
@@ -115,19 +116,22 @@
                         <td>
                             <input @if ($row->status === 1) readonly  value='' @endif
                                 style='font-size: 12px;width:70px;'type="number" pattern="[0-9]+([,\.][0-9]+)?"
-                                min="0" step="any" class="form-control" onkeyup='Parcial({{$IdDados}});'name="Parcial" id="Parcial{{ $IdDados }}"
+                                min="0" step="any" class="form-control"
+                                onkeyup='Parcial({{ $IdDados }});'name="Parcial" id="Parcial{{ $IdDados }}"
                                 aria-describedby="helpId" placeholder="">
                         </td>
                         <td>
 
                             <form action="/ContasaReceber/Ver/{{ $row->id }}" method="get">
-                                <input class="btn btn-dark" id='btned{{$IdDados}}'name="" type="submit" Value='Editar'>
+                                <input class="btn btn-dark" id='btned{{ $IdDados }}'name=""
+                                    type="submit" Value='Editar'>
                             </form>
 
                         </td>
                         <td>
                             <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
-                                <input class="btn btn-danger" id='btnd{{$IdDados}}'name="" type="submit" Value='Cancelar'>
+                                <input class="btn btn-danger" id='btnd{{ $IdDados }}'name=""
+                                    type="submit" Value='Cancelar'>
                             </form>
                         </td>
                         @if ($row->status === 0)
@@ -135,13 +139,17 @@
                                 <form id='FrmQuitar'action="/ContasaReceber/Validar/" method="get">
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Receber'>
-                                    <input name='ValorParcial' id='ValorParcial{{ $IdDados }}' hidden value=''>
+                                    <input name='ValorParcial' id='ValorParcial{{ $IdDados }}' hidden
+                                        value=''>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input  hidden name='conta' value='' id="conta{{$IdDados}}">
-                                    <input onclick='QuitarContasAReceber({{ $row->id }},{{$IdDados}},
-                                    {{ $row->Total }});'class="btn btn-primary" name="" id='btnq{{$IdDados}}' type="button" Value='Receber'>
+                                    <input hidden name='conta' value='' id="conta{{ $IdDados }}">
+                                    <input
+                                        onclick='QuitarContasAReceber({{ $row->id }},{{ $IdDados }},
+                                    {{ $row->Total }});'class="btn btn-primary"
+                                        name="" id='btnq{{ $IdDados }}' type="button" Value='Receber'>
 
                             </td>
+
 
 
 
@@ -153,17 +161,23 @@
                                 <form action="/ContasaReceber/Estornar/" method="get">
                                     <input name='id' hidden value='{{ $row->id }}'>
                                     <input name='tipo' hidden value='Receber'>
-                                    <input hidden name='conta2' value='{{ $row->conta }}' id='conta{{$IdDados}}'>
+                                    <input hidden name='conta2' value='{{ $row->conta }}'
+                                        id='conta{{ $IdDados }}'>
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
-                                    <input onclick='EstornarContasAReceber({{ $row->id }},{{$IdDados}},
-                                    {{ $row->Total }});'class="btn btn-warning" name="" id='btne{{$IdDados}}'class="btn btn-warning" name="" type="button" Value='Estornar'>
+                                    <input
+                                        onclick='EstornarContasAReceber({{ $row->id }},{{ $IdDados }},
+                                    {{ $row->Total }});'class="btn btn-warning"
+                                        name="" id='btne{{ $IdDados }}'class="btn btn-warning"
+                                        name="" type="button" Value='Estornar'>
                             </td>
 
                             </form>
                         @endif
 
-
-
+                        @if ($VerificaExtrato->ConstaNoExtrato($row->id) == true)
+                            <td> <input class="btn btn-success" id='btnd{{ $IdDados }}'name=""
+                                    type="submit" Value='Parciais'></td>
+                        @endif
 
 
 
