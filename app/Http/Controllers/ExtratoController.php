@@ -41,4 +41,13 @@ class ExtratoController extends Controller
         $Total = Count($Extrato);
         return $Total > 0 ? true :false;
     }
+
+    function ShowExtrato(){
+
+        $Extrato = DB::table('parcials')->get()->paginate(20);
+
+        while($Extrato){
+            return $Extrato;
+        }
+    }
 }

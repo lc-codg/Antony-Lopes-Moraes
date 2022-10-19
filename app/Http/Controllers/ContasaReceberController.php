@@ -27,7 +27,7 @@ class ContasaReceberController extends Controller
             'conta' => ''
         ]);
         $Extrato = new ExtratoController();
-        $Extrato->Extrato($Dados,'Parcial');
+        $Extrato->ExtratoCredito($Dados,'Parcial');
     }
 
     public function index()
@@ -184,7 +184,7 @@ class ContasaReceberController extends Controller
         ]);
 
         $Extrato = new ExtratoController();
-        $Extrato->Extrato($Dados,'Parcial');
+        $Extrato->ExtratoCredito($Dados,'Parcial');
     }
 
     public function Estornar(Request $request)
