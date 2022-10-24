@@ -175,8 +175,14 @@
                         @endif
 
                         @if ($VerificaExtrato->ConstaNoExtrato($row->id) == true)
-                            <td> <input class="btn btn-success" id='btnd{{ $IdDados }}'name=""
-                                    type="submit" Value='Parciais'></td>
+
+                            <td>
+                                <form action="/Extrato/Todos/{{$row->id}}" method="get">                               
+                                    <input class="btn btn-success" id='btnd{{ $IdDados }}'name=""
+                                    type="submit" Value='Parciais'>
+
+                                </form>
+                                </td>
                         @endif
 
 

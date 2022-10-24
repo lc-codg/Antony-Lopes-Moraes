@@ -35,19 +35,17 @@ class ExtratoController extends Controller
         ]);
     }
 
-    function ConstaNoExtrato($id){
+    function ConstaNoExtrato($Id){
 
-        $Extrato = DB::table('parcials')->get();;
+        $Extrato = parcial::findOrFail($Id)->get();
         $Total = Count($Extrato);
         return $Total > 0 ? true :false;
     }
 
-    function ShowExtrato(){
+    function ShowExtrato($Id){
 
-        $Extrato = DB::table('parcials')->get()->paginate(20);
-
-        while($Extrato){
-            return $Extrato;
-        }
+        $Extrato = DB::table('parcials')->where('id_original','=',$Id)->paginate(20);
+        return view('/Extrato.Todos',['Extrato'=>$Extrato]);
     }
+  
 }

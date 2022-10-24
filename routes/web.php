@@ -146,3 +146,5 @@ Route::get('/Arrecadacao/Deletar/{id}',[ArrecadacaoController::class,'Excluir'])
 Route::get('/Arrecadacao/Editar/{id}',[ArrecadacaoController::class,'Editar']);
 Route::post('/Arrecadacao/Atualizar',[ArrecadacaoController::class,'Atualizar']);
 
+Route::get('/Extrato/Todos/{id}',[ExtratoController::class,'ShowExtrato']);
+
