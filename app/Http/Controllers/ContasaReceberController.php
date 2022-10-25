@@ -18,7 +18,7 @@ class ContasaReceberController extends Controller
     public function PagarParcial($Dados)
     {
         $Banco = new ContasBancariasController();
-        if ($Banco->Deposito(Str::substr($Dados->conta, 0, 1),  $Dados->Valor))
+        if ($Banco->Deposito(Str::substr($Dados->conta, 0, 1),  $Dados->ValorParcial))
             $ContasaReceber = ContasaReceber::findOrFail($Dados->id);
 
         $ContasaReceber->update([
@@ -198,6 +198,21 @@ class ContasaReceberController extends Controller
         ]);
 
         return "Estornado com sucesso!";
+    }
+    public function EParcial(Request $request)
+    {
+        $Banco = new ContasBancariasController();
+        
+        if ($Banco->Saque($request->conta, $request->Valor))
+            $ContasaReceber = ContasaReceber::findOrFail($request->id_original);
+        $ContasaReceber->update([
+            'status' => 0,
+            'Total' => $ContasaReceber->Total + $request->valor,
+            'conta' => ''
+        ]);
+        $Extrato = new ExtratoController();
+        $Extrato->CancelarParcial($request->id);
+        return "<script>alert('Estorno de parcial efetuado com sucesso!');window.history.back ();</script>"; 
     }
 
     public function show($id)

@@ -37,15 +37,20 @@ class ExtratoController extends Controller
 
     function ConstaNoExtrato($Id){
 
-        $Extrato = parcial::findOrFail($Id)->get();
+        $Extrato = DB::table('parcials')->where('id_original','=',$Id)->get();
         $Total = Count($Extrato);
         return $Total > 0 ? true :false;
     }
 
     function ShowExtrato($Id){
 
-        $Extrato = DB::table('parcials')->where('id_original','=',$Id)->paginate(20);
+        $Extrato = DB::table('parcials')->where('id_original','=',$Id)->Where('usuario','<>','Cancelado')->paginate(20);
         return view('/Extrato.Todos',['Extrato'=>$Extrato]);
     }
-  
+   function CancelarParcial($id){
+      $Extrato = parcial::findOrFail($id);
+      $Extrato->update([
+        'usuario'=> 'Cancelado',
+      ]);
+   }
 }

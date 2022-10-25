@@ -112,6 +112,7 @@ Route::get('ContasaReceber/Delete/{id}', [ContasaRecebercontroller::class, 'dest
 Route::get('/ContasaReceber/Quitar/', [ContasaReceberController::class, 'Quitar']);
 Route::get('/ContasaReceber/Estornar/', [ContasaReceberController::class, 'Estornar']);
 Route::get('/ContasaReceber/Validar/', [ContasaReceberController::class, 'Validar']);
+Route::post('/ContasaReceber/EstornarParcial/', [ContasaReceberController::class,'EParcial']);
 
 Route::get('/Despesas/Novo', [DespesasController::class, 'index']);
 Route::post('/Despesas/Salvar', [Despesascontroller::class, 'create']);

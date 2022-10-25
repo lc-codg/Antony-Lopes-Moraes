@@ -120,6 +120,8 @@
                                 onkeyup='Parcial({{ $IdDados }});'name="Parcial" id="Parcial{{ $IdDados }}"
                                 aria-describedby="helpId" placeholder="">
                         </td>
+                        
+                        @if ($VerificaExtrato->ConstaNoExtrato($row->id) == false)
                         <td>
 
                             <form action="/ContasaReceber/Ver/{{ $row->id }}" method="get">
@@ -128,12 +130,15 @@
                             </form>
 
                         </td>
+
+                       
                         <td>
                             <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
                                 <input class="btn btn-danger" id='btnd{{ $IdDados }}'name=""
                                     type="submit" Value='Cancelar'>
                             </form>
                         </td>
+                        @endif
                         @if ($row->status === 0)
                             <td>
                                 <form id='FrmQuitar'action="/ContasaReceber/Validar/" method="get">
