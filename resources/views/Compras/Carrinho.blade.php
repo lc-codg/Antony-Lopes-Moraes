@@ -65,7 +65,9 @@
 
 
     <div id='container' class='.container-fluid'>
-        @php if(($Fornecedor['Razao'] <>'')){ @endphp
+        @php
+         if(($Fornecedor['Razao'] <>'')){
+        @endphp
         <td> <button type="button" id="Fornecedor" class="btn btn-dark btn-xs">Fornecedor: {{$Fornecedor['Razao']}}</button></td>
         @php
         }

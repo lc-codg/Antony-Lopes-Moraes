@@ -183,7 +183,7 @@
 
                             <td>
                                 <form action="/Extrato/Todos/{{$row->id}}" method="get">                               
-                                    <input class="btn btn-success" id='btnd{{ $IdDados }}'name=""
+                                    <input class="btn btn-success" id='btnp{{ $IdDados }}'name=""
                                     type="submit" Value='Parciais'>
 
                                 </form>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('valor',19,2);
             $table->date('data');
             $table->String('usuario',100)->default(NULL);
-            $table->integer('id_original');
+            $table->integer('id_original')->default(NULL);
             $table->string('conta',200)->default(NULL);
             $table->string('pessoa',100)->default(NULL);
             $table->timestamps();

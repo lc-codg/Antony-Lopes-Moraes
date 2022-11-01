@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\Receitas;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
+use App\Http\Controllers\ExtratoController;
 
 class ReceitasController extends Controller
 {
@@ -58,7 +59,7 @@ class ReceitasController extends Controller
 
             Receitas::create([
                 'Descricao' => $request->Descricao,
-                'CodCliente' => Isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) :0,
+                'CodCliente' => isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
@@ -71,6 +72,10 @@ class ReceitasController extends Controller
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
             ]);
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
+
+            $Total = $request->Total;
+            $Extrato = new ExtratoController();
+            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas');
 
             return
                 "<script>
@@ -115,7 +120,7 @@ class ReceitasController extends Controller
         if ($this->Verificar($request)) {
             $Receitas->Update([
                 'Descricao' => $request->Descricao,
-                'CodCliente' => Isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) :0,
+                'CodCliente' => isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
@@ -140,7 +145,10 @@ class ReceitasController extends Controller
     public function destroy($id)
     {
 
-        $Receitas = Receitas::findOrFail($id);
+        $Receitas = Receitas::findOrFail($id)->get();
+        $Total = $Receitas->Total;
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas');
         $Receitas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Receitas/Todos';</script>";

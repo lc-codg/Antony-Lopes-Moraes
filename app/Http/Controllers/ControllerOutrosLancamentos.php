@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use  App\Http\Controllers\DespesasController;
 use App\Http\Controllers\ReceitasController;
 use App\Classes\ObterDados;
+use app\Http\Controllers\ExtratoController;
 
 class ControllerOutrosLancamentos extends Controller
 {
@@ -20,6 +21,12 @@ class ControllerOutrosLancamentos extends Controller
         $Receitas = new ReceitasController();
 
       ($request->Tipo == 'Crédito') ? $Receitas->create($request) : $Despesas->create($request); 
+
+      $Modelo = ($request->Tipo == 'Crédito') ? 'C' : 'D';
+      $Total = $request->Total;
+      $Extrato = new ExtratoController();
+      $Extrato->InserirNoExtrato($Total, $Modelo, $request->Conta, 'Outros');
+
       echo "<script>alert('Salvo com sucesso!');</script>";
       return $this->Novo();
         

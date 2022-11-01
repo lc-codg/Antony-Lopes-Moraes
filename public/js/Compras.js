@@ -151,6 +151,7 @@ $('body').on('click', '#resultado_Fornecedor a', function() {
         datetype: 'json',
         success: function(retorno) {
             window.location.href = '/Compras/Carrinho';
+          
         }
     });
 

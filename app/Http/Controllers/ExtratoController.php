@@ -8,6 +8,17 @@ use Illuminate\Support\Str;
 
 class ExtratoController extends Controller
 {
+    function InserirNoExtrato($Valor,$Tipo,$Conta,$Modelo){
+       
+        parcial::create([
+            'data' => now(),
+            'valor' => $Valor,
+            'usuario' => $Modelo,
+            'pessoa' => $Tipo,
+            'conta' => Str::substr($Conta, 0, 1),
+        ]);  
+
+    }
     function ExtratoCredito($Dados,$Tipo){
 
         $Valor = ($Tipo =='Parcial' ? $Dados->ValorParcial : $Dados->Valor);
@@ -15,7 +26,7 @@ class ExtratoController extends Controller
         parcial::create([
             'data' => now(),
             'valor' => $Valor,
-            'usuario' => '',
+            'usuario' => 'Receber',
             'id_original' => $Dados->id,
             'pessoa' => 'C',
             'conta' => Str::substr($Dados->conta, 0, 1),
@@ -28,7 +39,7 @@ class ExtratoController extends Controller
         parcial::create([
             'data' => now(),
             'valor' => $Valor,
-            'usuario' => '',
+            'usuario' => 'Receber',
             'id_original' => $Dados->id,
             'pessoa' => 'D',
             'conta' => Str::substr($Dados->conta, 0, 1),
@@ -37,7 +48,7 @@ class ExtratoController extends Controller
 
     function ConstaNoExtrato($Id){
 
-        $Extrato = DB::table('parcials')->where('id_original','=',$Id)->get();
+        $Extrato = DB::table('parcials')->where('id_original','=',$Id)->where('usuario','<>','Cancelado')->get();
         $Total = Count($Extrato);
         return $Total > 0 ? true :false;
     }

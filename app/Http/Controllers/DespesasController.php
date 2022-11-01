@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Models\Despesas;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
+use App\Http\Controllers\ExtratoController;
 
 class DespesasController extends Controller
 {
@@ -59,13 +60,13 @@ class DespesasController extends Controller
             Despesas::create([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodFornecedor' => Isset($request->CodFornecedor) ?Str::substr($request->CodFornecedor, 0, 1):0,
+                'CodFornecedor' => isset($request->CodFornecedor) ? Str::substr($request->CodFornecedor, 0, 1) : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
                 'Vencimento' => $request->Vencimento,
-                'CodGrupo' => Isset($request->CodGrupo) ? Str::substr($request->CodGrupo, 0, 1) : 0,
-                'CodSubGrupo' =>  Isset($request->CodGrupo) ? Str::substr($request->SubGrupo, 0, 1) : 0,
+                'CodGrupo' => isset($request->CodGrupo) ? Str::substr($request->CodGrupo, 0, 1) : 0,
+                'CodSubGrupo' =>  isset($request->CodGrupo) ? Str::substr($request->SubGrupo, 0, 1) : 0,
                 'Parcelas' => $request->Parcelas,
                 'Dataemissao' => $request->Dataemissao,
                 'Datarecebimento' => $request->Datarecebimento,
@@ -74,7 +75,13 @@ class DespesasController extends Controller
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1)
             ]);
+
             $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
+
+            $Total = $request->Total;
+            $Extrato = new ExtratoController();
+            $Extrato->InserirNoExtrato($Total, 'D', $request->Conta, 'Despesa');
+
             return
                 "<script>
                 alert('Despesa Salva com sucesso!');
@@ -118,7 +125,7 @@ class DespesasController extends Controller
             $Despesas->Update([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodFornecedor' => Isset($request->CodFornecedor) ?Str::substr($request->CodFornecedor, 0, 1):0,
+                'CodFornecedor' => isset($request->CodFornecedor) ? Str::substr($request->CodFornecedor, 0, 1) : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
@@ -144,7 +151,10 @@ class DespesasController extends Controller
 
     public function destroy($id)
     {
-        $Despesas = Despesas::findOrFail($id);
+        $Despesas = Despesas::findOrFail($id)->get();
+        $Total = $Despesas->Total;
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($Total, 'D', $Despesas->Conta, 'Despesa');
         $Despesas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Despesas/Todos';</script>";

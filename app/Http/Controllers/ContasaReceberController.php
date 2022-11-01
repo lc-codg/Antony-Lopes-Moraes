@@ -13,8 +13,6 @@ use App\Http\Controllers\ExtratoController;
 
 class ContasaReceberController extends Controller
 {
-
-
     public function PagarParcial($Dados)
     {
         $Banco = new ContasBancariasController();
@@ -203,7 +201,7 @@ class ContasaReceberController extends Controller
     {
         $Banco = new ContasBancariasController();
         
-        if ($Banco->Saque($request->conta, $request->Valor))
+        if ($Banco->Saque($request->conta, $request->valor))
             $ContasaReceber = ContasaReceber::findOrFail($request->id_original);
         $ContasaReceber->update([
             'status' => 0,
@@ -212,7 +210,7 @@ class ContasaReceberController extends Controller
         ]);
         $Extrato = new ExtratoController();
         $Extrato->CancelarParcial($request->id);
-        return "<script>alert('Estorno de parcial efetuado com sucesso!');window.history.back ();</script>"; 
+        return "<script>alert('Estorno de parcial efetuado com sucesso!');window.history.back();</script>"; 
     }
 
     public function show($id)
@@ -236,7 +234,8 @@ class ContasaReceberController extends Controller
             'contasa_recebers.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
+        whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
         return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber, 'Contas' => $Banco]);
     }
@@ -272,7 +271,7 @@ class ContasaReceberController extends Controller
             "<script>
             alert('Salvo com Sucesso!');
             location = '/ContasaReceber/Todos';
-        </script>";
+        </scriptwindow.history.back>";
     }
 
 
@@ -282,5 +281,17 @@ class ContasaReceberController extends Controller
         $ContasaReceber->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/ContasaReceber/Todos';</script>";
+    }
+
+    public function ListarAtrasadas()
+    {
+        $ContasaReceber = DB::table('contasa_recebers')->join(
+            'empresas',
+            'contasa_recebers.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join('fornecedors', 'contasa_recebers.CodFornecedor', '=', 'fornecedors.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->WhereDate('contasa_recebers.vencimento', '>', 'CURRENT_DATE()')->get();
+
+        return $ContasaReceber;
     }
 }

@@ -71,6 +71,9 @@ class ArrecadacaoController extends Controller
                 'DataRecebimento' => $request->Data,
                 'Descricao' => $request->Descricao
             ]);
+
+           
+
             return  "<script>
             alert('Arrecadação Salva com sucesso!');
             location = '/Arrecadacao/Novo';

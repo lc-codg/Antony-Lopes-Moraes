@@ -13,12 +13,10 @@ function QuitarContasAPagar(Valor, id, Generator) {
             url: '/ContasaPagar/Quitar/',
             data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor },
 
-            success: function(retorno) {
+            success: function (retorno) {
 
                 alert(retorno);
-                document.getElementById("btnec" + Generator).style.visibility = 'hidden';
-                document.getElementById("btned" + Generator).style.visibility = 'hidden';
-                document.getElementById("btnq" + Generator).style.visibility = 'hidden';
+                location.reload(true);
 
 
             }
@@ -39,12 +37,10 @@ function EstornarContasAPagar(Valor, id, Generator) {
         url: '/ContasaPagar/Estornar/',
         data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'conta2': Conta, 'Valor': Valor },
 
-        success: function(retorno) {
+        success: function (retorno) {
 
             alert(retorno);
-            document.getElementById("btnec" + Generator).style.visibility = 'hidden';
-            document.getElementById("btned" + Generator).style.visibility = 'hidden';
-            document.getElementById("btne" + Generator).style.visibility = 'hidden';
+            location.reload(true);
 
         }
 
@@ -60,17 +56,20 @@ function QuitarContasAReceber(id, idclass, total) {
         var Parcial = document.getElementById("ValorParcial" + idclass).value;
         var Conta = document.getElementById('conta' + idclass).value;
 
+        if (Parcial == '') {
+            Parcial = total;
+        }
         $.ajax({
 
             method: 'get',
             url: '/ContasaReceber/Validar/',
             data: { 'id': id, 'tipo': 'Receber', 'ValorParcial': Parcial, 'Valor': total, 'conta': Conta },
-            success: function(retorno) {
+            success: function (retorno) {
 
                 alert(retorno);
-                document.getElementById("btnq" + idclass).style.visibility = 'hidden';
-                document.getElementById("btned" + idclass).style.visibility = 'hidden';
-                document.getElementById("btnd" + idclass).style.visibility = 'hidden';
+                location.reload(true);
+
+
             }
         });
     }
@@ -85,12 +84,10 @@ function EstornarContasAReceber(id, idclass, total) {
         method: 'get',
         url: '/ContasaReceber/Estornar/',
         data: { 'id': id, 'tipo': 'Receber', 'Valor': total, 'conta2': Conta },
-        success: function(retorno) {
+        success: function (retorno) {
 
             alert(retorno);
-            document.getElementById("btne" + idclass).style.visibility = 'hidden';
-            document.getElementById("btned" + idclass).style.visibility = 'hidden';
-            document.getElementById("btnd" + idclass).style.visibility = 'hidden';
+            location.reload(true);
         }
     });
 }
@@ -148,7 +145,7 @@ function Cheque(id) {
 }
 
 
-$(function() {
+$(function () {
 
 
     var totals = $('.price');
@@ -208,7 +205,7 @@ $(function() {
     //Filtragem por botôes
 
     var tds = document.querySelectorAll('table td[data-estado]');
-    document.querySelector('.btn-group').addEventListener('click', function(e) {
+    document.querySelector('.btn-group').addEventListener('click', function (e) {
         var estado = e.target.id;
         for (var i = 0; i < tds.length; i++) {
             var tr = tds[i].closest('tr');

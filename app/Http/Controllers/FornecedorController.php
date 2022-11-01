@@ -22,7 +22,7 @@ class FornecedorController extends Controller
     {
         $cliente = Fornecedor::findorFail($request->id);
 
-        Session::put('fornecedor', [
+        Session::put('Fornecedor', [
             'Razao' => ($cliente->Nome == '') ? $cliente->Razao : $cliente->Nome,
             'Cnpj' => ($cliente->Cpf == '') ? $cliente->Cnpj : $cliente->Cpf,
             'Id' => $cliente->id,

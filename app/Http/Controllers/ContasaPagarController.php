@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
 use Carbon\Carbon;
+use App\Http\Controllers\ExtratoController;
 
 class ContasaPagarController extends Controller
 {
@@ -31,8 +32,11 @@ class ContasaPagarController extends Controller
                 'Conta' => Str::substr($request->conta, 0, 1)
             ]);
 
-        return 'Quitado com sucesso!';
+        $Total = $request->Valor + $Multa + $Juros;
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($Total, 'D', $request->conta, 'Pagar');
 
+        return 'Quitado com sucesso!';
     }
 
     public function Estornar(Request $request)
@@ -51,6 +55,9 @@ class ContasaPagarController extends Controller
             'Conta' => 0
         ]);
 
+        $Total = $request->Valor + $Multa + $Juros;
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar');
 
         return 'Estornado com sucesso!';
     }
@@ -174,7 +181,7 @@ class ContasaPagarController extends Controller
             'contasa_pagars.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->WhereDate('contasa_pagars.vencimento', '>', 'CURRENT_DATE()')->get();
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=', '0')->WhereDate('contasa_pagars.vencimento', '>', 'CURRENT_DATE()')->get();
 
         return $ContasaPagar;
     }
@@ -185,7 +192,7 @@ class ContasaPagarController extends Controller
             'contasa_pagars.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->WhereDate('contasa_pagars.vencimento', '<=', 'CURRENT_DATE()')->get();
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=', '0')->WhereDate('contasa_pagars.vencimento', '<=', 'CURRENT_DATE()')->get();
 
         return $ContasaPagar;
     }
