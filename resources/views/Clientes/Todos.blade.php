@@ -24,7 +24,7 @@
                 <small id="helpId" class="form-text text-muted">Aperte a tecla ENTER para realizar a pesquisa por Cnpj,Cpf,Nome ou Razão Social</small>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <input name="Localizar" id="Bot" class="btn btn-dark" type="submit" value="Pesquisar">
             </div>
         </div>

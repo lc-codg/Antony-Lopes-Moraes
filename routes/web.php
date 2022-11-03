@@ -17,7 +17,7 @@ use App\Http\Controllers\ReceitasController;
 use App\Http\Controllers\ControllerOutrosLancamentos;
 use App\Models\ContasaReceber;
 use App\Http\Controllers\ArrecadacaoController;
-use App\http\Controllers\ExtratoController;
+use App\Http\Controllers\ExtratoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,4 +148,5 @@ Route::get('/Arrecadacao/Editar/{id}',[ArrecadacaoController::class,'Editar']);
 Route::post('/Arrecadacao/Atualizar',[ArrecadacaoController::class,'Atualizar']);
 
 Route::get('/Extrato/Todos/{id}',[ExtratoController::class,'ShowExtrato']);
+Route::get('/Extrato/View',[ExtratoController::class,'ExtratoGeral']);
 

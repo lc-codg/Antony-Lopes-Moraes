@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\parcial;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class ExtratoController extends Controller
 {
@@ -63,5 +64,9 @@ class ExtratoController extends Controller
       $Extrato->update([
         'usuario'=> 'Cancelado',
       ]);
+   }
+   function ExtratoGeral(Request $request){
+    $Extrato = DB::table('parcials')->whereBetween('parcials.data', [$request->DataIni, $request->DataFim])->paginate(20);
+    return view('/Extrato.View',['Extrato'=>$Extrato]);
    }
 }

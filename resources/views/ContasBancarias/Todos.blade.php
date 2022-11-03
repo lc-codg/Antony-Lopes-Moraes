@@ -21,7 +21,7 @@
                     <input autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
                     <small id="helpId" class="form-text text-muted">Código, Nome ou Cnpj</small>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <input name="Localizar" id="Bot" class="btn btn-dark" type="submit" value="Pesquisar">
                 </div>
 

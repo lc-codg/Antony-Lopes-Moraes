@@ -112,6 +112,7 @@
               <a class="dropdown-item" href="/Arrecadacao/Novo">Arrecadação</a>
               <a class="dropdown-item" href="/Arrecadacao/Todos">Listar Arrecadação</a>
             </div>
+            
           </div>
         </li>
 
@@ -150,7 +151,7 @@
 
               <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
             </div>
-
+            <a class="dropdown-item" href="/Extrato/View">Extrato</a>
           </div>
         </li>
         <li class="nav-item dropdown">
