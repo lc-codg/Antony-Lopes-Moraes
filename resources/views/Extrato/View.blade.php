@@ -39,6 +39,13 @@
 
         </div>
 
+        <div class="btn-group">
+            <button id='h7' type="button" class="btn btn-dark  btn-xs"></button>
+
+
+
+        </div>
+
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
         <thead class="thead-DARK">
             <tr>
@@ -88,16 +95,5 @@
 
 @include('footer')
 
-<script>
-       
-        var numeros = document.getElementsByClassName('price').value;
-var total = 0;
-
-function somar(item) {
-    total += item;
-}
-
-numeros.forEach(somar);
-alert(total);
-    </script>
+<script src="{{ asset('js/Extrato.js') }}"></script>
 </html>
