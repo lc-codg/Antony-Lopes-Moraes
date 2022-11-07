@@ -56,6 +56,7 @@
                 <th scope="col">Conta</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Usuário</th>
+                <th scope="col" >Empresa</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -70,6 +71,7 @@
                 <td>{{ $row->conta }}</td>
                 <td>{{ $row->pessoa }}</td>
                 <td>{{ $row->usuario }}</td>
+                <td>{{$row->CodEmpresa}}</td>
     
                 <td>
                     <form action="/ContasaReceber/EstornarParcial" method="post">

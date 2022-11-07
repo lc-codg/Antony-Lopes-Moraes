@@ -73,20 +73,23 @@ class DespesasController extends Controller
                 'Boleta' => $request->boleta,
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
-                'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1)
+                'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
+                'Conta' =>Str::substr($request->Conta, 0, 1),
             ]);
 
             $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
+            $Empresa = Str::substr($request->CodEmpresa, 0, 1);
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($Total, 'D', $request->Conta, 'Despesa');
+            $Extrato->InserirNoExtrato($Total, 'D',Str::substr($request->Conta, 0, 1), 'Despesa',$Empresa);
 
             return
-                "<script>
-                alert('Despesa Salva com sucesso!');
-                location = '/Despesas/Novo;
-              </script>";
+            "<script>
+            alert('Salvo com sucesso!');
+            location = '/Despesas/Todos';
+
+         </script>";
         }
     }
 
@@ -151,10 +154,14 @@ class DespesasController extends Controller
 
     public function destroy($id)
     {
-        $Despesas = Despesas::findOrFail($id)->get();
+        $Despesas = Despesas::findOrFail($id);
         $Total = $Despesas->Total;
+        //Depósito em Conta
+        $Banco = new ContasBancariasController();
+        if ($Banco->Deposito($Despesas->conta,$Despesas->total));
+        //Inserir no Extrato
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', $Despesas->Conta, 'Despesa');
+        $Extrato->InserirNoExtrato($Total, 'C', $Despesas->Conta, 'Despesa_Cancelada',$Despesas->CodEmpresa);
         $Despesas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Despesas/Todos';</script>";

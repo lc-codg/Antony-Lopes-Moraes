@@ -1,4 +1,4 @@
-function QuitarContasAPagar(Valor, id, Generator) {
+function QuitarContasAPagar(Valor, id, Generator,Empresa) {
 
     if (ValidarFormReceber() == true) {
 
@@ -11,7 +11,7 @@ function QuitarContasAPagar(Valor, id, Generator) {
 
             method: 'get',
             url: '/ContasaPagar/Quitar/',
-            data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor },
+            data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor,'CodEmpresa':Empresa  },
 
             success: function (retorno) {
 
@@ -49,7 +49,7 @@ function EstornarContasAPagar(Valor, id, Generator) {
 
 
 
-function QuitarContasAReceber(id, idclass, total) {
+function QuitarContasAReceber(id, idclass, total,Empresa) {
 
     if (ValidarFormReceber() == true) {
 
@@ -63,7 +63,7 @@ function QuitarContasAReceber(id, idclass, total) {
 
             method: 'get',
             url: '/ContasaReceber/Validar/',
-            data: { 'id': id, 'tipo': 'Receber', 'ValorParcial': Parcial, 'Valor': total, 'conta': Conta },
+            data: { 'id': id, 'tipo': 'Receber', 'ValorParcial': Parcial, 'Valor': total, 'conta': Conta,'CodEmpresa':Empresa },
             success: function (retorno) {
 
                 alert(retorno);
@@ -76,14 +76,14 @@ function QuitarContasAReceber(id, idclass, total) {
 
 }
 
-function EstornarContasAReceber(id, idclass, total) {
+function EstornarContasAReceber(id, idclass, total,Empresa) {
 
     var Conta = document.getElementById('conta' + idclass).value;
 
     $.ajax({
         method: 'get',
         url: '/ContasaReceber/Estornar/',
-        data: { 'id': id, 'tipo': 'Receber', 'Valor': total, 'conta2': Conta },
+        data: { 'id': id, 'tipo': 'Receber', 'Valor': total, 'conta2': Conta ,'CodEmpresa':Empresa },
         success: function (retorno) {
 
             alert(retorno);

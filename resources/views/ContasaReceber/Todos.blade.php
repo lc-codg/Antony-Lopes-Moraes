@@ -102,6 +102,7 @@
                         <td>{{ $row->Barras }}</td>
                         <td>{{ $row->Razaoe }}</td>
                         <td>{{ $row->Razaof }}</td>
+                       
 
                         @if ($row->status === 0)
                             <td class='price2'>R${{ $row->Total }}</td>
@@ -150,7 +151,7 @@
                                     <input hidden name='conta' value='' id="conta{{ $IdDados }}">
                                     <input
                                         onclick='QuitarContasAReceber({{ $row->id }},{{ $IdDados }},
-                                    {{ $row->Total }});'class="btn btn-primary"
+                                    {{ $row->Total }},{{$row->CodEmpresa}});'class="btn btn-primary"
                                         name="" id='btnq{{ $IdDados }}' type="button" Value='Receber'>
 
                             </td>

@@ -34,7 +34,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', $request->conta, 'Pagar');
+        $Extrato->InserirNoExtrato($Total, 'D', $request->conta, 'Pagar',$request->CodEmpresa);
 
         return 'Quitado com sucesso!';
     }
@@ -57,7 +57,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar');
+        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar',$request->CodEmpresa);
 
         return 'Estornado com sucesso!';
     }

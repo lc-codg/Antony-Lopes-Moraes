@@ -29,7 +29,14 @@
                         @endforeach
                     </select>
                 </div>
-
+                <div class="form-group md col-4">
+                    <label for="">Conta Bancária</label>
+                    <select class="form-control" name="Conta" id="">
+                        @foreach ($Contas as $C)
+                        <option selected>{{$C->id}}- {{$C->Descricao}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="form-group md col-10">
                     <label for="">Descrição</label>

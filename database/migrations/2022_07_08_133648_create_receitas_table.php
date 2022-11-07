@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('Boleta',100)->nullable()->default(NULL);
             $table->string('NotaFiscal',100)->nullable()->default(NULL);
             $table->string('Serie',100)->nullable()->default(NULL);
-            $table->integer('CodEmpresa');
+            $table->integer('CodEmpresa')->nullable()->default(NULL);
+            $table->integer('Conta')->nullable()->default(NULL);
             $table->timestamps();
             
         });

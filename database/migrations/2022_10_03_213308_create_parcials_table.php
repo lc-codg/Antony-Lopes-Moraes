@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('id_original')->default(NULL);
             $table->string('conta',200)->default(NULL);
             $table->string('pessoa',100)->default(NULL);
+            $table->integer('CodEmpresa')->default(NULL);
             $table->timestamps();
         });
     }

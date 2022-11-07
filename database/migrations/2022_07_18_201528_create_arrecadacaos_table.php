@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('DataRecebimento');
             $table->integer('CodEmpresa');
             $table->string('Numero',100)->nullable()->default(NULL);
+            $table->integer('conta')->nullable()->default(NULL);
             $table->timestamps();
         });
     }

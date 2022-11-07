@@ -70,12 +70,13 @@ class ReceitasController extends Controller
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
+                'Conta' =>Str::substr($request->Conta, 0, 1),
             ]);
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas');
+            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas',Str::substr($request->CodEmpresa, 0, 1),);
 
             return
                 "<script>
@@ -145,10 +146,13 @@ class ReceitasController extends Controller
     public function destroy($id)
     {
 
-        $Receitas = Receitas::findOrFail($id)->get();
+        $Receitas = Receitas::findOrFail($id);
         $Total = $Receitas->Total;
+        //Saca da conta
+        $Receitas->Saque($Receitas->Conta, $Receitas->Total);
+        //Insere no extrato
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas');
+        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada',$Receitas->CodEmpresa);
         $Receitas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Receitas/Todos';</script>";

@@ -9,13 +9,14 @@ use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ExtratoController;
 
 class ArrecadacaoController extends Controller
 {
     public function index()
     {
         $Obterdados = new ObterDados();
-        return view('Arrecadacao.Novo', ['Empresa' => $Obterdados->ListaDeEmpresas()]);
+        return view('Arrecadacao.Novo', ['Empresa' => $Obterdados->ListaDeEmpresas(),'Contas'=>$Obterdados->ListarContasBancarias()]);
     }
     public function ListarTodos(Request $request)
     {
@@ -69,8 +70,13 @@ class ArrecadacaoController extends Controller
                 'Valor' => $request->Valor,
                 'Numero' => $request->Numero,
                 'DataRecebimento' => $request->Data,
-                'Descricao' => $request->Descricao
+                'Descricao' => $request->Descricao,
+                'conta' => Str::substr($request->Conta, 0, 1),
             ]);
+
+            $Extrato = new ExtratoController();
+            $Extrato->InserirNoExtrato($request->Valor,'C',Str::substr($request->Conta, 0, 1),'Arrecadação',Str::substr($request->Codempresa, 0, 1));
+
 
            
 
