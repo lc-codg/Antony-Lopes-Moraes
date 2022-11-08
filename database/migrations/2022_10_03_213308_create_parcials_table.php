@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->decimal('valor',19,2);
             $table->date('data');
-            $table->String('usuario',100)->default(NULL);
-            $table->integer('id_original')->default(NULL);
-            $table->string('conta',200)->default(NULL);
-            $table->string('pessoa',100)->default(NULL);
-            $table->integer('CodEmpresa')->default(NULL);
+            $table->String('usuario',100)->nullable()->default(NULL);
+            $table->integer('id_original')->nullable()->default(NULL);
+            $table->string('conta',200)->nullable()->default(NULL);
+            $table->string('pessoa',100)->nullable()->default(NULL);
+            $table->integer('CodEmpresa')->nullable()->default(NULL);
             $table->timestamps();
         });
     }

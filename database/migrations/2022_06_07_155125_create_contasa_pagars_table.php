@@ -31,9 +31,9 @@ return new class extends Migration
             $table->string('NotaFiscal',100)->nullable()->default(NULL);;
             $table->string('Serie',100)->nullable()->default(NULL);;
             $table->integer('CodEmpresa');
-            $table->boolean('status');
-            $table->decimal('Juros',19,2);
-            $table->decimal('Multa',19,2);
+            $table->boolean('status')->nullable()->default(NULL);;
+            $table->decimal('Juros',19,2)->nullable()->default(NULL);;
+            $table->decimal('Multa',19,2)->nullable()->default(NULL);;
             $table->string('Cheque',100)->nullable()->default(NULL);
             $table->string('Conta',100)->nullable()->default(NULL);
             $table->timestamps();

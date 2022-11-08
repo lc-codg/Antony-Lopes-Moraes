@@ -24,10 +24,6 @@ class ControllerOutrosLancamentos extends Controller
       ($request->Tipo == 'Crédito') ? $Receitas->create($request) : $Despesas->create($request); 
 
       $Modelo = ($request->Tipo == 'Crédito') ? 'C' : 'D';
-      $Empresa = Str::substr($request->CodEmpresa, 0, 1);
-      $Total = $request->Total;
-      $Extrato = new ExtratoController();
-      $Extrato->InserirNoExtrato($Total, $Modelo, $request->Conta, 'Outros',$Empresa);
 
       echo "<script>alert('Salvo com sucesso!');</script>";
       return $this->Novo();
