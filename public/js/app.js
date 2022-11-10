@@ -115,13 +115,17 @@ $(function() {
         var dadosProduto = $(this).attr('id');
         var splitdados = dadosProduto.split(':');
 
-        quantidade = prompt('Digite a quantidade: ');
-        Peso = prompt('Digite o Peso: ');
-        Preco = prompt('Digite o Preço: ');
+        let quantidadeO = prompt('Digite a quantidade: ');
+        let PesoO = prompt('Digite o Peso: ');
+        let PrecoO = prompt('Digite o Preço: ');
+        let quantidade = parseFloat(quantidadeO .replace(',','.'));
+        let Peso = parseFloat(PesoO.replace(',','.'));
+        let Preco = parseFloat(PrecoO.replace(',','.'));
+
 
         if ((!isNaN(quantidade)) && (quantidade > 0)) {
-            if ((!isNaN(Peso)) && (Peso > 0))
-                if ((!isNaN(Preco)) && (Preco > 0))
+            if ((!isNaN(Peso)) && (Peso > 0)){
+                if ((!isNaN(Preco)) && (Preco > 0)){
 
                     $.ajax({
                     method: 'get',
@@ -133,6 +137,8 @@ $(function() {
 
                     }
                 });
+            }
+        }
         } else
             alert('Digite um número válido.');
 

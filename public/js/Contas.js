@@ -25,7 +25,7 @@ function QuitarContasAPagar(Valor, id, Generator,Empresa) {
     }
 }
 
-function EstornarContasAPagar(Valor, id, Generator) {
+function EstornarContasAPagar(Valor, id, Generator,Empresa) {
 
     let Juros = document.getElementById("Juros2" + Generator).value;
     let Multa = document.getElementById('Multa2' + Generator).value;
@@ -35,7 +35,7 @@ function EstornarContasAPagar(Valor, id, Generator) {
 
         method: 'get',
         url: '/ContasaPagar/Estornar/',
-        data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'conta2': Conta, 'Valor': Valor },
+        data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'conta2': Conta, 'Valor': Valor,'CodEmpresa':Empresa },
 
         success: function (retorno) {
 

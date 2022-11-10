@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ExtratoController;
+use App\Http\Controllers\ContasBancariasController;
 
 class ArrecadacaoController extends Controller
 {
@@ -73,7 +74,10 @@ class ArrecadacaoController extends Controller
                 'Descricao' => $request->Descricao,
                 'conta' => Str::substr($request->Conta, 0, 1),
             ]);
-
+            //Deposita na Conta
+            $Contas = new ContasBancariasController();
+            $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Valor);
+            //Adiciona ao extrato
             $Extrato = new ExtratoController();
             $Extrato->InserirNoExtrato($request->Valor,'C',Str::substr($request->Conta, 0, 1),'Arrecadação',Str::substr($request->Codempresa, 0, 1));
 

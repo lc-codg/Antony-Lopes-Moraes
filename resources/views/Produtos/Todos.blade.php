@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <div class='.container-fluid ' id='c2'>
-<h5>Produtos</h5>
+        <h5>Produtos</h5>
 </head>
 
 <body>
@@ -20,8 +20,10 @@
         <div class='form-row'>
             <div class="form-group col-md-8">
                 <label for="">Pesquisa Produto</label>
-                <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
-                <small id="helpId" class="form-text text-muted">Aperte a tecla ENTER para realizar a pesquisa por Descrição ou Código de Barras.</small>
+                <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id=""
+                    aria-describedby="helpId" placeholder="">
+                <small id="helpId" class="form-text text-muted">Aperte a tecla ENTER para realizar a pesquisa por
+                    Descrição ou Código de Barras.</small>
             </div>
             <div class="form-group col-md-3">
                 <input name="Localizar" id="Bot" class="btn btn-dark" type="submit" value="Pesquisar">
@@ -48,33 +50,37 @@
         <tbody>
             <tr>
 
+                @php
+                    
+                    use App\Http\Controller\ExtratoController;
+                    $Extrato = new Extratocontroller();
+                @endphp
+
+                @foreach ($produtos as $row)
+                    @php $val = $row->ValorUnitario @endphp
+
+                    <td>{{ $row->id }}</td>
+
+                    <td>{{ $row->Barras }}</td>
+                    <td>{{ $row->Descricao }}</td>
+
+                    <td>R$ <span class="price">{{ number_format($val, 2, '.', '') }}</span></td>
+                    <td>{{ $row->Quantidade }}</td>
 
 
-                @foreach($produtos as $row)
-                @php $val = $row->ValorUnitario @endphp
-
-                <td>{{ $row->id }}</td>
-
-                <td>{{ $row->Barras }}</td>
-                <td>{{ $row->Descricao }}</td>
-
-                <td>R$ <span class="price">{{ number_format($val, 2, '.', '') }}</span></td>
-                <td>{{ $row->Quantidade }}</td>
 
 
+                    <td>
 
-
-                <td>
-
-                    <form action="/Produtos/Ver/{{ $row->id }}" method="get">
-                        <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                    </form>
-                </td>
-                <td>
-                    <form action="/Produtos/Delete/{{ $row->id}}" method="get">
-                        <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
-                    </form>
-                </td>
+                        <form action="/Produtos/Ver/{{ $row->id }}" method="get">
+                            <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/Produtos/Delete/{{ $row->id }}" method="get">
+                            <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
+                        </form>
+                    </td>
 
 
 
@@ -87,7 +93,7 @@
 
 
 </body>
-{{$produtos->links()}}
+{{ $produtos->links() }}
 @include('footer')
 
 </html>

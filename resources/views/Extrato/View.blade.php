@@ -73,19 +73,7 @@
                 <td>{{ $row->usuario }}</td>
                 <td>{{$row->CodEmpresa}}</td>
     
-                <td>
-                    <form action="/ContasaReceber/EstornarParcial" method="post">
-                        @csrf
-                        <input class="btn btn-warning" name="" type="submit" Value='Estornar'>
-                        <input name='id'type='hidden'value='{{ $row->id }}'>
-                        <input name='valor'type='hidden' value='{{ $row->valor }}'>
-                        <input name='data'type='hidden'value='{{ $row->data }}'>
-                        <input type='hidden' name='id_original' value='{{ $row->id_original}}'>
-                        <input type='hidden'name='conta'value='{{ $row->conta }}'>
-                        <input type='hidden' name='pessoa'value='{{ $row->pessoa }}'>
-                        <input type='hidden'name='usuario'value='{{ $row->usuario }}'>
-                    </form>
-                </td>
+              
             </tr>
             @endforeach
             <script></script>
@@ -93,9 +81,10 @@
 
 
 </body>
-{{ $Extrato->links() }}
+
 
 @include('footer')
+{{ $Extrato->links() }}
 
 <script src="{{ asset('js/Extrato.js') }}"></script>
 </html>

@@ -22,8 +22,9 @@
             <div class="form-group col-md-2">
                 <label for="">Emitente</label>
                 <select class="form-control " name="" id='Empresa'>
+                    <option selected >Selecione...</option>
                     @foreach($Empresa as $RowEmpresa)
-                    <option selected>{{$RowEmpresa->id}} - {{$RowEmpresa->Razao}}</option>
+                    <option >{{$RowEmpresa->id}} - {{$RowEmpresa->Razao}}</option>
                     @endforeach
                 </select>
             </div>

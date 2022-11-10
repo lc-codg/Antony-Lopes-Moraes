@@ -174,7 +174,7 @@
                                     <input hidden name='conta' hidden value=''
                                         id='conta{{ $IdDados }}'>
                                     <input style='width:65px;font-size: 12px;'
-                                        onclick='QuitarContasAPagar({{ $row->Total }},{{ $row->id }},{{ $IdDados }});
+                                        onclick='QuitarContasAPagar({{ $row->Total }},{{ $row->id }},{{ $IdDados }},{{$row->CodEmpresa}});
                                         'class="btn btn-primary"
                                        id="btnq{{ $IdDados }}" type="button" Value='Quitar'>
 
@@ -196,7 +196,7 @@
 
                                     <input style='width:65px;font-size: 12px;' class="btn btn-warning"
                                         id="btne{{ $IdDados }}"
-                                        onclick='EstornarContasAPagar({{ $row->Total }},{{ $row->id }},{{ $IdDados }});'  type="button" Value='Estornar'>
+                                        onclick='EstornarContasAPagar({{ $row->Total }},{{ $row->id }},{{ $IdDados }},{{$row->CodEmpresa}});'  type="button" Value='Estornar'>
 
                             </td>
 

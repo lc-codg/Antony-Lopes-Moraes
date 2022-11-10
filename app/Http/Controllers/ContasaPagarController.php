@@ -34,7 +34,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', $request->conta, 'Pagar',$request->CodEmpresa);
+        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar',$request->CodEmpresa);
 
         return 'Quitado com sucesso!';
     }
