@@ -18,6 +18,7 @@ use App\Http\Controllers\ControllerOutrosLancamentos;
 use App\Models\ContasaReceber;
 use App\Http\Controllers\ArrecadacaoController;
 use App\Http\Controllers\ExtratoController;
+use App\Http\Controllers\BalancoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,4 +150,9 @@ Route::post('/Arrecadacao/Atualizar',[ArrecadacaoController::class,'Atualizar'])
 
 Route::get('/Extrato/Todos/{id}',[ExtratoController::class,'ShowExtrato']);
 Route::get('/Extrato/View',[ExtratoController::class,'ExtratoGeral']);
+
+Route::get('/Balanco/Show',[BalancoController::class,'Show']);
+Route::post('/Balanco/Cadastrar',[BalancoController::class,'Cadastrar']);
+Route::get('/Balanco/Listar',[BalancoController::class,'Listar']);
+Route::get('/Balanco/Localizar',[BalancoController::class,'Localizar']);
 

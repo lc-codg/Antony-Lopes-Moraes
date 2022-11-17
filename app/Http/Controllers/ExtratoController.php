@@ -77,8 +77,8 @@ class ExtratoController extends Controller
     {
         $Dataini = (!Isset($request->DataIni) ? Date('Y-m-d') : $request->DataIni);
         $Datafim = (!Isset($request->DataFim) ?Date('Y-m-d') : $request->DataFim);
-        $Extrato = parcial::whereBetween('parcials.data', [$Dataini, $Datafim])->paginate(10);
-        
+        $Extrato = parcial::whereBetween('parcials.data', [$Dataini, $Datafim])->paginate(100);
+
 
         return view('/Extrato/View', ['Extrato' => $Extrato]);
     }

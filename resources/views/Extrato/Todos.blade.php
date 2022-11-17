@@ -41,8 +41,8 @@
                 <td>{{ $row->conta }}</td>
                 <td>{{ $row->pessoa }}</td>
                 <td>{{ $row->usuario }}</td>
-           
-    
+
+
                 <td>
                     <form action="/ContasaReceber/EstornarParcial" method="post">
                         @csrf

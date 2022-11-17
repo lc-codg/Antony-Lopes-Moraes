@@ -112,7 +112,7 @@
               <a class="dropdown-item" href="/Arrecadacao/Novo">Arrecadação</a>
               <a class="dropdown-item" href="/Arrecadacao/Todos">Listar Arrecadação</a>
             </div>
-            
+
           </div>
         </li>
 
@@ -141,14 +141,26 @@
           <div class="dropdown-menu">
 
             <div class="list-group">
-
+                <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
+                    Movimento
+                  </a>
               <a class="dropdown-item" href="/Produtos/Novo">Movimento diário</a>
               <a class="dropdown-item" href="/Produtos/Todos">Saldo Do Caixa</a>
+              <div class="list-group">
+
+                <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
+                  Balanço
+                </a>
+                <a class="dropdown-item" href="/Balanco/Show">Lançar Balanço </a>
+                <a class="dropdown-item" href="/Balanco/Listar">Listar Balanço </a>
+              </div>
             </div>
 
 
             <div class="list-group">
-
+                <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
+                   Fluxo
+                  </a>
               <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
             </div>
             <a class="dropdown-item" href="/Extrato/View">Extrato</a>
