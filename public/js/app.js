@@ -186,6 +186,26 @@ function ValidarContasAPagar() {
     }
 }
 
+function ValidarContasAReceber() {
+
+    let Empresa = document.getElementById("CodEmpresa").value;
+    let Fornecedor = document.getElementById("Cliente").value;
+    let Grupo = document.getElementById("Grupo").value;
+    let SubGrupo = document.getElementById("SubGrupo").value;
+
+    if (Grupo == 'Selecione...') {
+        alert("Selecione o Grupo");
+    } else if (Empresa == 'Selecione...') {
+        alert("Selecione a Empresa");
+    } else if (SubGrupo == 'Selecione...') {
+        alert("Selecione o SubGrupo");
+    } else if (Fornecedor == 'Selecione...') {
+        alert("Selecione o Cliente");
+    } else {
+        document.getElementById("Form").submit();
+    }
+}
+
 function Prazo() {
 
     if (document.getElementById('Tipo').checked == false) {

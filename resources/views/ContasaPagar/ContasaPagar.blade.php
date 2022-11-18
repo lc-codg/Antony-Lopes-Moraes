@@ -117,7 +117,7 @@
                 <div class="form-group md col-2">
                     <label for="">Total</label>
                     <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                        class="form-control" onkeyup ='Conta();' name="Total" id="Total" aria-describedby="helpId"
+                        class="form-control" onkeyup ='Conta();' name="TotalFinal" id="Total" aria-describedby="helpId"
                         placeholder="">
                 </div>
 
@@ -138,7 +138,7 @@
                 <div class="form-group md col-2">
                     <label for="">Total Final</label>
                     <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                        class="form-control" name="TotalFinal" readOnly id="Final" aria-describedby="helpId"
+                        class="form-control" name="Total" readOnly id="Final" aria-describedby="helpId"
                         placeholder="">
                 </div>
 

@@ -102,6 +102,7 @@ class ContasaReceberController extends Controller
         $Serie,
         $CodEmpresa,
         $status,
+
     ) {
         ContasaReceber::create([
             'Barras' => $Barras,
@@ -121,7 +122,8 @@ class ContasaReceberController extends Controller
             'Serie' => $Serie,
             'CodEmpresa' => $CodEmpresa,
             'status' => $status,
-            'conta' => ''
+            'conta' => '',
+
         ]);
     }
     public function create(Request $request)
@@ -146,7 +148,7 @@ class ContasaReceberController extends Controller
                 $request->NotaFiscal,
                 $request->Serie,
                 Str::substr($request->CodEmpresa, 0, 1),
-                isset($request->status) ? false : false,
+                isset($request->Tipo) ? false : true,
 
             );
 
@@ -200,7 +202,7 @@ class ContasaReceberController extends Controller
     public function EParcial(Request $request)
     {
         $Banco = new ContasBancariasController();
-        
+
         if ($Banco->Saque($request->conta, $request->valor))
             $ContasaReceber = ContasaReceber::findOrFail($request->id_original);
         $ContasaReceber->update([
@@ -210,7 +212,7 @@ class ContasaReceberController extends Controller
         ]);
         $Extrato = new ExtratoController();
         $Extrato->CancelarParcial($request->id);
-        return "<script>alert('Estorno de parcial efetuado com sucesso!');window.history.back();</script>"; 
+        return "<script>alert('Estorno de parcial efetuado com sucesso!');window.history.back();</script>";
     }
 
     public function show($id)
@@ -264,7 +266,8 @@ class ContasaReceberController extends Controller
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
                 'status' => isset($request->status) ? false : false,
-                'conta' => ''
+                'conta' => '',
+                'status' => isset($request->Tipo) ? false : true,
             ]);
 
         return
