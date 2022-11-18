@@ -10,9 +10,9 @@ class Compras extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['id', 'CodigoDoCliente', 'Total', 'TotalDesconto', 'TotalAcréscimo', 
+    protected $fillable = ['id', 'CodigoDoCliente', 'Total', 'TotalDesconto', 'TotalAcréscimo',
     'TotaldosProdutos', 'Modelo', 'Nota', 'Serie', 'TotalTributos', 'TotalIpi', 'TotalPis',
-     'TotalCofins', 'TotalIcms', 'TotalBase', 'TotalBaseImcs', 'TotalBaseSt', 'TotalFrete', 
+     'TotalCofins', 'TotalIcms', 'TotalBase', 'TotalBaseImcs', 'TotalBaseSt', 'TotalFrete',
      'TotalOutros', 'DtPedido', 'TotalSt', 'Dataemissao',
-     'DataSaida', 'Finalidade', 'Natureza', 'Devolucao', 'Complementar', 'CodEmpresa'];
+     'DataSaida', 'Finalidade', 'Natureza', 'Devolucao', 'Complementar', 'CodEmpresa','Tipo'];
 }

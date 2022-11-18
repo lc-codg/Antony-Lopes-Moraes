@@ -135,7 +135,7 @@ class ContasaPagarController extends Controller
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-                'status' => isset($request->status) ? false : false,
+                'status' => isset($request->Tipo) ? false : true,
                 'Juros' => 0,
                 'Multa' => 0,
                 'Cheque' => 0
@@ -144,7 +144,7 @@ class ContasaPagarController extends Controller
             return
                 "<script>
                 alert('Salvo com sucesso!');
-                location = '/ContasaPagar/Todos';
+                location = '/ContasaPagar/Novo';
               </script>";
         }
     }

@@ -136,7 +136,8 @@ class ComprasController extends Controller
                 'Dataemissao' => date('Y-m-d'),
                 'DataSaida' => date('Y-m-d'),
                 'Finalidade' => 'Venda',
-                'CodEmpresa' => $Empresa['Id']
+                'CodEmpresa' => $Empresa['Id'],
+                'Tipo' => Isset($request->Tipo) ? 'Prazo' : 'Vista',
             ]);
 
             $Id = $Compras->id;

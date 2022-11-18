@@ -50,11 +50,7 @@
         <tbody>
             <tr>
 
-                @php
-                    
-                    use App\Http\Controller\ExtratoController;
-                    $Extrato = new Extratocontroller();
-                @endphp
+
 
                 @foreach ($produtos as $row)
                     @php $val = $row->ValorUnitario @endphp

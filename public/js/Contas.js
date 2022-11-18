@@ -1,4 +1,4 @@
-function QuitarContasAPagar(Valor, id, Generator,Empresa) {
+function QuitarContasAPagar(Valor, id, Generator, Empresa) {
 
     if (ValidarFormReceber() == true) {
 
@@ -11,9 +11,9 @@ function QuitarContasAPagar(Valor, id, Generator,Empresa) {
 
             method: 'get',
             url: '/ContasaPagar/Quitar/',
-            data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor,'CodEmpresa':Empresa  },
+            data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'Cheque2': Cheque, 'conta': Conta, 'Valor': Valor, 'CodEmpresa': Empresa },
 
-            success: function (retorno) {
+            success: function(retorno) {
 
                 alert(retorno);
                 location.reload(true);
@@ -25,7 +25,7 @@ function QuitarContasAPagar(Valor, id, Generator,Empresa) {
     }
 }
 
-function EstornarContasAPagar(Valor, id, Generator,Empresa) {
+function EstornarContasAPagar(Valor, id, Generator, Empresa) {
 
     let Juros = document.getElementById("Juros2" + Generator).value;
     let Multa = document.getElementById('Multa2' + Generator).value;
@@ -35,9 +35,9 @@ function EstornarContasAPagar(Valor, id, Generator,Empresa) {
 
         method: 'get',
         url: '/ContasaPagar/Estornar/',
-        data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'conta2': Conta, 'Valor': Valor,'CodEmpresa':Empresa },
+        data: { 'id': id, 'Juros2': Juros, 'Multa2': Multa, 'conta2': Conta, 'Valor': Valor, 'CodEmpresa': Empresa },
 
-        success: function (retorno) {
+        success: function(retorno) {
 
             alert(retorno);
             location.reload(true);
@@ -49,7 +49,7 @@ function EstornarContasAPagar(Valor, id, Generator,Empresa) {
 
 
 
-function QuitarContasAReceber(id, idclass, total,Empresa) {
+function QuitarContasAReceber(id, idclass, total, Empresa) {
 
     if (ValidarFormReceber() == true) {
 
@@ -63,8 +63,8 @@ function QuitarContasAReceber(id, idclass, total,Empresa) {
 
             method: 'get',
             url: '/ContasaReceber/Validar/',
-            data: { 'id': id, 'tipo': 'Receber', 'ValorParcial': Parcial, 'Valor': total, 'conta': Conta,'CodEmpresa':Empresa },
-            success: function (retorno) {
+            data: { 'id': id, 'tipo': 'Receber', 'ValorParcial': Parcial, 'Valor': total, 'conta': Conta, 'CodEmpresa': Empresa },
+            success: function(retorno) {
 
                 alert(retorno);
                 location.reload(true);
@@ -76,15 +76,15 @@ function QuitarContasAReceber(id, idclass, total,Empresa) {
 
 }
 
-function EstornarContasAReceber(id, idclass, total,Empresa) {
+function EstornarContasAReceber(id, idclass, total, Empresa) {
 
     var Conta = document.getElementById('conta' + idclass).value;
 
     $.ajax({
         method: 'get',
         url: '/ContasaReceber/Estornar/',
-        data: { 'id': id, 'tipo': 'Receber', 'Valor': total, 'conta2': Conta ,'CodEmpresa':Empresa },
-        success: function (retorno) {
+        data: { 'id': id, 'tipo': 'Receber', 'Valor': total, 'conta2': Conta, 'CodEmpresa': Empresa },
+        success: function(retorno) {
 
             alert(retorno);
             location.reload(true);
@@ -145,7 +145,9 @@ function Cheque(id) {
 }
 
 
-$(function () {
+
+
+$(function() {
 
 
     var totals = $('.price');
@@ -205,7 +207,7 @@ $(function () {
     //Filtragem por botôes
 
     var tds = document.querySelectorAll('table td[data-estado]');
-    document.querySelector('.btn-group').addEventListener('click', function (e) {
+    document.querySelector('.btn-group').addEventListener('click', function(e) {
         var estado = e.target.id;
         for (var i = 0; i < tds.length; i++) {
             var tr = tds[i].closest('tr');

@@ -118,27 +118,27 @@ $(function() {
         let quantidadeO = prompt('Digite a quantidade: ');
         let PesoO = prompt('Digite o Peso: ');
         let PrecoO = prompt('Digite o Preço: ');
-        let quantidade = parseFloat(quantidadeO .replace(',','.'));
-        let Peso = parseFloat(PesoO.replace(',','.'));
-        let Preco = parseFloat(PrecoO.replace(',','.'));
+        let quantidade = parseFloat(quantidadeO.replace(',', '.'));
+        let Peso = parseFloat(PesoO.replace(',', '.'));
+        let Preco = parseFloat(PrecoO.replace(',', '.'));
 
 
         if ((!isNaN(quantidade)) && (quantidade > 0)) {
-            if ((!isNaN(Peso)) && (Peso > 0)){
-                if ((!isNaN(Preco)) && (Preco > 0)){
+            if ((!isNaN(Peso)) && (Peso > 0)) {
+                if ((!isNaN(Preco)) && (Preco > 0)) {
 
                     $.ajax({
-                    method: 'get',
-                    url: '/Produtos/Inserir',
-                    data: { id: splitdados[0], 'Quantidade': quantidade, 'Preco': Preco, 'Peso': Peso },
-                    datetype: 'json',
-                    success: function(retorno) {
-                        window.location.href = '/Pedidos/Carrinho';
+                        method: 'get',
+                        url: '/Produtos/Inserir',
+                        data: { id: splitdados[0], 'Quantidade': quantidade, 'Preco': Preco, 'Peso': Peso },
+                        datetype: 'json',
+                        success: function(retorno) {
+                            window.location.href = '/Pedidos/Carrinho';
 
-                    }
-                });
+                        }
+                    });
+                }
             }
-        }
         } else
             alert('Digite um número válido.');
 
@@ -165,3 +165,47 @@ $('body').on('click', '#resultado_cliente a', function() {
 
 
 });
+
+function ValidarContasAPagar() {
+
+    let Empresa = document.getElementById("Empresa").value;
+    let Fornecedor = document.getElementById("Fornecedor").value;
+    let Grupo = document.getElementById("Grupo").value;
+    let SubGrupo = document.getElementById("SubGrupo").value;
+
+    if (Grupo == 'Selecione...') {
+        alert("Selecione o Grupo");
+    } else if (Empresa == 'Selecione...') {
+        alert("Selecione a Empresa");
+    } else if (SubGrupo == 'Selecione...') {
+        alert("Selecione o SubGrupo");
+    } else if (Fornecedor == 'Selecione...') {
+        alert("Selecione o Fornecedor");
+    } else {
+        document.getElementById("Form").submit();
+    }
+}
+
+function Prazo() {
+
+    if (document.getElementById('Tipo').checked == false) {
+        document.getElementById('Parcela').readOnly = true;
+        document.getElementById('Boleta').readOnly = true;
+        document.getElementById('Parcela').value = '1';
+        document.getElementById('Boleta').value = '1';
+    } else {
+        document.getElementById('Parcela').readOnly = false;
+        document.getElementById('Boleta').readOnly = false;
+
+
+    }
+}
+
+function Conta() {
+
+    let Desconto = document.getElementById('Desconto').value == '' ? 0 : parseFloat(document.getElementById('Desconto').value);
+    let Acrescimo = document.getElementById('Acrescimo').value == '' ? 0 : parseFloat(document.getElementById('Acrescimo').value);
+    let Valor = document.getElementById('Total').value == '' ? 0 : parseFloat(document.getElementById('Total').value);
+    let Final = Valor + Acrescimo - Desconto;
+    document.getElementById('Final').value = Final;
+}
