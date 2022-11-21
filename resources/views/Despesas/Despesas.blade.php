@@ -103,16 +103,19 @@
                 <div class="form-group md col-4">
                     <label for="">Grupo</label>
                     <select class="form-control" name="CodGrupo" id="">
-                        <option>1- Contas Fixas</option>
-                        <option selected>2- Contas Avulsas</option>
+                        @foreach ($Categoria as $RowCat)
+                        <option>{{$RowCat->id .' - '. $RowCat->descricao}}</option>
+                        @endforeach
+                           
                     </select>
                 </div>
 
                 <div class="form-group md col-4">
                     <label for="">Sub.Grupo</label>
                     <select class="form-control" name="SubGrupo" id="">
-                        <option selected>1- Contas</option>
-                        <option>2- Despesas</option>
+                        @foreach ($Sub as $RowSub)
+                        <option>{{$RowSub->id .' - '. $RowSub->descricao}}</option>
+                        @endforeach
                     </select>
                 </div>
 

@@ -42,7 +42,7 @@
 
         </div>
 
-        <input name="" id="btn" onclick='Localizar();'class="btn btn-primary" type="button"
+        <input name="" id="btn" onclick='Localizar();'class="btn btn-dark" type="button"
             value="Listar">
 
 

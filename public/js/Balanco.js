@@ -22,7 +22,7 @@ function Localizar() {
         CodEmpresa = document.getElementById('CodEmpresa').value;
 
         $.ajax({
-            type: 'get',
+            type: 'post',
             url: '/Balanco/Localizar/',
             data: { 'Dataini': Dataini, 'Datafim': Datafim, 'CodEmpresa': CodEmpresa },
             datatype: 'json',

@@ -9,5 +9,5 @@ class Categorias extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['id,descricao,tipo'];
+    protected $fillable = ['id','descricao','tipo'];
 }

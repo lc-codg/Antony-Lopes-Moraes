@@ -12,10 +12,8 @@
 <body>
 
     <div id='container' class='.container-fluid'>
-        <p>
-        <div class="card text-left">
-            <img class="card-img-top" src="" alt="">
-            <div class="card-body">
+        <div id='container' class='.container-fluid'>
+            <p>
                 <h4 class="card-title">Lançar Estoque Atual</h4>
                 <form method='post' id='form'action='/Balanco/Cadastrar'>
 

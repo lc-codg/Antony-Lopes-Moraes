@@ -19,6 +19,7 @@ use App\Models\ContasaReceber;
 use App\Http\Controllers\ArrecadacaoController;
 use App\Http\Controllers\ExtratoController;
 use App\Http\Controllers\BalancoController;
+use App\Http\Controllers\CategoriasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -155,4 +156,11 @@ Route::get('/Balanco/Show',[BalancoController::class,'Show']);
 Route::post('/Balanco/Cadastrar',[BalancoController::class,'Cadastrar']);
 Route::get('/Balanco/Listar',[BalancoController::class,'Listar']);
 Route::get('/Balanco/Localizar',[BalancoController::class,'Localizar']);
+
+Route::get('/Categorias/Categorias',[CategoriasController::class,'Show']);
+Route::post('/Categorias/Salvar',[CategoriasController::class,'Salvar']);
+Route::post('/Categorias/Editar',[CategoriasController::class,'Editar']);
+Route::get('/Categorias/Todos',[CategoriasController::class,'Listar']);
+Route::get('/Categorias/Localizar',[CategoriasController::class,'Localizar']);
+Route::get('/Categorias/Excluir/',[CategoriasController::class,'Excluir']);
 

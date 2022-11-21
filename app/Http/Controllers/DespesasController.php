@@ -9,6 +9,7 @@ use App\Models\Despesas;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
 use App\Http\Controllers\ExtratoController;
+use App\Http\Controllers\CategoriasController;
 
 class DespesasController extends Controller
 {
@@ -42,12 +43,17 @@ class DespesasController extends Controller
     public function index()
     {
         $ObterDados = new ObterDados();
+        $Categoria = new CategoriasController();
+        $Cat = $Categoria->ListaCategoria('Categoria');
+        $SubCategoria = $Categoria->ListaCategoria('Sub-Categoria');
 
         return view('Despesas.Despesas', [
             'Empresas'
             =>  $ObterDados->ListaDeEmpresas(),
             'Fornecedor' =>  $ObterDados->ListaDeFornecedores(),
             'Contas' => $ObterDados->ListarContasBancarias(),
+            'Categoria' => $Cat,
+            'Sub' => $SubCategoria,
         ]);
     }
 
@@ -97,12 +103,17 @@ class DespesasController extends Controller
         $ObterDados = new ObterDados();
 
         $Despesas = Despesas::findOrFail($id);
+        $Categoria = new CategoriasController();
+        $Cat = $Categoria->ListaCategoria('Categoria');
+        $SubCategoria = $Categoria->ListaCategoria('Sub-Categoria');
 
         return view('/Despesas.Ver', [
             'Despesas' => $Despesas,
             'Empresas'
             =>  $ObterDados->ListaDeEmpresas(),
-            'Fornecedor' =>  $ObterDados->ListaDeFornecedores()
+            'Fornecedor' =>  $ObterDados->ListaDeFornecedores(),
+            'Categoria' => $Cat,
+            'Sub' => $SubCategoria,
         ]);
     }
 

@@ -41,15 +41,14 @@
 
                     <th scope="col">Cod.Despesa</th>
                     <th scope="col">Descrição</th>
-                    <th scope="col">Barras</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Fornecedor</th>
                     <th scope="col">Total</th>
-                    <th scope='col'>Vencimento</th>
-                    <th scope='col'>N° Parcela</th>
-                    <th scope='col'>Identificação</th>
+                    <th scope="col">Data</th>
+
                     <th scope="col"></th>
                     <th scope="col"></th>
+                
                 </tr>
             </thead>
             <tbody>
@@ -62,13 +61,13 @@
                     <td>{{ $row->id }}</td>
 
                     <td>{{ $row->Descricao }}</td>
-                    <td>{{ $row->Barras }}</td>
+                 
                     <td>{{ $row->Razaoe}}</td>
                     <td>{{ $row->Razaof}}</td>
                     <td>{{ $row->Total}}</td>
-                    <td>{{ $row->Vencimento}}</td>
-                    <td>{{ $row->Parcelas}}</td>
-                    <td>{{ $row->Boleta}}</td>
+                    <td>{{ $row->Datarecebimento}}</td>
+
+    
 
 
                     <td>

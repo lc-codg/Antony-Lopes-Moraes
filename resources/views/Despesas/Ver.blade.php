@@ -43,10 +43,6 @@
                     <input type="text" value= '{{$Despesas->Descricao}}' class="form-control" name="Descricao" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-12">
-                    <label for="">Código da Boleta</label>
-                    <input type="number" value= '{{$Despesas->Barras}}' class="form-control" name="Barras" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
             </div>
 
@@ -57,15 +53,6 @@
                     <input type="number" value= '{{$Despesas->NotaFiscal}}' class="form-control" name="NotaFiscal" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-4">
-                    <label for="">Série</label>
-                    <input type="number" value= '{{$Despesas->Serie}}' class="form-control" name="Serie" id="" aria-describedby="helpId" placeholder="">
-                </div>
-
-                <div class="form-group md col-2">
-                    <label for="">Vencimento</label>
-                    <input type="date" value= '{{$Despesas->Vencimento}}' class="form-control" name="Vencimento" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
                 <div class="form-group md col-2">
                     <label for="">Data Recebimento</label>
@@ -103,15 +90,7 @@
                     <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalFinal" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Parcelas</label>
-                    <input type="number" value= '{{$Despesas->Parcelas}}' class="form-control" name="Parcelas" id="" aria-describedby="helpId" placeholder="">
-                </div>
-
-                <div class="form-group md col-2">
-                    <label for="">Quantidade de boletas</label>
-                    <input type="number" value= '{{$Despesas->Boleta}}' class="form-control" name="boleta" id="" aria-describedby="helpId" placeholder="">
-                </div>
+              
 
             </div>
 
@@ -120,21 +99,23 @@
                 <div class="form-group md col-4">
                     <label for="">Grupo</label>
                     <select class="form-control" name="CodGrupo" id="">
-                        <option>{{$Despesas->CodGrupo}}</option>
-                        <option>1- Contas Fixas</option>
-                        <option>2- Contas Avulsas</option>
+                        <option selected>{{$Despesas->CodGrupo}}</option>
+                        @foreach ($Categoria as $RowCat)
+                        <option>{{$RowCat->id .' - '. $RowCat->descricao}}</option>
+                        @endforeach
+                           
                     </select>
                 </div>
 
                 <div class="form-group md col-4">
                     <label for="">Sub.Grupo</label>
                     <select class="form-control" name="SubGrupo" id="">
-                        <option>{{$Despesas->CodSubGrupo}}</option>
-                        <option>1- Contas</option>
-                        <option>2- Despesas</option>
+                        <option selected>{{$Despesas->CodSubGrupo}}</option>
+                        @foreach ($Sub as $RowSub)
+                        <option>{{$RowSub->id .' - '. $RowSub->descricao}}</option>
+                        @endforeach
                     </select>
                 </div>
-
 
             </div>
 
