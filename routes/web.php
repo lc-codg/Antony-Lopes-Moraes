@@ -15,11 +15,11 @@ use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\ItensCompraController;
 use App\Http\Controllers\ReceitasController;
 use App\Http\Controllers\ControllerOutrosLancamentos;
-use App\Models\ContasaReceber;
 use App\Http\Controllers\ArrecadacaoController;
 use App\Http\Controllers\ExtratoController;
 use App\Http\Controllers\BalancoController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\AbateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,4 +163,7 @@ Route::post('/Categorias/Editar',[CategoriasController::class,'Editar']);
 Route::get('/Categorias/Todos',[CategoriasController::class,'Listar']);
 Route::get('/Categorias/Localizar',[CategoriasController::class,'Localizar']);
 Route::get('/Categorias/Excluir/',[CategoriasController::class,'Excluir']);
+
+Route::get('/Boi',[AbateController::class,'index']);
+Route::get('/Tabela',[AbateController::class,'show']);
 
