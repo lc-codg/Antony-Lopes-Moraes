@@ -58,6 +58,7 @@
                 Diversos
               </a>
               <a class="dropdown-item" href="/Categorias/Categorias">Cadastrar Categorias</a>
+              <a class="dropdown-item" href="/Tabela">Lançar Abate</a>
               <a class="dropdown-item" href="/Categorias/Todos">Listar Categorias</a>
             </div>
           </div>
