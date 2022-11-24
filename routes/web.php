@@ -20,6 +20,7 @@ use App\Http\Controllers\ExtratoController;
 use App\Http\Controllers\BalancoController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AbateController;
+use App\Http\Controllers\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ use App\Http\Controllers\AbateController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('Public');
 });
 
 Route::get('/Produtos/Novo', [ProdutosController::class, 'Cadastrar']);
@@ -53,15 +54,15 @@ Route::get('/Clientes/Delete/{Id}', [ClientesController::class, 'Delete']);
 Route::get('/Clientes/Ver/{Id}', [ClientesController::class, 'ListarPorId']);
 Route::get('/Clientes/Todos', [ClientesController::class, 'ListarTodos']);
 Route::get('/Clientes/Inserir', [ClientesController::class, 'Inserir']);
-Route::get('/Clientes/PesquisaNome',[ClientesController::class,'ListarPorNome']);
+Route::get('/Clientes/PesquisaNome', [ClientesController::class, 'ListarPorNome']);
 
 Route::get('/Pedidos/Ver/{Id}', [PedidoController::class, 'ListarPorId']);
 Route::get('/Pedidos/Todos', [PedidoController::class, 'ListarTodos']);
 Route::get('/Pedidos/Delete/{id}', [PedidoController::class, 'Delete']);
 Route::get('/Pedidos/Carrinho', [PedidoController::class, 'Show']);
 Route::get('/Pedidos/LimparCarrinho', [PedidoController::class, 'LimparCarrinho']);
-Route::get('/Pedidos/Salvar',[PedidoController::class,'create']);
-Route::get('/Pedidos/ImprimirA4/{id}/{tipo}',[PedidoController::class,'Imprimir']);
+Route::get('/Pedidos/Salvar', [PedidoController::class, 'create']);
+Route::get('/Pedidos/ImprimirA4/{id}/{tipo}', [PedidoController::class, 'Imprimir']);
 
 Route::get('/Itens/Delete/{Id}', [ItensController::class, 'Delete']);
 Route::get('/Itens/Ver/{id}', [ItensController::class, 'ListarPorId']);
@@ -78,7 +79,7 @@ Route::get('/Fornecedor/Delete/{Id}', [FornecedorController::class, 'Delete']);
 Route::get('/Fornecedor/Ver/{Id}', [FornecedorController::class, 'ListarPorId']);
 Route::get('/Fornecedor/Todos', [FornecedorController::class, 'ListarTodos']);
 Route::get('/Fornecedor/Inserir', [FornecedorController::class, 'Inserir']);
-Route::get('/Fornecedor/PesquisaNome',[FornecedorController::class,'ListarPorNome']);
+Route::get('/Fornecedor/PesquisaNome', [FornecedorController::class, 'ListarPorNome']);
 
 Route::get('/Empresa/Novo', [EmpresaController::class, 'Cadastrar']);
 Route::post('/Empresa/Salvar', [EmpresaController::class, 'Salvar']);
@@ -87,7 +88,7 @@ Route::get('/Empresa/Delete/{Id}', [EmpresaController::class, 'Delete']);
 Route::get('/Empresa/Ver/{Id}', [EmpresaController::class, 'ListarPorId']);
 Route::get('/Empresa/Todos', [EmpresaController::class, 'ListarTodos']);
 Route::post('/Empresa/Inserir', [EmpresaController::class, 'Inserir']);
-Route::get('/Empresa/Seleciona',[EmpresaController::class, 'Seleciona']);
+Route::get('/Empresa/Seleciona', [EmpresaController::class, 'Seleciona']);
 
 Route::get('/ContasBancarias/Novo', [ContasBancariasController::class, 'index']);
 Route::post('/ContasBancarias/Salvar', [ContasBancariasController::class, 'Salvar']);
@@ -114,7 +115,7 @@ Route::get('ContasaReceber/Delete/{id}', [ContasaRecebercontroller::class, 'dest
 Route::get('/ContasaReceber/Quitar/', [ContasaReceberController::class, 'Quitar']);
 Route::get('/ContasaReceber/Estornar/', [ContasaReceberController::class, 'Estornar']);
 Route::get('/ContasaReceber/Validar/', [ContasaReceberController::class, 'Validar']);
-Route::post('/ContasaReceber/EstornarParcial/', [ContasaReceberController::class,'EParcial']);
+Route::post('/ContasaReceber/EstornarParcial/', [ContasaReceberController::class, 'EParcial']);
 
 Route::get('/Despesas/Novo', [DespesasController::class, 'index']);
 Route::post('/Despesas/Salvar', [Despesascontroller::class, 'create']);
@@ -128,42 +129,43 @@ Route::get('/Compras/Todos', [ComprasController::class, 'ListarTodos']);
 Route::get('/Compras/Delete/{id}', [ComprasController::class, 'Delete']);
 Route::get('/Compras/Carrinho', [ComprasController::class, 'Show']);
 Route::get('/Compras/LimparCarrinho', [ComprasController::class, 'LimparCarrinho']);
-Route::get('/Compras/Salvar',[ComprasController::class,'create']);
-Route::get('/Compras/ImprimirA4/{id}/{tipo}',[ComprasController::class,'Imprimir']);
+Route::get('/Compras/Salvar', [ComprasController::class, 'create']);
+Route::get('/Compras/ImprimirA4/{id}/{tipo}', [ComprasController::class, 'Imprimir']);
 
-Route::get('/Receitas/Novo',[ReceitasController::class,'index']);
-Route::get('/Receitas/Todos',[ReceitasController::class,'ListarTodos']);
+Route::get('/Receitas/Novo', [ReceitasController::class, 'index']);
+Route::get('/Receitas/Todos', [ReceitasController::class, 'ListarTodos']);
 Route::post('/Receitas/Salvar', [Receitascontroller::class, 'create']);
 Route::get('/Receitas/Ver/{id}', [ReceitasController::class, 'show']);
 Route::get('/Receitas/Editar/{id}', [ReceitasController::class, 'update']);
 Route::get('Receitas/Delete/{id}', [ReceitasController::class, 'destroy']);
 
-Route::get('/Outros/Novo',[ControllerOutrosLancamentos::class,'Novo']);
-Route::post('/Outros/Salvar',[ControllerOutrosLancamentos::class,'Salvar']);
+Route::get('/Outros/Novo', [ControllerOutrosLancamentos::class, 'Novo']);
+Route::post('/Outros/Salvar', [ControllerOutrosLancamentos::class, 'Salvar']);
 
 
-route::get('/Arrecadacao/Novo',[ArrecadacaoController::class,'index']);
-Route::post('/Arrecadacao/Salvar',[ArrecadacaoController::class,'Salvar']);
-Route::get('/Arrecadacao/Todos',[ArrecadacaoController::class,'Listartodos']);
-Route::get('/Arrecadacao/Deletar/{id}',[ArrecadacaoController::class,'Excluir']);
-Route::get('/Arrecadacao/Editar/{id}',[ArrecadacaoController::class,'Editar']);
-Route::post('/Arrecadacao/Atualizar',[ArrecadacaoController::class,'Atualizar']);
+route::get('/Arrecadacao/Novo', [ArrecadacaoController::class, 'index']);
+Route::post('/Arrecadacao/Salvar', [ArrecadacaoController::class, 'Salvar']);
+Route::get('/Arrecadacao/Todos', [ArrecadacaoController::class, 'Listartodos']);
+Route::get('/Arrecadacao/Deletar/{id}', [ArrecadacaoController::class, 'Excluir']);
+Route::get('/Arrecadacao/Editar/{id}', [ArrecadacaoController::class, 'Editar']);
+Route::post('/Arrecadacao/Atualizar', [ArrecadacaoController::class, 'Atualizar']);
 
-Route::get('/Extrato/Todos/{id}',[ExtratoController::class,'ShowExtrato']);
-Route::get('/Extrato/View',[ExtratoController::class,'ExtratoGeral']);
+Route::get('/Extrato/Todos/{id}', [ExtratoController::class, 'ShowExtrato']);
+Route::get('/Extrato/View', [ExtratoController::class, 'ExtratoGeral']);
 
-Route::get('/Balanco/Show',[BalancoController::class,'Show']);
-Route::post('/Balanco/Cadastrar',[BalancoController::class,'Cadastrar']);
-Route::get('/Balanco/Listar',[BalancoController::class,'Listar']);
-Route::get('/Balanco/Localizar',[BalancoController::class,'Localizar']);
+Route::get('/Balanco/Show', [BalancoController::class, 'Show']);
+Route::post('/Balanco/Cadastrar', [BalancoController::class, 'Cadastrar']);
+Route::get('/Balanco/Listar', [BalancoController::class, 'Listar']);
+Route::get('/Balanco/Localizar', [BalancoController::class, 'Localizar']);
 
-Route::get('/Categorias/Categorias',[CategoriasController::class,'Show']);
-Route::post('/Categorias/Salvar',[CategoriasController::class,'Salvar']);
-Route::post('/Categorias/Editar',[CategoriasController::class,'Editar']);
-Route::get('/Categorias/Todos',[CategoriasController::class,'Listar']);
-Route::get('/Categorias/Localizar',[CategoriasController::class,'Localizar']);
-Route::get('/Categorias/Excluir/',[CategoriasController::class,'Excluir']);
+Route::get('/Categorias/Categorias', [CategoriasController::class, 'Show']);
+Route::post('/Categorias/Salvar', [CategoriasController::class, 'Salvar']);
+Route::post('/Categorias/Editar', [CategoriasController::class, 'Editar']);
+Route::get('/Categorias/Todos', [CategoriasController::class, 'Listar']);
+Route::get('/Categorias/Localizar', [CategoriasController::class, 'Localizar']);
+Route::get('/Categorias/Excluir/', [CategoriasController::class, 'Excluir']);
 
-Route::get('/Boi',[AbateController::class,'index']);
-Route::get('/Tabela',[AbateController::class,'show']);
+Route::get('/Boi', [AbateController::class, 'index']);
+Route::get('/Tabela', [AbateController::class, 'show']);
 
+Route::get('/Usuario/{Tipo}',[user::class,'index']);
