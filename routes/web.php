@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
@@ -20,7 +21,8 @@ use App\Http\Controllers\ExtratoController;
 use App\Http\Controllers\BalancoController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AbateController;
-use App\Http\Controllers\User;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,12 +34,27 @@ use App\Http\Controllers\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('Public');
 });
+Route::get('/Public',function(){
+    return view('Public');
+});
+Route::get('/Usuario/{Tipo}',[UserController::class,'index']);
+Route::post('Usuario/Registrar',[UserController::class,'Registrar']);
+Route::post('/Usuario/Logar',[UserController::class,'Logar']);
+Route::post('/Usuario/Logarok',[UserController::class,'LogarOk']);
 
-Route::get('/Produtos/Novo', [ProdutosController::class, 'Cadastrar']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/Produtos/Novo', [ProdutosController::class, 'Cadastrar']);
 Route::post('/Produtos/Salvar', [ProdutosController::class, 'Salvar']);
 Route::get('/Produtos/Editar/{Id}', [ProdutosController::class, 'Editar']);
 Route::get('/Produtos/Delete/{Id}', [ProdutosController::class, 'Delete']);
@@ -167,5 +184,6 @@ Route::get('/Categorias/Excluir/', [CategoriasController::class, 'Excluir']);
 
 Route::get('/Boi', [AbateController::class, 'index']);
 Route::get('/Tabela', [AbateController::class, 'show']);
+});
 
-Route::get('/Usuario/{Tipo}',[user::class,'index']);
+require __DIR__.'/auth.php';

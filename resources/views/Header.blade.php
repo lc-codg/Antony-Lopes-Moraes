@@ -191,7 +191,7 @@
 
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="Front-end/Produto.html">Sair <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">Sair <span class="sr-only">(current)</span></a>
         </li>
 
       </ul>
