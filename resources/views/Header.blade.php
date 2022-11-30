@@ -19,6 +19,12 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
+          
+        <?php 
+         $Usuarios = Session()->get('DadosUsuarios');
+            
+        if($Usuarios->Cadastro <> Null){ ?>
+
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cadastro</a>
           <div class="dropdown-menu">
@@ -53,6 +59,8 @@
               <a class="dropdown-item" href="/Empresa/Novo">Cadastrar Empresas</a>
               <a class="dropdown-item" href="/Empresa/Todos">Listar Empresas</a>
             </div>
+           
+
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Diversos
@@ -62,8 +70,11 @@
               <a class="dropdown-item" href="/Categorias/Todos">Listar Categorias</a>
             </div>
           </div>
+          <?php } ?>
         </li>
-
+   <?php 
+          
+            if($Usuarios->Financeiro <> Null){ ?>
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Financeiro</a>
           <div class="dropdown-menu">
@@ -121,11 +132,16 @@
             </div>
 
           </div>
+          <?php } ?>
         </li>
-
+<?php 
+if($Usuarios->Notas <> Null){ ?>
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notas</a>
           <div class="dropdown-menu">
+            <?php 
+          
+            if($Usuarios->Compras ='1' ){ ?>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Notas de Compra
@@ -133,6 +149,10 @@
               <a class="dropdown-item" href="/Compras/Carrinho">Cadastrar Notas de Compra </a>
               <a class="dropdown-item" href="/Compras/Todos">Listar Notas de Compra </a>
             </div>
+            <?php } ?>
+            <?php 
+          
+            if($Usuarios->Vendas <> Null){ ?>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Notas de Venda
@@ -140,9 +160,12 @@
               <a class="dropdown-item" href="/Pedidos/Carrinho">Emitir Nota de Venda </a>
               <a class="dropdown-item" href="/Pedidos/Todos/">Listar Nota de Venda </a>
             </div>
-
+<?php } ?>
 
           </div>
+          <?php }
+          
+          if($Usuarios->Fluxo <> Null){ ?>
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Fluxo</a>
           <div class="dropdown-menu">
@@ -163,7 +186,8 @@
               </div>
             </div>
 
-
+       
+          
             <div class="list-group">
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                    Fluxo
@@ -172,7 +196,10 @@
             </div>
             <a class="dropdown-item" href="/Extrato/View">Extrato</a>
           </div>
+          <?php } ?>
         </li>
+
+        <?php if($Usuarios->Relatorio <> Null){ ?>
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatório</a>
           <div class="dropdown-menu">
@@ -188,10 +215,10 @@
 
           </div>
         </li>
-
+<?php } ?>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/">Sair <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/LogOff">Sair <span class="sr-only">(current)</span></a>
         </li>
 
       </ul>

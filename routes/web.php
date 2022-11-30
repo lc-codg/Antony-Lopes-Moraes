@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
@@ -23,7 +22,6 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AbateController;
 use App\Http\Controllers\UserController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +32,7 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     return view('Public');
 });
@@ -42,19 +41,20 @@ Route::get('/Public',function(){
 });
 Route::get('/Usuario/{Tipo}',[UserController::class,'index']);
 Route::post('Usuario/Registrar',[UserController::class,'Registrar']);
-Route::post('/Usuario/Logar',[UserController::class,'Logar']);
-Route::post('/Usuario/Logarok',[UserController::class,'LogarOk']);
+Route::post('/Usuario/Logar',[UserController::class,'LogarOk']);
+Route::post('/Usuario/Logarok',[UserController::class,'Logar']);
+Route::get('/LogOff',[UserController::class,'Logoff']);
 
+// Verifica se existe a sessão
+if (session()->has('DadosUsuarios')) {
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+}else{
+    
+Route::get('/home',function(){
+    return view('home');
+});
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/Produtos/Novo', [ProdutosController::class, 'Cadastrar']);
+Route::get('/Produtos/Novo', [ProdutosController::class, 'Cadastrar']);
 Route::post('/Produtos/Salvar', [ProdutosController::class, 'Salvar']);
 Route::get('/Produtos/Editar/{Id}', [ProdutosController::class, 'Editar']);
 Route::get('/Produtos/Delete/{Id}', [ProdutosController::class, 'Delete']);
@@ -184,6 +184,7 @@ Route::get('/Categorias/Excluir/', [CategoriasController::class, 'Excluir']);
 
 Route::get('/Boi', [AbateController::class, 'index']);
 Route::get('/Tabela', [AbateController::class, 'show']);
-});
 
-require __DIR__.'/auth.php';
+
+}
+  

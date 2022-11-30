@@ -75,7 +75,9 @@ class UserController extends Controller
         $Usuario = DB::table('users')->where('name', '=', $Login)->first();
         if ($Usuario <> null) {
             if (($Senha == $Usuario->password) && ($Login == $Usuario->name)) {
-                return '<script>location="/Home"</script>';
+                session()->put('DadosUsuarios', $Usuario);
+                //var_dump(Session()->get('DadosUsuarios'));
+                return '<script>location="/home"</script>';
             } else {
                 echo '<script>alert("Usuário ou Senha incorreto");</script>';
                 return '<script>location="/"</script>';
@@ -84,5 +86,9 @@ class UserController extends Controller
             echo '<script>alert("Usuário não cadastrado.");</script>';
             return '<script>location="/"</script>';
         }
+    }
+    public function Logoff(){
+        Session()->flush('DadosUsuarios');
+        return view('Public');
     }
 }
