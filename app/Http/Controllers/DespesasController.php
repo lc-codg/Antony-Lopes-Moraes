@@ -176,4 +176,21 @@ class DespesasController extends Controller
 
         return "<script>alert('Deletado com sucesso.');location = '/Despesas/Todos';</script>";
     }
+
+    public function FechamentoDespesa(Request $request){
+
+        $Despesa = Despesas::whereBetween('datarecebimento',[$request->DataIni,$request->DataFim])->where('CodEmpresa',$request->Empresa)->get();
+        return response()->json($Despesa,200);
+
+    } 
+    public function Detalhado(Request $request){
+        $Despesa = Despesas::where('CodGrupo',$request->CodGrupo)->where('CodEmpresa',$request->CodEmpresa)->wherebetween('datarecebimento',[$request->Dataini,$request->DataFim])->get();
+        return response()->json($Despesa,200);
+    }
+    public function Relatorio(){
+        $Utilidades = new ObterDados();
+        return view('Despesas.Relatorio',['Empresas'=>$Utilidades->ListaDeEmpresas()]);
+    }
 }
+
+
