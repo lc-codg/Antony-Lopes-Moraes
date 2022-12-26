@@ -21,22 +21,37 @@
 
             <div class="form-group col-md-4">
                 <label for="">Localizar</label>
-                <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+                <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id=""
+                    aria-describedby="helpId" placeholder="">
                 <small id="helpId" class="form-text text-muted">Localizar por Emitente ou Destinatário</small>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="">Data Inicial</label>
-                <input type="date" class="form-control" name="Dataini" id="" value="{{Date('Y-m-d')}}" aria-describedby="helpId" placeholder="">
+                <input type="date" class="form-control" name="Dataini" id="" value="{{ Date('Y-m-d') }}"
+                    aria-describedby="helpId" placeholder="">
             </div>
 
             <div class="form-group col-md-2">
                 <label for="">Data Final</label>
-                <input type="date" class="form-control" name="Datafim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
+                <input type="date" class="form-control" name="Datafim" value="{{ Date('Y-m-d') }}" id=""
+                    aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group md col-3">
+                <label for="">Empresa</label>
+                <select class="form-control" name="Empresa" id="Empresa">
+                    <option selected>Selecione...</option>
+                    @foreach ($Empresa as $item)
+                        <option>{{ $item->id . '-' . $item->Razao }}</option>
+                    @endforeach
+
+
+                </select>
             </div>
 
             <div class="form-group col-md-3">
-                <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar'
+                    aria-describedby="helpId" placeholder="">
             </div>
 
         </div>
@@ -62,43 +77,43 @@
 
 
                 @foreach ($Pedidos as $row)
+                    <td>{{ $row->id }}</td>
+                    <td>{{ $row->Razao }}</td>
+                    <td>{{ $row->Nome }}</td>
+                    <td>R$ <span class="price">{{ number_format($row->Total, 2, '.', '') }}</span></td>
 
-                <td>{{ $row->id }}</td>
-                <td>{{ $row->Razao }}</td>
-                <td>{{ $row->Nome }}</td>
-                <td>R$ <span class="price">{{ number_format($row->Total, 2, '.', '') }}</span></td>
-
-                <td>{{ $row->DtPedido }}</td>
-
+                    <td>{{ $row->DtPedido }}</td>
 
 
 
-                <td>
 
-                    <form action="/Itens/Todos/{{ $row->id }}" method="get">
-                        <input class="btn btn-primary" name="" type="submit" Value='Itens'>
-                    </form>
-                </td>
-                <td>
-                    <form action="/Pedidos/Delete/{{$row->id}}" method="get">
+                    <td>
 
-                        <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
-                    </form>
-                </td>
+                        <form action="/Itens/Todos/{{ $row->id }}" method="get">
+                            <input class="btn btn-primary" name="" type="submit" Value='Itens'>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/Pedidos/Delete/{{ $row->id }}" method="get">
 
-                <td>
-                    <form target="_blank"action="/Pedidos/ImprimirA4/{{$row->id}}/{{'Limpo'}}" method="get">
+                            <input class="btn btn-Danger" name="" type="submit" Value='Excluir'>
+                        </form>
+                    </td>
 
-                        <input class="btn btn-success" name="" type="submit" Value='Imprimir'>
-                    </form>
-                </td>
+                    <td>
+                        <form target="_blank"action="/Pedidos/ImprimirA4/{{ $row->id }}/{{ 'Limpo' }}"
+                            method="get">
+
+                            <input class="btn btn-success" name="" type="submit" Value='Imprimir'>
+                        </form>
+                    </td>
 
 
 
 
             </tr>
             @endforeach
-            {{$Pedidos->links()}}
+            {{ $Pedidos->links() }}
 
 
 

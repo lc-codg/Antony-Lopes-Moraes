@@ -19,7 +19,7 @@
 
         <div class='form-row'>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label for="">Localizar</label>
                 <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
                 <small id="helpId" class="form-text text-muted">Localizar por Emitente ou Destinatário</small>
@@ -35,6 +35,17 @@
                 <input type="date" class="form-control" name="Datafim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
             </div>
 
+            <div class="form-group md col-3">
+                <label for="">Empresa</label>
+                <select class="form-control" name="Empresa" id="Empresa">
+                    <option selected>Selecione...</option>
+                    @foreach ($Empresa as $item)
+                        <option>{{ $item->id . '-' . $item->Razao }}</option>
+                    @endforeach
+
+
+                </select>
+            </div>
             <div class="form-group col-md-4">
                 <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
             </div>

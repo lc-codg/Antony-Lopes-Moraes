@@ -21,6 +21,8 @@ class ArrecadacaoController extends Controller
     }
     public function ListarTodos(Request $request)
     {
+        $Utilidades = new ObterDados;
+        $Empresas = $Utilidades->ListaDeEmpresas();
         $Arrecada = DB::table('arrecadacaos')->join(
             'empresas',
             'arrecadacaos.Codempresa',
@@ -29,12 +31,12 @@ class ArrecadacaoController extends Controller
         )->select(
             'arrecadacaos.*',
             'empresas.Razao as Razaoe'
-        )->wherebetween(
+        )->where('arrecadacaos.Codempresa','=',Str::substr($request->Empresa,0,1))->wherebetween(
             'DataRecebimento',
             [$request->DataIni, $request->DataFim]
         )->paginate(20);
 
-        return view('/Arrecadacao.Todos', ['Arrecada' => $Arrecada]);
+        return view('/Arrecadacao.Todos', ['Arrecada' => $Arrecada,'Empresas'=>$Empresas]);
     }
     private function Verificar($Dados)
     {

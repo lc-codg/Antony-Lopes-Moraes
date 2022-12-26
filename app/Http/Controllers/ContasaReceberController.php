@@ -231,15 +231,17 @@ class ContasaReceberController extends Controller
     {
         $Contas = new ContasBancariasController();
         $Banco = $Contas->Listar();
+        $Utilidades = new ObterDados;
+        $Empresas = $Utilidades->ListaDeEmpresas();
         $ContasaReceber = DB::table('contasa_recebers')->join(
             'empresas',
             'contasa_recebers.CodEmpresa',
             '=',
             'empresas.id'
         )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
-        whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
+        where('contasa_recebers.CodEmpresa','=',$request->Empresa)->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
-        return view('/ContasaReceber.Todos', ['ContasaReceber' => $ContasaReceber, 'Contas' => $Banco]);
+        return view('/ContasaReceber.Todos', ['Empresas'=>$Empresas,'ContasaReceber' => $ContasaReceber, 'Contas' => $Banco]);
     }
 
     public function update(Request $request, $id)

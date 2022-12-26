@@ -26,7 +26,17 @@
                     <label for="">Data Final</label>
                     <input type="date" class="form-control" name="DataFim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
                 </div>
+                <div class="form-group md col-3">
+                    <label for="">Empresa</label>
+                    <select class="form-control" name="Empresa" id="Empresa">
+                        <option selected>Selecione...</option>
+                        @foreach ($Empresas as $item)
+                            <option>{{ $item->id . '-' . $item->Razao }}</option>
+                        @endforeach
 
+
+                    </select>
+                </div>
                 <div class="form-group col-md-3">
                     <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
                 </div>

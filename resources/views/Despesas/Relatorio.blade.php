@@ -45,8 +45,7 @@
             <th>Código</th>
             <th>Descrição</th>
             <th>Data</th>
-            <th></th>
-            <th></th>
+        
         </tr>
     </thead>
     <tbody id='Despesas'>

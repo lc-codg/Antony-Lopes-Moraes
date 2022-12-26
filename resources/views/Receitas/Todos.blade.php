@@ -19,18 +19,31 @@
 
                 <div class="form-group col-md-2">
                     <label for="">Data Inicial</label>
-                    <input type="date" class="form-control" name="DataIni" id="" value="{{Date('Y-m-d')}}" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" name="DataIni" id="" value="{{ Date('Y-m-d') }}"
+                        aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="">Data Final</label>
-                    <input type="date" class="form-control" name="DataFim" value="{{Date('Y-m-d')}}" id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" name="DataFim" value="{{ Date('Y-m-d') }}" id=""
+                        aria-describedby="helpId" placeholder="">
                 </div>
+                <div class="form-group md col-3">
+                    <label for="">Empresa</label>
+                    <select class="form-control" name="Empresa" id="Empresa">
+                        <option selected>Selecione...</option>
+                        @foreach ($Empresas as $item)
+                            <option>{{ $item->id . '-' . $item->Razao }}</option>
+                        @endforeach
 
+
+                    </select>
+                </div>
                 <div class="form-group col-md-3">
-                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar'
+                        aria-describedby="helpId" placeholder="">
                 </div>
-
+               
             </div>
         </form>
 
@@ -56,30 +69,29 @@
 
 
                     @foreach ($Receitas as $row)
+                        <td>{{ $row->id }}</td>
+                        <td>{{ $row->Descricao }}</td>
+                        <td>{{ $row->Razaoe }}</td>
+                        <td>{{ $row->Razaof }}</td>
+                        <td>{{ $row->Total }}</td>
+                        <td>{{ $row->Vencimento }}</td>
+                        <td>{{ $row->Parcelas }}</td>
+                        <td>{{ $row->Boleta }}</td>
 
-                    <td>{{ $row->id }}</td>
-                    <td>{{ $row->Descricao }}</td>
-                    <td>{{ $row->Razaoe}}</td>
-                    <td>{{ $row->Razaof}}</td>
-                    <td>{{ $row->Total}}</td>
-                    <td>{{ $row->Vencimento}}</td>
-                    <td>{{ $row->Parcelas}}</td>
-                    <td>{{ $row->Boleta}}</td>
 
+                        <td>
 
-                    <td>
+                            <form action="/Receitas/Ver/{{ $row->id }}" method="get">
+                                <input class="btn btn-dark" name="" type="submit" Value='Editar'>
+                            </form>
 
-                        <form action="/Receitas/Ver/{{ $row->id }}" method="get">
-                            <input class="btn btn-dark" name="" type="submit" Value='Editar'>
-                        </form>
+                        </td>
 
-                    </td>
-
-                    <td>
-                        <form action="/Receitas/Delete/{{ $row->id }}" method="get">
-                            <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
-                        </form>
-                    </td>
+                        <td>
+                            <form action="/Receitas/Delete/{{ $row->id }}" method="get">
+                                <input class="btn btn-danger" name="" type="submit" Value='Excluir'>
+                            </form>
+                        </td>
 
 
 

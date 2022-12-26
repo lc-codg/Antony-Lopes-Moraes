@@ -191,6 +191,7 @@ class DespesasController extends Controller
         $Utilidades = new ObterDados();
         return view('Despesas.Relatorio',['Empresas'=>$Utilidades->ListaDeEmpresas()]);
     }
+ 
 }
 
 

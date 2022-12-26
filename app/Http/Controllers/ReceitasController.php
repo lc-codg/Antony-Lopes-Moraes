@@ -70,13 +70,13 @@ class ReceitasController extends Controller
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-                'Conta' =>Str::substr($request->Conta, 0, 1),
+                'Conta' => Str::substr($request->Conta, 0, 1),
             ]);
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas',Str::substr($request->CodEmpresa, 0, 1),);
+            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),);
 
             return
                 "<script>
@@ -104,14 +104,17 @@ class ReceitasController extends Controller
 
     public function Listartodos(Request $request)
     {
+        $Utilidades = new ObterDados;
+        $Empresas = $Utilidades->ListaDeEmpresas();
         $Receitas = DB::table('receitas')->join(
             'empresas',
             'receitas.CodEmpresa',
             '=',
             'empresas.id'
-        )->select('receitas.*', 'empresas.Razao as Razaoe', 'receitas.CodCliente as Razaof')->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->select('receitas.*', 'empresas.Razao as Razaoe', 'receitas.CodCliente as Razaof')
+            ->where('receitas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(20);
 
-        return view('/Receitas.Todos', ['Receitas' => $Receitas]);
+        return view('/Receitas.Todos', ['Receitas' => $Receitas, 'Empresas' => $Empresas]);
     }
 
     public function update(Request $request, $id)
@@ -152,7 +155,7 @@ class ReceitasController extends Controller
         $Receitas->Saque($Receitas->Conta, $Receitas->Total);
         //Insere no extrato
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada',$Receitas->CodEmpresa);
+        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada', $Receitas->CodEmpresa);
         $Receitas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Receitas/Todos';</script>";

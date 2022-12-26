@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ItensController;
 use App\Http\Controllers\ContasaReceberController;
+use Illuminate\Support\Str;
 use Exception;
 
 class PedidoController extends Controller
@@ -89,9 +90,12 @@ class PedidoController extends Controller
         )->
         join('clientes', 'pedidos.CodigoDoCliente', '=', 'clientes.id')->
         join('empresas', 'pedidos.CodEmpresa','=','empresas.id')->
+        where('clientes.Nome','LIKE','%'.$request->Nome.'%')->
+       // where('clientes.Razao','LIKE','%'.$request->Nome.'%')->
+        where('pedidos.CodEmpresa','=',Str::Substr($request->Empresa,0,1))->
         where('empresas.Razao', 'LIKE', '%'.$request->Nome.'%')->
-        orwhere('clientes.Nome','LIKE','%'.$request->Nome.'%')->
-        orwhere('clientes.Razao','LIKE','%'.$request->Nome.'%')->
+       
+      
         whereBetween('DtPedido',array($request->Dataini,$request->Datafim))->
         paginate(20);
 

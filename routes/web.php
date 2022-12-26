@@ -136,7 +136,7 @@ Route::post('/ContasaReceber/EstornarParcial/', [ContasaReceberController::class
 
 Route::get('/Despesas/Novo', [DespesasController::class, 'index']);
 Route::post('/Despesas/Salvar', [Despesascontroller::class, 'create']);
-Route::get('/Despesas/Todos', [DespesasController::class, 'ListarTodos']);
+Route::get('/Despesas/Todos', [DespesasController::class, 'Relatorio']);
 Route::get('/Despesas/Ver/{id}', [DespesasController::class, 'show']);
 Route::get('/Despesas/Editar/{id}', [DespesasController::class, 'update']);
 Route::get('Despesas/Delete/{id}', [Despesascontroller::class, 'destroy']);

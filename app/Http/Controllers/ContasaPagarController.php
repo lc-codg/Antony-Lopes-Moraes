@@ -163,15 +163,17 @@ class ContasaPagarController extends Controller
     {
         $Obter = new ObterDados();
         $ContasBancarias = $Obter->ListarContasBancarias();
+        $Empresas = $Obter->ListaDeEmpresas();
 
         $ContasaPagar = DB::table('contasa_pagars')->join(
             'empresas',
             'contasa_pagars.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->
+        where('contasa_pagars.CodEmpresa','=',$request->Empresa)->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
-        return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar, 'Contas' => $ContasBancarias]);
+        return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar, 'Contas' => $ContasBancarias,'Empresas'=>$Empresas]);
     }
 
     public function ListarAtrasadas()

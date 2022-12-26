@@ -87,7 +87,7 @@ class ComprasController extends Controller
             'fornecedors.Nome',
             'empresas.Razao',
 
-        )->join('fornecedors', 'compras.CodigoDoCliente', '=', 'fornecedors.id')->join('empresas', 'compras.CodEmpresa', '=', 'empresas.id')->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('fornecedors.Nome', 'LIKE', '%' . $request->Nome . '%')->orwhere('fornecedors.Razao', 'LIKE', '%' . $request->Nome . '%')->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->paginate(20);
+        )->join('fornecedors', 'compras.CodigoDoCliente', '=', 'fornecedors.id')->join('empresas', 'compras.CodEmpresa', '=', 'empresas.id')->where('compras.Codempresa','=',$request->Empresa)->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Nome', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Razao', 'LIKE', '%' . $request->Nome . '%')->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->paginate(20);
 
         return view('Compras.Todos', ['Compras' => $Compras, 'Empresa' => $Empresa, 'Fornecedor' => $Fornecedor]);
     }
