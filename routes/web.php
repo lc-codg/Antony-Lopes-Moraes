@@ -21,6 +21,7 @@ use App\Http\Controllers\BalancoController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\AbateController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Relatorios;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +123,7 @@ Route::get('/ContasaPagar/Editar/{id}', [ContasaPagarController::class, 'update'
 Route::get('/ContasaPagar/Delete/{id}', [Contasapagarcontroller::class, 'destroy']);
 Route::get('/ContasaPagar/Quitar/', [ContasaPagarController::class, 'Quitar']);
 Route::get('/ContasaPagar/Estornar', [ContasaPagarController::class, 'Estornar']);
+Route::get('/ContasaPagar/Fechamento', [ContasaPagarController::class, 'Fechamento']);
 
 Route::get('/ContasaReceber/Novo', [ContasaReceberController::class, 'index']);
 Route::post('/ContasaReceber/Salvar', [ContasaRecebercontroller::class, 'create']);
@@ -169,6 +171,7 @@ Route::get('/Arrecadacao/Todos', [ArrecadacaoController::class, 'Listartodos']);
 Route::get('/Arrecadacao/Deletar/{id}', [ArrecadacaoController::class, 'Excluir']);
 Route::get('/Arrecadacao/Editar/{id}', [ArrecadacaoController::class, 'Editar']);
 Route::post('/Arrecadacao/Atualizar', [ArrecadacaoController::class, 'Atualizar']);
+Route::get('/Arrecadacao/Fechamento', [ArrecadacaoController::class, 'Fechamento']);
 
 Route::get('/Extrato/Todos/{id}', [ExtratoController::class, 'ShowExtrato']);
 Route::get('/Extrato/View', [ExtratoController::class, 'ExtratoGeral']);
@@ -187,6 +190,8 @@ Route::get('/Categorias/Excluir/', [CategoriasController::class, 'Excluir']);
 
 Route::get('/Boi', [AbateController::class, 'index']);
 Route::get('/Tabela', [AbateController::class, 'show']);
+
+Route::get('/MovimentoFinanceiro',[Relatorios::class,'show']);
 
 
 }

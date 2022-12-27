@@ -34,7 +34,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar',$request->CodEmpresa);
+        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar', $request->CodEmpresa);
 
         return 'Quitado com sucesso!';
     }
@@ -57,7 +57,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar',$request->CodEmpresa);
+        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar', $request->CodEmpresa);
 
         return 'Estornado com sucesso!';
     }
@@ -170,10 +170,9 @@ class ContasaPagarController extends Controller
             'contasa_pagars.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->
-        where('contasa_pagars.CodEmpresa','=',$request->Empresa)->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->where('contasa_pagars.CodEmpresa', '=', $request->Empresa)->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
-        return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar, 'Contas' => $ContasBancarias,'Empresas'=>$Empresas]);
+        return view('/ContasaPagar/Todos', ['ContasaPagar' => $ContasaPagar, 'Contas' => $ContasBancarias, 'Empresas' => $Empresas]);
     }
 
     public function ListarAtrasadas()
@@ -281,5 +280,20 @@ class ContasaPagarController extends Controller
         $ContasaPagar->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/ContasaPagar/Todos';</script>";
+    }
+
+    public function Fechamento(Request $request)
+    {
+        $ContasaPagar = DB::table('contasa_pagars')->join(
+            'empresas',
+            'contasa_pagars.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->
+        select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')
+        ->where('contasa_pagars.CodEmpresa', '=', $request->Empresa)
+        ->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->get();
+
+        return response()->json($ContasaPagar);
     }
 }

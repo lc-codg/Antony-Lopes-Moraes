@@ -174,7 +174,7 @@ if($Usuarios->Notas <> Null){ ?>
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                     Movimento
                   </a>
-              <a class="dropdown-item" href="/Produtos/Novo">Movimento diário</a>
+              <a class="dropdown-item" href="/MovimentoFinanceiro">Movimento diário</a>
               <a class="dropdown-item" href="/Produtos/Todos">Saldo Do Caixa</a>
               <div class="list-group">
 

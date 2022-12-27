@@ -129,4 +129,23 @@ class ArrecadacaoController extends Controller
           </script>";
         }
     }
+    public function Fechamento(Request $request){
+      
+        $Arrecada = DB::table('arrecadacaos')->join(
+            'empresas',
+            'arrecadacaos.Codempresa',
+            '=',
+            'empresas.id'
+        )->select(
+            'arrecadacaos.*',
+            'empresas.Razao as Razaoe'
+          
+        )->where('arrecadacaos.Codempresa','=',Str::substr( $request->Empresa,0,1))->wherebetween(
+            'DataRecebimento',
+            [ $request->DataIni,  $request->DataFim]
+        )->get();
+
+        return response()->json($Arrecada);
+
+    }
 }
