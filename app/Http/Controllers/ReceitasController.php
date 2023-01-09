@@ -76,7 +76,7 @@ class ReceitasController extends Controller
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),);
+            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),$request->Descricao);
 
             return
                 "<script>
@@ -150,12 +150,13 @@ class ReceitasController extends Controller
     {
 
         $Receitas = Receitas::findOrFail($id);
+        $Descricao = $Receitas->Descricao;
         $Total = $Receitas->Total;
         //Saca da conta
         $Receitas->Saque($Receitas->Conta, $Receitas->Total);
         //Insere no extrato
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada', $Receitas->CodEmpresa);
+        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada', $Receitas->CodEmpresa,$Descricao);
         $Receitas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Receitas/Todos';</script>";

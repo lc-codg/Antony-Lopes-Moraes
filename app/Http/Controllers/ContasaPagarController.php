@@ -23,6 +23,8 @@ class ContasaPagarController extends Controller
         $Multa = empty($request->Multa2) ? 0 : $request->Multa2;
         $Cheque = empty($request->Cheque2) ? '' : $request->Cheque2;
 
+        $Descricao = $ContasaPagar->Descricao;
+
         if ($Banco->Saque(Str::substr($request->conta, 0, 1), $request->Valor + $Multa + $Juros))
             $ContasaPagar->update([
                 'status' => 1,
@@ -31,10 +33,10 @@ class ContasaPagarController extends Controller
                 'Cheque' => $Cheque,
                 'Conta' => Str::substr($request->conta, 0, 1)
             ]);
-
+        
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar', $request->CodEmpresa);
+        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar', $request->CodEmpresa,$Descricao);
 
         return 'Quitado com sucesso!';
     }
@@ -47,6 +49,7 @@ class ContasaPagarController extends Controller
         $Banco = new ContasBancariasController();
         if ($Banco->Deposito(Str::substr($request->conta2, 0, 1), $request->Valor + $Multa + $Juros))
             $ContasaPagar = ContasaPagar::findOrFail($request->id);
+            $Descricao = $ContasaPagar->Descricao;
         $ContasaPagar->update([
             'status' => 0,
             'Juros' => 0,
@@ -57,7 +60,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar', $request->CodEmpresa);
+        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar', $request->CodEmpresa,$Descricao);
 
         return 'Estornado com sucesso!';
     }

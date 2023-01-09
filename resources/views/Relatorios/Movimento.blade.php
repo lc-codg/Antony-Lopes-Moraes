@@ -37,14 +37,24 @@
     <input name="" id="" onclick="Fechamento();"class="btn btn-primary" type="button" value="Pesquisar">
     <br>
     <br>
-    <caption>Arrecadação</caption>
+  
+
+
+
+      <div class='form-row'>
+
+        <div id='Arrecadado'class="btn-group md col-02">
+        
+        </div>
+      </div>
+
     <table id="tabelaPedidos" class="table table-bordered table-condensed "
     style="font-size: 12px; width:100%;">
   
     <thead class="thead-dark">
       
         <tr>
-            <th>Código</th>
+            <th>Código Contas</th>
             <th>Descrição</th>
             <th>Data</th>
             <th>Empresa</th>
@@ -60,14 +70,12 @@
  
  </table>     
      
-
- <caption>Contas</caption>
 <table id="tabelaPedidos" class="table table-bordered table-condensed "
     style="font-size: 12px; width:100%;">
     
     <thead class="thead-dark">
         <tr>
-            <th>Código</th>
+            <th>Código Arrecadação</th>
             <th>Descrição</th>
             <th>Data</th>
             <th>Total</th>

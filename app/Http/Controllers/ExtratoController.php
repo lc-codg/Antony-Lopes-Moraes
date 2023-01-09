@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ExtratoController extends Controller
 {
-    function InserirNoExtrato($Valor, $Tipo, $Conta, $Modelo, $Empresa)
+    function InserirNoExtrato($Valor, $Tipo, $Conta, $Modelo, $Empresa,$Descricao)
     {
 
         parcial::create([
@@ -19,6 +19,7 @@ class ExtratoController extends Controller
             'pessoa' => $Tipo,
             'conta' => Str::substr($Conta, 0, 1),
             'CodEmpresa' => $Empresa,
+            'descricao' =>$Descricao,
         ]);
     }
     function ExtratoCredito($Dados, $Tipo)

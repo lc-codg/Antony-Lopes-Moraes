@@ -9,5 +9,5 @@ class parcial extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable =['id','data','valor','usuario','id_original','pessoa','conta','CodEmpresa'];
+    protected $fillable =['id','data','valor','usuario','id_original','pessoa','conta','CodEmpresa','descricao'];
 }

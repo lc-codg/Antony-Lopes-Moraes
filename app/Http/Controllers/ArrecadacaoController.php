@@ -81,7 +81,7 @@ class ArrecadacaoController extends Controller
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Valor);
             //Adiciona ao extrato
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($request->Valor,'C',Str::substr($request->Conta, 0, 1),'Arrecadação',Str::substr($request->Codempresa, 0, 1));
+            $Extrato->InserirNoExtrato($request->Valor,'C',Str::substr($request->Conta, 0, 1),'Arrecadação',Str::substr($request->Codempresa, 0, 1,$request->Descricao));
 
 
            
