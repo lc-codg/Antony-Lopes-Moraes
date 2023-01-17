@@ -106,7 +106,7 @@
                         @foreach ($Categoria as $RowCat)
                         <option>{{$RowCat->id .' - '. $RowCat->descricao}}</option>
                         @endforeach
-                           
+
                     </select>
                 </div>
 
@@ -131,6 +131,7 @@
     </div>
 
     </div>
+
 
 </body>
 @include('footer')

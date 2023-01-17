@@ -25,7 +25,7 @@ class ContasaReceberController extends Controller
             'conta' => ''
         ]);
         $Extrato = new ExtratoController();
-        $Extrato->ExtratoCredito($Dados,'Parcial');
+        $Extrato->ExtratoCredito($Dados, 'Parcial');
     }
 
     public function index()
@@ -148,7 +148,7 @@ class ContasaReceberController extends Controller
                 $request->NotaFiscal,
                 $request->Serie,
                 Str::substr($request->CodEmpresa, 0, 1),
-                isset($request->Tipo) ? false : true,
+                0,
 
             );
 
@@ -166,6 +166,7 @@ class ContasaReceberController extends Controller
             $this->Quitar($request);
 
             return 'Quitada com sucesso!';
+
         } else {
             $this->PagarParcial($request);
             $resto = 'Parcialmente Quitada, resta: ' . ($request->Valor - $request->ValorParcial);
@@ -184,7 +185,8 @@ class ContasaReceberController extends Controller
         ]);
 
         $Extrato = new ExtratoController();
-        $Extrato->ExtratoCredito($Dados,'Parcial');
+        $Extrato->InserirNoExtrato($Dados->Valor, 'C', $Dados->conta, 'Receber', $Dados->CodEmpresa,($ContasaReceber->Descricao.' Nº: '.$Dados->id));
+
     }
 
     public function Estornar(Request $request)
@@ -196,6 +198,8 @@ class ContasaReceberController extends Controller
             'status' => 0,
             'conta' => ''
         ]);
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($request->Valor, 'D', $request->conta2, 'Receber', $request->CodEmpresa,($ContasaReceber->Descricao.' Cancelada nº '.$request->id));
 
         return "Estornado com sucesso!";
     }
@@ -212,7 +216,7 @@ class ContasaReceberController extends Controller
         ]);
         $Extrato = new ExtratoController();
         $Extrato->CancelarParcial($request->id);
-        return "<script>alert('Estorno de parcial efetuado com sucesso!');window.history.back();</script>";
+        return "<script>alert('Estorno de parcial efetuado com sucesso!');location='/ContasaReceber/Todos'</script>";
     }
 
     public function show($id)
@@ -238,10 +242,9 @@ class ContasaReceberController extends Controller
             'contasa_recebers.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->
-        where('contasa_recebers.CodEmpresa','=',$request->Empresa)->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->where('contasa_recebers.CodEmpresa', '=', $request->Empresa)->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
 
-        return view('/ContasaReceber.Todos', ['Empresas'=>$Empresas,'ContasaReceber' => $ContasaReceber, 'Contas' => $Banco]);
+        return view('/ContasaReceber.Todos', ['Empresas' => $Empresas, 'ContasaReceber' => $ContasaReceber, 'Contas' => $Banco]);
     }
 
     public function update(Request $request, $id)
@@ -269,14 +272,14 @@ class ContasaReceberController extends Controller
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
                 'status' => isset($request->status) ? false : false,
                 'conta' => '',
-                'status' => isset($request->Tipo) ? false : true,
+                'status' => 0,
             ]);
 
         return
             "<script>
             alert('Salvo com Sucesso!');
             location = '/ContasaReceber/Todos';
-        </scriptwindow.history.back>";
+        </script>";
     }
 
 
@@ -295,7 +298,7 @@ class ContasaReceberController extends Controller
             'contasa_recebers.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'contasa_recebers.CodFornecedor', '=', 'fornecedors.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=','0')->WhereDate('contasa_recebers.vencimento', '>', 'CURRENT_DATE()')->get();
+        )->join('fornecedors', 'contasa_recebers.CodFornecedor', '=', 'fornecedors.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')->Where('status', '=', '0')->WhereDate('contasa_recebers.vencimento', '>', 'CURRENT_DATE()')->get();
 
         return $ContasaReceber;
     }

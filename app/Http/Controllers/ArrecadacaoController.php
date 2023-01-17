@@ -81,10 +81,10 @@ class ArrecadacaoController extends Controller
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Valor);
             //Adiciona ao extrato
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($request->Valor,'C',Str::substr($request->Conta, 0, 1),'Arrecadação',Str::substr($request->Codempresa, 0, 1,$request->Descricao));
+            $Extrato->InserirNoExtrato($request->Valor,'C',Str::substr($request->Conta, 0, 1),'Arrecadação',Str::substr($request->Codempresa, 0, 1),$request->Descricao);
 
 
-           
+
 
             return  "<script>
             alert('Arrecadação Salva com sucesso!');
@@ -97,6 +97,10 @@ class ArrecadacaoController extends Controller
     {
         $Arreacadacao = Arrecadacao::findOrFail($id);
         $Arreacadacao->delete();
+
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($Arreacadacao->Valor, 'D', $Arreacadacao->conta, 'Arrecadacao', $Arreacadacao->CodEmpresa,($Arreacadacao->Descricao.'Cancelada  Nº: '.$Arreacadacao->id));
+
         try {
             return "<script>alert('Registro deletado com sucesso!');
           location = '/Arrecadacao/Todos';
@@ -130,7 +134,7 @@ class ArrecadacaoController extends Controller
         }
     }
     public function Fechamento(Request $request){
-      
+
         $Arrecada = DB::table('arrecadacaos')->join(
             'empresas',
             'arrecadacaos.Codempresa',
@@ -139,7 +143,7 @@ class ArrecadacaoController extends Controller
         )->select(
             'arrecadacaos.*',
             'empresas.Razao as Razaoe'
-          
+
         )->where('arrecadacaos.Codempresa','=',Str::substr( $request->Empresa,0,1))->wherebetween(
             'DataRecebimento',
             [ $request->DataIni,  $request->DataFim]

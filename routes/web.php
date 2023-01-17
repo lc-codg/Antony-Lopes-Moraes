@@ -50,7 +50,7 @@ Route::get('/LogOff',[UserController::class,'Logoff']);
 if (session()->has('DadosUsuarios')) {
 
 }else{
-    
+
 Route::get('/home',function(){
     return view('home');
 });
@@ -193,6 +193,9 @@ Route::get('/Tabela', [AbateController::class, 'show']);
 
 Route::get('/MovimentoFinanceiro',[Relatorios::class,'show']);
 
+Route::get('/Extrato/Creditos', [ExtratoController::class, 'ListaCreditos']);
+Route::get('/Extrato/Debitos', [ExtratoController::class, 'ListaDebitos']);
+
 
 }
-  
+

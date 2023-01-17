@@ -214,5 +214,6 @@
 
 
 </body>
+
 @include('footer')
 </html>

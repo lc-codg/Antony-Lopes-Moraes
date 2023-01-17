@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group md col-12">
                     <label for="">Senha</label>
-                    <input type="text" class="form-control" name="Senha" id="Senha" aria-describedby="helpId"
+                    <input type="password" class="form-control" name="Senha" id="Senha" aria-describedby="helpId"
                         placeholder="">
                 </div>
                 <?php if($Tipo <> 'Login') {?>

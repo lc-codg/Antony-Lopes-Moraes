@@ -33,7 +33,7 @@ class ContasaPagarController extends Controller
                 'Cheque' => $Cheque,
                 'Conta' => Str::substr($request->conta, 0, 1)
             ]);
-        
+
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
         $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar', $request->CodEmpresa,$Descricao);
@@ -60,7 +60,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar', $request->CodEmpresa,$Descricao);
+        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar', $request->CodEmpresa,($Descricao .'/ ESTORNADA'));
 
         return 'Estornado com sucesso!';
     }
@@ -138,7 +138,7 @@ class ContasaPagarController extends Controller
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-                'status' => isset($request->Tipo) ? false : true,
+                'status' => 0,
                 'Juros' => 0,
                 'Multa' => 0,
                 'Cheque' => 0

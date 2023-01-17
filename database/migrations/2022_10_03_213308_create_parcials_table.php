@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('conta',200)->nullable()->default(NULL);
             $table->string('pessoa',100)->nullable()->default(NULL);
             $table->integer('CodEmpresa')->nullable()->default(NULL);
+            $table->string('descricao',200)->nullable()->default(NULL);
             $table->timestamps();
         });
     }

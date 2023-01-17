@@ -166,7 +166,7 @@ class DespesasController extends Controller
     {
         $Despesas = Despesas::findOrFail($id);
         $Total = $Despesas->Total;
-        $Descricao = $Despesa->Descricao;
+        $Descricao = $Despesas->Descricao;
         //Depósito em Conta
         $Banco = new ContasBancariasController();
         if ($Banco->Deposito($Despesas->conta, $Despesas->total));
@@ -183,7 +183,7 @@ class DespesasController extends Controller
         $Despesa = Despesas::whereBetween('datarecebimento',[$request->DataIni,$request->DataFim])->where('CodEmpresa',$request->Empresa)->get();
         return response()->json($Despesa,200);
 
-    } 
+    }
     public function Detalhado(Request $request){
         $Despesa = Despesas::where('CodGrupo',$request->CodGrupo)->where('CodEmpresa',$request->CodEmpresa)->wherebetween('datarecebimento',[$request->Dataini,$request->DataFim])->get();
         return response()->json($Despesa,200);
@@ -192,7 +192,7 @@ class DespesasController extends Controller
         $Utilidades = new ObterDados();
         return view('Despesas.Relatorio',['Empresas'=>$Utilidades->ListaDeEmpresas()]);
     }
- 
+
 }
 
 

@@ -113,7 +113,7 @@
                         <td>{{ $row->Barras }}</td>
                         <td>{{ $row->Razaoe }}</td>
                         <td>{{ $row->Razaof }}</td>
-                       
+
 
                         @if ($row->status === 0)
                             <td class='price2'>R${{ $row->Total }}</td>
@@ -132,7 +132,7 @@
                                 onkeyup='Parcial({{ $IdDados }});'name="Parcial" id="Parcial{{ $IdDados }}"
                                 aria-describedby="helpId" placeholder="">
                         </td>
-                        
+
                         @if ($VerificaExtrato->ConstaNoExtrato($row->id) == false)
                         <td>
 
@@ -143,7 +143,7 @@
 
                         </td>
 
-                       
+
                         <td>
                             <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
                                 <input class="btn btn-danger" id='btnd{{ $IdDados }}'name=""
@@ -180,7 +180,9 @@
                                     <input name='tipo' hidden value='Receber'>
                                     <input hidden name='conta2' value='{{ $row->conta }}'
                                         id='conta{{ $IdDados }}'>
+
                                     <input name='Valor' hidden value='{{ $row->Total }}'>
+
                                     <input
                                         onclick='EstornarContasAReceber({{ $row->id }},{{ $IdDados }},
                                     {{ $row->Total }});'class="btn btn-warning"
@@ -194,7 +196,7 @@
                         @if ($VerificaExtrato->ConstaNoExtrato($row->id) == true)
 
                             <td>
-                                <form action="/Extrato/Todos/{{$row->id}}" method="get">                               
+                                <form action="/Extrato/Todos/{{$row->id}}" method="get">
                                     <input class="btn btn-success" id='btnp{{ $IdDados }}'name=""
                                     type="submit" Value='Parciais'>
 

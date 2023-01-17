@@ -150,13 +150,15 @@ class ReceitasController extends Controller
     {
 
         $Receitas = Receitas::findOrFail($id);
-        $Descricao = $Receitas->Descricao;
+
         $Total = $Receitas->Total;
+        $Contas = new ContasBancariasController();
         //Saca da conta
-        $Receitas->Saque($Receitas->Conta, $Receitas->Total);
+        $Contas->Saque($Receitas->Conta, $Total);
+
         //Insere no extrato
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada', $Receitas->CodEmpresa,$Descricao);
+        $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada', $Receitas->CodEmpresa,$Receitas->Descricao);
         $Receitas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Receitas/Todos';</script>";
