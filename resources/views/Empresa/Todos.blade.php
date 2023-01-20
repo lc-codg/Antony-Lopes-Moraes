@@ -10,7 +10,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <div class='.container-fluid ' id='c2'>
+    <br>
 <h5>Empresas</h5>
+
 </head>
 
 <body>
@@ -26,7 +28,7 @@
         <div class="form-group col-md-3">
             <input name="Localizar" id="Bot" class="btn btn-dark" type="submit" value="Pesquisar">
         </div>
-        </div>
+
 
 
     </form>

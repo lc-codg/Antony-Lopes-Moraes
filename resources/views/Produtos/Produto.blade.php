@@ -8,10 +8,13 @@
 
 </head>
 @include('Header')
+<body>
+<div class='. container-fluid'>
+    <br>
 
 <h5 Style='margin-left:1%;' class="text-left">Cadastro de Produto</h5>
 
-<body>
+
     <ul class="nav-tabs nav">
 
         <li class="nav-item">

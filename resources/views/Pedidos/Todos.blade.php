@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <div class='.container-fluid ' id='c2'>
+        <br>
         <h5>Vendas</h5>
 </head>
 
@@ -19,7 +20,7 @@
 
         <div class='form-row'>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label for="">Localizar</label>
                 <input autocomplete="off" autofocus type="text" class="form-control" name="Nome" id=""
                     aria-describedby="helpId" placeholder="">
@@ -54,7 +55,7 @@
                     aria-describedby="helpId" placeholder="">
             </div>
 
-        </div>
+
     </form>
 
     <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">

@@ -11,6 +11,7 @@
 
 <body>
     <div id='container' class='.container-fluid' id='c2'>
+        <br>
 <h5>Contas Bancárias</h5>
         <form method='get' action='/ContasBancarias/Todos/'>
 
@@ -26,7 +27,7 @@
                 </div>
 
 
-            </div>
+
 
 
         </form>

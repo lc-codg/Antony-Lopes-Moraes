@@ -8,7 +8,10 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-#tabelaPedidos { margin: 20px 0 40px; }
+
+#tabelaPedidos {
+    margin: 20px 0 20px;
+}
 
 #Total {
     color: blue;

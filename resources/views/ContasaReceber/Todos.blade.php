@@ -30,6 +30,7 @@
                     <input type="date" class="form-control" name="DataFim" value="{{ Date('Y-m-d') }}" id=""
                         aria-describedby="helpId" placeholder="">
                 </div>
+
                 <div class="form-group md col-3">
                     <label for="">Empresa</label>
                     <select class="form-control" name="Empresa" id="Empresa">
@@ -66,6 +67,7 @@
                 @endforeach
             </select>
         </button>
+
 
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
@@ -129,27 +131,27 @@
                             <input @if ($row->status === 1) readonly  value='' @endif
                                 style='font-size: 12px;width:70px;'type="number" pattern="[0-9]+([,\.][0-9]+)?"
                                 min="0" step="any" class="form-control"
-                                onkeyup='Parcial({{ $IdDados }});'name="Parcial" id="Parcial{{ $IdDados }}"
-                                aria-describedby="helpId" placeholder="">
+                                onkeyup='Parcial({{ $IdDados }});'name="Parcial"
+                                id="Parcial{{ $IdDados }}" aria-describedby="helpId" placeholder="">
                         </td>
 
                         @if ($VerificaExtrato->ConstaNoExtrato($row->id) == false)
-                        <td>
+                            <td>
 
-                            <form action="/ContasaReceber/Ver/{{ $row->id }}" method="get">
-                                <input class="btn btn-dark" id='btned{{ $IdDados }}'name=""
-                                    type="submit" Value='Editar'>
-                            </form>
+                                <form action="/ContasaReceber/Ver/{{ $row->id }}" method="get">
+                                    <input class="btn btn-dark" id='btned{{ $IdDados }}'name=""
+                                        type="submit" Value='Editar'>
+                                </form>
 
-                        </td>
+                            </td>
 
 
-                        <td>
-                            <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
-                                <input class="btn btn-danger" id='btnd{{ $IdDados }}'name=""
-                                    type="submit" Value='Cancelar'>
-                            </form>
-                        </td>
+                            <td>
+                                <form action="/ContasaReceber/Delete/{{ $row->id }}" method="get">
+                                    <input class="btn btn-danger" id='btnd{{ $IdDados }}'name=""
+                                        type="submit" Value='Cancelar'>
+                                </form>
+                            </td>
                         @endif
                         @if ($row->status === 0)
                             <td>
@@ -162,7 +164,7 @@
                                     <input hidden name='conta' value='' id="conta{{ $IdDados }}">
                                     <input
                                         onclick='QuitarContasAReceber({{ $row->id }},{{ $IdDados }},
-                                    {{ $row->Total }},{{$row->CodEmpresa}});'class="btn btn-primary"
+                                    {{ $row->Total }},{{ $row->CodEmpresa }});'class="btn btn-primary"
                                         name="" id='btnq{{ $IdDados }}' type="button" Value='Receber'>
 
                             </td>
@@ -194,14 +196,13 @@
                         @endif
 
                         @if ($VerificaExtrato->ConstaNoExtrato($row->id) == true)
-
                             <td>
-                                <form action="/Extrato/Todos/{{$row->id}}" method="get">
+                                <form action="/Extrato/Todos/{{ $row->id }}" method="get">
                                     <input class="btn btn-success" id='btnp{{ $IdDados }}'name=""
-                                    type="submit" Value='Parciais'>
+                                        type="submit" Value='Parciais'>
 
                                 </form>
-                                </td>
+                            </td>
                         @endif
 
 

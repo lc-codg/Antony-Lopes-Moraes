@@ -10,12 +10,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <div class='.container-fluid ' id='c2'>
+        <br>
 <h5>Fornecedores</h5>
 </head>
 
 <body>
 
     <form method='get' action='/Fornecedor/Todos'>
+
         <div class='form-row'>
             <div class="form-group col-md-8">
                 <label for="">Pesquisa Fornecedor</label>
@@ -25,7 +27,7 @@
             <div class="form-group col-md-3">
                 <input name="Localizar" id="Bot" class="btn btn-dark" type="submit" value="Pesquisar">
             </div>
-        </div>
+
 
 
     </form>

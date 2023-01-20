@@ -19,10 +19,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
-          
-        <?php 
+
+        <?php
          $Usuarios = Session()->get('DadosUsuarios');
-            
+
         if($Usuarios->Cadastro <> Null){ ?>
 
         <li class="nav-item dropdown">
@@ -59,21 +59,21 @@
               <a class="dropdown-item" href="/Empresa/Novo">Cadastrar Empresas</a>
               <a class="dropdown-item" href="/Empresa/Todos">Listar Empresas</a>
             </div>
-           
+
 
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                 Diversos
               </a>
               <a class="dropdown-item" href="/Categorias/Categorias">Cadastrar Categorias</a>
-              <a class="dropdown-item" href="/Tabela">Lançar Abate</a>
+
               <a class="dropdown-item" href="/Categorias/Todos">Listar Categorias</a>
             </div>
           </div>
           <?php } ?>
         </li>
-   <?php 
-          
+   <?php
+
             if($Usuarios->Financeiro <> Null){ ?>
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Financeiro</a>
@@ -134,13 +134,13 @@
           </div>
           <?php } ?>
         </li>
-<?php 
+<?php
 if($Usuarios->Notas <> Null){ ?>
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notas</a>
           <div class="dropdown-menu">
-            <?php 
-          
+            <?php
+
             if($Usuarios->Compras ='1' ){ ?>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
@@ -150,8 +150,8 @@ if($Usuarios->Notas <> Null){ ?>
               <a class="dropdown-item" href="/Compras/Todos">Listar Notas de Compra </a>
             </div>
             <?php } ?>
-            <?php 
-          
+            <?php
+
             if($Usuarios->Vendas <> Null){ ?>
             <div class="list-group">
               <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
@@ -164,7 +164,7 @@ if($Usuarios->Notas <> Null){ ?>
 
           </div>
           <?php }
-          
+
           if($Usuarios->Fluxo <> Null){ ?>
         <li class="nav-item dropdown">
           <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Fluxo</a>
@@ -175,7 +175,9 @@ if($Usuarios->Notas <> Null){ ?>
                     Movimento
                   </a>
               <a class="dropdown-item" href="/MovimentoFinanceiro">Movimento diário</a>
+              <a class="dropdown-item" href="/Extrato/View">Extrato</a>
               <a class="dropdown-item" href="/Produtos/Todos">Saldo Do Caixa</a>
+              <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
               <div class="list-group">
 
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
@@ -186,15 +188,16 @@ if($Usuarios->Notas <> Null){ ?>
               </div>
             </div>
 
-       
-          
+
+
             <div class="list-group">
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
-                   Fluxo
+                   Abate
                   </a>
-              <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
+
+              <a class="dropdown-item" href="/Tabela">Lançar Abate</a>
             </div>
-            <a class="dropdown-item" href="/Extrato/View">Extrato</a>
+
           </div>
           <?php } ?>
         </li>
@@ -230,4 +233,4 @@ if($Usuarios->Notas <> Null){ ?>
 
 
 </html>
-<br>
+
