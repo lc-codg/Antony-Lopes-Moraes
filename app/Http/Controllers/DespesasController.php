@@ -192,6 +192,10 @@ class DespesasController extends Controller
         $Utilidades = new ObterDados();
         return view('Despesas.Relatorio',['Empresas'=>$Utilidades->ListaDeEmpresas()]);
     }
+    public function PorCategoria(Request $request){
+        $Despesa = Despesas::where('CodGrupo',$request->CodGrupo)->wherebetween('datarecebimento',[$request->Dataini,$request->DataFim])->get();
+        return response()->json($Despesa,200);
+    }
 
 }
 

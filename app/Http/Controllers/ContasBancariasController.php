@@ -21,7 +21,7 @@ class ContasBancariasController extends Controller
 
         $ContasBancarias = ContasBancarias::findOrFail($id);
         $ContasBancarias->update([
-            'Saldo' => ($ContasBancarias->Saldo)+($Valor),
+            'Saldo' => ($ContasBancarias->Saldo) + ($Valor),
         ]);
 
         return true;
@@ -30,7 +30,7 @@ class ContasBancariasController extends Controller
     {
         $ContasBancarias = ContasBancarias::findOrFail($id);
         $ContasBancarias->update([
-            'Saldo' => ($ContasBancarias->Saldo)-($Valor),
+            'Saldo' => ($ContasBancarias->Saldo) - ($Valor),
         ]);
 
         return true;
@@ -55,16 +55,31 @@ class ContasBancariasController extends Controller
     public function ListarTodos(Request $request)
     {
         $ContasBancarias = DB::table('contas_bancarias')->join('empresas', 'empresas.id', '=', 'contas_bancarias.CodEmpresa')->select(
-                'contas_bancarias.id',
-                'contas_bancarias.Descricao',
-                'contas_bancarias.Banco',
-                'contas_bancarias.Agencia',
-                'contas_bancarias.Operacao',
-                'contas_bancarias.Tipo',
-                'empresas.Razao',
-                'contas_bancarias.Saldo'
-            )->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('empresas.Cnpj', '=', $request->Nome)->orwhere('empresas.id', '=', $request->Nome)->paginate(20);
+            'contas_bancarias.id',
+            'contas_bancarias.Descricao',
+            'contas_bancarias.Banco',
+            'contas_bancarias.Agencia',
+            'contas_bancarias.Operacao',
+            'contas_bancarias.Tipo',
+            'empresas.Razao',
+            'contas_bancarias.Saldo'
+        )->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->orwhere('empresas.Cnpj', '=', $request->Nome)->orwhere('empresas.id', '=', $request->Nome)->paginate(20);
         return View('ContasBancarias.Todos', ['ContasBancarias' => $ContasBancarias]);
+    }
+
+    public function Saldo()
+    {
+        $ContasBancarias = DB::table('contas_bancarias')->join('empresas', 'empresas.id', '=', 'contas_bancarias.CodEmpresa')->select(
+            'contas_bancarias.id',
+            'contas_bancarias.Descricao',
+            'contas_bancarias.Banco',
+            'contas_bancarias.Agencia',
+            'contas_bancarias.Operacao',
+            'contas_bancarias.Tipo',
+            'empresas.Razao',
+            'contas_bancarias.Saldo'
+        )->paginate(20);
+        return View('ContasBancarias.Saldo', ['ContasBancarias' => $ContasBancarias]);
     }
 
 

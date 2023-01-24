@@ -114,6 +114,7 @@ Route::get('/ContasBancarias/Todos/', [ContasBancariasController::class, 'Listar
 Route::get('/ContasBancarias/Ver/{id}', [ContasBancariasController::class, 'show']);
 Route::get('/ContasBancarias/Editar/{id}', [ContasBancariasController::class, 'Update']);
 Route::get('/ContasBancarias/Delete/{id}', [ContasBancariasController::class, 'Delete']);
+Route::get('/ContasBancarias/Saldo/', [ContasBancariasController::class, 'Saldo']);
 
 Route::get('/ContasaPagar/Novo', [ContasaPagarController::class, 'index']);
 Route::post('/ContasaPagar/Salvar', [Contasapagarcontroller::class, 'create']);
@@ -145,6 +146,7 @@ Route::get('Despesas/Delete/{id}', [Despesascontroller::class, 'destroy']);
 Route::get('/Despesas/Fechamento',[DespesasController::class,'FechamentoDespesa']);
 Route::get('/Depesas/Detalhado/',[DespesasController::class,'Detalhado']);
 Route::get('/Despesas/Relatorio',[DespesasController::class,'Relatorio']);
+Route::get('/Despesas/PorCategoria',[DespesasController::class,'PorCategoria']);
 
 Route::get('/Compras/Ver/{Id}', [ComprasController::class, 'ListarPorId']);
 Route::get('/Compras/Todos', [ComprasController::class, 'ListarTodos']);
@@ -187,6 +189,7 @@ Route::post('/Categorias/Editar', [CategoriasController::class, 'Editar']);
 Route::get('/Categorias/Todos', [CategoriasController::class, 'Listar']);
 Route::get('/Categorias/Localizar', [CategoriasController::class, 'Localizar']);
 Route::get('/Categorias/Excluir/', [CategoriasController::class, 'Excluir']);
+Route::get('/Categorias/Categorias/', [CategoriasController::class, 'Categorias']);
 
 Route::get('/Boi', [AbateController::class, 'index']);
 Route::get('/Tabela', [AbateController::class, 'show']);

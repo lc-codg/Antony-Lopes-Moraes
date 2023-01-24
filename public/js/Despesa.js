@@ -21,4 +21,37 @@ function Pesquisa(){
 
         
     });
+
+}
+function Categoria(){
+
+    let DataIni = document.getElementById('DataIni').value;
+    let DataFim = document.getElementById('DataFim').value;
+
+   $.ajax({
+
+    method:'get',
+    url:'/Categorias/Categorias',
+    sucess:function(Categoria){
+        return Categoria;
+    }
+
+   });
+
+    $.ajax({
+        method:'get',
+        url:'/Despesas/PorCategoria',
+        data:{'DataIni':DataIni,'DataFim':DataFim,'CodGrupo':CodGrupo},
+        success:function(retorno){
+            $('#Despesas').html('');
+            
+
+            for(let i =0; retorno.length >i; i++){
+            $('#Despesas').append('<tr> <td>'+retorno[i].id+' </td> <td>'+retorno[i].Descricao+'</td> <td>'+retorno[i].Datarecebimento+'</td>');
+            }
+       
+        }
+
+        
+    });
 }

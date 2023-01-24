@@ -176,7 +176,7 @@ if($Usuarios->Notas <> Null){ ?>
                   </a>
               <a class="dropdown-item" href="/MovimentoFinanceiro">Movimento diário</a>
               <a class="dropdown-item" href="/Extrato/View">Extrato</a>
-              <a class="dropdown-item" href="/Produtos/Todos">Saldo Do Caixa</a>
+              <a class="dropdown-item" h href="/ContasBancarias/Saldo">Saldo Do Caixa</a>
               <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
               <div class="list-group">
 
