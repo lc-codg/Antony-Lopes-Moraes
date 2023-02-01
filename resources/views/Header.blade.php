@@ -211,7 +211,7 @@ if($Usuarios->Notas <> Null){ ?>
 
               <a class="dropdown-item" href="/Produtos/Novo">Entradas</a>
               <a class="dropdown-item" href="/Produtos/Todos">Saídas</a>
-              <a class="dropdown-item" href="/Produtos/Todos">Despesas</a>
+              <a class="dropdown-item" href="/Despesas/DespesaPorCategoria">Despesas Por Categoria</a>
               <a class="dropdown-item" href="/Produtos/Todos">Consolidado</a>
             </div>
 

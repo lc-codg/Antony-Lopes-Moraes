@@ -197,6 +197,10 @@ class DespesasController extends Controller
         return response()->json($Despesa,200);
     }
 
+    public function DespesaPorCategoria(){
+        return view('Despesas.DespesaPorCategoria');
+    }
+
 }
 
 

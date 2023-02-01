@@ -147,6 +147,7 @@ Route::get('/Despesas/Fechamento',[DespesasController::class,'FechamentoDespesa'
 Route::get('/Depesas/Detalhado/',[DespesasController::class,'Detalhado']);
 Route::get('/Despesas/Relatorio',[DespesasController::class,'Relatorio']);
 Route::get('/Despesas/PorCategoria',[DespesasController::class,'PorCategoria']);
+Route::get('/Despesas/DespesaPorCategoria',[DespesasController::class,'DespesaPorCategoria']);
 
 Route::get('/Compras/Ver/{Id}', [ComprasController::class, 'ListarPorId']);
 Route::get('/Compras/Todos', [ComprasController::class, 'ListarTodos']);
