@@ -25,10 +25,11 @@
                     aria-describedby="helpId" placeholder="">
             </div>
 
-            <div class="form-group md col-2">
-            <input name="" id="Bot" onclick="Pesquisa();"class="btn btn-primary" type="button"
-                value="Pesquisar">
+            <div class="form-group col-md-3">
+                <input class="btn btn-primary" style='margin-top: 30px;'name="" id='Bot' type="button" onclick="DespesaCategoria();" Value='Pesquisar' aria-describedby="helpId" placeholder="">
             </div>
+
+        </div>
 
 
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 12px; width:100%;">

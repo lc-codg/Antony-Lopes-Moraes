@@ -1,57 +1,58 @@
-function Pesquisa(){
+function Pesquisa() {
 
     let DataIni = document.getElementById('DataIni').value;
     let DataFim = document.getElementById('DataFim').value;
     let Empresa = document.getElementById('Empresa').value;
- 
+
 
     $.ajax({
-        method:'get',
-        url:'/Despesas/Fechamento',
-        data:{'DataIni':DataIni,'DataFim':DataFim,'Empresa':Empresa},
-        success:function(retorno){
+        method: 'get',
+        url: '/Despesas/Fechamento',
+        data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa },
+        success: function (retorno) {
             $('#Despesas').html('');
-            
 
-            for(let i =0; retorno.length >i; i++){
-            $('#Despesas').append('<tr> <td>'+retorno[i].id+' </td> <td>'+retorno[i].Descricao+'</td> <td>'+retorno[i].Datarecebimento+'</td>');
+
+            for (let i = 0; retorno.length > i; i++) {
+                $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + retorno[i].Datarecebimento + '</td>');
             }
-       
+
         }
 
-        
+
     });
 
 }
-function Categoria(){
+
+function Categoria() {
+
+
+    $.ajax({
+
+
+        method: 'get',
+        url: '/Categorias/Categorias',
+        datatype: 'json',
+        success: function (retorno) {
+           a = [1,2,3];
+            return a;
+        }
+
+    });
+  
+
+}
+
+function DespesaCategoria() {
 
     let DataIni = document.getElementById('DataIni').value;
     let DataFim = document.getElementById('DataFim').value;
 
-   $.ajax({
-
-    method:'get',
-    url:'/Categorias/Categorias',
-    sucess:function(Categoria){
-        return Categoria;
-    }
-
-   });
-
-    $.ajax({
-        method:'get',
-        url:'/Despesas/PorCategoria',
-        data:{'DataIni':DataIni,'DataFim':DataFim,'CodGrupo':CodGrupo},
-        success:function(retorno){
-            $('#Despesas').html('');
-            
-
-            for(let i =0; retorno.length >i; i++){
-            $('#Despesas').append('<tr> <td>'+retorno[i].id+' </td> <td>'+retorno[i].Descricao+'</td> <td>'+retorno[i].Datarecebimento+'</td>');
-            }
-       
-        }
-
-        
+    Dados = Categoria();
+  
+    $.each(Dados, function(Id, val) {
+        console.log(val);
     });
+
+
 }
