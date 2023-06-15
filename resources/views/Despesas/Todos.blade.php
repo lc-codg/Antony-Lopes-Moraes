@@ -33,6 +33,10 @@
                     <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
                 </div>
 
+                <div class="form-group col-md-3">
+                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Imprimir' aria-describedby="helpId" placeholder="">
+                </div>
+
             </div>
         </form>
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">

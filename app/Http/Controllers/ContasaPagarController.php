@@ -294,7 +294,7 @@ class ContasaPagarController extends Controller
             'empresas.id'
         )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->
         select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')
-        ->where('contasa_pagars.CodEmpresa', '=', $request->Empresa)
+        ->where('contasa_pagars.CodEmpresa', '=', $request->Empresa)->Where('contasa_pagars.status', '=',1)
         ->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->get();
 
         return response()->json($ContasaPagar);
