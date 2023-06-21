@@ -93,7 +93,7 @@ class DespesasController extends Controller
             return
                 "<script>
             alert('Salvo com sucesso!');
-            location = '/Despesas/Todos';
+            location = '/Despesas/Novo';
          </script>";
         }
     }

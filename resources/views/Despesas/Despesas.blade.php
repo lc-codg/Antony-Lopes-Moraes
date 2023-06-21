@@ -77,22 +77,22 @@
 
                 <div class="form-group md col-2">
                     <label for="">Total</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="Total" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" onkeyup="Totalizar();" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="Total" id="Total" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Desconto</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalDesconto" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" onkeyup="Totalizar()";pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalDesconto" id="Desconto" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Acréscimo</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalAcrescimo" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" onkeyup="Totalizar();" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalAcrescimo" id="Acrescimo" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Final</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalFinal" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalFinal" id="Totalizado" aria-describedby="helpId" placeholder="">
                 </div>
 
 
@@ -131,7 +131,7 @@
     </div>
 
     </div>
-
+    <script src="{{ asset('js/Despesa.js') }}"></script>
 
 </body>
 @include('footer')

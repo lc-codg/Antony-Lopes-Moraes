@@ -20,19 +20,45 @@ function Pesquisa() {
                     currency: 'BRL'
                 });
                 Soma += parseFloat(retorno[i].Total);
+                let DescCat = SelecionaNomeCategoria(retorno[i].CodGrupo );
                 $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>'
-                    + '</td> <td>' + retorno[i].Datarecebimento + '</td>');
+                    + '</td> <td>' + retorno[i].Datarecebimento + '</td>' + '<td>' + DescCat);
             }
             const Total = parseFloat(Soma).toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
             });
-            $('#Soma').append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="'+Total+'" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            $('#Soma').append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
 
         }
 
 
     });
+
+}
+
+function SelecionaNomeCategoria($Id) {
+
+    let Categoria ='' ;
+    $.ajax({
+        method: 'get',
+        url: '/Categorias/ListarPorId',
+        data: { 'id': $Id },
+        success: function (retorno) {
+
+            
+            Categoria = (retorno[0].descricao);
+
+              
+            }
+
+
+        });
+        
+    
+    return 'teste';
+
+
 
 }
 
@@ -78,5 +104,16 @@ function DespesaCategoria() {
         console.log(val);
     });
 
+
+}
+
+function Totalizar() {
+
+    let Total = document.getElementById('Total').value == '' ? 0 : parseFloat(document.getElementById('Total').value);
+    let Desconto = document.getElementById('Desconto').value == '' ? 0 : parseFloat(document.getElementById('Desconto').value);
+    let Acrescimo = document.getElementById('Acrescimo').value != '' ? parseFloat(document.getElementById('Acrescimo').value) : 0;
+    let Totalizado = (Total + Acrescimo) - Desconto;
+
+    document.getElementById('Totalizado').value = Totalizado;
 
 }

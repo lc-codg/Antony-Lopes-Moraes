@@ -190,6 +190,7 @@ Route::post('/Categorias/Editar', [CategoriasController::class, 'Editar']);
 Route::get('/Categorias/Todos', [CategoriasController::class, 'Listar']);
 Route::get('/Categorias/Localizar', [CategoriasController::class, 'Localizar']);
 Route::get('/Categorias/Excluir/', [CategoriasController::class, 'Excluir']);
+Route::get('/Categorias/ListarPorId/', [CategoriasController::class, 'ListarCategoriaPorId']);
 
 
 Route::get('/Boi', [AbateController::class, 'index']);

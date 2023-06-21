@@ -46,6 +46,7 @@
           <th>Descrição</th>
           <th>Total</th>
           <th>Data</th>
+          <th>Categoria</th>
 
         </tr>
       </thead>
