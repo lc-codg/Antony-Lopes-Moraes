@@ -87,4 +87,9 @@ class CategoriasController extends Controller
         $Categoria = Categorias::where('id',$request->id)->get();
         return response()->json($Categoria,200);
     }
+    public function RelatorioPorCategoria(){
+        $Categoria = DB::table('categorias')->where('tipo','=','Categoria')->get();
+        return $Categoria;
+    }
+   
 }

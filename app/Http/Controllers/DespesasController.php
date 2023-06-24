@@ -179,7 +179,6 @@ class DespesasController extends Controller
     }
 
     public function FechamentoDespesa(Request $request){
-
         $Despesa = Despesas::whereBetween('datarecebimento',[$request->DataIni,$request->DataFim])->where('CodEmpresa',$request->Empresa)->get();
         return response()->json($Despesa,200);
 
@@ -198,7 +197,14 @@ class DespesasController extends Controller
     }
 
     public function DespesaPorCategoria(){
-        return view('Despesas.DespesaPorCategoria');
+        $Utilidades= new ObterDados();
+        return view('Despesas.DespesaPorCategoria',['Empresas'=>$Utilidades->ListaDeEmpresas()]);
+    }
+    public function FechamentoDespesaCat(Request $request){
+        $Despesa = Despesas::whereBetween('datarecebimento',[$request->DataIni,$request->DataFim])->where('CodEmpresa',$request->Empresa)->
+        where('CodGrupo',$request->CodGrupo)->get();
+        return response()->json($Despesa,200);
+
     }
 
 }

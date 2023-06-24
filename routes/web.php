@@ -148,6 +148,7 @@ Route::get('/Depesas/Detalhado/',[DespesasController::class,'Detalhado']);
 Route::get('/Despesas/Relatorio',[DespesasController::class,'Relatorio']);
 Route::get('/Despesas/PorCategoria',[DespesasController::class,'PorCategoria']);
 Route::get('/Despesas/DespesaPorCategoria',[DespesasController::class,'DespesaPorCategoria']);
+Route::get('/Despesas/FechamentoCat',[DespesasController::class,'FechamentoDespesaCat']);
 
 Route::get('/Compras/Ver/{Id}', [ComprasController::class, 'ListarPorId']);
 Route::get('/Compras/Todos', [ComprasController::class, 'ListarTodos']);
@@ -191,6 +192,7 @@ Route::get('/Categorias/Todos', [CategoriasController::class, 'Listar']);
 Route::get('/Categorias/Localizar', [CategoriasController::class, 'Localizar']);
 Route::get('/Categorias/Excluir/', [CategoriasController::class, 'Excluir']);
 Route::get('/Categorias/ListarPorId/', [CategoriasController::class, 'ListarCategoriaPorId']);
+Route::get('/Categorias/Lista/', [CategoriasController::class, 'RelatorioPorCategoria']);
 
 
 Route::get('/Boi', [AbateController::class, 'index']);
