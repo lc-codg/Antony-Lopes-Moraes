@@ -163,4 +163,11 @@ class ReceitasController extends Controller
 
         return "<script>alert('Deletado com sucesso.');location = '/Receitas/Todos';</script>";
     }
+    public function ListarPorData(Request $request){
+        $Receitas = DB::table('receitas')->select(DB::raw('SUM(receitas.Total) AS Total'), 'receitas.Descricao')
+        ->whereBetween('DataDaEntrada', array($request->Dataini, $request->Datafim))->where('receitas.CodEmpresa','=', Str::substr($request->Codempresa, 0, 1))
+        ->groupBy('receitas.Descricao')->get();
+
+        return $Receitas;
+    }
 }

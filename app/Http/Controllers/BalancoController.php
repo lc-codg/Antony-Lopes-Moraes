@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Balanco;
 use App\Classes\ObterDados;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class BalancoController extends Controller
 {
@@ -56,5 +57,15 @@ class BalancoController extends Controller
             exit;
         }
         return true;
+    }
+
+    public function ListarPorData(Request $request){
+        $EstoqueAtual = DB::table('balanco')->select(DB::raw('SUM(Valor) as EstoqueAtual'))->where('Data','=',$request->Datafim)
+        ->where('CodEmpresa','=',Str::Substr($request->CodEmpresa,0,1))->get();
+
+        $EstoqueAnterior = DB::table('balanco')->select(DB::raw('SUM(Valor) as EstoqueAtual'))->where('Data','=',$request->Datafim)
+        ->where('CodEmpresa','=',Str::Substr($request->CodEmpresa,0,1))->get();
+
+        return (['EstoqueAtual'=>$EstoqueAtual,'EstoqueAnterior'=>$EstoqueAnterior]);
     }
 }

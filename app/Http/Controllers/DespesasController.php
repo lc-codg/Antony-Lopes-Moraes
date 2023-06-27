@@ -206,7 +206,12 @@ class DespesasController extends Controller
         return response()->json($Despesa,200);
 
     }
+    public function ListarDespesas(Request $request){
+        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'),'categorias.descricao')
+        ->join('categorias', 'categorias.id', '=', 'despesas.CodGrupo')->whereBetween('despesas.Datarecebimento', array($request->Dataini, $request->Datafim))->where('compras.CodEmpresa','=',Str::substr($request->Codempresa, 0, 1))->
+        groupBy('categorias.descricao')->get();
+        return $Despesas;
+    }
 
 }
-
 

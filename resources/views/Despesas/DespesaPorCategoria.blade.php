@@ -44,21 +44,21 @@
   <tr>
     <th>Código</th>
   </tr>
-</thead>
+
 <tbody id='Cat'>
    
-  </div>
+  
 
-
-  </tr>
-      </thead>
-     
+</thead> 
 
     </table>
    
   </div>
 
 </body>
+<div id='Totalizado'>
+  
+</div>
 @include('footer')
 <script src="{{ asset('js/Despesa.js') }}"></script>
 

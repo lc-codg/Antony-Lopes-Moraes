@@ -152,4 +152,12 @@ class ArrecadacaoController extends Controller
         return response()->json($Arrecada);
 
     }
+    public function ListarPorData(Request $request){
+        $Arreacadacao = DB::table('arrecadacaos')->select(DB::raw('SUM(arrecadacaos.Valor) AS Total'), 'arrecadacaos.Descricao')
+        ->whereBetween('DataRecebimento', array($request->Dataini, $request->Datafim))->where('arrecadacaos.CodEmpresa','=', Str::substr($request->Codempresa, 0, 1))
+        ->groupBy('arrecadacaos.Descricao')->get();
+
+        return $Arreacadacao;
+    }
 }
+

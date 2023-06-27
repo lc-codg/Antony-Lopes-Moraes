@@ -13,5 +13,11 @@ class Relatorios extends Controller
 
         return view('Relatorios.Movimento',['Empresas'=>$Empresa]);
     }
+
+    public function FechamentoGeral(){
+        $Util = new ObterDados();
+        $Empresa = $Util->ListaDeEmpresas();
+        return view('Relatorios.FechamentoGeral',['Empresa'=>$Empresa]);
+    }
   
 }

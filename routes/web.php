@@ -149,6 +149,7 @@ Route::get('/Despesas/Relatorio',[DespesasController::class,'Relatorio']);
 Route::get('/Despesas/PorCategoria',[DespesasController::class,'PorCategoria']);
 Route::get('/Despesas/DespesaPorCategoria',[DespesasController::class,'DespesaPorCategoria']);
 Route::get('/Despesas/FechamentoCat',[DespesasController::class,'FechamentoDespesaCat']);
+Route::get('/ListarDespesas',[DespesasController::class,'ListarPorData']);
 
 Route::get('/Compras/Ver/{Id}', [ComprasController::class, 'ListarPorId']);
 Route::get('/Compras/Todos', [ComprasController::class, 'ListarTodos']);
@@ -157,6 +158,7 @@ Route::get('/Compras/Carrinho', [ComprasController::class, 'Show']);
 Route::get('/Compras/LimparCarrinho', [ComprasController::class, 'LimparCarrinho']);
 Route::get('/Compras/Salvar', [ComprasController::class, 'create']);
 Route::get('/Compras/ImprimirA4/{id}/{tipo}', [ComprasController::class, 'Imprimir']);
+Route::get('ListarCompras', [ComprasController::class, 'ListarPorData']);
 
 Route::get('/Receitas/Novo', [ReceitasController::class, 'index']);
 Route::get('/Receitas/Todos', [ReceitasController::class, 'ListarTodos']);
@@ -164,6 +166,7 @@ Route::post('/Receitas/Salvar', [Receitascontroller::class, 'create']);
 Route::get('/Receitas/Ver/{id}', [ReceitasController::class, 'show']);
 Route::get('/Receitas/Editar/{id}', [ReceitasController::class, 'update']);
 Route::get('Receitas/Delete/{id}', [ReceitasController::class, 'destroy']);
+Route::get('/ListarReceitas', [ReceitasController::class, 'ListarPorData']);
 
 Route::get('/Outros/Novo', [ControllerOutrosLancamentos::class, 'Novo']);
 Route::post('/Outros/Salvar', [ControllerOutrosLancamentos::class, 'Salvar']);
@@ -176,6 +179,7 @@ Route::get('/Arrecadacao/Deletar/{id}', [ArrecadacaoController::class, 'Excluir'
 Route::get('/Arrecadacao/Editar/{id}', [ArrecadacaoController::class, 'Editar']);
 Route::post('/Arrecadacao/Atualizar', [ArrecadacaoController::class, 'Atualizar']);
 Route::get('/Arrecadacao/Fechamento', [ArrecadacaoController::class, 'Fechamento']);
+Route::get('/ListarArrecadacoes', [ArrecadacaoController::class, 'ListarPorData']);
 
 Route::get('/Extrato/Todos/{id}', [ExtratoController::class, 'ShowExtrato']);
 Route::get('/Extrato/View', [ExtratoController::class, 'ExtratoGeral']);
@@ -199,6 +203,7 @@ Route::get('/Boi', [AbateController::class, 'index']);
 Route::get('/Tabela', [AbateController::class, 'show']);
 
 Route::get('/MovimentoFinanceiro',[Relatorios::class,'show']);
+Route::get('/FechamentoGeral',[Relatorios::class,'FechamentoGeral']);
 
 Route::get('/Extrato/Creditos', [ExtratoController::class, 'ListaCreditos']);
 Route::get('/Extrato/Debitos', [ExtratoController::class, 'ListaDebitos']);

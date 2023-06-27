@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ItensCompraController;
+use Illuminate\Support\Str;
 use Exception;
 
 class ComprasController extends Controller
 {
-    public function Imprimir($id,$tipo)
+    public function Imprimir($id, $tipo)
     {
         $comprass = DB::table('compras')->select(
             'compras.Id',
@@ -33,7 +34,7 @@ class ComprasController extends Controller
         $itens = new ItensCompraController();
         $Produtos = $itens->LocalizaItens($id);
 
-        return view('Pedidos.ImpressaoA4', ['Itens' => $Produtos, 'Venda' => $comprass, 'Tipo' => $tipo, 'Estado'=>'F']);
+        return view('Pedidos.ImpressaoA4', ['Itens' => $Produtos, 'Venda' => $comprass, 'Tipo' => $tipo, 'Estado' => 'F']);
     }
     public function Show()
     {
@@ -70,6 +71,18 @@ class ComprasController extends Controller
         $Pedido = Compras::findOrfail($Id);
         return view('Compras.Ver', ['Compras' => $Pedido]);
     }
+
+    public function ListarPorData(Request $request)
+    {
+        $Compras = DB::table('compras')->select(
+            DB::raw('SUM(compras.Total) AS Total'),
+            'fornecedors.Nome'
+        )->join('fornecedors', 'fornecedors.id', '=', 'compras.CodigoDoCliente')
+            ->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->where('compras.CodEmpresa','=',Str::Substr($request->CodEmpresa,0,1))->
+            groupBy('fornecedors.Nome')->get();
+            return $Compras;
+    }
+
     public function ListarTodos(Request $request)
     {
         $Dados = new ObterDados;
@@ -87,7 +100,7 @@ class ComprasController extends Controller
             'fornecedors.Nome',
             'empresas.Razao',
 
-        )->join('fornecedors', 'compras.CodigoDoCliente', '=', 'fornecedors.id')->join('empresas', 'compras.CodEmpresa', '=', 'empresas.id')->where('compras.Codempresa','=',$request->Empresa)->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Nome', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Razao', 'LIKE', '%' . $request->Nome . '%')->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->paginate(20);
+        )->join('fornecedors', 'compras.CodigoDoCliente', '=', 'fornecedors.id')->join('empresas', 'compras.CodEmpresa', '=', 'empresas.id')->where('compras.Codempresa', '=', $request->Empresa)->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Nome', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Razao', 'LIKE', '%' . $request->Nome . '%')->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->paginate(20);
 
         return view('Compras.Todos', ['Compras' => $Compras, 'Empresa' => $Empresa, 'Fornecedor' => $Fornecedor]);
     }
@@ -137,7 +150,7 @@ class ComprasController extends Controller
                 'DataSaida' => date('Y-m-d'),
                 'Finalidade' => 'Venda',
                 'CodEmpresa' => $Empresa['Id'],
-                'Tipo' => Isset($request->Tipo) ? 'Prazo' : 'Vista',
+                'Tipo' => isset($request->Tipo) ? 'Prazo' : 'Vista',
             ]);
 
             $Id = $Compras->id;
@@ -147,9 +160,8 @@ class ComprasController extends Controller
                 echo "<script>
                 alert('Nota Salva com sucesso.'),
                </script>";
-               $this->LimparCarrinho();
-               return $this->Imprimir($Id,$Tipo);
-
+                $this->LimparCarrinho();
+                return $this->Imprimir($Id, $Tipo);
             } else {
                 return "<script>alert(Erro ao Gravar.)</script>";
             }

@@ -1,3 +1,5 @@
+var Totalizado ;
+
 function Pesquisa() {
 
     let DataIni = document.getElementById('DataIni').value;
@@ -14,7 +16,9 @@ function Pesquisa() {
             $('#Soma').html('');
 
             let Soma = 0;
+
             for (let i = 0; retorno.length > i; i++) {
+
                 const Valor = parseFloat(retorno[i].Total).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
@@ -23,6 +27,7 @@ function Pesquisa() {
 
                 $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>'
                     + '</td> <td>' + retorno[i].Datarecebimento + '</td>' + '<td id="cat' + i + '"> </td>');
+
                 SelecionaNomeCategoria(retorno[i].CodGrupo, i);
             }
             const Total = parseFloat(Soma).toLocaleString('pt-BR', {
@@ -59,18 +64,27 @@ function SelecionaNomeCategoria(Id, Posicao) {
 }
 
     function RelatorioCategoria() {
+        Totalizado = 0;
         $('#Cat').html('');
         $.ajax({
             method: 'get',
             url: '/Categorias/Lista',
             data: {  },
             success: function (retorno) {
+
                 for (let i = 0; retorno.length > i; i++) {
                     $('#Despesa'+i).html('');
                     $('#Soma'+i).html('');
-                $('#Cat').append('<tr>  <td>' + retorno[i].descricao +'<td> <tr><td id="Despesa'+i+'"></td>'+'<td> <tr><td id="Soma'+i+'"></td>');
+
+                $('#Cat').append('<tr>  <td style="font-size: 20px; width:80%;">' + retorno[i].descricao +'<td> <tr><td id="Despesa'+i+'"></td>'+'<td> <tr><td id="Soma'+i+'"></td>');
                 
                 DespesasPorCategoria(i,retorno[i].id);
+                const Totalizador = parseFloat(Totalizado).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+        
+               // $('#Totalizado').append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Totalizador + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
                 }
 
             }
@@ -84,7 +98,7 @@ function SelecionaNomeCategoria(Id, Posicao) {
         let DataIni = document.getElementById('DataIni').value;
         let DataFim = document.getElementById('DataFim').value;
         let Empresa = document.getElementById('Empresa').value;
-
+        
 
         $.ajax({
             method: 'get',
@@ -100,18 +114,21 @@ function SelecionaNomeCategoria(Id, Posicao) {
                         currency: 'BRL'
                     });
                     Soma += parseFloat(retorno[i].Total);
+                    Totalizado += Soma;
 
-                    $('#Despesa'+Posicao).append('<tr>  <td style="font-size: 20px; width:80%;">' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>'
+                    $('#Despesa'+Posicao).append('<tr>  <td style="font-size: 15px; width:80%;">' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>'
                     + '</td> <td>' + retorno[i].Datarecebimento + '</td>');
                 }
                 const Total = parseFloat(Soma).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 });
+
                $('#Soma'+Posicao).append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
 
 
             }
+          
 
 
         });
@@ -149,9 +166,6 @@ function Imprimir() {
     $('#BtnPesquisa').show();
     $('#BtnImprimir').show();
     $("#Titulo").html('Relatório de Despesas');
-
-
-
 
 }
 function DespesaCategoria() {

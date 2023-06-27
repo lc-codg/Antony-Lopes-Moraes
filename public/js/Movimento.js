@@ -1,7 +1,9 @@
 function Fechamento() {
+   
     let DataIni = document.getElementById('DataIni').value;
     let DataFim = document.getElementById('DataFim').value;
     let Empresa = document.getElementById('Empresa').value;
+
     let ValorArrecadado = 0;
     let ValorPAgo = 0;
     let Soma = 0;
@@ -9,6 +11,7 @@ function Fechamento() {
 
     $.ajax({
         method: 'get',
+
         url: '/Arrecadacao/Fechamento',
         data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa },
 
@@ -113,8 +116,5 @@ function Imprimir() {
     $('#BtnPesquisa').show();
     $('#BtnImprimir').show();
     $("#Titulo").html('Movimento Financeiro');
-
-
-
 
 }

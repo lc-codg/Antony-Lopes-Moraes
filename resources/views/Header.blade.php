@@ -178,6 +178,8 @@ if($Usuarios->Notas <> Null){ ?>
               <a class="dropdown-item" href="/Extrato/View">Extrato</a>
               <a class="dropdown-item" h href="/ContasBancarias/Saldo">Saldo Do Caixa</a>
               <a class="dropdown-item" href="/Clientes/Novo">Fluxo de Fechamento</a>
+              <a class="dropdown-item" href="/FechamentoGeral">Fechamento Geral</a>
+
               <div class="list-group">
 
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
@@ -209,8 +211,6 @@ if($Usuarios->Notas <> Null){ ?>
 
             <div class="list-group">
 
-              <a class="dropdown-item" href="/Produtos/Novo">Entradas</a>
-              <a class="dropdown-item" href="/Produtos/Todos">Saídas</a>
               <a class="dropdown-item" href="/Despesas/DespesaPorCategoria">Despesas Por Categoria</a>
               <a class="dropdown-item" href="/Produtos/Todos">Consolidado</a>
             </div>
