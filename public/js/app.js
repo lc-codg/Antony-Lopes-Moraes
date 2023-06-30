@@ -172,19 +172,41 @@ function ValidarContasAPagar() {
     let Fornecedor = document.getElementById("Fornecedor").value;
     let Grupo = document.getElementById("Grupo").value;
     let SubGrupo = document.getElementById("SubGrupo").value;
+    let Descricao = document.getElementById("Descricao").value;
+    let Desconto = document.getElementById("Desconto").value;
+    let Acrescimo = document.getElementById("Acrescimo").value;
+    let Total = document.getElementById("Total").value;
 
     if (Grupo == 'Selecione...') {
         alert("Selecione o Grupo");
+        document.getElementById("Grupo").focus();
     } else if (Empresa == 'Selecione...') {
         alert("Selecione a Empresa");
+        document.getElementById("Empresa").focus();
     } else if (SubGrupo == 'Selecione...') {
         alert("Selecione o SubGrupo");
+        document.getElementById("SubGrupo").focus();
     } else if (Fornecedor == 'Selecione...') {
         alert("Selecione o Fornecedor");
+        document.getElementById("Fornecedor").focus();
+    } else if (Total == '') {
+        alert("Digite o Total");
+        document.getElementById("Total").focus();
     } else {
+        if (Desconto == '') {
+            document.getElementById("Desconto").value = 0;
+        }
+        if (Descricao == '') {
+            document.getElementById("Descricao").value = 'Compra ' + Fornecedor.substring(3, 100)
+        }
+        if (Acrescimo == '') {
+            document.getElementById("Acrescimo").value = 0;
+        }
         document.getElementById("Form").submit();
     }
+
 }
+
 
 function ValidarContasAReceber() {
 

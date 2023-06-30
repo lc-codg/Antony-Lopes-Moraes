@@ -53,8 +53,8 @@ class PedidoController extends Controller
     }
     public function LimparCarrinho()
     {
-        Session::flush('Cart');
-        Session::flush('Cliente');
+        Session::forget('Cart');
+        Session::forget('Cliente');
         return "<script>location='/Pedidos/Carrinho';</script>";
     }
 

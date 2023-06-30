@@ -23,7 +23,7 @@
                     <select class="form-control " name="CodEmpresa" id="Empresa">
                         <option selected>Selecione...</option>
                         @foreach ($Empresas as $row)
-                            <option>{{ $row->id }}- {{ $row->Razao }}</option>
+                        <option>{{ $row->id }}- {{ $row->Razao }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -33,32 +33,28 @@
                     <select class="form-control" name="CodFornecedor" id="Fornecedor">
                         <option selected>Selecione...</option>
                         @foreach ($Fornecedor as $RowF)
-                            <option>{{ $RowF->id }}- {{ $RowF->Nome }}</option>
+                        <option>{{ $RowF->id }}- {{ $RowF->Nome }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group md col-4">
                     <label for="">Descrição</label>
-                    <input type="text" class="form-control" name="Descricao" id="" aria-describedby="helpId"
-                        placeholder="">
+                    <input type="text" class="form-control" name="Descricao" id="Descricao" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-4">
                     <label for="">Código da Boleta</label>
-                    <input type="number" class="form-control" name="Barras" id="" aria-describedby="helpId"
-                        placeholder="">
+                    <input type="number" class="form-control" name="Barras" id="" aria-describedby="helpId" placeholder="">
                 </div>
                 <div class="form-group md col-4">
                     <label for="">Nota Fiscal</label>
-                    <input type="number" class="form-control" name="NotaFiscal" id=""
-                        aria-describedby="helpId" placeholder="">
+                    <input type="number" class="form-control" name="NotaFiscal" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-4">
                     <label for="">Série</label>
-                    <input type="number" class="form-control" name="Serie" id="" aria-describedby="helpId"
-                        placeholder="">
+                    <input type="number" class="form-control" name="Serie" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
             </div>
@@ -68,20 +64,17 @@
 
                 <div class="form-group md col-2">
                     <label for="">Vencimento</label>
-                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Vencimento"
-                        id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Vencimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Data Recebimento</label>
-                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Datarecebimento"
-                        id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Data emissão</label>
-                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Dataemissao"
-                        id="" aria-describedby="helpId" placeholder="">
+                    <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Dataemissao" id="" aria-describedby="helpId" placeholder="">
                 </div>
                 <div class="form-group md col-3">
                     <label for="">Grupo</label>
@@ -103,11 +96,14 @@
 
 
             </div>
-            <div class="form-check col md-6">
-                <label class="form-check-label">
-                    <input onclick = 'Prazo();'type="checkbox" class="form-check-input" name="Tipo" id="Tipo" value="V"
-                        unchecked>
+            <div class='form-row'>
+                <label style='margin-left:2%' class="form-check-label">
+                    <input onclick='Prazo();' type="checkbox" class="form-check-input" name="Tipo" id="Tipo" value="V" unchecked>
                     A Prazo
+                </label>
+                <label style='margin-left:3%' class="form-check-label">
+                    <input  type="checkbox" class="form-check-input" name="Compra" id="Tipo" value="S" checked>
+                    Compra
                 </label>
             </div>
             <br>
@@ -116,50 +112,39 @@
 
                 <div class="form-group md col-2">
                     <label for="">Total</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                        class="form-control" onkeyup ='Conta();' name="TotalFinal" id="Total" aria-describedby="helpId"
-                        placeholder="">
+                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" onkeyup='Conta();' name="TotalFinal" id="Total" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Desconto</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                        class="form-control" onkeyup ='Conta();' name="TotalDesconto" id="Desconto" aria-describedby="helpId"
-                        placeholder="" value=''>
+                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" onkeyup='Conta();' name="TotalDesconto" id="Desconto" aria-describedby="helpId" placeholder="" value=''>
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Acréscimo</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                        class="form-control" onkeyup ='Conta();' name="TotalAcrescimo" id="Acrescimo" aria-describedby="helpId"
-                        placeholder="" value=''>
+                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" onkeyup='Conta();' name="TotalAcrescimo" id="Acrescimo" aria-describedby="helpId" placeholder="" value=''>
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Final</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any"
-                        class="form-control" name="Total" readOnly id="Final" aria-describedby="helpId"
-                        placeholder="">
+                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="Total" readOnly id="Final" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Parcelas</label>
-                    <input type="number" class="form-control" name="Parcelas" id="Parcela"
-                        aria-describedby="helpId" value='1' readOnly  placeholder="">
+                    <input type="number" class="form-control" name="Parcelas" id="Parcela" aria-describedby="helpId" value='1' readOnly placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Quantidade de boletas</label>
-                    <input type="number" class="form-control" readOnly name="boleta" id="Boleta"
-                        aria-describedby="helpId" value='1'placeholder="">
+                    <input type="number" class="form-control" readOnly name="boleta" id="Boleta" aria-describedby="helpId" value='1' placeholder="">
                 </div>
 
             </div>
 
 
 
-            <input name="Salvar" id="button" onclick='ValidarContasAPagar();' class="btn btn-dark"
-                type="button" value="Salvar">
+            <input name="Salvar" id="button" onclick='ValidarContasAPagar();' class="btn btn-dark" type="button" value="Salvar">
 
 
         </form>

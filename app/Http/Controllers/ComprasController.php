@@ -55,8 +55,8 @@ class ComprasController extends Controller
     }
     public function LimparCarrinho()
     {
-        Session::flush('CartComprasCompras');
-        Session::flush('Fornecedor');
+        Session::forget('CartCompras');
+        Session::forget('Fornecedor');
         return "<script>location='/Compras/Carrinho';</script>";
     }
     public function Delete($id)
@@ -78,9 +78,8 @@ class ComprasController extends Controller
             DB::raw('SUM(compras.Total) AS Total'),
             'fornecedors.Nome'
         )->join('fornecedors', 'fornecedors.id', '=', 'compras.CodigoDoCliente')
-            ->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->where('compras.CodEmpresa','=',Str::Substr($request->CodEmpresa,0,1))->
-            groupBy('fornecedors.Nome')->get();
-            return $Compras;
+            ->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->where('compras.CodEmpresa', '=', Str::Substr($request->CodEmpresa, 0, 1))->groupBy('fornecedors.Nome')->get();
+        return $Compras;
     }
 
     public function ListarTodos(Request $request)
@@ -166,5 +165,21 @@ class ComprasController extends Controller
                 return "<script>alert(Erro ao Gravar.)</script>";
             }
         }
+    }
+    public function SalvarComprasSimples($Dados)
+    {
+        Compras::create([
+            'CodigoDoCliente' => Str::substr($Dados->CodFornecedor, 0, 1),
+            'Total' => $Dados->Total,
+            'TotaldosProdutos' => $Dados->Total,
+            'DtPedido' => $Dados->Dataemissao,
+            'Dataemissao' => $Dados->Dataemissao,
+            'DataSaida' => $Dados->Dataemissao,
+            'Finalidade' => 'Venda',
+            'CodEmpresa' => Str::substr($Dados->CodEmpresa, 0, 1),
+            'Tipo' => isset($Dados->Tipo) ? 'Prazo' : 'Vista',
+            'TotalDesconto' => isset($Dados->TotalDesconto) ? Str_replace(",", ".", $Dados->TotalDesconto) : 10,
+            'TotalAcréscimo' => isset($Dados->TotalAcrescimo) ? Str_replace(",", ".", $Dados->TotalAcrescimo) : 0,
+        ]);
     }
 }

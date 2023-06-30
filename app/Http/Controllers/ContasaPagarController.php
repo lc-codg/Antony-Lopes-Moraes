@@ -10,6 +10,7 @@ use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
 use Carbon\Carbon;
 use App\Http\Controllers\ExtratoController;
+use App\Http\Controllers\ComprasController;
 
 class ContasaPagarController extends Controller
 {
@@ -36,7 +37,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar', $request->CodEmpresa,$Descricao);
+        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->conta, 0, 1), 'Pagar', $request->CodEmpresa, $Descricao);
 
         return 'Quitado com sucesso!';
     }
@@ -49,7 +50,7 @@ class ContasaPagarController extends Controller
         $Banco = new ContasBancariasController();
         if ($Banco->Deposito(Str::substr($request->conta2, 0, 1), $request->Valor + $Multa + $Juros))
             $ContasaPagar = ContasaPagar::findOrFail($request->id);
-            $Descricao = $ContasaPagar->Descricao;
+        $Descricao = $ContasaPagar->Descricao;
         $ContasaPagar->update([
             'status' => 0,
             'Juros' => 0,
@@ -60,7 +61,7 @@ class ContasaPagarController extends Controller
 
         $Total = $request->Valor + $Multa + $Juros;
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar', $request->CodEmpresa,($Descricao .'/ ESTORNADA'));
+        $Extrato->InserirNoExtrato($Total, 'C', $request->conta2, 'Pagar', $request->CodEmpresa, ($Descricao . '/ ESTORNADA'));
 
         return 'Estornado com sucesso!';
     }
@@ -143,7 +144,10 @@ class ContasaPagarController extends Controller
                 'Multa' => 0,
                 'Cheque' => 0
             ]);
-
+            if ($request->Compra == 'S') {
+                $Compras = new ComprasController();
+                $Compras->SalvarComprasSimples($request);
+            }
             return
                 "<script>
                 alert('Salvo com sucesso!');
@@ -292,10 +296,9 @@ class ContasaPagarController extends Controller
             'contasa_pagars.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->
-        select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')
-        ->where('contasa_pagars.CodEmpresa', '=', $request->Empresa)->Where('contasa_pagars.status', '=',1)
-        ->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->get();
+        )->join('fornecedors', 'contasa_pagars.CodFornecedor', '=', 'fornecedors.id')->select('contasa_pagars.*', 'empresas.Razao as Razaoe', 'fornecedors.Nome as Razaof')
+            ->where('contasa_pagars.CodEmpresa', '=', $request->Empresa)->Where('contasa_pagars.status', '=', 1)
+            ->whereBetween('contasa_pagars.vencimento', [$request->DataIni, $request->DataFim])->get();
 
         return response()->json($ContasaPagar);
     }
