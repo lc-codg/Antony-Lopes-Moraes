@@ -79,6 +79,7 @@ class CategoriasController extends Controller
         $Categoria = DB::table('categorias')->where('tipo','=',$Tipo)->get();
         return $Categoria;
     }
+    
     public function Categorias(){
         $Categoria = DB::table('categorias')->get();
         return response()->json($Categoria,200);

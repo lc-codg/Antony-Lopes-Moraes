@@ -75,11 +75,9 @@ class ComprasController extends Controller
     public function ListarPorData(Request $request)
     {
         $Compras = DB::table('compras')->select(
-            DB::raw('SUM(compras.Total) AS Total'),
-            'fornecedors.Nome'
-        )->join('fornecedors', 'fornecedors.id', '=', 'compras.CodigoDoCliente')
-            ->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->where('compras.CodEmpresa', '=', Str::Substr($request->CodEmpresa, 0, 1))->groupBy('fornecedors.Nome')->get();
-        return $Compras;
+            DB::raw('SUM(compras.Total) AS Total'),'compras.Tipo')
+            ->where('compras.CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('DtPedido', [$request->DataIni, $request->DataFim])->groupBy('compras.Tipo')->get();
+            return response()->json($Compras);
     }
 
     public function ListarTodos(Request $request)

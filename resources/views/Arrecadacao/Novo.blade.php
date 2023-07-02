@@ -38,9 +38,13 @@
                     </select>
                 </div>
 
-                <div class="form-group md col-10">
+                <div class="form-group md col-6">
                     <label for="">Descrição</label>
-                    <input type="text" class="form-control" name="Descricao" id="" aria-describedby="helpId" placeholder="">
+                    <select class="form-control" name="Descricao" id="Descricao">
+                        @foreach ($SubCat as $C)
+                        <option selected>{{$C->id}}- {{$C->descricao}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 

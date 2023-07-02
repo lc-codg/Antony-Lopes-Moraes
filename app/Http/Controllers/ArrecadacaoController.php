@@ -17,7 +17,11 @@ class ArrecadacaoController extends Controller
     public function index()
     {
         $Obterdados = new ObterDados();
-        return view('Arrecadacao.Novo', ['Empresa' => $Obterdados->ListaDeEmpresas(),'Contas'=>$Obterdados->ListarContasBancarias()]);
+        return view('Arrecadacao.Novo', [
+            'Empresa' => $Obterdados->ListaDeEmpresas(),
+            'Contas' => $Obterdados->ListarContasBancarias(),
+            'SubCat' => $Obterdados->ListarSubCategorias()
+        ]);
     }
     public function ListarTodos(Request $request)
     {
@@ -31,12 +35,12 @@ class ArrecadacaoController extends Controller
         )->select(
             'arrecadacaos.*',
             'empresas.Razao as Razaoe'
-        )->where('arrecadacaos.Codempresa','=',Str::substr($request->Empresa,0,1))->wherebetween(
+        )->where('arrecadacaos.Codempresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween(
             'DataRecebimento',
             [$request->DataIni, $request->DataFim]
         )->paginate(20);
 
-        return view('/Arrecadacao.Todos', ['Arrecada' => $Arrecada,'Empresas'=>$Empresas]);
+        return view('/Arrecadacao.Todos', ['Arrecada' => $Arrecada, 'Empresas' => $Empresas]);
     }
     private function Verificar($Dados)
     {
@@ -73,7 +77,7 @@ class ArrecadacaoController extends Controller
                 'Valor' => $request->Valor,
                 'Numero' => $request->Numero,
                 'DataRecebimento' => $request->Data,
-                'Descricao' => $request->Descricao,
+                'Descricao' => Str::Substr($request->Descricao,0, 1),
                 'conta' => Str::substr($request->Conta, 0, 1),
             ]);
             //Deposita na Conta
@@ -81,7 +85,7 @@ class ArrecadacaoController extends Controller
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Valor);
             //Adiciona ao extrato
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($request->Valor,'C',Str::substr($request->Conta, 0, 1),'Arrecadação',Str::substr($request->Codempresa, 0, 1),$request->Descricao);
+            $Extrato->InserirNoExtrato($request->Valor, 'C', Str::substr($request->Conta, 0, 1), 'Arrecadação', Str::substr($request->Codempresa, 0, 1), $request->Descricao);
 
 
 
@@ -99,7 +103,7 @@ class ArrecadacaoController extends Controller
         $Arreacadacao->delete();
 
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Arreacadacao->Valor, 'D', $Arreacadacao->conta, 'Arrecadacao', $Arreacadacao->CodEmpresa,($Arreacadacao->Descricao.'Cancelada  Nº: '.$Arreacadacao->id));
+        $Extrato->InserirNoExtrato($Arreacadacao->Valor, 'D', $Arreacadacao->conta, 'Arrecadacao', $Arreacadacao->CodEmpresa, ($Arreacadacao->Descricao . 'Cancelada  Nº: ' . $Arreacadacao->id));
 
         try {
             return "<script>alert('Registro deletado com sucesso!');
@@ -133,7 +137,8 @@ class ArrecadacaoController extends Controller
           </script>";
         }
     }
-    public function Fechamento(Request $request){
+    public function Fechamento(Request $request)
+    {
 
         $Arrecada = DB::table('arrecadacaos')->join(
             'empresas',
@@ -144,20 +149,19 @@ class ArrecadacaoController extends Controller
             'arrecadacaos.*',
             'empresas.Razao as Razaoe'
 
-        )->where('arrecadacaos.Codempresa','=',Str::substr( $request->Empresa,0,1))->wherebetween(
+        )->where('arrecadacaos.Codempresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween(
             'DataRecebimento',
-            [ $request->DataIni,  $request->DataFim]
+            [$request->DataIni,  $request->DataFim]
         )->get();
 
         return response()->json($Arrecada);
-
     }
-    public function ListarPorData(Request $request){
-        $Arreacadacao = DB::table('arrecadacaos')->select(DB::raw('SUM(arrecadacaos.Valor) AS Total'), 'arrecadacaos.Descricao')
-        ->whereBetween('DataRecebimento', array($request->Dataini, $request->Datafim))->where('arrecadacaos.CodEmpresa','=', Str::substr($request->Codempresa, 0, 1))
-        ->groupBy('arrecadacaos.Descricao')->get();
+    public function ListarPorData(Request $request)
+    {
+        $Arreacadacao = DB::table('arrecadacaos')->select(DB::raw('SUM(arrecadacaos.Valor) AS Total'), 'Descricao')
+            ->where('CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->whereBetween('DataRecebimento', [$request->DataIni, $request->DataFim])
+            ->groupBy('arrecadacaos.Descricao')->get();
 
-        return $Arreacadacao;
+        return ($Arreacadacao);
     }
 }
-

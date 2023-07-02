@@ -188,6 +188,7 @@ Route::get('/Balanco/Show', [BalancoController::class, 'Show']);
 Route::post('/Balanco/Cadastrar', [BalancoController::class, 'Cadastrar']);
 Route::get('/Balanco/Listar', [BalancoController::class, 'Listar']);
 Route::get('/Balanco/Localizar', [BalancoController::class, 'Localizar']);
+Route::get('/ListarBalanco', [BalancoController::class, 'ListarPorData']);
 
 Route::get('/Categorias/Categorias', [CategoriasController::class, 'Show']);
 Route::post('/Categorias/Salvar', [CategoriasController::class, 'Salvar']);

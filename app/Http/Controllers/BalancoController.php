@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class BalancoController extends Controller
 {
-    public function Listar(){
+    public function Listar()
+    {
         $ObterDados = new ObterDados();
         return view('Balanco.Listar', [
             'Empresas' => $ObterDados->ListaDeEmpresas()
@@ -26,7 +27,7 @@ class BalancoController extends Controller
     public function Localizar(request $request)
     {
         $Balanco = Balanco::wherebetween('Data', [$request->Dataini, $request->Datafim])
-        ->where('CodEmpresa', Str::Substr($request->CodEmpresa,0,1))->get();
+            ->where('CodEmpresa', Str::Substr($request->CodEmpresa, 0, 1))->get();
         return $Balanco;
     }
     public function Cadastrar(request $request)
@@ -59,13 +60,32 @@ class BalancoController extends Controller
         return true;
     }
 
-    public function ListarPorData(Request $request){
-        $EstoqueAtual = DB::table('balanco')->select(DB::raw('SUM(Valor) as EstoqueAtual'))->where('Data','=',$request->Datafim)
-        ->where('CodEmpresa','=',Str::Substr($request->CodEmpresa,0,1))->get();
+    public function ListarPorData(Request $request)
+    {
+        $Mes =  date('m');
+        $Ano = date('Y');
+        if (($Mes) == 01) {
+            $Mes = 12;
+            $Ano = $Ano - 1;
+        } else {
+            $Mes = $Mes - 1;
+        }
+        $data_incio = mktime(0, 0, 0, date('m'), 1, date('Y'));
+        $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
+        $Diaa = date('Y-m-d', $data_incio);
+        $Dia2a =  date('Y-m-d', $data_fim);
 
-        $EstoqueAnterior = DB::table('balanco')->select(DB::raw('SUM(Valor) as EstoqueAtual'))->where('Data','=',$request->Datafim)
-        ->where('CodEmpresa','=',Str::Substr($request->CodEmpresa,0,1))->get();
+        $data_incioa = mktime(0, 0, 0, $Mes, 1, $Ano);
+        $data_fimm = mktime(23, 59, 59, $Mes, date("t"), $Ano);
+        $Diaan = date('Y-m-d', $data_incioa);
+        $Dia2an = date('Y-m-d', $data_fimm);
 
-        return (['EstoqueAtual'=>$EstoqueAtual,'EstoqueAnterior'=>$EstoqueAnterior]);
+        $Estoque[0]= DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAtual'))
+            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('Data', [$Diaa, $Dia2a])->get();
+
+        $Estoque[1]= DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAnterior'))
+            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('Data', [$Diaan, $Dia2an])->get();
+
+            return response()->json(($Estoque));
     }
 }

@@ -88,7 +88,7 @@ class DespesasController extends Controller
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->Conta, 0, 1), 'Despesa', $Empresa,$request->Descricao);
+            $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->Conta, 0, 1), 'Despesa', $Empresa, $request->Descricao);
 
             return
                 "<script>
@@ -172,46 +172,47 @@ class DespesasController extends Controller
         if ($Banco->Deposito($Despesas->conta, $Despesas->total));
         //Inserir no Extrato
         $Extrato = new ExtratoController();
-        $Extrato->InserirNoExtrato($Total, 'C', $Despesas->Conta, 'Despesa_Cancelada', $Despesas->CodEmpresa,$Descricao);
+        $Extrato->InserirNoExtrato($Total, 'C', $Despesas->Conta, 'Despesa_Cancelada', $Despesas->CodEmpresa, $Descricao);
         $Despesas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Despesas/Todos';</script>";
     }
 
-    public function FechamentoDespesa(Request $request){
-        $Despesa = Despesas::whereBetween('datarecebimento',[$request->DataIni,$request->DataFim])->where('CodEmpresa',$request->Empresa)->get();
-        return response()->json($Despesa,200);
-
+    public function FechamentoDespesa(Request $request)
+    {
+        $Despesa = Despesas::whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->get();
+        return response()->json($Despesa, 200);
     }
-    public function Detalhado(Request $request){
-        $Despesa = Despesas::where('CodGrupo',$request->CodGrupo)->where('CodEmpresa',$request->CodEmpresa)->wherebetween('datarecebimento',[$request->Dataini,$request->DataFim])->get();
-        return response()->json($Despesa,200);
+    public function Detalhado(Request $request)
+    {
+        $Despesa = Despesas::where('CodGrupo', $request->CodGrupo)->where('CodEmpresa', $request->CodEmpresa)->wherebetween('datarecebimento', [$request->Dataini, $request->DataFim])->get();
+        return response()->json($Despesa, 200);
     }
-    public function Relatorio(){
+    public function Relatorio()
+    {
         $Utilidades = new ObterDados();
-        return view('Despesas.Relatorio',['Empresas'=>$Utilidades->ListaDeEmpresas()]);
+        return view('Despesas.Relatorio', ['Empresas' => $Utilidades->ListaDeEmpresas()]);
     }
-    public function PorCategoria(Request $request){
-        $Despesa = Despesas::where('CodGrupo',$request->CodGrupo)->wherebetween('datarecebimento',[$request->Dataini,$request->DataFim])->get();
-        return response()->json($Despesa,200);
-    }
-
-    public function DespesaPorCategoria(){
-        $Utilidades= new ObterDados();
-        return view('Despesas.DespesaPorCategoria',['Empresas'=>$Utilidades->ListaDeEmpresas()]);
-    }
-    public function FechamentoDespesaCat(Request $request){
-        $Despesa = Despesas::whereBetween('datarecebimento',[$request->DataIni,$request->DataFim])->where('CodEmpresa',$request->Empresa)->
-        where('CodGrupo',$request->CodGrupo)->get();
-        return response()->json($Despesa,200);
-
-    }
-    public function ListarDespesas(Request $request){
-        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'),'categorias.descricao')
-        ->join('categorias', 'categorias.id', '=', 'despesas.CodGrupo')->whereBetween('despesas.Datarecebimento', array($request->Dataini, $request->Datafim))->where('compras.CodEmpresa','=',Str::substr($request->Codempresa, 0, 1))->
-        groupBy('categorias.descricao')->get();
-        return $Despesas;
+    public function PorCategoria(Request $request)
+    {
+        $Despesa = Despesas::where('CodGrupo', $request->CodGrupo)->wherebetween('datarecebimento', [$request->Dataini, $request->DataFim])->get();
+        return response()->json($Despesa, 200);
     }
 
+    public function DespesaPorCategoria()
+    {
+        $Utilidades = new ObterDados();
+        return view('Despesas.DespesaPorCategoria', ['Empresas' => $Utilidades->ListaDeEmpresas()]);
+    }
+    public function FechamentoDespesaCat(Request $request)
+    {
+        $Despesa = Despesas::whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->where('CodGrupo', $request->CodGrupo)->get();
+        return response()->json($Despesa, 200);
+    }
+    public function ListarPorData(Request $request)
+    {
+        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'), 'categorias.descricao')
+            ->join('categorias', 'categorias.id', '=', 'despesas.CodGrupo')->where('despesas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->whereBetween('DataRecebimento', [$request->DataIni, $request->DataFim])->groupBy('categorias.descricao')->get();
+            return response()->json($Despesas);
+    }
 }
-
