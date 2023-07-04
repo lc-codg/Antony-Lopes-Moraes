@@ -68,6 +68,7 @@
                 <th scope="col">Emitente</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Total</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Data</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -84,7 +85,7 @@
                     <td>{{ $row->Razao }}</td>
                     <td>{{ $row->Nome }}</td>
                     <td>R$ <span class="price">{{ number_format($row->Total, 2, '.', '') }}</span></td>
-
+                    <td>{{ $row->Tipo}}</td>
                     <td>{{ $row->DtPedido }}</td>
 
 

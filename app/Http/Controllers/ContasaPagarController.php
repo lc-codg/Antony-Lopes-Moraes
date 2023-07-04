@@ -68,13 +68,16 @@ class ContasaPagarController extends Controller
 
 
 
-    public function index()
+    public function index($Tipo)
     {
         $ObterDados = new ObterDados();
 
         return view('ContasaPagar.ContasaPagar', [
             'Empresas' => $ObterDados->ListaDeEmpresas(),
-            'Fornecedor' => $ObterDados->ListaDeFornecedores()
+            'Fornecedor' => $ObterDados->ListaDeFornecedores(),
+            'Tipo'=>$Tipo,
+            'Categoria'=>$ObterDados->ListarCategorias(),
+            'SubCategoria'=>$ObterDados->ListarSubCategorias()
         ]);
     }
 
@@ -144,14 +147,14 @@ class ContasaPagarController extends Controller
                 'Multa' => 0,
                 'Cheque' => 0
             ]);
-            if ($request->Compra == 'S') {
+            if ($request->TipoDeCompra <>'conta') {
                 $Compras = new ComprasController();
                 $Compras->SalvarComprasSimples($request);
             }
             return
                 "<script>
                 alert('Salvo com sucesso!');
-                location = '/ContasaPagar/Novo';
+                location = '/ContasaPagar/Novo/$request->TipoDeCompra';
               </script>";
         }
     }
@@ -162,7 +165,8 @@ class ContasaPagarController extends Controller
 
         $ContasaPagar = ContasaPagar::findOrFail($id);
         return view('/ContasaPagar.Ver', ['ContasaPagar' => $ContasaPagar, 'Empresas'
-        =>  $ObterDados->ListaDeEmpresas(), 'Fornecedor' =>  $ObterDados->ListaDeFornecedores()]);
+        =>  $ObterDados->ListaDeEmpresas(), 'Fornecedor' =>  $ObterDados->ListaDeFornecedores(),      'Catgoria'=>$ObterDados->ListarCategorias(),
+        'SubCategoria'=>$ObterDados->ListarSubCategorias()]);
     }
 
 

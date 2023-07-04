@@ -11,6 +11,9 @@ function FechamentoGeral() {
     let LucroLiquido = 0;
     let EstoqueA = 0;
     let EstoqueAn = 0;
+    let Apuracao = 0;
+    let ApuracaoL = 0;
+    let ApuraRL = 0;
 
     $.ajax({
         method: 'get',
@@ -31,10 +34,12 @@ function FechamentoGeral() {
                 }));
 
             }
-            $('#TotalFaturamento').append('<div class="form-group"> <label for="">Total Faturamento</label><input Style="font-size:20px;" type="text"class="form-control" value="' + TotalFaturamento.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            if (TotalFaturamento > 0) {
+                $('#TotalFaturamento').append('<div class="form-group"> <label for="">Total Faturamento</label><input readonly style="font-weight: bold;font-size:20px;"  type="text"class="form-control" value="' + TotalFaturamento.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            }
 
 
         }
@@ -52,17 +57,19 @@ function FechamentoGeral() {
 
             for (let i = 0; Contas.length > i; i++) {
                 TotalDespesa += parseFloat(Contas[i].Total);
+
                 $('#Despesas').append('<tr> <td>' + Contas[i].descricao + '</td> <td>' + parseFloat(Contas[i].Total).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 }));
 
             }
-
-            $('#TotalDespesa').append('<div class="form-group"> <label for="">Total Despesa</label><input Style="font-size:20px;" type="text"class="form-control" value="' + TotalDespesa.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            if (TotalDespesa > 0) {
+                $('#TotalDespesa').append('<div class="form-group"> <label for="">Total Despesa</label><input readonly style="font-weight: bold;font-size:20px;"  type="text"class="form-control" value="' + TotalDespesa.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            }
 
         }
     });
@@ -79,10 +86,12 @@ function FechamentoGeral() {
 
             for (let i = 0; Compra.length > i; i++) {
                 TotalCompra += parseFloat(Compra[i].Total);
+
                 $('#Compras').append('<tr> <td>' + Compra[i].Tipo + '</td> <td>' + parseFloat(Compra[i].Total).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 }));
+
 
             }
 
@@ -101,6 +110,8 @@ function FechamentoGeral() {
             $('#EstoqueAtual').html('');
             $('#EstoqueAnterior').html('');
             $('#TotalCompra').html('');
+            $('#LucroBruto').html('');
+            $('#LucroLiquido').html('');
 
             $.each(Contas[0], function(Id, val) {
                 EstoqueA = val.EstoqueAtual;
@@ -108,35 +119,49 @@ function FechamentoGeral() {
                     style: 'currency',
                     currency: 'BRL'
                 });
-
-                $('#EstoqueAtual').append('<div class="form-group"> <label for="">Estoque Atual</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+                if (EstoqueAtual > 0) {
+                    $('#EstoqueAtual').append('<div  class="form-group"> <label for="">Estoque Atual</label><input readonly style="font-weight: bold;font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+                }
 
             });
+
             $.each(Contas[1], function(Id, val) {
                 EstoqueAn = val.EstoqueAnterior;
                 const Totala = parseFloat(val.EstoqueAnterior).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 });
-
-                $('#EstoqueAnterior').append('<div class="form-group"> <label for="">Estoque Anterior</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Totala + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+                if (EstoqueAnterior > 0) {
+                    $('#EstoqueAnterior').append('<div readonly class="form-group"> <label for="">Estoque Anterior</label><input readonly style="font-weight: bold;font-size:20px;"  type="text"class="form-control" value="' + Totala + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+                }
             });
 
             TotalC = (parseFloat(EstoqueAn) + parseFloat(TotalCompra)) - parseFloat(EstoqueA);
-            $('#TotalCompra').append('<div class="form-group"> <label for="">Total Comras</label><input Style="font-size:20px;" type="text"class="form-control" value="' + TotalC.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            if (TotalCompra > 0) {
+                $('#TotalCompra').append('<div readonly class="form-group"> <label for="">Total Comras</label><input readonly style="font-weight: bold;font-size:20px;" type="text"class="form-control" value="' + TotalC.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            }
+
             LucroBruto = parseFloat(TotalFaturamento) - parseFloat(TotalC);
-            $('#LucroBruto').append('<div class="form-group"> <label for="">Lucro Bruto</label><input Style="font-size:20px;" type="text"class="form-control" value="' + LucroBruto.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            Apuracao = (parseFloat(LucroBruto) / parseFloat(TotalFaturamento)) * 100;
+            ApuraR = Apuracao.toFixed(2);
+            if (LucroBruto > 0) {
+                $('#LucroBruto').append('<div readonly class="form-group"> <label for="">Lucro Bruto</label><input readonly style="font-weight: bold;font-size:20px;"  type="text"class="form-control" value="' + LucroBruto.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }) + '   Apuração: ' + ApuraR + '%" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            }
             LucroLiquido = parseFloat(LucroBruto) - parseFloat(TotalDespesa);
-            $('#LucroLiquido').append('<div class="form-group"> <label for="">Lucro Líquido</label><input Style="font-size:20px;" type="text"class="form-control" value="' + LucroLiquido.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
-            }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            ApuracaoL = (parseFloat(LucroLiquido) / parseFloat(TotalFaturamento)) * 100;
+            ApuraRL = ApuracaoL.toFixed(2);
+            if (LucroLiquido > 0) {
+                $('#LucroLiquido').append('<div readonly class="form-group"> <label for="">Lucro Líquido</label><input readonly style="font-weight: bold;font-size:20px;"  type="text"class="form-control" value="' + LucroLiquido.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }) + '  Apuração: ' + ApuraRL + '%" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            }
         }
 
 
@@ -255,6 +280,8 @@ function Fechamento() {
 }
 
 function Imprimir() {
+    let hoje = new Date();
+    $('#dia').html('Emitido dia: ' + hoje);
     $('#BtnPesquisa').hide();
     $('#BtnImprimir').hide();
     $("#Titulo").html('Impressão Movimento Financeiro');
@@ -262,5 +289,7 @@ function Imprimir() {
     $('#BtnPesquisa').show();
     $('#BtnImprimir').show();
     $("#Titulo").html('Movimento Financeiro');
+
+
 
 }

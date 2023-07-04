@@ -31,18 +31,30 @@
                     <select class="form-control" name="Empresa" id="Empresa">
                         <option selected>Selecione...</option>
                         @foreach ($Empresas as $item)
-                            <option>{{ $item->id . '-' . $item->Razao }}</option>
+                        <option>{{ $item->id . '-' . $item->Razao }}</option>
                         @endforeach
 
 
                     </select>
                 </div>
-                <div class="form-group col-md-3">
-                    <input class="btn btn-primary" name="" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
-                </div>
+         
+                    <div class="form-group col-md-3">
+                        <input class="btn btn-primary" name="BtnPesquisa" id='Bot' type="submit" Value='Pesquisar' aria-describedby="helpId" placeholder="">
+                    </div>
+             
+
 
         </form>
 
+        <div class="btn-group">
+
+            <button id='h5' type="button" class="btn btn-primary btn-xs"></button>
+            <button id='h7' type="button" class="btn btn-ligth btn-xs">
+            <button type="button" id="Pago"  onclick='Imprimir()'class="btn btn-danger btn-xs">Imprimir</button>
+
+
+
+        </div>
         <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 15px; width:100%;">
             <thead class="thead-dark">
                 <tr>
@@ -67,7 +79,7 @@
                     <td>{{ $row->id }}</td>
                     <td>{{ $row->Descricao }}</td>
                     <td>{{ $row->Razaoe}}</td>
-                    <td>{{ $row->Valor}}</td>
+                    <td class='price'>{{ $row->Valor}}</td>
                     <td>{{ $row->DataRecebimento}}</td>
                     <td>{{ $row->Numero}}</td>
 
@@ -91,7 +103,74 @@
 
                 </tr>
                 @endforeach
-                <script></script>
+                <script>
+                    $(function() {
+
+
+                        var totals = $('.price');
+                        var totals2 = $('.price2');
+
+                        var sum = 0;
+                        var sum2 = 0;
+
+                        for (var i = 0; i < totals.length; i++) {
+                            //strip out Real signs and commas
+                            var v = $(totals[i]).text().replace(/[^\d.]/g, '');
+
+                            //convert string to integer
+                            var ct = parseFloat(v);
+                            sum += ct;
+
+
+                        }
+
+
+
+
+
+                        const formatado = sum.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+
+                        var qtd = $('#tabelaPedidos tbody tr').length;
+
+
+                        var myHeading = document.querySelector('#h5');
+                        myHeading.textContent = "Total Quitado: " + formatado;
+
+
+                        var myHeading = document.querySelector('#h7');
+                        myHeading.textContent = "N° de Contas: " + qtd;
+
+
+
+                        //Filtragem por botôes
+
+                        var tds = document.querySelectorAll('table td[data-estado]');
+                        document.querySelector('.btn-group').addEventListener('click', function(e) {
+                            var estado = e.target.id;
+                            for (var i = 0; i < tds.length; i++) {
+                                var tr = tds[i].closest('tr');
+                                tr.style.display = estado == tds[i].dataset.estado || !estado ? '' : 'none';
+                            }
+                        });
+
+                    });
+
+                    function Imprimir() {
+
+                        $('#BtnPesquisa').hide();
+                        $('#BtnImprimir').hide();
+                        window.print();
+                        $('#Bot').show();
+                        $('#BtnImprimir').show();
+
+
+
+
+                    }
+                </script>
 
 
 

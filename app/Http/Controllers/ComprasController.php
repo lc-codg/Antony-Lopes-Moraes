@@ -96,6 +96,7 @@ class ComprasController extends Controller
             'compras.CodEmpresa',
             'fornecedors.Nome',
             'empresas.Razao',
+            'compras.Tipo'
 
         )->join('fornecedors', 'compras.CodigoDoCliente', '=', 'fornecedors.id')->join('empresas', 'compras.CodEmpresa', '=', 'empresas.id')->where('compras.Codempresa', '=', $request->Empresa)->where('empresas.Razao', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Nome', 'LIKE', '%' . $request->Nome . '%')->where('fornecedors.Razao', 'LIKE', '%' . $request->Nome . '%')->whereBetween('DtPedido', array($request->Dataini, $request->Datafim))->paginate(20);
 
@@ -175,7 +176,7 @@ class ComprasController extends Controller
             'DataSaida' => $Dados->Dataemissao,
             'Finalidade' => 'Venda',
             'CodEmpresa' => Str::substr($Dados->CodEmpresa, 0, 1),
-            'Tipo' => isset($Dados->Tipo) ? 'Prazo' : 'Vista',
+            'Tipo' => $Dados->TipoDeCompra,
             'TotalDesconto' => isset($Dados->TotalDesconto) ? Str_replace(",", ".", $Dados->TotalDesconto) : 10,
             'TotalAcréscimo' => isset($Dados->TotalAcrescimo) ? Str_replace(",", ".", $Dados->TotalAcrescimo) : 0,
         ]);

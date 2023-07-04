@@ -64,7 +64,7 @@
                     <td>{{ $row->Operacao}}</td>
                     <td>{{ $row->Tipo}}</td>
                     <td>{{ $row->Razao}}</td>
-                    <td class='price'>R${{ $row->Saldo}}</td>
+                    <td class='price'>{{ $row->Saldo}}</td>
 
                     <td>
 

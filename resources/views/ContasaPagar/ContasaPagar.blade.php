@@ -12,12 +12,20 @@
 <body>
 
     <div id='container' class='.container-fluid'>
-
+  
+        @if ($Tipo === "prazo")
+        <h5>Lançar compras a Prazo</h5>
+        @elseif($Tipo === "vista")
+        <h5>Lançar compras a Vista</h5>
+        @elseif($Tipo === "transferencia")
+        <h5>Lançar Transferências</h5>
+        @else
         <h5>Cadastro de Contas a Pagar</h5>
+        @endif
         <form method='post' action='/ContasaPagar/Salvar' id='Form'>
             <div class='form-row'>
+            @csrf
 
-                @csrf
                 <div class="form-group md col-4">
                     <label for="">Empresa</label>
                     <select class="form-control " name="CodEmpresa" id="Empresa">
@@ -79,30 +87,35 @@
                 <div class="form-group md col-3">
                     <label for="">Grupo</label>
                     <select class="form-control" name="CodGrupo" id="Grupo">
-                        <option selected>Selecione...</option>
-                        <option>1- Contas Fixas</option>
-                        <option>2- Contas Avulsas</option>
+                    <option selected>Selecione...</option>
+                    @foreach($Categoria as $Cat)
+                        <option>{{$Cat->id}}-{{$Cat->descricao}}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="form-group md col-3">
                     <label for="">Sub.Grupo</label>
                     <select class="form-control" name="SubGrupo" id="SubGrupo">
-                        <option selected>Selecione...</option>
-                        <option>1- Contas</option>
-                        <option>2- Despesas</option>
+                    <option selected>Selecione...</option>
+                    @foreach($SubCategoria as $Sub)
+                        <option>{{$Sub->id}}-{{$Sub->descricao}}</option>
+                        @endforeach
                     </select>
                 </div>
 
 
             </div>
+
             <div class='form-row'>
-                <label style='margin-left:2%' class="form-check-label">
-                    <input onclick='Prazo();' type="checkbox" class="form-check-input" name="Tipo" id="Tipo" value="V" unchecked>
+                <label @if($Tipo =='vista') hidden @endif style='margin-left:2%' class="form-check-label">
+
+                    <input @if($Tipo =='prazo' ) checked @elseif ($Tipo =='vista') unchecked hidden @endif onclick='Prazo();' type="checkbox" class="form-check-input" name="Tipo" id="Tipo" value="V" unchecked>
                     A Prazo
                 </label>
-                <label style='margin-left:3%' class="form-check-label">
-                    <input  type="checkbox" class="form-check-input" name="Compra" id="Tipo" value="S" checked>
+
+                <label @if($Tipo == 'conta') hidden unchecked @endif style='margin-left:3%' class="form-check-label">
+                    <input @if($Tipo == 'conta') hidden unchecked @endif type="checkbox" class="form-check-input" name="Compra" id="Tipo" value="S" checked>
                     Compra
                 </label>
             </div>
@@ -143,6 +156,7 @@
             </div>
 
 
+            <input hidden id='' value ='{{$Tipo}}'name='TipoDeCompra'></input>
 
             <input name="Salvar" id="button" onclick='ValidarContasAPagar();' class="btn btn-dark" type="button" value="Salvar">
 

@@ -116,7 +116,7 @@ Route::get('/ContasBancarias/Editar/{id}', [ContasBancariasController::class, 'U
 Route::get('/ContasBancarias/Delete/{id}', [ContasBancariasController::class, 'Delete']);
 Route::get('/ContasBancarias/Saldo/', [ContasBancariasController::class, 'Saldo']);
 
-Route::get('/ContasaPagar/Novo', [ContasaPagarController::class, 'index']);
+Route::get('/ContasaPagar/Novo/{Tipo}', [ContasaPagarController::class, 'index']);
 Route::post('/ContasaPagar/Salvar', [Contasapagarcontroller::class, 'create']);
 Route::get('/ContasaPagar/Todos', [ContasaPagarController::class, 'ListarTodos']);
 Route::get('/ContasaPagar/Ver/{id}', [ContasaPagarController::class, 'show']);
