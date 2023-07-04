@@ -119,9 +119,9 @@ function FechamentoGeral() {
                     style: 'currency',
                     currency: 'BRL'
                 });
-                if (EstoqueAtual > 0) {
-                    $('#EstoqueAtual').append('<div  class="form-group"> <label for="">Estoque Atual</label><input readonly style="font-weight: bold;font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
-                }
+
+                $('#EstoqueAtual').append('<div  class="form-group"> <label for="">Estoque Atual</label><input readonly style="font-weight: bold;font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+
 
             });
 
@@ -131,9 +131,9 @@ function FechamentoGeral() {
                     style: 'currency',
                     currency: 'BRL'
                 });
-                if (EstoqueAnterior > 0) {
-                    $('#EstoqueAnterior').append('<div readonly class="form-group"> <label for="">Estoque Anterior</label><input readonly style="font-weight: bold;font-size:20px;"  type="text"class="form-control" value="' + Totala + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
-                }
+
+                $('#EstoqueAnterior').append('<div readonly class="form-group"> <label for="">Estoque Anterior</label><input readonly style="font-weight: bold;font-size:20px;"  type="text"class="form-control" value="' + Totala + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+
             });
 
             TotalC = (parseFloat(EstoqueAn) + parseFloat(TotalCompra)) - parseFloat(EstoqueA);
