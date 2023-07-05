@@ -13,7 +13,7 @@
 
 body{
   /* The image used */
-  background-image: url('img/Empresa.jpg');
+  background-image: url('img/empresa.jpg');
 
 
   /* Full height */

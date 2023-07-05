@@ -138,4 +138,4 @@
 
 </html>
 
-@include("Footer")
+@include("footer")
