@@ -61,10 +61,7 @@
                     <input autocomplete="off" type="number" value= '{{$Receitas->Serie}}' class="form-control" name="Serie" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Vencimento</label>
-                    <input type="date" value= '{{$Receitas->Vencimento}}' class="form-control" name="Vencimento" id="" aria-describedby="helpId" placeholder="">
-                </div>
+           
 
                 <div class="form-group md col-2">
                     <label for="">Data Recebimento</label>

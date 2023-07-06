@@ -53,14 +53,11 @@
 
 
                 <div class="form-group md col-2">
-                    <label for="">Data Recebimento</label>
+                    <label for="">Data</label>
                     <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Data emissão</label>
-                    <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Dataemissao" id="" aria-describedby="helpId" placeholder="">
-                </div>
+               
 
             </div>
 

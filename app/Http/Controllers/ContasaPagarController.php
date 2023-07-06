@@ -90,20 +90,8 @@ class ContasaPagarController extends Controller
             </script>";
             exit;
         }
-        if (empty($request->Vencimento)) {
-            echo "<script>
-              alert('Preencha o vencimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Dataemissao)) {
-            echo "<script>
-              alert('Preencha a Data da emissão');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
+        
+      
         if (empty($request->Total)) {
             echo "<script>
               alert('Preencha a Total');
@@ -133,11 +121,11 @@ class ContasaPagarController extends Controller
                     'Total' => Str_replace(",", ".", $request->Total),
                     'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
                     'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
-                    'Vencimento' => $request->Vencimento,
+                    'Vencimento' =>$request->Datarecebimento,
                     //'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
                     //'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
                     'Parcelas' => $request->Parcelas,
-                    'Dataemissao' => $request->Dataemissao,
+                    'Dataemissao' => $request->Datarecebimento,
                     'Datarecebimento' => $request->Datarecebimento,
                     'Boleta' => $request->boleta,
                     'NotaFiscal' => $request->NotaFiscal,
@@ -224,20 +212,6 @@ class ContasaPagarController extends Controller
             </script>";
             exit;
         }
-        if (empty($request->Vencimento)) {
-            echo "<script>
-              alert('Preencha o vencimento');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Dataemissao)) {
-            echo "<script>
-              alert('Preencha a Data da emissão');
-              javascript:history.back();
-            </script>";
-            exit;
-        }
         if (empty($request->Total)) {
             echo "<script>
               alert('Preencha a Total');
@@ -266,11 +240,11 @@ class ContasaPagarController extends Controller
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
-                'Vencimento' => $request->Vencimento,
+                'Vencimento' => $request->Datarecebimento,
                 'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
                 'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
                 'Parcelas' => $request->Parcelas,
-                'Dataemissao' => $request->Dataemissao,
+                'Dataemissao' => $request->Datarecebimento,
                 'Datarecebimento' => $request->Datarecebimento,
                 'Boleta' => $request->boleta,
                 'NotaFiscal' => $request->NotaFiscal,

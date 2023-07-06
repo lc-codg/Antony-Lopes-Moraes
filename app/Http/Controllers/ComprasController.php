@@ -10,6 +10,7 @@ use App\Classes\ObterDados;
 use App\Http\Controllers\ItensCompraController;
 use Illuminate\Support\Str;
 use Exception;
+use App\Http\Controllers\ArrecadacaoController;
 
 class ComprasController extends Controller
 {
@@ -75,9 +76,11 @@ class ComprasController extends Controller
     public function ListarPorData(Request $request)
     {
         $Compras = DB::table('compras')->select(
-            DB::raw('SUM(compras.Total) AS Total'),'compras.Tipo')
+            DB::raw('SUM(compras.Total) AS Total'),
+            'compras.Tipo'
+        )
             ->where('compras.CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('DtPedido', [$request->DataIni, $request->DataFim])->groupBy('compras.Tipo')->get();
-            return response()->json($Compras);
+        return response()->json($Compras);
     }
 
     public function ListarTodos(Request $request)
@@ -171,14 +174,19 @@ class ComprasController extends Controller
             'CodigoDoCliente' => Str::substr($Dados->CodFornecedor, 0, 1),
             'Total' => $Dados->Total,
             'TotaldosProdutos' => $Dados->Total,
-            'DtPedido' => $Dados->Dataemissao,
-            'Dataemissao' => $Dados->Dataemissao,
-            'DataSaida' => $Dados->Dataemissao,
+            'DtPedido' => $Dados->Datarecebimento,
+            'Dataemissao' => $Dados->Datarecebimento,
+            'DataSaida' => $Dados->Datarecebimento,
             'Finalidade' => 'Venda',
             'CodEmpresa' => Str::substr($Dados->CodEmpresa, 0, 1),
             'Tipo' => $Dados->TipoDeCompra,
             'TotalDesconto' => isset($Dados->TotalDesconto) ? Str_replace(",", ".", $Dados->TotalDesconto) : 10,
             'TotalAcréscimo' => isset($Dados->TotalAcrescimo) ? Str_replace(",", ".", $Dados->TotalAcrescimo) : 0,
         ]);
+        if ($Dados->TipoDeCompra =='vista') {
+            $Arrecadacao = new ArrecadacaoController();
+            $Arrecadacao->CompraAVista($Dados->CodEmpresa,$Dados->Total,1,$Dados->Datarecebimento);
+
+        }
     }
 }

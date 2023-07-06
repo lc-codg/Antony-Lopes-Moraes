@@ -59,11 +59,7 @@
                     <input type="date" class="form-control" value= '{{$Despesas->Datarecebimento}}'  name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Data emissão</label>
-                    <input type="date" class="form-control" value= '{{$Despesas->Dataemissao}}'  name="Dataemissao" id="" aria-describedby="helpId" placeholder="">
-                </div>
-
+                
             </div>
 
             <br>

@@ -68,17 +68,7 @@ class ArrecadacaoController extends Controller
             return true;
         }
     }
-    public function ComprasAvista(Request $request)
-    {
-        Arrecadacao::create([
-            'CodEmpresa' => Str::substr($request->Codempresa, 0, 1),
-            'Valor' => $request->Valor,
-            'Numero' => $request->Numero,
-            'DataRecebimento' => $request->Data,
-            'Descricao' => Str::Substr($request->Descricao, 0, 1),
-            'conta' => Str::substr($request->Conta, 0, 1),
-        ]);
-    }
+
     public function Salvar(Request $request)
     {
         if ($this->Verificar($request)) {
@@ -88,8 +78,8 @@ class ArrecadacaoController extends Controller
                 'Valor' => $request->Valor,
                 'Numero' => $request->Numero,
                 'DataRecebimento' => $request->Data,
-                'Descricao' => Str::Substr($request->Descricao, 0, 1),
-               // 'conta' => Str::substr($request->Conta, 0, 1),
+                'Descricao' => Str::Substr($request->Descricao, 2, 100),
+                // 'conta' => Str::substr($request->Conta, 0, 1),
             ]);
 
             /*
@@ -109,7 +99,16 @@ class ArrecadacaoController extends Controller
           </script>";
         }
     }
-
+    public function CompraAVista($Empresa,$Valor,$Numero,$Data)
+    {
+        Arrecadacao::create([
+            'CodEmpresa' => Str::substr($Empresa, 0, 1),
+            'Valor' => $Valor,
+            'Numero' => $Numero,
+            'DataRecebimento' => $Data,
+            'Descricao' => 'Compra a Vista',
+        ]);
+    }
     public function Excluir($id)
     {
         $Arreacadacao = Arrecadacao::findOrFail($id);

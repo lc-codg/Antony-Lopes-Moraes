@@ -45,20 +45,7 @@ class ContasaReceberController extends Controller
               </script>";
             exit;
         }
-        if (empty($Vencimento)) {
-            echo "<script>
-                alert('Preencha o vencimento');
-                javascript:history.back();
-              </script>";
-            exit;
-        }
-        if (empty($Dataemissao)) {
-            echo "<script>
-                alert('Preencha a Data da emissão');
-                javascript:history.back();
-              </script>";
-            exit;
-        }
+       
         if (empty($Total)) {
             echo "<script>
                 alert('Preencha o Total');
@@ -111,11 +98,11 @@ class ContasaReceberController extends Controller
             'Total' => $Total,
             'TotalDesconto' => $TotalDesconto,
             'TotalAcréscimo' => $TotalAcrescimo,
-            'Vencimento' => $Vencimento,
+            'Vencimento' => $Datarecebimento,
             'CodGrupo' => $CodGrupo,
             'CodSubGrupo' => $SubGrupo,
             'Parcelas' => $Parcelas,
-            'Dataemissao' => $Dataemissao,
+            'Dataemissao' => $Datarecebimento,
             'Datarecebimento' => $Datarecebimento,
             'Boleta' => $boleta,
             'NotaFiscal' => $NotaFiscal,
@@ -260,11 +247,11 @@ class ContasaReceberController extends Controller
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => Str_replace(",", ".", $request->TotalDesconto),
                 'TotalAcréscimo' => Str_replace(",", ".", $request->TotalAcrescimo),
-                'Vencimento' => $request->Vencimento,
+                'Vencimento' => $request->Datarecebimento,
                 'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
                 'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
                 'Parcelas' => $request->Parcelas,
-                'Dataemissao' => $request->Dataemissao,
+                'Dataemissao' => $request->Datarecebimento,
                 'Datarecebimento' => $request->Datarecebimento,
                 'Boleta' => $request->boleta,
                 'NotaFiscal' => $request->NotaFiscal,

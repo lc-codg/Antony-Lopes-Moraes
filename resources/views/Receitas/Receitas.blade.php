@@ -62,13 +62,9 @@
                     <input type="number" class="form-control" name="Serie" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Vencimento</label>
-                    <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Vencimento" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
                 <div class="form-group md col-2">
-                    <label for="">Data da Entrada</label>
+                    <label for="">Data</label>
                     <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 

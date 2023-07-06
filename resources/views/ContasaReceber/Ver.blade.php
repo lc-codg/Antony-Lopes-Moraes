@@ -62,21 +62,14 @@
                     <input type="number" value= '{{$ContasaReceber->Serie}}' class="form-control" name="Serie" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Vencimento</label>
-                    <input type="date" value= '{{$ContasaReceber->Vencimento}}' class="form-control" name="Vencimento" id="" aria-describedby="helpId" placeholder="">
-                </div>
+         
 
                 <div class="form-group md col-2">
-                    <label for="">Data Recebimento</label>
+                    <label for="">Data</label>
                     <input type="date" class="form-control" value= '{{$ContasaReceber->Datarecebimento}}'  name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Data emissão</label>
-                    <input type="date" class="form-control" value= '{{$ContasaReceber->Dataemissao}}'  name="Dataemissao" id="" aria-describedby="helpId" placeholder="">
-                </div>
-
+          
             </div>
 
             <br>
