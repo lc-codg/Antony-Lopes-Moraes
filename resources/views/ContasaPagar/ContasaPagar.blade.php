@@ -12,7 +12,7 @@
 <body>
 
     <div id='container' class='.container-fluid'>
-  
+
         @if ($Tipo === "prazo")
         <h5>Lançar compras a Prazo</h5>
         @elseif($Tipo === "vista")
@@ -24,7 +24,7 @@
         @endif
         <form method='post' action='/ContasaPagar/Salvar' id='Form'>
             <div class='form-row'>
-            @csrf
+                @csrf
 
                 <div class="form-group md col-4">
                     <label for="">Empresa</label>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group md col-4">
                     <label for="">Nota Fiscal</label>
-                    <input type="number" class="form-control" name="NotaFiscal" id="" aria-describedby="helpId" placeholder="">
+                    <input @if($Tipo=='prazo' ) required @endif type="number" class="form-control" name="NotaFiscal" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-4">
@@ -84,11 +84,12 @@
                     <label for="">Data emissão</label>
                     <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Dataemissao" id="" aria-describedby="helpId" placeholder="">
                 </div>
+                @if ($Tipo === "conta")
                 <div class="form-group md col-3">
                     <label for="">Grupo</label>
                     <select class="form-control" name="CodGrupo" id="Grupo">
-                    <option selected>Selecione...</option>
-                    @foreach($Categoria as $Cat)
+                        <option selected>Selecione...</option>
+                        @foreach($Categoria as $Cat)
                         <option>{{$Cat->id}}-{{$Cat->descricao}}</option>
                         @endforeach
                     </select>
@@ -97,25 +98,25 @@
                 <div class="form-group md col-3">
                     <label for="">Sub.Grupo</label>
                     <select class="form-control" name="SubGrupo" id="SubGrupo">
-                    <option selected>Selecione...</option>
-                    @foreach($SubCategoria as $Sub)
+                        <option selected>Selecione...</option>
+                        @foreach($SubCategoria as $Sub)
                         <option>{{$Sub->id}}-{{$Sub->descricao}}</option>
                         @endforeach
                     </select>
                 </div>
-
+                @endif
 
             </div>
 
             <div class='form-row'>
-                <label @if($Tipo =='vista') hidden @endif style='margin-left:2%' class="form-check-label">
-
-                    <input @if($Tipo =='prazo' ) checked @elseif ($Tipo =='vista') unchecked hidden @endif onclick='Prazo();' type="checkbox" class="form-check-input" name="Tipo" id="Tipo" value="V" unchecked>
+                <label @if($Tipo<>'conta')  hidden @endif style='margin-left:2%' class="form-check-label">
+               
+                    <input @if($Tipo=='prazo' ) checked hidden  @elseif ($Tipo=='vista' ) readonly unchecked hidden @endif onclick='Prazo();' type="checkbox" class="form-check-input" name="Tipo" id="Tipo" value="V" unchecked>
                     A Prazo
                 </label>
 
-                <label @if($Tipo == 'conta') hidden unchecked @endif style='margin-left:3%' class="form-check-label">
-                    <input @if($Tipo == 'conta') hidden unchecked @endif type="checkbox" class="form-check-input" name="Compra" id="Tipo" value="S" checked>
+                <label @if($Tipo=='conta' ) hidden unchecked @endif @if($Tipo<>'conta' ) hidden checked @endif style='margin-left:3%' class="form-check-label">
+                    <input @if($Tipo=='conta' ) hidden unchecked @endif @if($Tipo<>'conta' ) hidden  @endif type="checkbox" class="form-check-input" name="Compra" id="Tipo" value="S" checked>
                     Compra
                 </label>
             </div>
@@ -156,7 +157,7 @@
             </div>
 
 
-            <input hidden id='' value ='{{$Tipo}}'name='TipoDeCompra'></input>
+            <input hidden id='' value='{{$Tipo}}' name='TipoDeCompra'></input>
 
             <input name="Salvar" id="button" onclick='ValidarContasAPagar();' class="btn btn-dark" type="button" value="Salvar">
 
@@ -168,12 +169,9 @@
     </div>
 
 
-    <script>
 
-
-    </script>
 </body>
-<script src="{{ asset('js/App.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <br><br><br>
 @include('footer')
 

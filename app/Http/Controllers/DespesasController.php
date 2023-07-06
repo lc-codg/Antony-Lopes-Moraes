@@ -80,16 +80,16 @@ class DespesasController extends Controller
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-                'Conta' => Str::substr($request->Conta, 0, 1),
+                //'Conta' => Str::substr($request->Conta, 0, 1),
             ]);
 
-            $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
+           /* $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
             $Empresa = Str::substr($request->CodEmpresa, 0, 1);
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
             $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->Conta, 0, 1), 'Despesa', $Empresa, $request->Descricao);
-
+*/
             return
                 "<script>
             alert('Salvo com sucesso!');
@@ -206,12 +206,12 @@ class DespesasController extends Controller
     }
     public function FechamentoDespesaCat(Request $request)
     {
-        $Despesa = Despesas::whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->where('CodGrupo', $request->CodGrupo)->get();
+        $Despesa = DB::table('despesas')->select('despesas.Descricao','despesas.Datarecebimento','despesas.Total','fornecedors.Nome')->join('fornecedors','fornecedors.id','=','despesas.CodFornecedor')->whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->where('CodGrupo', $request->CodGrupo)->get();
         return response()->json($Despesa, 200);
     }
     public function ListarPorData(Request $request)
     {
-        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'), 'categorias.descricao')
+        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'), 'categorias.descricao','fornecedors.Nome')
             ->join('categorias', 'categorias.id', '=', 'despesas.CodGrupo')->where('despesas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->whereBetween('DataRecebimento', [$request->DataIni, $request->DataFim])->groupBy('categorias.descricao')->get();
             return response()->json($Despesas);
     }

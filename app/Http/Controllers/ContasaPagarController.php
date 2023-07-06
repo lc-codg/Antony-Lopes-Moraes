@@ -75,9 +75,9 @@ class ContasaPagarController extends Controller
         return view('ContasaPagar.ContasaPagar', [
             'Empresas' => $ObterDados->ListaDeEmpresas(),
             'Fornecedor' => $ObterDados->ListaDeFornecedores(),
-            'Tipo'=>$Tipo,
-            'Categoria'=>$ObterDados->ListarCategorias(),
-            'SubCategoria'=>$ObterDados->ListarSubCategorias()
+            'Tipo' => $Tipo,
+            'Categoria' => $ObterDados->ListarCategorias(),
+            'SubCategoria' => $ObterDados->ListarSubCategorias()
         ]);
     }
 
@@ -125,32 +125,35 @@ class ContasaPagarController extends Controller
             </script>";
             exit;
         } else {
-            ContasaPagar::create([
-                'Barras' => $request->Barras,
-                'Descricao' => $request->Descricao,
-                'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
-                'Total' => Str_replace(",", ".", $request->Total),
-                'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
-                'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
-                'Vencimento' => $request->Vencimento,
-                'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
-                'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
-                'Parcelas' => $request->Parcelas,
-                'Dataemissao' => $request->Dataemissao,
-                'Datarecebimento' => $request->Datarecebimento,
-                'Boleta' => $request->boleta,
-                'NotaFiscal' => $request->NotaFiscal,
-                'Serie' => $request->Serie,
-                'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-                'status' => 0,
-                'Juros' => 0,
-                'Multa' => 0,
-                'Cheque' => 0
-            ]);
-            if ($request->TipoDeCompra <>'conta') {
+            if ($request->TipoDeCompra == 'prazo') {
+                ContasaPagar::create([
+                    'Barras' => $request->Barras,
+                    'Descricao' => $request->Descricao,
+                    'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
+                    'Total' => Str_replace(",", ".", $request->Total),
+                    'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
+                    'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
+                    'Vencimento' => $request->Vencimento,
+                    //'CodGrupo' => Str::substr($request->CodGrupo, 0, 1),
+                    //'CodSubGrupo' => Str::substr($request->SubGrupo, 0, 1),
+                    'Parcelas' => $request->Parcelas,
+                    'Dataemissao' => $request->Dataemissao,
+                    'Datarecebimento' => $request->Datarecebimento,
+                    'Boleta' => $request->boleta,
+                    'NotaFiscal' => $request->NotaFiscal,
+                    'Serie' => $request->Serie,
+                    'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
+                    'status' => 0,
+                    'Juros' => 0,
+                    'Multa' => 0,
+                    'Cheque' => 0
+                ]);
+            }
+            if ($request->TipoDeCompra <> 'conta') {
                 $Compras = new ComprasController();
                 $Compras->SalvarComprasSimples($request);
             }
+
             return
                 "<script>
                 alert('Salvo com sucesso!');
@@ -164,9 +167,11 @@ class ContasaPagarController extends Controller
         $ObterDados = new ObterDados();
 
         $ContasaPagar = ContasaPagar::findOrFail($id);
-        return view('/ContasaPagar.Ver', ['ContasaPagar' => $ContasaPagar, 'Empresas'
-        =>  $ObterDados->ListaDeEmpresas(), 'Fornecedor' =>  $ObterDados->ListaDeFornecedores(),      'Catgoria'=>$ObterDados->ListarCategorias(),
-        'SubCategoria'=>$ObterDados->ListarSubCategorias()]);
+        return view('/ContasaPagar.Ver', [
+            'ContasaPagar' => $ContasaPagar, 'Empresas'
+            =>  $ObterDados->ListaDeEmpresas(), 'Fornecedor' =>  $ObterDados->ListaDeFornecedores(),      'Catgoria' => $ObterDados->ListarCategorias(),
+            'SubCategoria' => $ObterDados->ListarSubCategorias()
+        ]);
     }
 
 

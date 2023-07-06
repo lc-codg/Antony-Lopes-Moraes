@@ -29,17 +29,10 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group md col-4">
-                    <label for="">Conta Bancária</label>
-                    <select class="form-control" name="Conta" id="">
-                        @foreach ($Contas as $C)
-                        <option selected>{{$C->id}}- {{$C->Descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
+              
 
                 <div class="form-group md col-6">
-                    <label for="">Descrição</label>
+                    <label for="">Descrição (Sub Categoria)</label>
                     <select class="form-control" name="Descricao" id="Descricao">
                         @foreach ($SubCat as $C)
                         <option selected>{{$C->id}}- {{$C->descricao}}</option>

@@ -13,7 +13,7 @@
 
     <div id='container' class='.container-fluid'>
 
-        <h5>Cadastro de Receitas</h5>
+        <h5>Cadastro de Receitas (Tranferências)</h5>
         <form method='post' action='/Receitas/Salvar'>
             <div class='form-row'>
 
@@ -36,14 +36,7 @@
                     </select>
                 </div>
 
-                <div class="form-group md col-4">
-                    <label for="">Conta Bancária</label>
-                    <select class="form-control" name="Conta" id="">
-                        @foreach ($Contas as $C)
-                        <option selected>{{$C->id}}- {{$C->Descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
+               
 
                 <div class="form-group md col-12">
                     <label for="">Descrição</label>

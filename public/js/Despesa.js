@@ -1,4 +1,4 @@
-var Totalizado ;
+var Totalizado;
 
 function Pesquisa() {
 
@@ -11,7 +11,7 @@ function Pesquisa() {
         method: 'get',
         url: '/Despesas/Fechamento',
         data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa },
-        success: function (retorno) {
+        success: function(retorno) {
             $('#Despesas').html('');
             $('#Soma').html('');
 
@@ -25,8 +25,8 @@ function Pesquisa() {
                 });
                 Soma += parseFloat(retorno[i].Total);
 
-                $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>'
-                    + '</td> <td>' + retorno[i].Datarecebimento + '</td>' + '<td id="cat' + i + '"> </td>');
+                $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>' +
+                    '</td> <td>' + retorno[i].Datarecebimento + '</td>' + '<td id="cat' + i + '"> </td>');
 
                 SelecionaNomeCategoria(retorno[i].CodGrupo, i);
             }
@@ -50,7 +50,7 @@ function SelecionaNomeCategoria(Id, Posicao) {
         method: 'get',
         url: '/Categorias/ListarPorId',
         data: { 'id': Id },
-        success: function (dados) {
+        success: function(dados) {
 
 
             Cat = (dados[0].descricao);
@@ -63,77 +63,78 @@ function SelecionaNomeCategoria(Id, Posicao) {
     });
 }
 
-    function RelatorioCategoria() {
-        Totalizado = 0;
-        $('#Cat').html('');
-        $.ajax({
-            method: 'get',
-            url: '/Categorias/Lista',
-            data: {  },
-            success: function (retorno) {
+function RelatorioCategoria() {
+    Totalizado = 0;
+    $('#Cat').html('');
+    $.ajax({
+        method: 'get',
+        url: '/Categorias/Lista',
+        data: {},
+        success: function(retorno) {
 
-                for (let i = 0; retorno.length > i; i++) {
-                    $('#Despesa'+i).html('');
-                    $('#Soma'+i).html('');
+            for (let i = 0; retorno.length > i; i++) {
+                $('#Despesa' + i).html('');
+                $('#Soma' + i).html('');
 
-                $('#Cat').append('<tr>  <td style="font-size: 20px; width:80%;">' + retorno[i].descricao +'<td> <tr><td id="Despesa'+i+'"></td>'+'<td> <tr><td id="Soma'+i+'"></td>');
-                
-                DespesasPorCategoria(i,retorno[i].id);
+                $('#Cat').append('<tr>  <td style="font-size: 20px; width:80%;">' + retorno[i].descricao + '<td> <tr><td id="Despesa' + i + '"></td>' + '<td> <tr><td id="Soma' + i + '"></td>');
+
+                DespesasPorCategoria(i, retorno[i].id);
                 const Totalizador = parseFloat(Totalizado).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 });
-        
-               // $('#Totalizado').append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Totalizador + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
-                }
 
+                // $('#Totalizado').append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Totalizador + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
             }
 
+        }
 
-        });
 
-    }
-    function DespesasPorCategoria(Posicao,Tipo) {
+    });
 
-        let DataIni = document.getElementById('DataIni').value;
-        let DataFim = document.getElementById('DataFim').value;
-        let Empresa = document.getElementById('Empresa').value;
-        
+}
 
-        $.ajax({
-            method: 'get',
-            url: '/Despesas/FechamentoCat',
-            data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa, 'CodGrupo': Tipo },
-            success: function (retorno) {
-        
+function DespesasPorCategoria(Posicao, Tipo) {
 
-                let Soma = 0;
-                for (let i = 0; retorno.length > i; i++) {
-                    const Valor = parseFloat(retorno[i].Total).toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    });
-                    Soma += parseFloat(retorno[i].Total);
-                    Totalizado += Soma;
+    let DataIni = document.getElementById('DataIni').value;
+    let DataFim = document.getElementById('DataFim').value;
+    let Empresa = document.getElementById('Empresa').value;
 
-                    $('#Despesa'+Posicao).append('<tr>  <td style="font-size: 15px; width:80%;">' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>'
-                    + '</td> <td>' + retorno[i].Datarecebimento + '</td>');
-                }
-                const Total = parseFloat(Soma).toLocaleString('pt-BR', {
+
+    $.ajax({
+        method: 'get',
+        url: '/Despesas/FechamentoCat',
+        data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa, 'CodGrupo': Tipo },
+        success: function(retorno) {
+
+
+            let Soma = 0;
+            for (let i = 0; retorno.length > i; i++) {
+                const Valor = parseFloat(retorno[i].Total).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 });
+                Soma += parseFloat(retorno[i].Total);
+                Totalizado += Soma;
 
-               $('#Soma'+Posicao).append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
-
-
+                $('#Despesa' + Posicao).append('<tr> <td>' + retorno[i].Nome + '</td>' + '<td style="font-size: 15px; width:80%;">' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>' +
+                    '</td> <td>' + retorno[i].Datarecebimento + '</td>');
             }
-          
+            const Total = parseFloat(Soma).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            $('#Soma' + Posicao).append('<div class="form-group"> <label for="">Total</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
 
 
-        });
+        }
 
-    }
+
+
+    });
+
+}
 
 
 
@@ -149,7 +150,7 @@ function Categoria() {
         method: 'get',
         url: '/Categorias/Categorias',
         datatype: 'json',
-        success: function (retorno) {
+        success: function(retorno) {
             a = [1, 2, 3];
             return a;
         }
@@ -158,6 +159,7 @@ function Categoria() {
 
 
 }
+
 function Imprimir() {
     $('#BtnPesquisa').hide();
     $('#BtnImprimir').hide();
@@ -168,6 +170,7 @@ function Imprimir() {
     $("#Titulo").html('Relatório de Despesas');
 
 }
+
 function DespesaCategoria() {
 
     let DataIni = document.getElementById('DataIni').value;
@@ -175,7 +178,7 @@ function DespesaCategoria() {
 
     Dados = Categoria();
 
-    $.each(Dados, function (Id, val) {
+    $.each(Dados, function(Id, val) {
         console.log(val);
     });
 

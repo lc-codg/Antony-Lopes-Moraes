@@ -70,14 +70,15 @@ class ReceitasController extends Controller
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-                'Conta' => Str::substr($request->Conta, 0, 1),
+               // 'Conta' => Str::substr($request->Conta, 0, 1),
             ]);
+            /*
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
             $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),$request->Descricao);
-
+*/
             return
                 "<script>
                 alert('Receita Salva com sucesso!');

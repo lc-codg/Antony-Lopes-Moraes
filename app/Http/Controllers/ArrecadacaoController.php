@@ -68,6 +68,17 @@ class ArrecadacaoController extends Controller
             return true;
         }
     }
+    public function ComprasAvista(Request $request)
+    {
+        Arrecadacao::create([
+            'CodEmpresa' => Str::substr($request->Codempresa, 0, 1),
+            'Valor' => $request->Valor,
+            'Numero' => $request->Numero,
+            'DataRecebimento' => $request->Data,
+            'Descricao' => Str::Substr($request->Descricao, 0, 1),
+            'conta' => Str::substr($request->Conta, 0, 1),
+        ]);
+    }
     public function Salvar(Request $request)
     {
         if ($this->Verificar($request)) {
@@ -77,9 +88,11 @@ class ArrecadacaoController extends Controller
                 'Valor' => $request->Valor,
                 'Numero' => $request->Numero,
                 'DataRecebimento' => $request->Data,
-                'Descricao' => Str::Substr($request->Descricao,0, 1),
-                'conta' => Str::substr($request->Conta, 0, 1),
+                'Descricao' => Str::Substr($request->Descricao, 0, 1),
+               // 'conta' => Str::substr($request->Conta, 0, 1),
             ]);
+
+            /*
             //Deposita na Conta
             $Contas = new ContasBancariasController();
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Valor);
@@ -87,7 +100,7 @@ class ArrecadacaoController extends Controller
             $Extrato = new ExtratoController();
             $Extrato->InserirNoExtrato($request->Valor, 'C', Str::substr($request->Conta, 0, 1), 'Arrecadação', Str::substr($request->Codempresa, 0, 1), $request->Descricao);
 
-
+*/
 
 
             return  "<script>

@@ -34,14 +34,14 @@ date_default_timezone_set('America/Sao_Paulo');
                 <a href="#" class="list-group-item-dark  list-group-item-action active" aria-current="true">
                   Produtos
                 </a>
-                <a class="dropdown-item" href="/Produtos/Novo">Lançar Produtos</a>
+                <a class="dropdown-item" href="/Produtos/Novo">Cadastrar Produtos</a>
                 <a class="dropdown-item" href="/Produtos/Todos">Listar Produtos</a>
               </div>
               <div class="list-group">
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="True">
                   Clientes
                 </a>
-                <a class="dropdown-item" href="/Clientes/Novo">Lançar Clientes</a>
+                <a class="dropdown-item" href="/Clientes/Novo">Cadastrar Clientes</a>
                 <a class="dropdown-item" href="/Clientes/Todos">Listar Clientes</a>
               </div>
 
@@ -49,7 +49,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                   Fornecedores
                 </a>
-                <a class="dropdown-item" href="/Fornecedor/Novo">Lançar Fornecedores</a>
+                <a class="dropdown-item" href="/Fornecedor/Novo">Cadastrar Fornecedores</a>
                 <a class="dropdown-item" href="/Fornecedor/Todos">Listar Fornecedores</a>
               </div>
 
@@ -57,7 +57,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                   Empresas
                 </a>
-                <a class="dropdown-item" href="/Empresa/Novo">Lançar Empresas</a>
+                <a class="dropdown-item" href="/Empresa/Novo">Cadastrar Empresas</a>
                 <a class="dropdown-item" href="/Empresa/Todos">Listar Empresas</a>
               </div>
 
@@ -66,7 +66,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                   Diversos
                 </a>
-                <a class="dropdown-item" href="/Categorias/Categorias">Lançar Categorias</a>
+                <a class="dropdown-item" href="/Categorias/Categorias">Cadastrar Categorias</a>
 
                 <a class="dropdown-item" href="/Categorias/Todos">Listar Categorias</a>
               </div>
@@ -74,7 +74,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                   Contas Bancárias
                 </a>
-                <a class="dropdown-item" href="/ContasBancarias/Novo">Lançar Conta Bancárias</a>
+                <a class="dropdown-item" href="/ContasBancarias/Novo">Cadastrar Conta Bancárias</a>
                 <a class="dropdown-item" href="/ContasBancarias/Todos">Listar Conta Bancárias</a>
               </div>
             </div>

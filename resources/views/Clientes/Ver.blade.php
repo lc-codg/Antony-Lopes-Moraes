@@ -44,13 +44,13 @@
 
                     <div class="form-group col-md-2">
                         <label for="">CPF</label>
-                        <input required type="number" Value="{{ $cliente->Cpf }}" class="form-control" name="CPF"
+                        <input  type="number" Value="{{ $cliente->Cpf }}" class="form-control" name="CPF"
                             id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">RG</label>
-                        <input required Value="{{ $cliente->Rg }}" type="number" class="form-control" name="RG" id=""
+                        <input  Value="{{ $cliente->Rg }}" type="number" class="form-control" name="RG" id=""
                             aria-describedby="helpId" placeholder="">
                     </div>
 

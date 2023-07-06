@@ -80,12 +80,16 @@ class BalancoController extends Controller
         $Diaan = date('Y-m-d', $data_incioa);
         $Dia2an = date('Y-m-d', $data_fimm);
 
-        $Estoque[0]= DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAtual'))
-            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('Data', [$Diaa, $Dia2a])->get();
+        $Estoque[0] = DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAtual'))
+            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('Data', [$request->Dataini, $request->DataFim])->get();
 
-        $Estoque[1]= DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAnterior'))
-            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('Data', [$Diaan, $Dia2an])->get();
+        $UltimoId = DB::table('balancos')->select('select id')
+            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->max('id');
+        $UltimoId = $UltimoId -1;    
 
-            return response()->json(($Estoque));
+        $Estoque[1] = DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAnterior'))
+            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->where('id','=',$UltimoId)->get();
+
+        return response()->json(($Estoque));
     }
 }
