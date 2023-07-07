@@ -87,6 +87,25 @@ class ReceitasController extends Controller
         }
     }
 
+    public function Credito(Request $request)
+    {
+        $Contas = new ContasBancariasController();
+
+        if ($this->Verificar($request)) {
+
+            $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
+
+            $Total = $request->Total;
+            $Extrato = new ExtratoController();
+            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),$request->Descricao);
+
+            return
+                "<script>
+                alert('Crédito lançado com sucesso!');
+                location = '/Receitas/Novo';
+              </script>";
+        }
+    }
 
     public function show($id)
     {

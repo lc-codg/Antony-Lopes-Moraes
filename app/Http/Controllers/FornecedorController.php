@@ -71,13 +71,7 @@ class FornecedorController extends Controller
           </script>";
             exit;
         }
-        if (empty($request->CPF)) {
-            echo "<script>
-            alert('Digite o CPF.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
+
 
         if (empty($request->Endereco)) {
             echo "<script>
@@ -160,13 +154,7 @@ class FornecedorController extends Controller
           </script>";
             exit;
         }
-        if (empty($request->CPF)) {
-            echo "<script>
-            alert('Digite o CPF.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
+
         if (empty($request->RG)) {
             echo "<script>
             alert('Digite o RG.');

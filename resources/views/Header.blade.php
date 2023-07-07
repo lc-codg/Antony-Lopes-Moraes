@@ -97,10 +97,10 @@ date_default_timezone_set('America/Sao_Paulo');
 
                 <div class="list-group">
                   <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
-                    Receitas
+                    Transferências
                   </a>
-                  <a class="dropdown-item" href="/Receitas/Novo">Lançar Receitas</a>
-                  <a class="dropdown-item" href="/Receitas/Todos">Listar Receitas</a>
+                  <a class="dropdown-item" href="/Receitas/Novo">Lançar Transferências(Receita)</a>
+                  <a class="dropdown-item" href="/Receitas/Todos">Listar Transferências(Receita)</a>
                 </div>
 
                 <div class="list-group">
@@ -153,7 +153,7 @@ date_default_timezone_set('America/Sao_Paulo');
                       <a class="dropdown-item" href="/Compras/Carrinho">Lançar Notas de Compra </a>
                       <a class="dropdown-item" href="/ContasaPagar/Novo/vista">Lançar Compra a Vista </a>
                       <a class="dropdown-item" href="/ContasaPagar/Novo/prazo">Lançar Compra a Prazo </a>
-                      <a class="dropdown-item" href="/ContasaPagar/Novo/transferencia">Lançar Transferência </a>
+                      <a class="dropdown-item" href="/ContasaPagar/Novo/transferencia">Lançar Compra Transferência </a>
                       <a class="dropdown-item" href="/Compras/Todos">Listar lançamentos de Compra </a>
                     </div>
                   <?php } ?>
@@ -185,6 +185,7 @@ date_default_timezone_set('America/Sao_Paulo');
                     <a class="dropdown-item" href="/Extrato/View">Extrato</a>
                     <a class="dropdown-item" h href="/ContasBancarias/Saldo">Saldo Do Caixa</a>
                     <a class="dropdown-item" href="/FechamentoGeral">Fechamento Geral</a>
+                    <a class="dropdown-item" href="/ContasBancarias/TrasferirSaldo">Transferir Saldo</a>
 
                     <div class="list-group">
 

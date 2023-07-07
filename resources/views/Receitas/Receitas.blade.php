@@ -13,54 +13,45 @@
 
     <div id='container' class='.container-fluid'>
 
-        <h5>Cadastro de Receitas (Tranferências)</h5>
-        <form method='post' action='/Receitas/Salvar'>
+        <h5>Cadastro Tranferências</h5>
+        <form id='Form'method='post' action='/Receitas/Salvar'>
             <div class='form-row'>
 
                 @csrf
                 <div class="form-group md col-4">
                     <label for="">Empresa</label>
-                    <select class="form-control " name="CodEmpresa" id="">
+                    <select class="form-control " name="CodEmpresa" id="Empresa">
+                    <option selected>Selecione...</option>
                         @foreach ($Empresas as $row)
-                        <option selected>{{$row->id}}- {{$row->Razao}}</option>
+                        <option >{{$row->id}}- {{$row->Razao}}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group md col-4">
                     <label for="">Cliente</label>
-                    <select class="form-control" name="CodCliente" id="">
+                    <select class="form-control" name="CodCliente" id="Cliente">
+                    <option selected>Selecione...</option>
                         @foreach ($Cliente as $RowF)
-                        <option selected>{{$RowF->id}}- {{$RowF->Nome}}</option>
+                        <option >{{$RowF->id}}- {{$RowF->Nome}}</option>
                         @endforeach
                     </select>
                 </div>
 
-               
+
 
                 <div class="form-group md col-12">
                     <label for="">Descrição</label>
-                    <input autocomplete="off" type="text" class="form-control" name="Descricao" id="" aria-describedby="helpId" placeholder="">
+                    <input autocomplete="off" type="text" class="form-control" name="Descricao" id="Descricao" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-12">
-                    <label for="">Código da Boleta</label>
-                    <input autocomplete="off" type="number" class="form-control" name="Barras" id="" aria-describedby="helpId" placeholder="">
-                </div>
+
 
             </div>
 
             <div class='form-row'>
 
-                <div class="form-group md col-8">
-                    <label for="">Nota Fiscal</label>
-                    <input type="number" class="form-control" name="NotaFiscal" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
-                <div class="form-group md col-4">
-                    <label for="">Série</label>
-                    <input type="number" class="form-control" name="Serie" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
 
                 <div class="form-group md col-2">
@@ -77,37 +68,29 @@
 
                 <div class="form-group md col-2">
                     <label for="">Total</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="Total" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" onkeyup="Totalizar();" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="Total" id="Total" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Desconto</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalDesconto" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" onkeyup="Totalizar();" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalDesconto" id="Desconto" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Acréscimo</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalAcrescimo" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" onkeyup="Totalizar();" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalAcrescimo" id="Acrescimo" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Total Final</label>
-                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalFinal" id="" aria-describedby="helpId" placeholder="">
+                    <input type="number" pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalFinal" id="Totalizado" aria-describedby="helpId" placeholder="">
                 </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Parcelas</label>
-                    <input type="number" class="form-control" name="Parcelas" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
-                <div class="form-group md col-2">
-                    <label for="">Quantidade de boletas</label>
-                    <input type="number" class="form-control" name="boleta" id="" aria-describedby="helpId" placeholder="">
-                </div>
 
             </div>
 
-            <input name="Salvar" id="" class="btn btn-dark" type="submit" value="Salvar">
+            <input name="Salvar" id="" class="btn btn-dark" type="button" onclick="Verifica();" value="Salvar">
 
 
         </form>
@@ -115,7 +98,7 @@
     </div>
 
     </div>
-
+    <script src="{{ asset('js/Receitas.js') }}"></script>
 </body>
 @include('footer')
 

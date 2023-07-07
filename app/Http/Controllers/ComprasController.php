@@ -82,7 +82,9 @@ class ComprasController extends Controller
             ->where('compras.CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('DtPedido', [$request->DataIni, $request->DataFim])->groupBy('compras.Tipo')->get();
         return response()->json($Compras);
     }
+public function ListarComrpasAVista(){
 
+}
     public function ListarTodos(Request $request)
     {
         $Dados = new ObterDados;

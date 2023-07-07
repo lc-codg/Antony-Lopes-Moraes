@@ -21,11 +21,11 @@ class ControllerOutrosLancamentos extends Controller
         $Despesas = new DespesasController();
         $Receitas = new ReceitasController();
 
-      ($request->Tipo === 'Crédito') ? $Receitas->create($request) : $Despesas->create($request);
+      ($request->Tipo === 'Crédito') ? $Receitas->Credito($request) : $Despesas->Debito($request);
 
       $Modelo = ($request->Tipo == 'Crédito') ? 'C' : 'D';
 
-      echo "<script>alert('Salvo com sucesso!');</script>";
+      echo "<script>alert('Lançado com sucesso!');</script>";
       return $this->Novo();
 
     }

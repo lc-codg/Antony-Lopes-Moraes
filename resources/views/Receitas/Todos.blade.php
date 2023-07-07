@@ -11,7 +11,7 @@
 
 <body>
     <div id='c2' class='.container-fluid'>
-        <h5>Receitas</h5>
+        <h5>Relatório de Transferências</h5>
 
         <form method='get' action='/Receitas/Todos'>
 

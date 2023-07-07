@@ -14,42 +14,41 @@
     <div id='container' class='.container-fluid'>
 
         <h5>Cadastro de Despesas</h5>
-        <form method='post' action='/Despesas/Salvar'>
+        <form id='Form' method='post' action='/Despesas/Salvar'>
             <div class='form-row'>
 
                 @csrf
                 <div class="form-group md col-4">
                     <label for="">Empresa</label>
-                    <select class="form-control " name="CodEmpresa" id="">
+                    <select class="form-control " name="CodEmpresa" id="Empresa">
+                        <option selected>Selecione...</option>
                         @foreach ($Empresas as $row)
-                        <option selected>{{$row->id}}- {{$row->Razao}}</option>
+                        <option >{{$row->id}}- {{$row->Razao}}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group md col-4">
                     <label for="">Fornecedor</label>
-                    <select class="form-control" name="CodFornecedor" id="">
+                    <select class="form-control" name="CodFornecedor" id="Cliente">
+                    <option selected>Selecione...</option>
                         @foreach ($Fornecedor as $RowF)
-                        <option selected>{{$RowF->id}}- {{$RowF->Nome}}</option>
+                        <option >{{$RowF->id}}- {{$RowF->Nome}}</option>
                         @endforeach
                     </select>
                 </div>
-            
+
 
                 <div class="form-group md col-12">
                     <label for="">Descrição</label>
-                    <input type="text" class="form-control" name="Descricao" id="" aria-describedby="helpId" placeholder="">
+                    <input type="text" class="form-control" name="Descricao" id="Descricao" aria-describedby="helpId" placeholder="">
                 </div>
 
             </div>
 
             <div class='form-row'>
 
-                <div class="form-group md col-8">
-                    <label for="">Nota Fiscal</label>
-                    <input type="number" class="form-control" name="NotaFiscal" id="" aria-describedby="helpId" placeholder="">
-                </div>
+
 
 
                 <div class="form-group md col-2">
@@ -57,7 +56,7 @@
                     <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-               
+
 
             </div>
 
@@ -72,7 +71,7 @@
 
                 <div class="form-group md col-2">
                     <label for="">Total Desconto</label>
-                    <input type="number" onkeyup="Totalizar()";pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalDesconto" id="Desconto" aria-describedby="helpId" placeholder="">
+                    <input type="number" onkeyup="Totalizar();"pattern="[0-9]+([,\.][0-9]+)?" min="0" step="any" class="form-control" name="TotalDesconto" id="Desconto" aria-describedby="helpId" placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
@@ -113,7 +112,7 @@
             </div>
 
 
-            <input name="Salvar" id="" class="btn btn-dark" type="submit" value="Salvar">
+            <input name="Salvar" id="" onclick="Verifica();" class="btn btn-dark" type="button" value="Salvar">
 
 
         </form>

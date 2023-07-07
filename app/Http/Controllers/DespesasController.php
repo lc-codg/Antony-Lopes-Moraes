@@ -83,7 +83,7 @@ class DespesasController extends Controller
                 //'Conta' => Str::substr($request->Conta, 0, 1),
             ]);
 
-           /* $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
+            /* $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
             $Empresa = Str::substr($request->CodEmpresa, 0, 1);
 
             $Total = $request->Total;
@@ -96,6 +96,24 @@ class DespesasController extends Controller
             location = '/Despesas/Novo';
          </script>";
         }
+    }
+    public function Debito(Request $request)
+    {
+        $Contas = new ContasBancariasController();
+
+
+        $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
+        $Empresa = Str::substr($request->CodEmpresa, 0, 1);
+
+        $Total = $request->Total;
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($Total, 'D', Str::substr($request->Conta, 0, 1), 'Despesa', $Empresa, $request->Descricao);
+
+        return
+            "<script>
+            alert('Débito lançado com sucesso!');
+            location = '/Despesas/Novo';
+         </script>";
     }
 
     public function show($id)
@@ -167,12 +185,14 @@ class DespesasController extends Controller
         $Despesas = Despesas::findOrFail($id);
         $Total = $Despesas->Total;
         $Descricao = $Despesas->Descricao;
+        /*
         //Depósito em Conta
         $Banco = new ContasBancariasController();
         if ($Banco->Deposito($Despesas->conta, $Despesas->total));
         //Inserir no Extrato
         $Extrato = new ExtratoController();
         $Extrato->InserirNoExtrato($Total, 'C', $Despesas->Conta, 'Despesa_Cancelada', $Despesas->CodEmpresa, $Descricao);
+        */
         $Despesas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Despesas/Todos';</script>";
@@ -206,13 +226,13 @@ class DespesasController extends Controller
     }
     public function FechamentoDespesaCat(Request $request)
     {
-        $Despesa = DB::table('despesas')->select('despesas.Descricao','despesas.Datarecebimento','despesas.Total','fornecedors.Nome')->join('fornecedors','fornecedors.id','=','despesas.CodFornecedor')->whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->where('CodGrupo', $request->CodGrupo)->get();
+        $Despesa = DB::table('despesas')->select('despesas.Descricao', 'despesas.Datarecebimento', 'despesas.Total', 'fornecedors.Nome')->join('fornecedors', 'fornecedors.id', '=', 'despesas.CodFornecedor')->whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->where('CodGrupo', $request->CodGrupo)->get();
         return response()->json($Despesa, 200);
     }
     public function ListarPorData(Request $request)
     {
-        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'), 'categorias.descricao','fornecedors.Nome')
+        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'), 'categorias.descricao', 'fornecedors.Nome')
             ->join('categorias', 'categorias.id', '=', 'despesas.CodGrupo')->where('despesas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->whereBetween('DataRecebimento', [$request->DataIni, $request->DataFim])->groupBy('categorias.descricao')->get();
-            return response()->json($Despesas);
+        return response()->json($Despesas);
     }
 }

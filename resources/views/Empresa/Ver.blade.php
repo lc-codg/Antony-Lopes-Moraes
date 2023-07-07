@@ -36,22 +36,22 @@
 
                     <div class="form-group col-md-4 ">
                         <label for="">Razão</label>
-                        <input type="text" value="{{$Empresas->Razao}}"class="form-control" name="razao" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="text" value="{{$Empresas->Razao}}"class="form-control" name="razao" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Fantasia</label>
-                        <input type="text" value="{{$Empresas->Fantasia}}"class="form-control" name="fantasia" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="text" value="{{$Empresas->Fantasia}}"class="form-control" name="fantasia" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">CNPJ</label>
-                        <input type="number" value="{{$Empresas->Cnpj}}"class="form-control" name="cnpj" id="" aria-describedby="helpId" placeholder="">
+                        <input required type="number" value="{{$Empresas->Cnpj}}"class="form-control" name="cnpj" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Inscrição Estadual</label>
-                        <input type="number" value="{{$Empresas->Ie}}"class="form-control" name="ie" id="" aria-describedby="helpId" placeholder="">
+                        <input required  type="number" value="{{$Empresas->Ie}}"class="form-control" name="ie" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
 

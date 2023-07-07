@@ -8,9 +8,33 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Str;
 use App\Classes\ObterDados;
+use App\Http\Controllers\ExtratoController;
 
 class ContasBancariasController extends Controller
 {
+    public function Transferencia(Request $request)
+    {
+        $this->Saque(Str::substr($request->Contao, 0, 1), $request->Valor);
+        $this->Deposito(Str::substr($request->Contad, 0, 1), $request->Valor);
+
+        //Inserir no Extrato
+        $Extrato = new ExtratoController();
+        $Extrato->InserirNoExtrato($request->Valor, 'C', Str::substr($request->Contad, 0, 1), 'Transferência de Saldo', Str::substr($request->CodEmpresa, 0, 1), $request->Descricao);
+        $Extrato->InserirNoExtrato($request->Valor, 'D', Str::substr($request->Contao, 0, 1), 'Transferência de Saldo', Str::substr($request->CodEmpresa, 0, 1), $request->Descricao);
+        return
+            "<script>
+             alert('Transferência Realizada com sucesso.!');
+             location = '/ContasBancarias/TrasferirSaldo';
+            </script>";
+    }
+    public function Transferir()
+    {
+        $ObterDados = new ObterDados();
+        return view('ContasBancarias.TransferirSaldo', [
+            'Contas' => $ObterDados->ListarContasBancarias(),
+            'Empresas' => $ObterDados->ListaDeEmpresas()
+        ]);
+    }
     public function Listar()
     {
         $Contas = DB::table('contas_bancarias')->get();
@@ -143,7 +167,7 @@ class ContasBancariasController extends Controller
             return
                 "<script>
              alert('Salvo com sucesso!');
-             location = '/ContasBancarias/Novo'; 
+             location = '/ContasBancarias/Novo';
 
           </script>";
         }
