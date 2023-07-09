@@ -168,6 +168,25 @@ class ArrecadacaoController extends Controller
 
         return response()->json($Arrecada);
     }
+    public function FechamentoTodos(Request $request)
+    {
+
+        $Arrecada = DB::table('arrecadacaos')->join(
+            'empresas',
+            'arrecadacaos.Codempresa',
+            '=',
+            'empresas.id'
+        )->select(
+            'arrecadacaos.*',
+            'empresas.Razao as Razaoe'
+
+        )->wherebetween(
+            'DataRecebimento',
+            [$request->DataIni,  $request->DataFim]
+        )->get();
+
+        return response()->json($Arrecada);
+    }
     public function ListarPorData(Request $request)
     {
         $Arreacadacao = DB::table('arrecadacaos')->select(DB::raw('SUM(arrecadacaos.Valor) AS Total'), 'Descricao')

@@ -152,6 +152,7 @@ Route::get('/Despesas/PorCategoria',[DespesasController::class,'PorCategoria']);
 Route::get('/Despesas/DespesaPorCategoria',[DespesasController::class,'DespesaPorCategoria']);
 Route::get('/Despesas/FechamentoCat',[DespesasController::class,'FechamentoDespesaCat']);
 Route::get('/ListarDespesas',[DespesasController::class,'ListarPorData']);
+Route::get('/Despesas/FechamentoTodos',[DespesasController::class,'FechamentoDespesaTodos']);
 
 Route::get('/Compras/Ver/{Id}', [ComprasController::class, 'ListarPorId']);
 Route::get('/Compras/Todos', [ComprasController::class, 'ListarTodos']);
@@ -161,6 +162,8 @@ Route::get('/Compras/LimparCarrinho', [ComprasController::class, 'LimparCarrinho
 Route::get('/Compras/Salvar', [ComprasController::class, 'create']);
 Route::get('/Compras/ImprimirA4/{id}/{tipo}', [ComprasController::class, 'Imprimir']);
 Route::get('ListarCompras', [ComprasController::class, 'ListarPorData']);
+Route::get('/Compras/Fechamento', [ComprasController::class, 'Fechamento']);
+Route::get('/Compras/FechamentoTodos', [ComprasController::class, 'FechamentoTodos']);
 
 Route::get('/Receitas/Novo', [ReceitasController::class, 'index']);
 Route::get('/Receitas/Todos', [ReceitasController::class, 'ListarTodos']);
@@ -182,6 +185,7 @@ Route::get('/Arrecadacao/Editar/{id}', [ArrecadacaoController::class, 'Editar'])
 Route::post('/Arrecadacao/Atualizar', [ArrecadacaoController::class, 'Atualizar']);
 Route::get('/Arrecadacao/Fechamento', [ArrecadacaoController::class, 'Fechamento']);
 Route::get('/ListarArrecadacoes', [ArrecadacaoController::class, 'ListarPorData']);
+Route::get('/Arrecadacao/FechamentoTodos', [ArrecadacaoController::class, 'FechamentoTodos']);
 
 Route::get('/Extrato/Todos/{id}', [ExtratoController::class, 'ShowExtrato']);
 Route::get('/Extrato/View', [ExtratoController::class, 'ExtratoGeral']);

@@ -70,14 +70,14 @@
             <div class='form-row'>
 
 
-            
+
 
                 <div class="form-group md col-2">
                     <label for="">Data</label>
                     <input type="date" class="form-control" value="{{ date('Y-m-d') }}" name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
 
-          
+
                 @if ($Tipo === "conta")
                 <div class="form-group md col-3">
                     <label for="">Grupo</label>
@@ -104,7 +104,7 @@
 
             <div class='form-row'>
                 <label @if($Tipo<>'conta')  hidden @endif style='margin-left:2%' class="form-check-label">
-               
+
                     <input @if($Tipo=='prazo' ) checked hidden  @elseif ($Tipo=='vista' ) readonly unchecked hidden @endif onclick='Prazo();' type="checkbox" class="form-check-input" name="Tipo" id="Tipo" value="V" unchecked>
                     A Prazo
                 </label>

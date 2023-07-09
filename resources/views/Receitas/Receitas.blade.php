@@ -42,7 +42,7 @@
 
                 <div class="form-group md col-12">
                     <label for="">Descrição</label>
-                    <input autocomplete="off" type="text" class="form-control" name="Descricao" id="Descricao" aria-describedby="helpId" placeholder="">
+                    <input required autocomplete="off" type="text" class="form-control" name="Descricao" id="Descricao" aria-describedby="helpId" placeholder="">
                 </div>
 
 

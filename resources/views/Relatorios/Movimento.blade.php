@@ -26,6 +26,7 @@
     <label for="">Empresa</label>
     <select class="form-control" name="Empresa" id="Empresa">
       <option selected>Selecione...</option>
+      <option >0-TODOS</option>
       @foreach ($Empresas as $item)
       <option>{{$item->id .'-' .$item->Razao}}</option>
       @endforeach
@@ -50,7 +51,7 @@
       </div>
 
     <table id="tabelaPedidos" class="table table-bordered table-condensed "
-    style="font-size: 12px; width:100%;">
+    style="font-size: 18px; width:100%;">
 
     <thead class="thead-dark">
 
@@ -60,8 +61,6 @@
             <th>Data</th>
             <th>Empresa</th>
             <th>Valor</th>
-            <th>Documento</th>
-            <th>Conta</th>
 
 
         </tr>
@@ -72,17 +71,18 @@
  </table>
 
 <table id="tabelaPedidos" class="table table-bordered table-condensed "
-    style="font-size: 12px; width:100%;">
+    style="font-size: 18px; width:100%;">
 
     <thead class="thead-dark">
         <tr>
-            <th>Código Contas Pagas</th>
+            <th>Código Compras a Vista</th>
+            <th>Fornecedor</th>
             <th>Descrição</th>
             <th>Data</th>
-            <th>Total</th>
-            <th>Conta</th>
             <th>Empresa</th>
-            <th>Obs</th>
+            <th>Total</th>
+
+
 
         </tr>
     </thead>
@@ -92,14 +92,17 @@
  </table>
 
 
-    <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 12px; width:100%;">
+    <table id="tabelaPedidos" class="table table-bordered table-condensed " style="font-size: 18px; width:100%;">
 
       <thead class="thead-dark">
         <tr>
           <th>Código Despesas</th>
+          <th>Fornecedor</th>
           <th>Descrição</th>
-          <th>Total</th>
           <th>Data</th>
+          <th>Empresa</th>
+          <th>Total</th>
+
 
         </tr>
       </thead>
@@ -115,7 +118,7 @@
   </div>
   <div id='Saldo'>
   </div>
-  
+
   </div>
 
    </div>

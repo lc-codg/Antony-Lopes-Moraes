@@ -56,8 +56,8 @@
 
     </form>
     <div class="btn-group">
-        <button type="button" id="prazo" class="btn btn-success btn-xs">A Vista</button>
-        <button type="button" id="vista" class="btn btn-warning btn-xs">A Prazo</button>
+        <button type="button" id="vista" class="btn btn-success btn-xs">A Vista</button>
+        <button type="button" id="prazo" class="btn btn-warning btn-xs">A Prazo</button>
         <button type="button" id="transferencia" class="btn btn-danger btn-xs">Transfrências</button>
         <button type="button" class="btn btn-dark btn-xs">Todos</button>
         <button id='h5' type="button" class="btn btn-success btn-xs"></button>
@@ -102,7 +102,7 @@
                 <td>R$ <span class="price3">{{ number_format($row->Total, 2, '.', '') }}</span></td>
                 <td data-estado="transferencia">{{ $row->Tipo}}</td>
                 @endif
-               
+
                 <td>{{ $row->DtPedido }}</td>
 
 

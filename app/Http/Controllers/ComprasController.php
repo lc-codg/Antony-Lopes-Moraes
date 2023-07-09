@@ -180,15 +180,44 @@ public function ListarComrpasAVista(){
             'Dataemissao' => $Dados->Datarecebimento,
             'DataSaida' => $Dados->Datarecebimento,
             'Finalidade' => 'Venda',
+            'Natureza'=> $Dados->Descricao,
             'CodEmpresa' => Str::substr($Dados->CodEmpresa, 0, 1),
             'Tipo' => $Dados->TipoDeCompra,
             'TotalDesconto' => isset($Dados->TotalDesconto) ? Str_replace(",", ".", $Dados->TotalDesconto) : 10,
             'TotalAcréscimo' => isset($Dados->TotalAcrescimo) ? Str_replace(",", ".", $Dados->TotalAcrescimo) : 0,
+
         ]);
         if ($Dados->TipoDeCompra =='vista') {
             $Arrecadacao = new ArrecadacaoController();
             $Arrecadacao->CompraAVista($Dados->CodEmpresa,$Dados->Total,1,$Dados->Datarecebimento);
 
         }
+    }
+
+    public function Fechamento(Request $request)
+    {
+        $ContasaPagar = DB::table('compras')->join(
+            'empresas',
+            'compras.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join('fornecedors', 'compras.CodigoDoCliente', '=', 'fornecedors.id')->select('compras.*', 'empresas.Razao as Razaoe', 'fornecedors.Razao as Razaof')
+            ->where('compras.CodEmpresa', '=', $request->Empresa)->Where('compras.tipo', '=', 'vista')
+            ->whereBetween('compras.DtPedido', [$request->DataIni, $request->DataFim])->get();
+
+        return response()->json($ContasaPagar);
+    }
+    public function FechamentoTodos(Request $request)
+    {
+        $ContasaPagar = DB::table('compras')->join(
+            'empresas',
+            'compras.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join('clientes', 'compras.CodigoDoCliente', '=', 'clientes.id')->select('compras.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')
+           ->Where('compras.tipo', '=', 'vista')
+            ->whereBetween('compras.DtPedido', [$request->DataIni, $request->DataFim])->get();
+
+        return response()->json($ContasaPagar);
     }
 }

@@ -179,11 +179,14 @@ function Fechamento() {
     let ValorPAgo = 0;
     let Soma = 0;
     let Saldo = 0;
+    let Rota = '';
+
+    Rota = (Empresa == '0-TODOS') ? '/Arrecadacao/FechamentoTodos' : '/Arrecadacao/Fechamento';
 
     $.ajax({
         method: 'get',
 
-        url: '/Arrecadacao/Fechamento',
+        url: Rota,
         data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa },
 
         success: function(Contas) {
@@ -197,7 +200,7 @@ function Fechamento() {
                     ' </td> <td>' + Contas[i].Razaoe + ' </td> <td>' + parseFloat(Contas[i].Valor).toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }) + ' </td> <td>' + Contas[i].Numero + ' </td> <td>' + Contas[i].conta + '</td>');
+                    }) + ' </td>');
 
             }
 
@@ -205,10 +208,10 @@ function Fechamento() {
 
         }
     });
-
+    Rota = (Empresa == '0-TODOS') ? '/Compras/FechamentoTodos' : '/Compras/Fechamento';
     $.ajax({
         method: 'get',
-        url: '/ContasaPagar/Fechamento',
+        url: Rota,
         data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa },
 
         success: function(Arrecadacao) {
@@ -220,21 +223,21 @@ function Fechamento() {
             for (let i = 0; Arrecadacao.length > i; i++) {
 
                 ValorArrecadado += parseFloat(Arrecadacao[i].Total);
-                $('#Arrecadacao').append('<tr> <td>' + Arrecadacao[i].id + ' </td> <td>' + Arrecadacao[i].Razaof + '</td> <td>' + Arrecadacao[i].Vencimento +
-                    ' </td> <td>' + parseFloat(Arrecadacao[i].Total).toLocaleString('pt-BR', {
+                $('#Arrecadacao').append('<tr> <td>' + Arrecadacao[i].id + ' </td> <td>' + Arrecadacao[i].Razaof + '</td><td>' + Arrecadacao[i].Natureza + '</td> <td>' + Arrecadacao[i].DtPedido +
+                    ' </td> <td>' + Arrecadacao[i].Razaoe + ' </td> <td>' + parseFloat(Arrecadacao[i].Total).toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL'
-                    }) + ' </td> <td>' + Arrecadacao[i].Conta +
-                    ' </td> <td>' + Arrecadacao[i].Razaoe + ' </td> <td>' + Arrecadacao[i].Descricao + '</td>');
+                    }) + ' </td>  ');
             }
 
 
         }
 
     });
+    Rota = (Empresa == '0-TODOS') ? '/Despesas/FechamentoTodos' : '/Despesas/Fechamento';
     $.ajax({
         method: 'get',
-        url: '/Despesas/Fechamento',
+        url: Rota,
         data: { 'DataIni': DataIni, 'DataFim': DataFim, 'Empresa': Empresa },
         success: function(retorno) {
             $('#Despesas').html('');
@@ -250,24 +253,25 @@ function Fechamento() {
                     currency: 'BRL'
                 });
                 Soma += parseFloat(retorno[i].Total);
-                $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>' +
-                    '</td> <td>' + retorno[i].Datarecebimento + '</td>');
+                $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Razaof + '</td> ' +
+                    '<td>' + retorno[i].Descricao + '</td> <td>' + retorno[i].Datarecebimento + '</td>' + '<td>' + retorno[i].Razaoe + '</td>' +
+                    '</td> <td>' + Valor + '</td>');
             }
             const Total = parseFloat(Soma).toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
             });
-            $('#Soma').append('<div class="form-group"> <label for="">Total Despesa</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
-            $('#Somac').append('<div class="form-group"> <label for="">Total De Contas Pagas</label><input Style="font-size:20px;" type="text"class="form-control" value="' + ValorArrecadado.toLocaleString('pt-BR', {
+            $('#Soma').append('<div class="form-group"> <label for="">Total Despesa</label><input Style="font-weight: bold;font-size:25px;" type="text"class="form-control" value="' + Total + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
+            $('#Somac').append('<div class="form-group"> <label for="">Total De Compras a Vista</label><input Style="font-weight: bold;font-size:25px;" type="text"class="form-control" value="' + ValorArrecadado.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
             }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
-            $('#Somaa').append('<div class="form-group"> <label for="">Total Arrecadado</label><input Style="font-size:20px;" type="text"class="form-control" value="' + ValorPAgo.toLocaleString('pt-BR', {
+            $('#Somaa').append('<div class="form-group"> <label for="">Total Arrecadado</label><input Style="font-weight: bold;font-size:25px;" type="text"class="form-control" value="' + ValorPAgo.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
             }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');
             Saldo = ValorPAgo - (ValorArrecadado + Soma);
-            $('#Saldo').append('<div class="form-group"> <label for="">Saldo</label><input Style="font-size:20px;" type="text"class="form-control" value="' + Saldo.toLocaleString('pt-BR', {
+            $('#Saldo').append('<div class="form-group"> <label Style="font-weight: bold;font-size:28px;"for="">Saldo</label><input Style="font-weight: bold;font-size:28px;" type="text"class="form-control" value="' + Saldo.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
             }) + '" name="" id="" aria-describedby="helpId" placeholder=""></div>');

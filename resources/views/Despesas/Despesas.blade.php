@@ -41,7 +41,7 @@
 
                 <div class="form-group md col-12">
                     <label for="">Descrição</label>
-                    <input type="text" class="form-control" name="Descricao" id="Descricao" aria-describedby="helpId" placeholder="">
+                    <input required type="text" class="form-control" name="Descricao" id="Descricao" aria-describedby="helpId" placeholder="">
                 </div>
 
             </div>

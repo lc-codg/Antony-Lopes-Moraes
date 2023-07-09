@@ -200,7 +200,76 @@ class DespesasController extends Controller
 
     public function FechamentoDespesa(Request $request)
     {
-        $Despesa = Despesas::whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->get();
+        $Despesa = Despesas::select(
+            'despesas.id',
+            'Barras',
+            'Descricao',
+            'CodFornecedor',
+            'Total',
+            'TotalDesconto',
+            'TotalAcréscimo',
+            'TotaldosProdutos',
+            'Vencimento',
+            'CodGrupo',
+            'CodSubGrupo',
+            'Parcelas',
+            'Dataemissao',
+            'Datarecebimento',
+            'Boleta',
+            'NotaFiscal',
+            'Serie',
+            'CodEmpresa',
+            'empresas.Razao as Razaoe',
+            'fornecedors.Razao as Razaof'
+        )->join(
+            'empresas',
+            'despesas.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join(
+            'fornecedors',
+            'despesas.CodFornecedor',
+            '=',
+            'fornecedors.id'
+
+        )->whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->where('CodEmpresa', $request->Empresa)->get();
+        return response()->json($Despesa, 200);
+    }
+    public function FechamentoDespesaTodos(Request $request)
+    {
+        $Despesa = Despesas::select(
+            'despesas.id',
+            'Barras',
+            'Descricao',
+            'CodFornecedor',
+            'Total',
+            'TotalDesconto',
+            'TotalAcréscimo',
+            'TotaldosProdutos',
+            'Vencimento',
+            'CodGrupo',
+            'CodSubGrupo',
+            'Parcelas',
+            'Dataemissao',
+            'Datarecebimento',
+            'Boleta',
+            'NotaFiscal',
+            'Serie',
+            'CodEmpresa',
+            'empresas.Razao as Razaoe',
+            'fornecedors.Razao as Razaof'
+        )->join(
+            'empresas',
+            'despesas.CodEmpresa',
+            '=',
+            'empresas.id'
+        )->join(
+            'fornecedors',
+            'despesas.CodFornecedor',
+            '=',
+            'fornecedors.id'
+
+        )->whereBetween('datarecebimento', [$request->DataIni, $request->DataFim])->get();
         return response()->json($Despesa, 200);
     }
     public function Detalhado(Request $request)
