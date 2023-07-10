@@ -54,12 +54,12 @@ class ReceitasController extends Controller
     public function create(Request $request)
     {
         $Contas = new ContasBancariasController();
-
+        $Cliente =  explode("-",$request->CodCliente);
         if ($this->Verificar($request)) {
 
             Receitas::create([
                 'Descricao' => $request->Descricao,
-                'CodCliente' => isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) : 0,
+                'CodCliente' => isset($request->CodCliente) ? $Cliente[0] : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
@@ -140,11 +140,11 @@ class ReceitasController extends Controller
     public function update(Request $request, $id)
     {
         $Receitas = Receitas::findOrFail($id);
-
+        $Cliente =  explode("-",$request->CodCliente);
         if ($this->Verificar($request)) {
             $Receitas->Update([
                 'Descricao' => $request->Descricao,
-                'CodCliente' => isset($request->CodCliente) ? Str::substr($request->CodCliente, 0, 1) : 0,
+                'CodCliente' => isset($request->CodCliente) ? $Cliente[0] : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,

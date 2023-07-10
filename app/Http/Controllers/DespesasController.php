@@ -10,6 +10,7 @@ use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
 use App\Http\Controllers\ExtratoController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\ArrecadacaoController;
 
 class DespesasController extends Controller
 {
@@ -62,11 +63,11 @@ class DespesasController extends Controller
         $Contas = new ContasBancariasController();
 
         if ($this->Verificar($request)) {
-
+$Forn =  explode("-",$request->CodFornecedor);
             Despesas::create([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodFornecedor' => isset($request->CodFornecedor) ? Str::substr($request->CodFornecedor, 0, 1) : 0,
+                'CodFornecedor' => isset($request->CodFornecedor) ? $Forn[0] : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
@@ -82,6 +83,11 @@ class DespesasController extends Controller
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
                 //'Conta' => Str::substr($request->Conta, 0, 1),
             ]);
+
+                $Arrecadacao = new ArrecadacaoController();
+                $Arrecadacao->CompraAVista(Str::substr($request->CodEmpresa, 0, 1),Str_replace(",", ".", $request->Total),1,$request->Datarecebimento);
+
+
 
             /* $Contas->Saque(Str::substr($request->Conta, 0, 1), $request->Total);
             $Empresa = Str::substr($request->CodEmpresa, 0, 1);
@@ -151,12 +157,12 @@ class DespesasController extends Controller
     public function update(Request $request, $id)
     {
         $Despesas = Despesas::findOrFail($id);
-
+        $Forn =  explode("-",$request->CodFornecedor);
         if ($this->Verificar($request)) {
             $Despesas->Update([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodFornecedor' => isset($request->CodFornecedor) ? Str::substr($request->CodFornecedor, 0, 1) : 0,
+                'CodFornecedor' => isset($request->CodFornecedor) ? $Forn[0] : 0,
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 0,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,

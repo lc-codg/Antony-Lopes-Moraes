@@ -90,8 +90,8 @@ class ContasaPagarController extends Controller
             </script>";
             exit;
         }
-        
-      
+
+
         if (empty($request->Total)) {
             echo "<script>
               alert('Preencha a Total');
@@ -114,10 +114,11 @@ class ContasaPagarController extends Controller
             exit;
         } else {
             if ($request->TipoDeCompra == 'prazo') {
+                $Forn =  explode("-",$request->CodFornecedor);
                 ContasaPagar::create([
                     'Barras' => $request->Barras,
                     'Descricao' => $request->Descricao,
-                    'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
+                    'CodFornecedor' => $Forn[0],
                     'Total' => Str_replace(",", ".", $request->Total),
                     'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
                     'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,
@@ -233,10 +234,11 @@ class ContasaPagarController extends Controller
             </script>";
             exit;
         } else {
+            $Forn =  explode("-",$request->CodFornecedor);
             $ContasaPagar->Update([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodFornecedor' => Str::substr($request->CodFornecedor, 0, 1),
+                'CodFornecedor' => $Forn[0],
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => isset($request->TotalDesconto) ? Str_replace(",", ".", $request->TotalDesconto) : 10,
                 'TotalAcréscimo' => isset($request->TotalAcrescimo) ? Str_replace(",", ".", $request->TotalAcrescimo) : 0,

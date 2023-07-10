@@ -38,7 +38,7 @@
 
                     <div class="form-group col-md-4 ">
                         <label for="">Nome</label>
-                        <input required type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
+                        <input  required type="text" class="form-control" name="Nome" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
@@ -53,32 +53,32 @@
 
                     <div class="form-group col-md-4">
                         <label for="">Logadouro</label>
-                        <input required type="text" class="form-control" name="Endereco" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="text" class="form-control" name="Endereco" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">Número</label>
-                        <input required type="number" class="form-control" name="Numero" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="number" class="form-control" name="Numero" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Bairro</label>
-                        <input required type="text" class="form-control" name="Bairro" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="text" class="form-control" name="Bairro" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Cidade</label>
-                        <input required type="text" class="form-control" name="Cidade" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="text" class="form-control" name="Cidade" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">UF</label>
-                        <input required type="text" class="form-control" name="UF" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="text" class="form-control" name="UF" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">Cep</label>
-                        <input required type="number" class="form-control" name="cep" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="number" class="form-control" name="cep" id="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Email</label>
@@ -110,17 +110,17 @@
 
                     <div class="form-group col-md-4 ">
                         <label for="">Razão</label>
-                        <input required type="text" class="form-control" name="razao" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="text" class="form-control" name="razao" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">Fantasia</label>
-                        <input type="text" required class="form-control" name="fantasia" id="" aria-describedby="helpId" placeholder="">
+                        <input type="text"  class="form-control" name="fantasia" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">
                         <label for="">CNPJ</label>
-                        <input required type="number" class="form-control" name="cnpj" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="number" class="form-control" name="cnpj" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-2">

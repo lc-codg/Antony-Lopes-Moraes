@@ -35,7 +35,7 @@
         <div class="tab-content">
 
             <div id="Dados Pessoais" class="tab-pane active .container-fluid">
-
+ired
                 <div Style='margin-left:1%;margin-right:1%;'class='form-row'>
 
                     <div  class="form-group col-md-4 ">
@@ -55,32 +55,32 @@
 
                     <div  class="form-group col-md-4">
                         <label for="">Logadouro</label>
-                        <input required type="text" class="form-control" name="Endereco" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="text" class="form-control" name="Endereco" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div  class="form-group col-md-1">
                         <label for="">Número</label>
-                        <input  required type="number" class="form-control" name="Numero" id="" aria-describedby="helpId" placeholder="">
+                        <input   type="number" class="form-control" name="Numero" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div  class="form-group col-md-4">
                         <label for="">Bairro</label>
-                        <input  required type="text" class="form-control" name="Bairro" id="" aria-describedby="helpId" placeholder="">
+                        <input   type="text" class="form-control" name="Bairro" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div  class="form-group col-md-4">
                         <label for="">Cidade</label>
-                        <input required type="text" class="form-control" name="Cidade" id="" aria-describedby="helpId" placeholder="">
+                        <input  type="text" class="form-control" name="Cidade" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div  class="form-group col-md-1">
                         <label for="">UF</label>
-                        <input  required type="text" class="form-control" name="UF" id="" aria-describedby="helpId" placeholder="">
+                        <input   type="text" class="form-control" name="UF" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">Cep</label>
-                        <input  required  type="number" class="form-control" name="cep" id="" aria-describedby="helpId" placeholder="">
+                        <input    type="number" class="form-control" name="cep" id="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div  class="form-group col-md-4">
                         <label for="">Email</label>

@@ -172,8 +172,9 @@ public function ListarComrpasAVista(){
     }
     public function SalvarComprasSimples($Dados)
     {
+        $Forn =  explode("-",$Dados->CodFornecedor);
         Compras::create([
-            'CodigoDoCliente' => Str::substr($Dados->CodFornecedor, 0, 1),
+            'CodigoDoCliente' => $Forn[0],
             'Total' => $Dados->Total,
             'TotaldosProdutos' => $Dados->Total,
             'DtPedido' => $Dados->Datarecebimento,

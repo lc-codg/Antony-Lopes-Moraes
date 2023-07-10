@@ -45,7 +45,7 @@ class ContasaReceberController extends Controller
               </script>";
             exit;
         }
-       
+
         if (empty($Total)) {
             echo "<script>
                 alert('Preencha o Total');
@@ -115,13 +115,13 @@ class ContasaReceberController extends Controller
     }
     public function create(Request $request)
     {
-
+        $Cliente =  explode("-",$request->CodCliente);
         if ($this->Verificar($request->Descricao, $request->Vencimento, $request->Dataemissao, $request->Total, $request->Datarecebimento, $request->CodEmpresa))
 
             $this->Salvar(
                 $request->Barras,
                 $request->Descricao,
-                Str::substr($request->CodCliente, 0, 1),
+                $Cliente[0],
                 Str_replace(",", ".", $request->Total),
                 Str_replace(",", ".", $request->TotalDesconto),
                 Str_replace(",", ".", $request->TotalAcrescimo),
@@ -239,11 +239,11 @@ class ContasaReceberController extends Controller
         $ContasaReceber = ContasaReceber::findOrFail($id);
 
         if ($this->Verificar($request->Descricao, $request->Vencimento, $request->Dataemissao, $request->Total, $request->Datarecebimento, $request->CodEmpresa))
-
+        $Cliente =  explode("-",$request->CodCliente);
             $ContasaReceber->Update([
                 'Barras' => $request->Barras,
                 'Descricao' => $request->Descricao,
-                'CodCliente' => Str::substr($request->CodCliente, 0, 1),
+                'CodCliente' => $Cliente[0],
                 'Total' => Str_replace(",", ".", $request->Total),
                 'TotalDesconto' => Str_replace(",", ".", $request->TotalDesconto),
                 'TotalAcréscimo' => Str_replace(",", ".", $request->TotalAcrescimo),

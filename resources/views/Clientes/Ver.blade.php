@@ -38,7 +38,7 @@
 
                     <div class="form-group col-md-4 ">
                         <label for="">Nome</label>
-                        <input required type="text" Value="{{ $cliente->Nome }}" class="form-control" name="Nome"
+                        <input  required type="text" Value="{{ $cliente->Nome }}" class="form-control" name="Nome"
                             id="" aria-describedby="helpId" placeholder="">
                     </div>
 
@@ -56,37 +56,37 @@
 
                     <div class="form-group col-md-4">
                         <label for="">Logadouro</label>
-                        <input required Value="{{ $cliente->Endereco }}" type="text" class="form-control"
+                        <input  Value="{{ $cliente->Endereco }}" type="text" class="form-control"
                             name="Endereco" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">Número</label>
-                        <input required Value="{{ $cliente->Numero }}" type="number" class="form-control"
+                        <input  Value="{{ $cliente->Numero }}" type="number" class="form-control"
                             name="Numero" id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Bairro</label>
-                        <input required Value="{{ $cliente->Bairro }}" type="text" class="form-control" name="Bairro"
+                        <input  Value="{{ $cliente->Bairro }}" type="text" class="form-control" name="Bairro"
                             id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="">Cidade</label>
-                        <input required Value="{{ $cliente->Cidade }}" type="text" class="form-control" name="Cidade"
+                        <input  Value="{{ $cliente->Cidade }}" type="text" class="form-control" name="Cidade"
                             id="" aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">UF</label>
-                        <input Value="{{ $cliente->UF }}" required type="text" class="form-control" name="UF" id=""
+                        <input Value="{{ $cliente->UF }}"  type="text" class="form-control" name="UF" id=""
                             aria-describedby="helpId" placeholder="">
                     </div>
 
                     <div class="form-group col-md-1">
                         <label for="">Cep</label>
-                        <input Value="{{ $cliente->Cep }}" 1required type="number" class="form-control" name="cep"
+                        <input Value="{{ $cliente->Cep }}" 1 type="number" class="form-control" name="cep"
                             id="" aria-describedby="helpId" placeholder="">
                     </div>
                     <div class="form-group col-md-4">

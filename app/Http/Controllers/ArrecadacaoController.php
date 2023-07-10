@@ -106,7 +106,7 @@ class ArrecadacaoController extends Controller
             'Valor' => $Valor,
             'Numero' => $Numero,
             'DataRecebimento' => $Data,
-            'Descricao' => 'Compra a Vista',
+            'Descricao' => 'DINHEIRO',
         ]);
     }
     public function Excluir($id)

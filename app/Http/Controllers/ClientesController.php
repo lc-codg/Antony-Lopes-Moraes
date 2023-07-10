@@ -66,44 +66,10 @@ class ClientesController extends Controller
           javascript:history.back();
           </script>";
             exit;
-        }
 
 
-        if (empty($request->Endereco)) {
-            echo "<script>
-            alert('Digite o Endereço.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Bairro)) {
-            echo "<script>
-            alert('Digite ao Bairro.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->cep)) {
-            echo "<script>
-            alert('Digite ao Bairro.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->UF)) {
-            echo "<script>
-            alert('Digite a UF.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
 
-        if (empty($request->Numero)) {
-            echo "<script>
-            alert('Digite o Número.');
-            javascript:history.back();
-            </script>";
-            exit;
+
         } else {
 
 
@@ -150,29 +116,10 @@ class ClientesController extends Controller
           javascript:history.back();
           </script>";
             exit;
-        }
 
 
-        if (empty($request->Endereco)) {
-            echo "<script>
-            alert('Digite o Endereço.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Bairro)) {
-            echo "<script>
-            alert('Digite ao Bairro.');
-            javascript:history.back();
-            </script>";
-            exit;
-        }
-        if (empty($request->Numero)) {
-            echo "<script>
-            alert('Digite o Número.');
-            javascript:history.back();
-            </script>";
-            exit;
+
+
         } else {
 
 
@@ -182,8 +129,8 @@ class ClientesController extends Controller
                 'Cnpj' => $request->cnpj,
                 'Ie' => $request->ie,
                 'Rg' => $request->RG,
-                'Razao' => $request->razao,
-                'Fantasia' => $request->fantasia,
+                'Razao' => $request->Nome,
+                'Fantasia' => $request->Nome,
                 'Email' => $request->Email,
                 'Endereco' => $request->Endereco,
                 'Bairro' => $request->Bairro,
