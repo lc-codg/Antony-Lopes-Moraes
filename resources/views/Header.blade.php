@@ -24,7 +24,7 @@ date_default_timezone_set('America/Sao_Paulo');
         <?php
         $Usuarios = Session()->get('DadosUsuarios');
 
-        if ($Usuarios->Cadastro <> Null) { ?>
+        if ($Usuarios->Cadastro == 1) { ?>
 
           <li class="nav-item dropdown">
             <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cadastro</a>
@@ -82,7 +82,7 @@ date_default_timezone_set('America/Sao_Paulo');
           </li>
           <?php
 
-          if ($Usuarios->Financeiro <> Null) { ?>
+          if ($Usuarios->Financeiro == 1) { ?>
             <li class="nav-item dropdown">
               <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Financeiro</a>
               <div class="dropdown-menu">
@@ -139,27 +139,29 @@ date_default_timezone_set('America/Sao_Paulo');
             <?php } ?>
             </li>
             <?php
-            if ($Usuarios->Notas <> Null) { ?>
+            if ($Usuarios->Notas == 1) { ?>
               <li class="nav-item dropdown">
                 <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Notas</a>
                 <div class="dropdown-menu">
                   <?php
 
-                  if ($Usuarios->Compras = '1') { ?>
+                  if ($Usuarios->Compras ==1) { ?>
                     <div class="list-group">
                       <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                         Notas de Compra
                       </a>
                       <a class="dropdown-item" href="/Compras/Carrinho">Lançar Notas de Compra </a>
-                      <a class="dropdown-item" href="/ContasaPagar/Novo/vista">Lançar Compra a Vista </a>
-                      <a class="dropdown-item" href="/ContasaPagar/Novo/prazo">Lançar Compra a Prazo </a>
                       <a class="dropdown-item" href="/ContasaPagar/Novo/transferencia">Lançar Compra Transferência </a>
+                      <a class="dropdown-item" href="/ContasaPagar/Novo/vista">Lançar Compra a Vista </a>
+                      <?php } ?>
+                      <a class="dropdown-item" href="/ContasaPagar/Novo/prazo">Lançar Compra a Prazo </a>
+
                       <a class="dropdown-item" href="/Compras/Todos">Listar lançamentos de Compra </a>
                     </div>
-                  <?php } ?>
+
                   <?php
 
-                  if ($Usuarios->Vendas <> Null) { ?>
+                  if ($Usuarios->Vendas == 1) { ?>
                     <div class="list-group">
                       <a href="" class="list-group-item-dark  list-group-item-action active" aria-current="False">
                         Notas de Venda
@@ -172,7 +174,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 </div>
               <?php }
 
-            if ($Usuarios->Fluxo <> Null) { ?>
+            if ($Usuarios->Fluxo == 1) { ?>
               <li class="nav-item dropdown">
                 <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Fluxo</a>
                 <div class="dropdown-menu">
@@ -211,7 +213,7 @@ date_default_timezone_set('America/Sao_Paulo');
               <?php } ?>
               </li>
 
-              <?php if ($Usuarios->Relatorio <> Null) { ?>
+              <?php if ($Usuarios->Relatorio == 1) { ?>
                 <li class="nav-item dropdown">
                   <a style='color:white;' class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatório</a>
                   <div class="dropdown-menu">

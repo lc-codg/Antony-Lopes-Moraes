@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\Pedidos;
+use App\Models\Pedidos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Classes\ObterDados;
@@ -25,10 +25,10 @@ class PedidoController extends Controller
       'clientes.endereco','clientes.bairro',
       'clientes.cnpj','clientes.cep','clientes.telefone',
       'clientes.ie','clientes.numero')->
-      join('clientes' ,'pedidos.CodigoDocliente', '=','clientes.id')-> 
+      join('clientes' ,'pedidos.CodigoDocliente', '=','clientes.id')->
       join('empresas', 'pedidos.CodEmpresa', '=', 'empresas.Id')->
       where('pedidos.id', '=', $id)->get();
-      
+
       $itens = new ItensController();
       $Produtos = $itens->LocalizaItens($id);
 
@@ -94,8 +94,8 @@ class PedidoController extends Controller
        // where('clientes.Razao','LIKE','%'.$request->Nome.'%')->
         where('pedidos.CodEmpresa','=',Str::Substr($request->Empresa,0,1))->
         where('empresas.Razao', 'LIKE', '%'.$request->Nome.'%')->
-       
-      
+
+
         whereBetween('DtPedido',array($request->Dataini,$request->Datafim))->
         paginate(20);
 
