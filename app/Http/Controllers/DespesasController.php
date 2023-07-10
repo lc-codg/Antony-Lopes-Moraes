@@ -300,8 +300,8 @@ class DespesasController extends Controller
     }
     public function ListarPorData(Request $request)
     {
-        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'), 'categorias.descricao', 'fornecedors.Nome')
-            ->join('categorias', 'categorias.id', '=', 'despesas.CodGrupo')->where('despesas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->whereBetween('DataRecebimento', [$request->DataIni, $request->DataFim])->groupBy('categorias.descricao')->get();
+        $Despesas = DB::table('despesas')->select(DB::raw('SUM(despesas.Total) AS Total'), 'categorias.descricao', 'fornecedors.nome')->join('fornecedors','fornecedors.id','=','despesas.CodFornecedor')
+            ->join('categorias', 'categorias.id', '=', 'despesas.CodGrupo')->where('despesas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->whereBetween('DataRecebimento', [$request->DataIni, $request->DataFim])->groupBy('categorias.descricao','fornecedors.nome')->get();
         return response()->json($Despesas);
     }
 }

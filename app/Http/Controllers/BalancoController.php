@@ -62,32 +62,15 @@ class BalancoController extends Controller
 
     public function ListarPorData(Request $request)
     {
-        $Mes =  date('m');
-        $Ano = date('Y');
-        if (($Mes) == 01) {
-            $Mes = 12;
-            $Ano = $Ano - 1;
-        } else {
-            $Mes = $Mes - 1;
-        }
-        $data_incio = mktime(0, 0, 0, date('m'), 1, date('Y'));
-        $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
-        $Diaa = date('Y-m-d', $data_incio);
-        $Dia2a =  date('Y-m-d', $data_fim);
 
-        $data_incioa = mktime(0, 0, 0, $Mes, 1, $Ano);
-        $data_fimm = mktime(23, 59, 59, $Mes, date("t"), $Ano);
-        $Diaan = date('Y-m-d', $data_incioa);
-        $Dia2an = date('Y-m-d', $data_fimm);
-
-        $Estoque[0] = DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAtual'))
-            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('Data', [$request->Dataini, $request->DataFim])->get();
+        $Estoque[0] = DB::table('balancos')->select(DB::raw('Valor AS EstoqueAtual'))
+            ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->whereBetween('Data', [$request->DataIni, $request->DataFim])->get();
 
         $UltimoId = DB::table('balancos')->select('select id')
             ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->max('id');
-        $UltimoId = $UltimoId -1;    
+        $UltimoId = $UltimoId -1;
 
-        $Estoque[1] = DB::table('balancos')->select(DB::raw('SUM(Valor) AS EstoqueAnterior'))
+        $Estoque[1] = DB::table('balancos')->select(DB::raw('Valor AS EstoqueAnterior'))
             ->where('CodEmpresa', '=', Str::Substr($request->Empresa, 0, 1))->where('id','=',$UltimoId)->get();
 
         return response()->json(($Estoque));
