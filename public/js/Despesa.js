@@ -25,8 +25,7 @@ function Pesquisa() {
                 });
                 Soma += parseFloat(retorno[i].Total);
 
-                $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>' +
-                    '</td> <td>' + retorno[i].Datarecebimento + '</td>' + '<td id="cat' + i + '"> </td>');
+                $('#Despesas').append('<tr> <td>' + retorno[i].id + ' </td> <td>' + retorno[i].Descricao + '</td> <td>' + Valor + '</td>' + '</td> <td>' + retorno[i].Datarecebimento + '</td>' + '<td id="cat' + i + '"> </td> <td> <form action="/Despesas/Delete/' + retorno[i].id + '" method="get"><input class="btn btn-danger" name="" type="submit" Value="Excluir"></td>');
 
                 SelecionaNomeCategoria(retorno[i].CodGrupo, i);
             }

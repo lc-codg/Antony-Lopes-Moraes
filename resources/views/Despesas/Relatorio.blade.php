@@ -47,6 +47,7 @@
           <th>Total</th>
           <th>Data</th>
           <th>Categoria</th>
+          <th></th>
 
         </tr>
       </thead>
