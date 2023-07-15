@@ -9,6 +9,7 @@ use App\Models\Receitas;
 use App\Classes\ObterDados;
 use App\Http\Controllers\ContasBancariasController;
 use App\Http\Controllers\ExtratoController;
+use App\Http\Controllers\ComprasController;
 
 class ReceitasController extends Controller
 {
@@ -18,7 +19,7 @@ class ReceitasController extends Controller
         return view('Receitas.Receitas', [
             'Empresas'
             =>  $ObterDados->ListaDeEmpresas(),
-            'Cliente' =>  $ObterDados->ListaDeClientes(),
+            'Cliente' =>  $ObterDados->ListaDeFornecedores(),
             'Contas' => $ObterDados->ListarContasBancarias(),
         ]);
     }
@@ -54,7 +55,7 @@ class ReceitasController extends Controller
     public function create(Request $request)
     {
         $Contas = new ContasBancariasController();
-        $Cliente =  explode("-",$request->CodCliente);
+        $Cliente =  explode("-", $request->CodCliente);
         if ($this->Verificar($request)) {
 
             Receitas::create([
@@ -70,8 +71,12 @@ class ReceitasController extends Controller
                 'NotaFiscal' => $request->NotaFiscal,
                 'Serie' => $request->Serie,
                 'CodEmpresa' => Str::substr($request->CodEmpresa, 0, 1),
-               // 'Conta' => Str::substr($request->Conta, 0, 1),
+                // 'Conta' => Str::substr($request->Conta, 0, 1),
             ]);
+
+
+           $Compras = new ComprasController();
+           $Compras->SalvarComprasSimples($request);
             /*
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
 
@@ -79,7 +84,7 @@ class ReceitasController extends Controller
             $Extrato = new ExtratoController();
             $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),$request->Descricao);
 */
-            return
+           return
                 "<script>
                 alert('Receita Salva com sucesso!');
                 location = '/Receitas/Novo';
@@ -97,7 +102,7 @@ class ReceitasController extends Controller
 
             $Total = $request->Total;
             $Extrato = new ExtratoController();
-            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),$request->Descricao);
+            $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1), $request->Descricao);
 
             return
                 "<script>
@@ -140,7 +145,7 @@ class ReceitasController extends Controller
     public function update(Request $request, $id)
     {
         $Receitas = Receitas::findOrFail($id);
-        $Cliente =  explode("-",$request->CodCliente);
+        $Cliente =  explode("-", $request->CodCliente);
         if ($this->Verificar($request)) {
             $Receitas->Update([
                 'Descricao' => $request->Descricao,
@@ -170,23 +175,26 @@ class ReceitasController extends Controller
     {
 
         $Receitas = Receitas::findOrFail($id);
-
+        /*
         $Total = $Receitas->Total;
         $Contas = new ContasBancariasController();
+
         //Saca da conta
         $Contas->Saque($Receitas->Conta, $Total);
 
         //Insere no extrato
         $Extrato = new ExtratoController();
         $Extrato->InserirNoExtrato($Total, 'D', $Receitas->Conta, 'Receitas_Cancelada', $Receitas->CodEmpresa,$Receitas->Descricao);
+       */
         $Receitas->delete();
 
         return "<script>alert('Deletado com sucesso.');location = '/Receitas/Todos';</script>";
     }
-    public function ListarPorData(Request $request){
+    public function ListarPorData(Request $request)
+    {
         $Receitas = DB::table('receitas')->select(DB::raw('SUM(receitas.Total) AS Total'), 'receitas.Descricao')
-        ->whereBetween('DataDaEntrada', array($request->Dataini, $request->Datafim))->where('receitas.CodEmpresa','=', Str::substr($request->Codempresa, 0, 1))
-        ->groupBy('receitas.Descricao')->get();
+            ->whereBetween('DataDaEntrada', array($request->Dataini, $request->Datafim))->where('receitas.CodEmpresa', '=', Str::substr($request->Codempresa, 0, 1))
+            ->groupBy('receitas.Descricao')->get();
 
         return $Receitas;
     }

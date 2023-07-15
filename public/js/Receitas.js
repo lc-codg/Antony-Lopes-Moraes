@@ -39,6 +39,9 @@ function Verifica() {
         if (document.getElementById('Descricao').value == '') {
             document.getElementById('Descricao').value = opcaoTexto.substring(2, 100);
         }
+        document.getElementById('CodFornecedor').value = opcaoTexto;
+        document.getElementById('TipoDeCompra').value = 'transferencia';
+        document.getElementById('Recebe').value = 'S';
         document.getElementById("Form").submit();
     }
 }

@@ -14,16 +14,16 @@
     <div id='container' class='.container-fluid'>
 
         <h5>Cadastro Tranferências</h5>
-        <form id='Form'method='post' action='/Receitas/Salvar'>
+        <form id='Form' method='post' action='/Receitas/Salvar'>
             <div class='form-row'>
 
                 @csrf
                 <div class="form-group md col-4">
                     <label for="">Empresa</label>
                     <select class="form-control " name="CodEmpresa" id="Empresa">
-                    <option selected>Selecione...</option>
+                        <option selected>Selecione...</option>
                         @foreach ($Empresas as $row)
-                        <option >{{$row->id}}- {{$row->Razao}}</option>
+                        <option>{{$row->id}}- {{$row->Razao}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -31,9 +31,9 @@
                 <div class="form-group md col-4">
                     <label for="">Cliente</label>
                     <select class="form-control" name="CodCliente" id="Cliente">
-                    <option selected>Selecione...</option>
-                        @foreach ($Cliente as $RowF)
-                        <option >{{$RowF->id}}- {{$RowF->Nome}}</option>
+                        <option selected>Selecione...</option>
+                        @foreach ($Empresas as $row)
+                        <option>{{$row->id}}- {{$row->Razao}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -58,8 +58,9 @@
                     <label for="">Data</label>
                     <input type="date" class="form-control" value="{{date('Y-m-d')}}" name="Datarecebimento" id="" aria-describedby="helpId" placeholder="">
                 </div>
-
-
+                <input hidden autocomplete="off" type="text" class="form-control" name="TipoDeCompra" id="TipoDeCompra" value='transferencia' aria-describedby="helpId" placeholder="">
+                <input hidden autocomplete="off" type="text" class="form-control" name="CodFornecedor" id="CodFornecedor" aria-describedby="helpId" placeholder="">
+                <input hidden autocomplete="off" type="text" class="form-control" name="Recebe" id="Recebe" aria-describedby="helpId" value ='S'placeholder="">
             </div>
 
             <br>

@@ -11,6 +11,8 @@ use App\Http\Controllers\ItensCompraController;
 use Illuminate\Support\Str;
 use Exception;
 use App\Http\Controllers\ArrecadacaoController;
+use App\Models\Empresa;
+use PhpParser\Node\Expr\Empty_;
 
 class ComprasController extends Controller
 {
@@ -173,8 +175,10 @@ public function ListarComrpasAVista(){
     public function SalvarComprasSimples($Dados)
     {
         $Forn =  explode("-",$Dados->CodFornecedor);
+        $Empresa = Empty($Dados->Recebe)?Str::substr($Dados->CodEmpresa, 0, 1):$Forn[0];
+        $Cliente = Empty($Dados->Recebe)?$Forn[0]:Str::substr($Dados->CodEmpresa, 0, 1);
         Compras::create([
-            'CodigoDoCliente' => $Forn[0],
+            'CodigoDoCliente' => $Cliente,
             'Total' => $Dados->Total,
             'TotaldosProdutos' => $Dados->Total,
             'DtPedido' => $Dados->Datarecebimento,
@@ -182,7 +186,7 @@ public function ListarComrpasAVista(){
             'DataSaida' => $Dados->Datarecebimento,
             'Finalidade' => 'Venda',
             'Natureza'=> $Dados->Descricao,
-            'CodEmpresa' => Str::substr($Dados->CodEmpresa, 0, 1),
+            'CodEmpresa' => $Empresa,
             'Tipo' => $Dados->TipoDeCompra,
             'TotalDesconto' => isset($Dados->TotalDesconto) ? Str_replace(",", ".", $Dados->TotalDesconto) : 10,
             'TotalAcréscimo' => isset($Dados->TotalAcrescimo) ? Str_replace(",", ".", $Dados->TotalAcrescimo) : 0,
@@ -212,10 +216,10 @@ public function ListarComrpasAVista(){
     {
         $ContasaPagar = DB::table('compras')->join(
             'empresas',
-            'compras.CodEmpresa',
+            'cempresa.id',
             '=',
-            'empresas.id'
-        )->join('clientes', 'compras.CodigoDoCliente', '=', 'clientes.id')->select('compras.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')
+            'compras.CodEmpresa'
+        )->join('clientes', 'clientes.id','=','compras.CodigoDoCliente')->select('compras.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')
            ->Where('compras.tipo', '=', 'vista')
             ->whereBetween('compras.DtPedido', [$request->DataIni, $request->DataFim])->get();
 

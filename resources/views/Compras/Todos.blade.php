@@ -73,8 +73,8 @@
             <tr>
 
                 <th scope="col">Código</th>
-                <th scope="col">Emitente</th>
-                <th scope="col">Cliente</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Fornecedor</th>
                 <th scope="col">Total</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Data</th>
