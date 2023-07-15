@@ -19,7 +19,7 @@ class ReceitasController extends Controller
         return view('Receitas.Receitas', [
             'Empresas'
             =>  $ObterDados->ListaDeEmpresas(),
-            'Cliente' =>  $ObterDados->ListaDeFornecedores(),
+            'Cliente' =>  $ObterDados->ListaDeFornecedoresEntreLojas(),
             'Contas' => $ObterDados->ListarContasBancarias(),
         ]);
     }
@@ -137,7 +137,7 @@ class ReceitasController extends Controller
             '=',
             'empresas.id'
         )->select('receitas.*', 'empresas.Razao as Razaoe', 'receitas.CodCliente as Razaof')
-            ->where('receitas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(20);
+            ->where('receitas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(2000);
 
         return view('/Receitas.Todos', ['Receitas' => $Receitas, 'Empresas' => $Empresas]);
     }

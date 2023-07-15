@@ -229,7 +229,7 @@ class ContasaReceberController extends Controller
             'contasa_recebers.CodEmpresa',
             '=',
             'empresas.id'
-        )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->where('contasa_recebers.CodEmpresa', '=', $request->Empresa)->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->join('clientes', 'contasa_recebers.CodCliente', '=', 'clientes.id')->select('contasa_recebers.*', 'empresas.Razao as Razaoe', 'clientes.Nome as Razaof')->where('contasa_recebers.CodEmpresa', '=', $request->Empresa)->whereBetween('contasa_recebers.vencimento', [$request->DataIni, $request->DataFim])->paginate(2000);
 
         return view('/ContasaReceber.Todos', ['Empresas' => $Empresas, 'ContasaReceber' => $ContasaReceber, 'Contas' => $Banco]);
     }

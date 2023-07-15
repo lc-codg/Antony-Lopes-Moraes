@@ -140,12 +140,12 @@
 
                 <div class="form-group md col-2">
                     <label for="">Parcelas</label>
-                    <input type="number" class="form-control" name="Parcelas" id="Parcela" aria-describedby="helpId" value='1' readOnly placeholder="">
+                    <input type="number" class="form-control" name="Parcelas" id="Parcela" aria-describedby="helpId" value='1' <?php if($Tipo<>'prazo'){?> readOnly <?php } ?>   placeholder="">
                 </div>
 
                 <div class="form-group md col-2">
                     <label for="">Quantidade de boletas</label>
-                    <input type="number" class="form-control" readOnly name="boleta" id="Boleta" aria-describedby="helpId" value='1' placeholder="">
+                    <input type="number" class="form-control" <?php if($Tipo<>'prazo'){?> readOnly <?php } ?> name="boleta" id="Boleta" aria-describedby="helpId" value='1' placeholder="">
                 </div>
 
             </div>

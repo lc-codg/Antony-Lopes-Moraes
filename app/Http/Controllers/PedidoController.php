@@ -97,7 +97,7 @@ class PedidoController extends Controller
 
 
         whereBetween('DtPedido',array($request->Dataini,$request->Datafim))->
-        paginate(20);
+        paginate(2000);
 
         return view('Pedidos.Todos', ['Pedidos' => $Pedidos,'Empresa'=>$Empresa,'Cliente'=>$Cliente]);
     }

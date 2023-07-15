@@ -15,6 +15,11 @@ class ObterDados
         $Fornecedor = new FornecedorController();
         return $Fornecedor->Listar();
     }
+    public function ListaDeFornecedoresEntreLojas()
+    {
+        $Fornecedor = new FornecedorController();
+        return $Fornecedor->ListarEntreLojas();
+    }
     public function ListaDeEmpresas()
     {
         $Empresa = new EmpresaController();

@@ -149,7 +149,7 @@ $Forn =  explode("-",$request->CodFornecedor);
             'despesas.CodEmpresa',
             '=',
             'empresas.id'
-        )->select('despesas.*', 'empresas.Razao as Razaoe', 'despesas.CodFornecedor as Razaof')->wherebetween('Datarecebimento', [$request->DataIni, $request->DataFim])->paginate(20);
+        )->select('despesas.*', 'empresas.Razao as Razaoe', 'despesas.CodFornecedor as Razaof')->wherebetween('Datarecebimento', [$request->DataIni, $request->DataFim])->paginate(2000);
 
         return view('/Despesas.Todos', ['Despesas' => $Despesas]);
     }

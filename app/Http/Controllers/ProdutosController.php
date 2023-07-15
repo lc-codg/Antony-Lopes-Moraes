@@ -35,7 +35,7 @@ class ProdutosController extends Controller
     }
     public function ListarTodos(Request $request)
     {
-        $produtos = DB::table('produtos')->where('Barras', 'LIKE', '%' . $request->Nome . '%')->orwhere('Descricao', 'LIKE', '%' . $request->Nome . '%')->paginate(10);
+        $produtos = DB::table('produtos')->where('Barras', 'LIKE', '%' . $request->Nome . '%')->orwhere('Descricao', 'LIKE', '%' . $request->Nome . '%')->paginate(1000);
         return view('Produtos.Todos', ['produtos' => $produtos]);
     }
     public function Inserir(Request $request)

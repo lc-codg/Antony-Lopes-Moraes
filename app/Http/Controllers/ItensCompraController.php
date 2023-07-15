@@ -20,7 +20,7 @@ class ItensCompraController extends Controller
     }
     public function LocalizaItens($id)
     {
-        $itens = DB::table('itens_compras')->where('NumeroDoPedido', '=', $id)->paginate(20);
+        $itens = DB::table('itens_compras')->where('NumeroDoPedido', '=', $id)->paginate(2000);
         return $itens;
     }
     public function ListarPorId($id)
@@ -36,7 +36,7 @@ class ItensCompraController extends Controller
     public function Salvar($Produtos, $Id)
     {
         foreach ($Produtos as $row) {
-            
+
             ItensCompras::Create(
                 [
                     'Descricao' => $row['Descricao'],

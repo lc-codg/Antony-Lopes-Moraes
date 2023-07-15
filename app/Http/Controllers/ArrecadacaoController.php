@@ -38,7 +38,7 @@ class ArrecadacaoController extends Controller
         )->where('arrecadacaos.Codempresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween(
             'DataRecebimento',
             [$request->DataIni, $request->DataFim]
-        )->paginate(20);
+        )->paginate(2000);
 
         return view('/Arrecadacao.Todos', ['Arrecada' => $Arrecada, 'Empresas' => $Empresas]);
     }

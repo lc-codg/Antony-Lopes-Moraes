@@ -32,7 +32,7 @@
                     <label for="">Cliente</label>
                     <select class="form-control" name="CodCliente" id="Cliente">
                         <option selected>Selecione...</option>
-                        @foreach ($Empresas as $row)
+                        @foreach ($Cliente as $row)
                         <option>{{$row->id}}- {{$row->Razao}}</option>
                         @endforeach
                     </select>
