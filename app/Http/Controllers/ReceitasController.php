@@ -75,8 +75,8 @@ class ReceitasController extends Controller
             ]);
 
 
-           $Compras = new ComprasController();
-           $Compras->SalvarComprasSimples($request);
+            $Compras = new ComprasController();
+            $Compras->SalvarComprasSimples($request);
             /*
             $Contas->Deposito(Str::substr($request->Conta, 0, 1), $request->Total);
 
@@ -84,7 +84,7 @@ class ReceitasController extends Controller
             $Extrato = new ExtratoController();
             $Extrato->InserirNoExtrato($Total, 'C', $request->Conta, 'Receitas', Str::substr($request->CodEmpresa, 0, 1),$request->Descricao);
 */
-           return
+            return
                 "<script>
                 alert('Receita Salva com sucesso!');
                 location = '/Receitas/Novo';
@@ -131,14 +131,25 @@ class ReceitasController extends Controller
     {
         $Utilidades = new ObterDados;
         $Empresas = $Utilidades->ListaDeEmpresas();
-        $Receitas = DB::table('receitas')->join(
-            'empresas',
-            'receitas.CodEmpresa',
-            '=',
-            'empresas.id'
-        )->select('receitas.*', 'empresas.Razao as Razaoe', 'receitas.CodCliente as Razaof')
-            ->where('receitas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(2000);
-
+        $CodEmpresa = Str::substr($request->Empresa, 0, 1);
+        if ($CodEmpresa <> '*') {
+            $Receitas = DB::table('receitas')->join(
+                'empresas',
+                'receitas.CodEmpresa',
+                '=',
+                'empresas.id'
+            )->select('receitas.*', 'empresas.Razao as Razaoe', 'receitas.CodCliente as Razaof')
+                ->where('receitas.CodEmpresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(2000);
+        }
+        if ($CodEmpresa == '*') {
+            $Receitas = DB::table('receitas')->join(
+                'empresas',
+                'receitas.CodEmpresa',
+                '=',
+                'empresas.id'
+            )->select('receitas.*', 'empresas.Razao as Razaoe', 'receitas.CodCliente as Razaof')
+                ->wherebetween('DataDaEntrada', [$request->DataIni, $request->DataFim])->paginate(2000);
+        }
         return view('/Receitas.Todos', ['Receitas' => $Receitas, 'Empresas' => $Empresas]);
     }
 
