@@ -27,19 +27,32 @@ class ArrecadacaoController extends Controller
     {
         $Utilidades = new ObterDados;
         $Empresas = $Utilidades->ListaDeEmpresas();
-        $Arrecada = DB::table('arrecadacaos')->join(
-            'empresas',
-            'arrecadacaos.Codempresa',
-            '=',
-            'empresas.id'
-        )->select(
-            'arrecadacaos.*',
-            'empresas.Razao as Razaoe'
-        )->where('arrecadacaos.Codempresa', '=', Str::substr($request->Empresa, 0, 1))->wherebetween(
-            'DataRecebimento',
-            [$request->DataIni, $request->DataFim]
-        )->paginate(2000);
-
+        $CodArrecadacao = Str::substr($request->Empresa, 0, 1);
+        if ($CodArrecadacao <> '*'){
+            $Arrecada = DB::table('arrecadacaos')->join(
+                'empresas',
+                'arrecadacaos.Codempresa',
+                '=',
+                'empresas.id'
+            )->select(
+                'arrecadacaos.*',
+                'empresas.Razao as Razaoe'
+            )->where('arrecadacaos.Codempresa', '=', Str::substr($request->Empresa, 0, 1) )->wherebetween(
+                'DataRecebimento',
+                [$request->DataIni, $request->DataFim]
+            )->paginate(2000);
+        }if ($CodArrecadacao == '*'){
+            $Arrecada = DB::table('arrecadacaos')->join(
+                'empresas',
+                'arrecadacaos.Codempresa',
+                '=',
+                'empresas.id'
+            )->select(
+                'arrecadacaos.*',
+                'empresas.Razao as Razaoe'
+            )->whereBetween('DataRecebimento',[$request->DataIni, $request->DataFim])->paginate(2000);
+        }
+        
         return view('/Arrecadacao.Todos', ['Arrecada' => $Arrecada, 'Empresas' => $Empresas]);
     }
     private function Verificar($Dados)

@@ -30,6 +30,7 @@
                     <label for="">Empresa</label>
                     <select class="form-control" name="Empresa" id="Empresa">
                         <option selected>Selecione...</option>
+                        <option>*-Todas</option>
                         @foreach ($Empresas as $item)
                         <option>{{ $item->id . '-' . $item->Razao }}</option>
                         @endforeach
