@@ -115,6 +115,8 @@
                     </form>
                 </td>
 
+                
+
                 <td>
                     <form action="/Compras/Delete/{{ $row->id }}" method="get">
 
